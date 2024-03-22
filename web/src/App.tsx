@@ -1,3 +1,5 @@
+import { PrimeReactProvider } from 'primereact/api'
+
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
@@ -9,9 +11,11 @@ import './index.css'
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
-      <RedwoodApolloProvider>
-        <Routes />
-      </RedwoodApolloProvider>
+      <PrimeReactProvider>
+        <RedwoodApolloProvider>
+          <Routes />
+        </RedwoodApolloProvider>
+      </PrimeReactProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
 )
