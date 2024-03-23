@@ -2,14 +2,16 @@ import logo from './palmHR_logo.png'
 
 const Navigation = () => {
   return (
-    <section className="min-h-screen w-[300px]  bg-[#1A2421] p-5">
-      <img
-        src={logo}
-        alt={'Palm HR Logo'}
-        height={200}
-        width={200}
-        className="h-auto"
-      />
+    <section className="min-h-screen w-[250px] bg-[#111010] p-5 flex justify-center ">
+      <div>
+        <img
+          src={logo}
+          alt={'Palm HR Logo'}
+          height={150}
+          width={150}
+          className="h-auto"
+        />
+      </div>
     </section>
   )
 }
