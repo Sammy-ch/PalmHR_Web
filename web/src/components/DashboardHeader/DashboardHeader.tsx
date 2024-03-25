@@ -1,8 +1,8 @@
 import { Avatar } from 'primereact/avatar'
 const DashboardHeader = () => {
   return (
-    <div className="flex h-[80px] w-full items-center justify-between rounded-[5px] bg-[#111010] px-5">
-      <h1 className="text-[25px] text-white">Dashboard</h1>
+    <div className="flex h-[80px] w-full items-center justify-between rounded-[5px]">
+      <h1 className="text-[30px] font-semibold text-white">Dashboard</h1>
       <Avatar
         label="M"
         size="xlarge"
