@@ -6,7 +6,7 @@ import DashboardHeader from 'src/components/DashboardHeader/DashboardHeader'
 const HomePage = () => {
   const { isAuthenticated, signUp } = useAuth()
   return (
-    <main className="w-full px-5 pt-2 bg-[#F5F5F5]">
+    <main className="w-full bg-[#F5F5F5] px-5 pt-2">
       <Metadata title="Home" description="Palm HR Dashboard" />
       <DashboardHeader />
       <span>{JSON.stringify({ isAuthenticated })}</span>
