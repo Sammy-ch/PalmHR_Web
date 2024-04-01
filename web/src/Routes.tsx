@@ -12,9 +12,11 @@ import { Set } from '@redwoodjs/router'
 
 import DashoardLayout from './layouts/DashoardLayout/DashoardLayout'
 
+import { useAuth } from './auth'
+
 const Routes = () => {
   return (
-    <Router>
+    <Router useAuth={useAuth}>
       <Set wrap={DashoardLayout}>
         <Route path="/" page={HomePage} name="home" />
       </Set>
