@@ -1,11 +1,25 @@
 import { Metadata } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
 import DashboardHeader from 'src/components/DashboardHeader/DashboardHeader'
+
 const HomePage = () => {
+  const { isAuthenticated, signUp } = useAuth()
   return (
-    <main className="w-full bg-[#000000] px-5 pt-2">
+    <main className="w-full px-5 pt-2 bg-[#F5F5F5]">
       <Metadata title="Home" description="Palm HR Dashboard" />
       <DashboardHeader />
+      <span>{JSON.stringify({ isAuthenticated })}</span>
+      <button
+        onClick={() =>
+          signUp({
+            email: 'alaincherubin@gmail.com',
+            password: 'santanasaint7',
+          })
+        }
+      >
+        Sign Up
+      </button>
     </main>
   )
 }

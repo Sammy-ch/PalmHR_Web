@@ -2,7 +2,7 @@ import logo from './palmHR_logo.png'
 
 const Navigation = () => {
   return (
-    <section className="flex min-h-screen w-[250px] justify-center bg-[#040A04] p-5 ">
+    <section className="flex min-h-screen w-[250px] justify-center p-5">
       <div>
         <img
           src={logo}

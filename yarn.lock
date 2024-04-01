@@ -4547,6 +4547,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/auth-supabase-api@npm:7.1.3":
+  version: 7.1.3
+  resolution: "@redwoodjs/auth-supabase-api@npm:7.1.3"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.24.0"
+    core-js: "npm:3.35.1"
+    jsonwebtoken: "npm:9.0.2"
+  checksum: 10c0/506a8334b8b083875897a39831e229b95503df5930bffc4b17f60cf5628c3f516837d853faa9b3200e483fbe8614b7a1db7a3a1d86ac6b90da8b1abc9c0b07c3
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/auth-supabase-setup@npm:7.1.3":
+  version: 7.1.3
+  resolution: "@redwoodjs/auth-supabase-setup@npm:7.1.3"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.24.0"
+    "@redwoodjs/cli-helpers": "npm:7.1.3"
+    core-js: "npm:3.35.1"
+  checksum: 10c0/fd9d6a832880175e0594c6af6e8262a6d0a819d693420dbf2c0cfb716aacf7f5c72756df1287791d01ff3dc215d6e590c5d004a457846520cda4888665ad91f0
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/auth-supabase-web@npm:7.1.3":
+  version: 7.1.3
+  resolution: "@redwoodjs/auth-supabase-web@npm:7.1.3"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.24.0"
+    core-js: "npm:3.35.1"
+  peerDependencies:
+    "@supabase/supabase-js": 2.39.0
+  checksum: 10c0/2b8c0aba47d3d4b6bb86a521e3b0835e60a3c7ba877707269bbf3febd3ef429a91eadfb602d8c82cbb022cee334df1f8d6b1418ba46f7fc4f45196ff0f23f1db
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/auth@npm:7.1.3":
   version: 7.1.3
   resolution: "@redwoodjs/auth@npm:7.1.3"
@@ -5146,6 +5180,77 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@supabase/auth-js@npm:2.63.0":
+  version: 2.63.0
+  resolution: "@supabase/auth-js@npm:2.63.0"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+  checksum: 10c0/f1654ad8254508e736705a8142b6e3e161a82532e693493ec878b7a006238e8f7dfc276e7d729fe14ec84b1ec01f3919f272869144ecf6e4e4c357318c92830b
+  languageName: node
+  linkType: hard
+
+"@supabase/functions-js@npm:2.2.2":
+  version: 2.2.2
+  resolution: "@supabase/functions-js@npm:2.2.2"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+  checksum: 10c0/3390190776cdf684ccbc240146e5c4c534f859fd0befb00707e35b1de0437fd93105f27511a90ec59799c006948f84cb5dea81ee39b1d7aa7add9ba9819bd389
+  languageName: node
+  linkType: hard
+
+"@supabase/node-fetch@npm:2.6.15, @supabase/node-fetch@npm:^2.6.14":
+  version: 2.6.15
+  resolution: "@supabase/node-fetch@npm:2.6.15"
+  dependencies:
+    whatwg-url: "npm:^5.0.0"
+  checksum: 10c0/98d25cab2eba53c93c59e730d52d50065b1a7fe216c65224471e83e2064ebd45ae51ad09cb39ec263c3cb59e3d41870fc2e789ea2e9587480d7ba212b85daf38
+  languageName: node
+  linkType: hard
+
+"@supabase/postgrest-js@npm:1.9.2":
+  version: 1.9.2
+  resolution: "@supabase/postgrest-js@npm:1.9.2"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+  checksum: 10c0/dab4144b54010f4d332f892d03529b3b5525f3a2bb164bbf254be7e6faaccbd0a6e25732b91808f7ec6987600ddc79508ffcb15a3ef037b646639b04eb969121
+  languageName: node
+  linkType: hard
+
+"@supabase/realtime-js@npm:2.9.3":
+  version: 2.9.3
+  resolution: "@supabase/realtime-js@npm:2.9.3"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+    "@types/phoenix": "npm:^1.5.4"
+    "@types/ws": "npm:^8.5.10"
+    ws: "npm:^8.14.2"
+  checksum: 10c0/321c98237e3255cad221ed16b54739ce327d395b80faba1416ba81577f043681ae0dde10e0ac1b7e3427412d1dbb35cb4b66d8466c21239932aa3dca6b9cc87c
+  languageName: node
+  linkType: hard
+
+"@supabase/storage-js@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@supabase/storage-js@npm:2.5.5"
+  dependencies:
+    "@supabase/node-fetch": "npm:^2.6.14"
+  checksum: 10c0/5a81f0d21a1094187390d60d6d993b7fbcaef355611b3ec74fe6f333921703d6e7f7e8000c1e729b25fba11b91f6b40ffbff7c64af3b961403b50dc01808cbd1
+  languageName: node
+  linkType: hard
+
+"@supabase/supabase-js@npm:^2":
+  version: 2.41.1
+  resolution: "@supabase/supabase-js@npm:2.41.1"
+  dependencies:
+    "@supabase/auth-js": "npm:2.63.0"
+    "@supabase/functions-js": "npm:2.2.2"
+    "@supabase/node-fetch": "npm:2.6.15"
+    "@supabase/postgrest-js": "npm:1.9.2"
+    "@supabase/realtime-js": "npm:2.9.3"
+    "@supabase/storage-js": "npm:2.5.5"
+  checksum: 10c0/8b1e3166435cb213c49eaecc3e6f15cce5e132b8f32f76dd5faba45e458ef51e1b610210e338e97b45d0ccc94af275d6562a534321f5e2a8d330f5e69e0308da
+  languageName: node
+  linkType: hard
+
 "@szmarczak/http-timer@npm:^1.1.2":
   version: 1.1.2
   resolution: "@szmarczak/http-timer@npm:1.1.2"
@@ -5717,6 +5822,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/phoenix@npm:^1.5.4":
+  version: 1.6.4
+  resolution: "@types/phoenix@npm:1.6.4"
+  checksum: 10c0/b2094c2e3065ce02f755bf3c4fde433cd9313bc97a2e34521b98bcc074ff9fd50b5af127b67cb8833c3d8b778d0756d67a25913f368669317fed3bd68cf7e752
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.11
   resolution: "@types/prop-types@npm:15.7.11"
@@ -5877,7 +5989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:^8.0.0, @types/ws@npm:^8.5.5":
+"@types/ws@npm:^8.0.0, @types/ws@npm:^8.5.10, @types/ws@npm:^8.5.5":
   version: 8.5.10
   resolution: "@types/ws@npm:8.5.10"
   dependencies:
@@ -6921,6 +7033,7 @@ __metadata:
   resolution: "api@workspace:api"
   dependencies:
     "@redwoodjs/api": "npm:7.1.3"
+    "@redwoodjs/auth-supabase-api": "npm:7.1.3"
     "@redwoodjs/graphql-server": "npm:7.1.3"
   languageName: unknown
   linkType: soft
@@ -18430,6 +18543,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@redwoodjs/auth-supabase-setup": "npm:7.1.3"
     "@redwoodjs/core": "npm:7.1.3"
     "@redwoodjs/project-config": "npm:7.1.3"
     prettier-plugin-tailwindcss: "npm:0.4.1"
@@ -21009,10 +21123,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:web"
   dependencies:
+    "@redwoodjs/auth-supabase-web": "npm:7.1.3"
     "@redwoodjs/forms": "npm:7.1.3"
     "@redwoodjs/router": "npm:7.1.3"
     "@redwoodjs/vite": "npm:7.1.3"
     "@redwoodjs/web": "npm:7.1.3"
+    "@supabase/supabase-js": "npm:^2"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
     autoprefixer: "npm:^10.4.19"
@@ -21609,7 +21725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.11.0, ws@npm:^8.12.0, ws@npm:^8.13.0, ws@npm:^8.4.2":
+"ws@npm:^8.11.0, ws@npm:^8.12.0, ws@npm:^8.13.0, ws@npm:^8.14.2, ws@npm:^8.4.2":
   version: 8.16.0
   resolution: "ws@npm:8.16.0"
   peerDependencies:
