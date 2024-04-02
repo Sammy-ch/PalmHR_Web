@@ -4,42 +4,68 @@ import { Chart } from 'primereact/chart'
 
 import { Metadata } from '@redwoodjs/web'
 
-import { useAuth } from 'src/auth'
 import DashboardHeader from 'src/components/DashboardHeader/DashboardHeader'
 
 const HomePage = () => {
-  const { isAuthenticated, signUp } = useAuth()
 
   const [chartData, setChartData] = useState({})
   const [chartOptions, setChartOptions] = useState({})
 
   useEffect(() => {
+    const documentStyle = getComputedStyle(document.documentElement)
+    const textColor = documentStyle.getPropertyValue('--text-color')
+    const textColorSecondary = documentStyle.getPropertyValue(
+      '--text-color-secondary'
+    )
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border')
     const data = {
-      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'Sales',
-          data: [540, 325, 702, 620],
-          backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-          ],
-          borderColor: [
-            'rgb(255, 159, 64)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-          ],
-          borderWidth: 1,
+          label: 'My First dataset',
+          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+          borderColor: documentStyle.getPropertyValue('--blue-500'),
+          data: [65, 59, 80, 81, 56, 55, 40],
+        },
+        {
+          label: 'My Second dataset',
+          backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+          borderColor: documentStyle.getPropertyValue('--pink-500'),
+          data: [28, 48, 40, 19, 86, 27, 90],
         },
       ],
     }
     const options = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+        legend: {
+          labels: {
+            fontColor: textColor,
+          },
+        },
+      },
       scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 500,
+            },
+          },
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+        },
         y: {
-          beginAtZero: true,
+          ticks: {
+            color: textColorSecondary,
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false,
+          },
         },
       },
     }
@@ -52,25 +78,7 @@ const HomePage = () => {
     <main className="w-full bg-[#F5F5F5] px-5 pt-2">
       <Metadata title="Home" description="Palm HR Dashboard" />
       <DashboardHeader />
-      <span>{JSON.stringify({ isAuthenticated })}</span>
-      <button
-        onClick={() =>
-          signUp({
-            email: 'alaincherubin@gmail.com',
-            password: 'santanasaint7',
-          })
-        }
-      >
-        Sign Up
-      </button>
-      <div className="card">
-        <Chart
-          className="h-full"
-          type="bar"
-          data={chartData}
-          options={chartOptions}
-        />
-      </div>
+      <Chart type="bar" data={chartData} options={chartOptions} />
     </main>
   )
 }
