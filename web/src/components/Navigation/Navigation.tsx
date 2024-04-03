@@ -21,9 +21,9 @@ const Navigation = () => {
           className="h-auto"
         />
       </header>
-      <nav className="flex flex-col gap-3 w-full">
+      <nav className="flex w-full flex-col gap-3">
         <NavLink
-          className="flex w-full items-center shadow-sm  gap-5 rounded-md bg-[#ECEFEC] px-5 py-2 text-lg "
+          className="flex w-full items-center gap-5  rounded-md bg-[#ECEFEC] px-5 py-2 text-lg shadow-sm "
           activeClassName="bg-green-500 text-white shadow-md"
           to={routes.home()}
         >
@@ -31,7 +31,7 @@ const Navigation = () => {
           Dashboard
         </NavLink>
         <NavLink
-          className="flex w-full items-center shadow-sm  gap-5 rounded-md bg-[#ECEFEC] px-5 py-2 text-lg "
+          className="flex w-full items-center gap-5  rounded-md bg-[#ECEFEC] px-5 py-2 text-lg shadow-sm "
           activeClassName="bg-green-500 text-white shadow-md"
           to={routes.reports()}
         >
@@ -39,24 +39,24 @@ const Navigation = () => {
           Reports
         </NavLink>
         <NavLink
-             className="flex w-full items-center shadow-sm  gap-5 rounded-md bg-[#ECEFEC] px-5 py-2 text-lg "
-             activeClassName="bg-green-500 text-white shadow-md"
+          className="flex w-full items-center gap-5  rounded-md bg-[#ECEFEC] px-5 py-2 text-lg shadow-sm "
+          activeClassName="bg-green-500 text-white shadow-md"
           to={routes.performance()}
         >
           <FilePieChart />
           Performance
         </NavLink>
         <NavLink
-       className="flex w-full items-center shadow-sm  gap-5 rounded-md bg-[#ECEFEC] px-5 py-2 text-lg "
-       activeClassName="bg-green-500 text-white shadow-md"
+          className="flex w-full items-center gap-5  rounded-md bg-[#ECEFEC] px-5 py-2 text-lg shadow-sm "
+          activeClassName="bg-green-500 text-white shadow-md"
           to={routes.attendance()}
         >
           <UserRoundSearch />
           Attendance
         </NavLink>
         <NavLink
-       className="flex w-full items-center shadow-sm  gap-5 rounded-md bg-[#ECEFEC] px-5 py-2 text-lg "
-       activeClassName="bg-green-500 text-white shadow-md"
+          className="flex w-full items-center gap-5  rounded-md bg-[#ECEFEC] px-5 py-2 text-lg shadow-sm "
+          activeClassName="bg-green-500 text-white shadow-md"
           to={routes.settings()}
         >
           <Settings />
