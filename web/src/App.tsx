@@ -1,5 +1,3 @@
-import { PrimeReactProvider } from 'primereact/api'
-
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
@@ -14,11 +12,9 @@ const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | Palm HR">
       <AuthProvider>
-        <PrimeReactProvider>
-          <RedwoodApolloProvider useAuth={useAuth}>
-            <Routes />
-          </RedwoodApolloProvider>
-        </PrimeReactProvider>
+        <RedwoodApolloProvider useAuth={useAuth}>
+          <Routes />
+        </RedwoodApolloProvider>
       </AuthProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
