@@ -21,7 +21,7 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'bottom' as const,
+      position: 'right' as const,
     },
     customCanvasBackgroundColor: {
       color: 'black',
@@ -48,7 +48,7 @@ export const data = {
 }
 
 const AttendanceChartCard = () => {
-  return <Bar options={options} data={data} />
+  return <Bar options={options} data={data} className="w-full" />
 }
 
 export default AttendanceChartCard
