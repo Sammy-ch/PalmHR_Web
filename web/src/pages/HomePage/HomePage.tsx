@@ -13,20 +13,22 @@ const HomePage = () => {
       <Metadata title="Home" description="Palm HR Dashboard" />
       <DashboardHeader />
       <section className="flex h-full flex-col gap-5 ">
-        <section className="grid w-full grid-flow-col gap-5 ">
-          <div className="w-full rounded-md shadow-md">
-            <AttendanceChartCard />
+        <section className="flex flex-col gap-5">
+          <div className="flex gap-2 rounded-md ">
+            <KpiCard title={'OnTime'} metric={'203.2'} progress={'129'} />
+            <KpiCard title={'Absenteeism'} metric={'203.2'} progress={'129'} />
+            <KpiCard title={'Late'} metric={'203.2'} progress={'129'} />
+            <KpiCard title={'OnTime'} metric={'203.2'} progress={'129'} />
           </div>
-          <div className="grid grid-cols-2 gap-5 rounded-md  ">
-            <KpiCard />
-            <KpiCard />
-            <KpiCard />
-            <KpiCard />
+          <div className="h-[500px] w-full rounded-md border shadow-md">
+            <AttendanceChartCard />
           </div>
         </section>
         <section className="flex h-full w-full grid-flow-col gap-5">
-          <div className="col-span-3 rounded-md bg-[#ECEFEC] shadow-md w-full"></div>
-          <div className="rounded-md bg-[#ECEFEC] shadow-md w-[400px]"><AttendancePieChart/></div>
+          <div className="col-span-3 w-full rounded-md bg-[#ECEFEC] shadow-md"></div>
+          <div className="w-[400px] rounded-md bg-[#ECEFEC] shadow-md">
+            <AttendancePieChart />
+          </div>
         </section>
       </section>
     </main>
