@@ -19,7 +19,6 @@ const HomePage = () => {
             <KpiCard title={'OnTime'} metric={'203.2'} progress={'129'} />
             <KpiCard title={'Absenteeism'} metric={'203.2'} progress={'129'} />
             <KpiCard title={'Late'} metric={'203.2'} progress={'129'} />
-            <KpiCard title={'OnTime'} metric={'203.2'} progress={'129'} />
           </div>
           <div className="h-[400px] w-full rounded-md border bg-slate-50 shadow-md">
             <AttendanceChartCard />
