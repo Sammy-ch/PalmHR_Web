@@ -20,16 +20,18 @@ const HomePage = () => {
             <KpiCard title={'Absenteeism'} metric={'203.2'} progress={'129'} />
             <KpiCard title={'Late'} metric={'203.2'} progress={'129'} />
           </div>
-          <div className="h-[400px] w-full rounded-md border bg-slate-50 shadow-md">
+        </section>
+        <section className="flex w-full gap-5">
+          <div className="h-[400px] w-full  rounded-md border bg-slate-50 shadow-md">
             <AttendanceChartCard />
+          </div>
+          <div className="w-[400px] rounded-md bg-slate-50 shadow-md">
+            <AttendancePieChart />
           </div>
         </section>
         <section className="flex h-full w-full grid-flow-col gap-5">
           <div className="col-span-3 w-full rounded-md bg-slate-50 p-5 shadow-md">
             <AttendanceActivityTable />
-          </div>
-          <div className="w-[400px] rounded-md bg-slate-50 shadow-md">
-            <AttendancePieChart />
           </div>
         </section>
       </section>

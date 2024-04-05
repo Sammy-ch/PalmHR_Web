@@ -1,54 +1,36 @@
 import React from 'react'
 
-import { faker } from '@faker-js/faker'
+import * as V from 'victory'
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { Bar } from 'react-chartjs-2'
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryTheme,
+  VictoryGroup,
+} from 'victory'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
-export const options = {
-  layout: {
-    padding: 20,
-  },
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'right' as const,
-    },
-    customCanvasBackgroundColor: {
-      color: 'black',
-    },
-  },
-}
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'OnTime',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
-      backgroundColor: '#29AB87',
-    },
-    {
-      label: 'Late',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
-      backgroundColor: '#00308F',
-    },
-  ],
-}
 
 const AttendanceChartCard = () => {
-  return <Bar options={options} data={data} className="w-full" />
+  return (
+    <VictoryChart>
+      <VictoryGroup offset={20} colorScale={'qualitative'}>
+        <VictoryBar
+          data={[
+            { x: 1, y: 1 },
+            { x: 2, y: 2 },
+            { x: 3, y: 5 },
+          ]}
+        />
+        <VictoryBar
+          data={[
+            { x: 1, y: 2 },
+            { x: 2, y: 1 },
+            { x: 3, y: 7 },
+          ]}
+        />
+      </VictoryGroup>
+    </VictoryChart>
+  )
 }
 
 export default AttendanceChartCard
