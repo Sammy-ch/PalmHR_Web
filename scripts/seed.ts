@@ -3,7 +3,7 @@ import { db } from 'api/src/lib/db'
 
 export default async () => {
   try {
-    const data: Prisma.AdminsCreateArgs['data'][] = [
+    const data: Prisma.AdminCreateArgs['data'][] = [
       // To try this example data with the UserExample model in schema.prisma,
       // uncomment the lines below and run 'yarn rw prisma migrate dev'
       //
@@ -16,15 +16,15 @@ export default async () => {
       "\nUsing the default './scripts/seed.ts' template\nEdit the file to add seed data\n"
     )
 
-    if ((await db.userExample.count()) === 0) {
+    if ((await db.admin.count()) === 0) {
       // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
       // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
       await Promise.all(
         //
         // Change to match your data model and seeding needs
         //
-        data.map(async (data: Prisma.UserExampleCreateArgs['data']) => {
-          const record = await db.userExample.create({ data })
+        data.map(async (data: Prisma.AdminCreateArgs['data']) => {
+          const record = await db.admin.create({ data })
           console.log(record)
         })
       )

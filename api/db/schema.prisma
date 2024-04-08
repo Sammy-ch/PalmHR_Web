@@ -7,14 +7,50 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas = ["public","auth"]
 }
 
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = "native"
+  previewFeatures = ["multiSchema"]
 }
 
-model Admins {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+
+
+model Admin {
+ProfileId Int @id
+First_Name String
+Last_Name String
+  @@schema("public")
+}
+
+
+
+model AdminTier {
+id String @id @default(uuid())
+createdAt DateTime
+updatedAt DateTime
+name String
+@@schema("public")
+}
+
+
+model Employee_profile {
+ProfileId Int @id
+First_Name String
+Last_Name String
+ProfileImage String
+AttendanceData Employee_attendance[]
+@@schema("public")
+}
+
+model Employee_attendance {
+AttendanceId  String @id @default(uuid())
+Employee   Employee_profile  @relation(fields: [EmployeeId],references: [ProfileId])
+EmployeeId Int
+Checkin_time  DateTime?
+Checkout_time DateTime?
+CheckingDate  DateTime?
+@@schema("public")
 }
