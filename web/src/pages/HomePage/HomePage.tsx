@@ -10,14 +10,15 @@ import KpiCard from 'src/components/KpiCard/KpiCard'
 
 const HomePage = () => {
   return (
-    <main className="h-full w-full gap-5 bg-[#F5F5F5] px-5 py-2 ">
+    <main className="h-full w-full gap-5  px-5 py-2 ">
       <Metadata title="Home" description="Palm HR Dashboard" />
       <DashboardHeader />
       <section className="flex h-full flex-col gap-5 ">
         <section className="flex flex-col gap-5">
-          <div className="flex gap-2 rounded-md bg-slate-50 ">
+          <div className="flex gap-2 rounded-md ">
             <KpiCard title={'OnTime'} metric={'203.2'} progress={'129'} />
             <KpiCard title={'Absenteeism'} metric={'203.2'} progress={'129'} />
+            <KpiCard title={'Late'} metric={'203.2'} progress={'129'} />
             <KpiCard title={'Late'} metric={'203.2'} progress={'129'} />
           </div>
         </section>
