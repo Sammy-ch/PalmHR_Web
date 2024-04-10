@@ -5,20 +5,56 @@
 // https://www.prisma.io/docs/orm/prisma-migrate
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  schemas = ["public"]
 }
 
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = "native"
+  previewFeatures = ["multiSchema"]
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Admin {
+AdminId String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+ProfileId String @db.Uuid
+First_Name String
+Last_Name String
+@@schema("public")
+}
+
+model AdminTier {
+id String @id @default(uuid())
+createdAt DateTime
+updatedAt DateTime
+name String
+@@schema("public")
+}
+
+model Employee_profile {
+ProfileId String @id @db.Uuid
+First_Name String
+Last_Name String
+ProfileImage String?
+Position String
+email String?
+OffDays Int? @db.Integer
+AttendanceData Employee_attendance[]
+@@schema("public")
+
+}
+
+model Employee_attendance {
+AttendanceId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+Employee   Employee_profile  @relation(fields: [EmployeeId],references: [ProfileId])
+EmployeeId String @db.Uuid
+Checkin_time  DateTime? @db.Time()
+Checkout_time DateTime? @db.Time()
+Checking_Date DateTime? @db.Date
+Working_time Int? @db.Integer
+ArrivalTag String? @db.Text
+@@schema("public")
+
 }

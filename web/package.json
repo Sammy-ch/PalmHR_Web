@@ -11,17 +11,24 @@
     ]
   },
   "dependencies": {
+    "@heroicons/react": "1.0.6",
     "@redwoodjs/auth-supabase-web": "7.3.0",
     "@redwoodjs/forms": "7.3.0",
     "@redwoodjs/router": "7.3.0",
     "@redwoodjs/web": "7.3.0",
+    "@remixicon/react": "^4.2.0",
     "@supabase/supabase-js": "^2",
+    "@tremor/react": "^3.15.0",
     "antd": "^5.16.0",
+    "chart.js": "^4.4.2",
     "lucide-react": "^0.364.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "18.2.0",
+    "victory": "^37.0.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@redwoodjs/vite": "7.3.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
