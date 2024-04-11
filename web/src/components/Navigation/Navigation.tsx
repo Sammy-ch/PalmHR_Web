@@ -25,7 +25,7 @@ const Navigation = () => {
         <NavLink
           className="flex w-full items-center gap-5  rounded-md  px-5 py-2 text-lg "
           activeClassName="bg-green-500 text-white shadow-lg"
-          to={routes.home()}
+          to={routes.dashboard()}
         >
           <LayoutDashboard />
           Dashboard
