@@ -7,9 +7,9 @@ type DashoardLayoutProps = {
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
   return (
     <div className="flex">
-      <aside>
+      <header>
         <Navigation />
-      </aside>
+      </header>
       {children}
     </div>
   )
