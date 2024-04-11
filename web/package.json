@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "1.0.6",
+    "@radix-ui/react-slot": "^1.0.2",
     "@redwoodjs/auth-supabase-web": "7.3.1",
     "@redwoodjs/forms": "7.3.1",
     "@redwoodjs/router": "7.3.1",
@@ -21,10 +22,14 @@
     "@tremor/react": "^3.15.0",
     "antd": "^5.16.0",
     "chart.js": "^4.4.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "lucide-react": "^0.364.0",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss-animate": "^1.0.7",
     "victory": "^37.0.1"
   },
   "devDependencies": {

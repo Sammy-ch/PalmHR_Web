@@ -1,12 +1,14 @@
 import React from 'react'
 
+import HeroSection from 'web/src/components/HeroSection/HeroSection'
+
 import { Metadata } from '@redwoodjs/web'
 
 const HomePage = () => {
   return (
-    <main className="flex min-h-screen w-full items-center justify-center gap-5 bg-[#F5F5F5] px-5 py-2">
+    <main className="w-full px-16 ">
       <Metadata title="Home" description="Welcome to Palm HR" />
-      <section>HOMEPAGE</section>
+      <HeroSection />
     </main>
   )
 }

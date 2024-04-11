@@ -17,11 +17,11 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Route path="/contact" page={ContactPage} name="contact" />
-      <Route path="/pricing" page={PricingPage} name="pricing" />
-      <Route path="/about" page={AboutPage} name="about" />
       <Set wrap={HomeLayout} >
         <Route path="/" page={HomePage} name="home" />
+        <Route path="/contact" page={ContactPage} name="contact" />
+        <Route path="/pricing" page={PricingPage} name="pricing" />
+        <Route path="/about" page={AboutPage} name="about" />
       </Set>
       <Set wrap={DashoardLayout}>
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />
