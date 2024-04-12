@@ -5,6 +5,7 @@ import { Label } from 'web/src/components/ui/label'
 import { Link } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
 
+import background from './palmhr-login-background.png'
 import logo from './palmhr_logo.png'
 
 const LoginPage = () => {
@@ -61,7 +62,7 @@ const LoginPage = () => {
         </div>
         <div className="hidden bg-muted lg:block">
           <img
-            src="/placeholder.svg"
+            src={background}
             alt=""
             width="1920"
             height="1080"

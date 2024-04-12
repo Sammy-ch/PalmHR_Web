@@ -6,7 +6,7 @@ import { Metadata } from '@redwoodjs/web'
 
 const HomePage = () => {
   return (
-    <main className="w-full px-16 ">
+    <main className="w-full px-[10rem]">
       <Metadata title="Home" description="Welcome to Palm HR" />
       <HeroSection />
     </main>

@@ -101,10 +101,26 @@
 }
 
 
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('/fonts/Comfortaa-VariableFont_wght.ttf')
+    format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  ascent-override: 97%;
+}
+
+
+
+
 .nav {
   font-family: "calibri";
 }
 
 .hero-h1{
   font-family: "archivo"
+}
+
+.navbar {
+  font-family: "Comfortaa";
 }

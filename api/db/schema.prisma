@@ -5,24 +5,21 @@
 // https://www.prisma.io/docs/orm/prisma-migrate
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-  schemas = ["public"]
-}
+  provider = "sqlite"
+  url      = "file:./dev.db"
+  }
 
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = "native"
-  previewFeatures = ["multiSchema"]
+  previewFeatures = ["driverAdapters"]
 }
 
 model Admin {
-AdminId String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-ProfileId String @db.Uuid
+AdminId String @id @default(uuid())
+ProfileId String
 First_Name String
 Last_Name String
-@@schema("public")
 }
 
 model AdminTier {
@@ -30,31 +27,29 @@ id String @id @default(uuid())
 createdAt DateTime
 updatedAt DateTime
 name String
-@@schema("public")
 }
 
 model Employee_profile {
-ProfileId String @id @db.Uuid
+ProfileId String @id
 First_Name String
 Last_Name String
 ProfileImage String?
 Position String
 email String?
-OffDays Int? @db.Integer
+OffDays Int?
 AttendanceData Employee_attendance[]
-@@schema("public")
 
 }
 
 model Employee_attendance {
-AttendanceId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+AttendanceId  String @id @default(uuid())
 Employee   Employee_profile  @relation(fields: [EmployeeId],references: [ProfileId])
-EmployeeId String @db.Uuid
-Checkin_time  DateTime? @db.Time()
-Checkout_time DateTime? @db.Time()
-Checking_Date DateTime? @db.Date
-Working_time Int? @db.Integer
-ArrivalTag String? @db.Text
-@@schema("public")
+EmployeeId String
+Checkin_time  DateTime?
+Checkout_time DateTime?
+Checking_Date DateTime?
+Working_time Int?
+ArrivalTag String?
 
 }
+
