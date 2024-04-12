@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "1.0.6",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@redwoodjs/auth-supabase-web": "7.3.1",
     "@redwoodjs/forms": "7.3.1",
