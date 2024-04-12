@@ -1,12 +1,13 @@
+import Spline from '@splinetool/react-spline'
 import { Download } from 'lucide-react'
 
 import { Button } from '../ui/button'
 
-import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
+// import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
 
 const HeroSection = () => {
   return (
-    <main className="grid min-h-screen grid-cols-2 pt-20">
+    <main className="grid min-h-screen grid-cols-2 pt-20 ">
       <section className="nav flex flex-col gap-10  text-[3rem]">
         <h2 className="hero-h1">
           Welcome to <span className="text-[#00a551]">PALM HR</span>
@@ -27,8 +28,8 @@ const HeroSection = () => {
           </Button>
         </div>
       </section>
-      <section className="pl-20 ">
-        <img src={logo} alt=""  />
+      <section className="pl-20 h-full  ">
+        <Spline scene="https://prod.spline.design/RQLVtoJceDYzvQie/scene.splinecode" className='h-full' />{' '}
       </section>
     </main>
   )

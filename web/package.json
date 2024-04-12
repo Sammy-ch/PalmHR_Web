@@ -21,6 +21,8 @@
     "@redwoodjs/router": "7.3.1",
     "@redwoodjs/web": "7.3.1",
     "@remixicon/react": "^4.2.0",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.93",
     "@supabase/supabase-js": "^2",
     "@tremor/react": "^3.15.0",
     "antd": "^5.16.0",
