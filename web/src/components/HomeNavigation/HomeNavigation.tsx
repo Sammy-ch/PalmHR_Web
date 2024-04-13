@@ -8,8 +8,8 @@ import logo from './palmHR_logo.png'
 const HomeNavigation = () => {
   const { isAuthenticated, signUp } = useAuth()
   return (
-    <header className="navbar border-1 z-10 mx-20 mt-5 flex items-center justify-between rounded-full bg-white p-5 shadow-md ">
-      <img src={logo} alt="Palm_HR_Logo" height={100} width={150} />
+    <header className="navbar border-1 z-10  flex items-center justify-between  bg-white p-5 shadow-md ">
+      <img src={logo} alt="Palm_HR_Logo" height={100} width={200} />
       <nav className="flex gap-10 text-lg">
         <NavLink
           className=""
