@@ -8,7 +8,7 @@ import logo from './palmHR_logo.png'
 const HomeNavigation = () => {
   const { isAuthenticated, signUp } = useAuth()
   return (
-    <header className="navbar border-1 z-10  flex items-center justify-between  bg-white p-5 shadow-md ">
+    <header className="navbar border-1 z-10  flex items-center justify-between  bg-white py-2 px-10 shadow-md ">
       <img src={logo} alt="Palm_HR_Logo" height={100} width={200} />
       <nav className="flex gap-10 text-lg">
         <NavLink
@@ -43,14 +43,14 @@ const HomeNavigation = () => {
       {isAuthenticated ? (
         <Link
           to={routes.dashboard()}
-          className="navbar text-md flex h-[40px] w-[150px] items-center justify-center rounded-full border-2   border-[#00A551] hover:bg-[#00A551]  hover:text-white  "
+          className="navbar flex h-[40px] w-[120px] items-center justify-center rounded-md bg-[#00A551] text-white   "
         >
-          DASHBOARD
+          Dashboard
         </Link>
       ) : (
         <Button
           onClick={signUp}
-          className=" w-[100px] rounded-full bg-[#00A551] text-lg hover:bg-white hover:text-black hover:outline"
+          className="navbar flex h-[40px] w-[120px] items-center justify-center rounded-md bg-[#00A551] text-white   "
         >
           SignUp
         </Button>
