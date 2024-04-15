@@ -11,7 +11,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
       <header>
         <HomeNavigation />
       </header>
-      {children}
+      <main className="min-h-screen">{children}</main>
       <footer>
         <HomeFooter />
       </footer>
