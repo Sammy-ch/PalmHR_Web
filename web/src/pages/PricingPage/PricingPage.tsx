@@ -2,7 +2,7 @@ import { Metadata } from '@redwoodjs/web'
 
 const PricingPage = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-5 py-10">
+    <main className="flex flex-col items-center justify-center gap-5 py-20">
       <Metadata title="Pricing" description="Pricing page" />
 
       <h1 className="sub-header text-5xl">Choose your right plan !</h1>
@@ -14,8 +14,9 @@ const PricingPage = () => {
       <section className="bg-white dark:bg-gray-900">
         <div className="content mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
           <div className="space-y-8 sm:gap-6 lg:grid lg:grid-cols-3 lg:space-y-0 xl:gap-10">
-            <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
-              <h3 className="mb-4 w-[100px] rounded-md border bg-[#00a551] p-2 text-2xl font-semibold text-white">
+           {/* Pricing Card */}
+            <div className="mx-auto shadow-md flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
+            <h3 className="mb-4  rounded-md  p-2 text-2xl font-semibold ">
                 Starter
               </h3>
               <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
@@ -111,15 +112,13 @@ const PricingPage = () => {
                   </span>
                 </li>
               </ul>
-              <a
-                href="#"
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white"
-              >
+              <div className="hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg border bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white">
                 Get started
-              </a>
+              </div>
             </div>
-            <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
-              <h3 className="mb-4 w-[120px] rounded-md border bg-[#00a551] p-2 text-2xl font-semibold text-white">
+              {/* Pricing Card */}
+            <div className="mx-auto shadow-md flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
+            <h3 className="mb-4  rounded-md  p-2 text-2xl font-semibold ">
                 Company
               </h3>
               <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
@@ -215,16 +214,13 @@ const PricingPage = () => {
                   </span>
                 </li>
               </ul>
-              <a
-                href="#"
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white"
-              >
+              <div className="hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg border bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white">
                 Get started
-              </a>
+              </div>
             </div>
             {/* Pricing card */}
-            <div className="mx-auto flex max-w-lg flex-col rounded-lg border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
-              <h3 className="mb-4 w-[130px] rounded-md border bg-[#00a551] p-2 text-2xl font-semibold text-white">
+            <div className="mx-auto flex max-w-lg flex-col rounded-lg shadow-md border border-gray-100 bg-white p-6 text-center text-gray-900 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white xl:p-8">
+              <h3 className="mb-4  rounded-md  p-2 text-2xl font-semibold ">
                 Enterprise
               </h3>
               <p className="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
@@ -320,12 +316,10 @@ const PricingPage = () => {
                   </span>
                 </li>
               </ul>
-              <a
-                href="#"
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white"
-              >
+              <div className="hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg border bg-sky-500 px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4  dark:text-white">
+
                 Get started
-              </a>
+              </div>
             </div>
           </div>
         </div>

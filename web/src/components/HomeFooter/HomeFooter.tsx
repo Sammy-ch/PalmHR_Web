@@ -4,8 +4,8 @@ import logo from './palmhr_logo.png'
 
 const HomeFooter = () => {
   return (
-    <main>
-      <div className="grid min-h-[300px] w-full grid-cols-2  bg-[#F5F5F5]  p-10">
+    <main className="bg-slate-100">
+      <div className="grid min-h-[300px] w-full grid-cols-2 px-[5rem] py-5">
         <section className="col-span-1 flex flex-col gap-5">
           <div>
             <img
