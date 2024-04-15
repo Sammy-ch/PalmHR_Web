@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Download } from 'lucide-react'
 
+import { Link, routes } from '@redwoodjs/router'
+
 import { AuroraBackground } from '../ui/aurora-background'
 import { Button } from '../ui/button'
 
@@ -20,21 +22,26 @@ const HeroSection = () => {
         className="mx-20 flex min-h-screen items-center justify-center text-center"
       >
         <section className="nav flex flex-col items-center justify-center gap-10  text-[3rem]">
-          <h2 className="hero-h1 text-[5rem]">
-            Welcome to <span className="text-[#00a551]">PALM HR</span>
+          <h2 className="header text-[5rem]">
+            Welcome to <span className="text-[#00a551]">Palm HR</span>
             {''}: Revolutionizing HR Management
           </h2>
-          <p className="px-[15rem] text-xl">
+          <p className="content px-[15rem] text-2xl">
             Experience the convenience of having all your HR needs in one place.
             From payroll to performance tracking, our comprehensive app
             simplifies every aspect of HR management.
           </p>
           <div className="flex gap-2">
-            <Button className="rounded-full p-6 text-lg shadow-md">Get Started</Button>
-            <Button className="flex gap-2 rounded-full bg-white text-black border-2 shadowm-md  p-6 text-lg">
+            <Link to={routes.home()} className="rounded-full p-2 text-lg bg-slate-800 w-40 content text-white shadow-md">
+              Get Started
+            </Link>
+            <Link
+              to={routes.home()}
+              className="shadowm-md flex gap-2 rounded-full border-2 bg-white w-40  p-2 text-lg content text-black"
+            >
               Download App
               <Download />
-            </Button>
+            </Link>
           </div>
         </section>
       </motion.div>
