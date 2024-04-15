@@ -4,7 +4,6 @@ import { Download } from 'lucide-react'
 import { Link, routes } from '@redwoodjs/router'
 
 import { AuroraBackground } from '../ui/aurora-background'
-import { Button } from '../ui/button'
 
 // import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
 
@@ -32,12 +31,15 @@ const HeroSection = () => {
             simplifies every aspect of HR management.
           </p>
           <div className="flex gap-2">
-            <Link to={routes.home()} className="rounded-full p-2 text-lg bg-slate-800 w-40 content text-white shadow-md">
+            <Link
+              to={routes.home()}
+              className="content w-40 rounded-full bg-slate-800 p-2 text-lg text-white shadow-md"
+            >
               Get Started
             </Link>
             <Link
               to={routes.home()}
-              className="shadowm-md flex gap-2 rounded-full border-2 bg-white w-40  p-2 text-lg content text-black"
+              className="shadowm-md content flex w-40 gap-2 rounded-full border-2  bg-white p-2 text-lg text-black"
             >
               Download App
               <Download />
