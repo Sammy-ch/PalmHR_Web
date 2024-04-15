@@ -1,106 +1,126 @@
-import { Button } from 'web/src/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from 'web/src/components/ui/card'
-import { Input } from 'web/src/components/ui/input'
-import { Label } from 'web/src/components/ui/label'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
-import { Form, Submit, SubmitHandler, FieldError } from '@redwoodjs/forms'
-import { Link } from '@redwoodjs/router'
+import {
+  Form,
+  Label,
+  TextField,
+  PasswordField,
+  FieldError,
+  Submit,
+} from '@redwoodjs/forms'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 
-import logo from './palmhr_logo.png'
-
-interface FormValues {
-  Fname: string
-  Lname: string
-  email: string
-  password: string | number
-}
-
 const SignupPage = () => {
-  const { signUp } = useAuth()
+  const { isAuthenticated, signUp } = useAuth()
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(routes.home())
+    }
+  }, [isAuthenticated])
+
+  // focus on username box on page load
+  const usernameRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    usernameRef.current?.focus()
+  }, [])
+
+  const onSubmit = async (data: Record<string, string>) => {
+    const response = await signUp({
+      username: data.username,
+      password: data.password,
+    })
+
+    if (response.message) {
+      toast(response.message)
+    } else if (response.error) {
+      toast.error(response.error)
+    } else {
+      // user is signed in automatically
+      toast.success('Welcome!')
+    }
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <Metadata title="Signup" description="Signup page" />
-      <div className="py-10">
-        <img src={logo} alt="" height={200} width={350} />
-      </div>
-      <Card className="nav mx-auto max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-xl">Sign Up</CardTitle>
-          <CardDescription>
-            Enter your information to create an account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form onSubmit={onSubmit}>
-            <div className="grid gap-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="first-name">First name</Label>
-                  <Input
-                    id="first-name"
-                    name="Fname"
-                    placeholder="Max"
-                    required
+    <>
+      <Metadata title="Signup" />
+
+      <main className="rw-main">
+        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
+        <div className="rw-scaffold rw-login-container">
+          <div className="rw-segment">
+            <header className="rw-segment-header">
+              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+            </header>
+
+            <div className="rw-segment-main">
+              <div className="rw-form-wrapper">
+                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                  <Label
+                    name="username"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Username
+                  </Label>
+                  <TextField
+                    name="username"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Username is required',
+                      },
+                    }}
                   />
-                  <FieldError name="Fname" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="last-name">Last name</Label>
-                  <Input id="last-name" name="Lname" placeholder="Robinson" />
-                  <FieldError name="Lname" />
-                </div>
+                  <FieldError name="username" className="rw-field-error" />
+
+                  <Label
+                    name="password"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Password
+                  </Label>
+                  <PasswordField
+                    name="password"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    autoComplete="current-password"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Password is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="password" className="rw-field-error" />
+
+                  <div className="rw-button-group">
+                    <Submit className="rw-button rw-button-blue">
+                      Sign Up
+                    </Submit>
+                  </div>
+                </Form>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="m@example.com"
-                  required
-                />
-                <FieldError name="email" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" name="password" />
-                <FieldError name="password" />
-              </div>
-              <Submit
-                type="submit"
-                className="h-10 w-full rounded-md border bg-black text-white"
-                onClick={signUp}
-              >
-                Create an account
-              </Submit>
-              <Button variant="outline" className="w-full">
-                Sign up with GitHub
-              </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Already have an account?{' '}
-              <Link href="#" className="underline">
-                Sign in
-              </Link>
-            </div>
-          </Form>
-        </CardContent>
-      </Card>
-    </main>
+          </div>
+          <div className="rw-login-link">
+            <span>Already have an account?</span>{' '}
+            <Link to={routes.login()} className="rw-link">
+              Log in!
+            </Link>
+          </div>
+        </div>
+      </main>
+    </>
   )
 }
 
