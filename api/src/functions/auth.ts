@@ -19,11 +19,20 @@ export const handler = async (
     // https://example.com/reset-password?resetToken=${user.resetToken}
     //
     // Whatever is returned from this function will be returned from
-    // the `forgotPassword()` function that is destructured from `useAuth()`
+    // the `forgotPassword()` function that is destructured from `useAuth()`.
     // You could use this return value to, for example, show the email
     // address in a toast message so the user will know it worked and where
     // to look for the email.
-    handler: (user) => {
+    //
+    // Note that this return value is sent to the client in *plain text*
+    // so don't include anything you wouldn't want prying eyes to see. The
+    // `user` here has been sanitized to only include the fields listed in
+    // `allowedUserFields` so it should be safe to return as-is.
+    handler: (user, _resetToken) => {
+      // TODO: Send user an email/message with a link to reset their password,
+      // including the `resetToken`. The URL should look something like:
+      // `http://localhost:8910/reset-password?resetToken=${resetToken}`
+
       return user
     },
 
@@ -71,14 +80,14 @@ export const handler = async (
 
   const resetPasswordOptions: DbAuthHandlerOptions['resetPassword'] = {
     // handler() is invoked after the password has been successfully updated in
-    // the database. Returning anything truthy will automatically logs the user
+    // the database. Returning anything truthy will automatically log the user
     // in. Return `false` otherwise, and in the Reset Password page redirect the
     // user to the login page.
     handler: (_user) => {
       return true
     },
 
-    // If `false` then the new password MUST be different than the current one
+    // If `false` then the new password MUST be different from the current one
     allowReusedPassword: true,
 
     errors: {
@@ -151,12 +160,8 @@ export const handler = async (
     db: db,
 
     // The name of the property you'd call on `db` to access your user table.
-    // ie. if your Prisma model is named `User` this value would be `user`, as in `db.user`
+    // i.e. if your Prisma model is named `User` this value would be `user`, as in `db.user`
     authModelAccessor: 'admin',
-
-    // The name of the property you'd call on `db` to access your user credentials table.
-    // ie. if your Prisma model is named `UserCredential` this value would be `userCredential`, as in `db.userCredential`
-    credentialModelAccessor: 'admin',
 
     // A map of what dbAuth calls a field to what your database calls it.
     // `id` is whatever column you use to uniquely identify a user (probably
@@ -168,8 +173,13 @@ export const handler = async (
       salt: 'salt',
       resetToken: 'resetToken',
       resetTokenExpiresAt: 'resetTokenExpiresAt',
-      challenge: 'webAuthnChallenge',
     },
+
+    // A list of fields on your user object that are safe to return to the
+    // client when invoking a handler that returns a user (like forgotPassword
+    // and signup). This list should be as small as possible to be sure not to
+    // leak any sensitive information to the client.
+    allowedUserFields: ['id', 'email'],
 
     // Specifies attributes on the cookie that dbAuth sets in order to remember
     // who is logged in. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies
@@ -178,7 +188,7 @@ export const handler = async (
         HttpOnly: true,
         Path: '/',
         SameSite: 'Strict',
-        Secure: process.env.NODE_ENV !== 'development' ? true : false,
+        Secure: process.env.NODE_ENV !== 'development',
 
         // If you need to allow other domains (besides the api side) access to
         // the dbAuth session cookie:
@@ -191,34 +201,6 @@ export const handler = async (
     login: loginOptions,
     resetPassword: resetPasswordOptions,
     signup: signupOptions,
-
-    // See https://redwoodjs.com/docs/authentication/dbauth#webauthn for options
-    webAuthn: {
-      enabled: true,
-      // How long to allow re-auth via WebAuthn in seconds (default is 10 years).
-      // The `login.expires` time denotes how many seconds before a user will be
-      // logged out, and this value is how long they'll be to continue to use a
-      // fingerprint/face scan to log in again. When this one expires they
-      // *must* re-enter username and password to authenticate (WebAuthn will
-      // then be re-enabled for this amount of time).
-      expires: 60 * 60 * 24 * 365 * 10,
-      name: 'Redwood Application',
-      domain:
-        process.env.NODE_ENV === 'development' ? 'localhost' : 'server.com',
-      origin:
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:8910'
-          : 'https://server.com',
-      type: 'platform',
-      timeout: 60000,
-      credentialFields: {
-        id: 'id',
-        userId: 'userId',
-        publicKey: 'publicKey',
-        transports: 'transports',
-        counter: 'counter',
-      },
-    },
   })
 
   return await authHandler.invoke()
