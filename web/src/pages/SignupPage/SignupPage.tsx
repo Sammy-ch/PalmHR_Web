@@ -24,14 +24,16 @@ const SignupPage = () => {
     }
   }, [isAuthenticated])
 
-  // focus on username box on page load
-  const usernameRef = useRef<HTMLInputElement>(null)
+  // focus on FirstName box on page load
+  const FirstNameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    usernameRef.current?.focus()
+    FirstNameRef.current?.focus()
   }, [])
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await signUp({
+      firstName: data.firstName,
+      last_Name: data.last_Name,
       username: data.username,
       password: data.password,
     })
@@ -62,6 +64,47 @@ const SignupPage = () => {
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <Label
+                    name="first_Name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    First Name
+                  </Label>
+                  <TextField
+                    name="first_Name"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    ref={FirstNameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'First Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="first_Name" className="rw-field-error" />
+
+                  <Label
+                    name="last_Name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Last Name
+                  </Label>
+                  <TextField
+                    name="last_Name"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Last Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="last_Name" className="rw-field-error" />
+
+                  <Label
                     name="username"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
@@ -72,7 +115,6 @@ const SignupPage = () => {
                     name="username"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                    ref={usernameRef}
                     validation={{
                       required: {
                         value: true,
@@ -81,7 +123,6 @@ const SignupPage = () => {
                     }}
                   />
                   <FieldError name="username" className="rw-field-error" />
-
                   <Label
                     name="password"
                     className="rw-label"

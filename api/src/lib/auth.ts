@@ -34,7 +34,7 @@ export const getCurrentUser = async (session: Decoded) => {
     throw new Error('Invalid session')
   }
 
-  return await db.user.findUnique({
+  return await db.admin.findUnique({
     where: { id: session.id },
     select: { id: true },
   })

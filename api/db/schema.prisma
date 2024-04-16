@@ -16,10 +16,12 @@ generator client {
 }
 
 model Admin {
-AdminId String @id @default(uuid())
-ProfileId String
-First_Name String
-Last_Name String
+id Int @id @default(autoincrement())
+email String @unique
+hashedPassword String
+salt String
+resetToken String?
+resetTokenExpiresAt DateTime?
 }
 
 model AdminTier {
