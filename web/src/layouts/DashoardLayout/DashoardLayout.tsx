@@ -13,10 +13,10 @@ const DashoardLayout = ({ children }: DashoardLayoutProps) => {
         <Navigation />
       </header>
       <div className="flex w-full flex-col">
-        <div className='border-b-[0.5px]'>
+        <div className="border-b-[0.5px]">
           <DashboardHeader />
         </div>
-        <div className='p-5'>{children}</div>
+        <div className="p-5">{children}</div>
       </div>
     </main>
   )

@@ -10,6 +10,8 @@
 import { Router, Route } from '@redwoodjs/router'
 import { PrivateSet, Set } from '@redwoodjs/router'
 
+import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
+
 import { useAuth } from './auth'
 import DashoardLayout from './layouts/DashoardLayout/DashoardLayout'
 import HomeLayout from './layouts/HomeLayout/HomeLayout'
@@ -17,6 +19,18 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="AdminRoles" titleTo="adminRoles" buttonLabel="New AdminRole" buttonTo="newAdminRole">
+        <Route path="/admin-roles/new" page={AdminRoleNewAdminRolePage} name="newAdminRole" />
+        <Route path="/admin-roles/{id}/edit" page={AdminRoleEditAdminRolePage} name="editAdminRole" />
+        <Route path="/admin-roles/{id}" page={AdminRoleAdminRolePage} name="adminRole" />
+        <Route path="/admin-roles" page={AdminRoleAdminRolesPage} name="adminRoles" />
+      </Set>
+      <Set wrap={ScaffoldLayout} title="Admins" titleTo="admins" buttonLabel="New Admin" buttonTo="newAdmin">
+        <Route path="/admins/new" page={AdminNewAdminPage} name="newAdmin" />
+        <Route path="/admins/{id:Int}/edit" page={AdminEditAdminPage} name="editAdmin" />
+        <Route path="/admins/{id:Int}" page={AdminAdminPage} name="admin" />
+        <Route path="/admins" page={AdminAdminsPage} name="admins" />
+      </Set>
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Route path="/signup" page={SignupPage} name="signup" />
