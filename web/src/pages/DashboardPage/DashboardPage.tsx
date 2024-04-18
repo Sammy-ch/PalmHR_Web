@@ -4,7 +4,7 @@ import { Metadata } from '@redwoodjs/web'
 
 import AttendanceActivityTable from 'src/components/AttendanceActivityTable/AttendanceActivityTable'
 import KpiCard from 'src/components/KpiCard/KpiCard'
-import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
+// import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
   return (
     <main className="content h-full w-full  gap-5  ">
@@ -38,9 +38,7 @@ const DashboardPage = () => {
           <div className="w-full rounded-md ">
             <AttendanceActivityTable />
           </div>
-          <div>
-            {/* <TopPerformersCard /> */}
-          </div>
+          <div>{/* <TopPerformersCard /> */}</div>
         </section>
       </section>
     </main>
