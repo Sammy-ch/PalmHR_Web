@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { Download } from 'lucide-react'
-import { useAuth } from 'web/src/auth'
 
 import { Link, routes } from '@redwoodjs/router'
 
@@ -9,7 +8,6 @@ import { AuroraBackground } from '../ui/aurora-background'
 // import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
 
 const HeroSection = () => {
-  const { isAuthenticated, currentUser, userMetadata } = useAuth()
   return (
     <AuroraBackground>
       <motion.div
@@ -32,18 +30,6 @@ const HeroSection = () => {
             From payroll to performance tracking, our comprehensive app
             simplifies every aspect of HR management.
           </p>
-
-          <div className={'text-md'}>
-            {isAuthenticated ? (
-              <div>
-                <span>Welcome Alan</span>
-                <span>{JSON.stringify({ currentUser })}</span>
-                <span>{JSON.stringify({ userMetadata })}</span>
-              </div>
-            ) : (
-              <span> Please login </span>
-            )}
-          </div>
 
           <div className="flex gap-2">
             <Link
