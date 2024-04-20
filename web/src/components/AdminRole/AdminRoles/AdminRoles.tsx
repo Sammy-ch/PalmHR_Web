@@ -16,7 +16,7 @@ const DELETE_ADMIN_ROLE_MUTATION: TypedDocumentNode<
   DeleteAdminRoleMutation,
   DeleteAdminRoleMutationVariables
 > = gql`
-  mutation DeleteAdminRoleMutation($id: String!) {
+  mutation DeleteAdminRoleMutation($id: Int!) {
     deleteAdminRole(id: $id) {
       id
     }

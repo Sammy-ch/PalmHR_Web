@@ -9,7 +9,7 @@ import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { timeTag } from 'src/lib/formatters'
+import {} from 'src/lib/formatters'
 
 const DELETE_ADMIN_MUTATION: TypedDocumentNode<
   DeleteAdminMutation,
@@ -58,24 +58,16 @@ const Admin = ({ admin }: Props) => {
               <td>{admin.id}</td>
             </tr>
             <tr>
+              <th>First name</th>
+              <td>{admin.first_name}</td>
+            </tr>
+            <tr>
+              <th>Last name</th>
+              <td>{admin.last_name}</td>
+            </tr>
+            <tr>
               <th>Email</th>
               <td>{admin.email}</td>
-            </tr>
-            <tr>
-              <th>Hashed password</th>
-              <td>{admin.hashedPassword}</td>
-            </tr>
-            <tr>
-              <th>Salt</th>
-              <td>{admin.salt}</td>
-            </tr>
-            <tr>
-              <th>Reset token</th>
-              <td>{admin.resetToken}</td>
-            </tr>
-            <tr>
-              <th>Reset token expires at</th>
-              <td>{timeTag(admin.resetTokenExpiresAt)}</td>
             </tr>
           </tbody>
         </table>

@@ -18,10 +18,9 @@ const ReportsPage = () => {
     <>
       <Metadata title="Reports" description="Reports page" />
 
-      <div className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6">
+      <div className="w-full md:px-6">
         <div className="space-y-4">
           <div>
-            <h1 className="text-2xl font-bold">Attendance Reports</h1>
             <p className="text-gray-500 dark:text-gray-400">
               View and download employee attendance data.
             </p>

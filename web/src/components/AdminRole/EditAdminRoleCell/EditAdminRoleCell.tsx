@@ -16,7 +16,7 @@ import { toast } from '@redwoodjs/web/toast'
 import AdminRoleForm from 'src/components/AdminRole/AdminRoleForm'
 
 export const QUERY: TypedDocumentNode<EditAdminRoleById> = gql`
-  query EditAdminRoleById($id: String!) {
+  query EditAdminRoleById($id: Int!) {
     adminRole: adminRole(id: $id) {
       id
       createdAt
@@ -31,10 +31,7 @@ const UPDATE_ADMIN_ROLE_MUTATION: TypedDocumentNode<
   EditAdminRoleById,
   UpdateAdminRoleMutationVariables
 > = gql`
-  mutation UpdateAdminRoleMutation(
-    $id: String!
-    $input: UpdateAdminRoleInput!
-  ) {
+  mutation UpdateAdminRoleMutation($id: Int!, $input: UpdateAdminRoleInput!) {
     updateAdminRole(id: $id, input: $input) {
       id
       createdAt

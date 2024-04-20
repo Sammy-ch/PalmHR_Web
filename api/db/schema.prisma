@@ -17,16 +17,16 @@ generator client {
 
 model Admin {
 id Int @id @default(autoincrement())
-email String @unique
-hashedPassword String
-salt String
-resetToken String?
-resetTokenExpiresAt DateTime?
+first_name String
+last_name String
+email String
 tierAccess AdminRole[]
+
+@@unique([id,email])
 }
 
 model AdminRole{
-id String @id @default(uuid())
+id Int @id @default(autoincrement())
 createdAt DateTime @default(now())
 updatedAt DateTime @default(now())
 name String
@@ -34,7 +34,7 @@ admin Admin? @relation(fields: [adminId],references: [id])
 adminId  Int?
 
 
-@@unique([name,adminId])
+@@unique([id,name,adminId])
 }
 
 model Employee_profile {
@@ -50,7 +50,7 @@ AttendanceData Employee_attendance[]
 }
 
 model Employee_attendance {
-AttendanceId  String @id @default(uuid())
+AttendanceId BigInt @id @default(autoincrement())
 Employee   Employee_profile  @relation(fields: [EmployeeId],references: [ProfileId])
 EmployeeId String
 Checkin_time  DateTime?
@@ -58,6 +58,5 @@ Checkout_time DateTime?
 Checking_Date DateTime?
 Working_time Int?
 ArrivalTag String?
-
 }
 

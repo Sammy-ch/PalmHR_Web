@@ -5,7 +5,7 @@ const PerformancePage = () => {
     <>
       <Metadata title="Performance" description="Performance page" />
 
-      <main className="container px-4 md:px-6">
+      <main className="container">
         <h1 className="mb-8 text-xl font-bold">Our Team</h1>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <div className="rounded-lg bg-white shadow-md dark:bg-gray-800">

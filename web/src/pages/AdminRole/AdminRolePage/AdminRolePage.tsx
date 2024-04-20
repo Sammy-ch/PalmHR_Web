@@ -1,7 +1,7 @@
 import AdminRoleCell from 'src/components/AdminRole/AdminRoleCell'
 
 type AdminRolePageProps = {
-  id: string
+  id: number
 }
 
 const AdminRolePage = ({ id }: AdminRolePageProps) => {

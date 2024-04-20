@@ -9,11 +9,11 @@ type DashoardLayoutProps = {
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
   return (
     <main className="flex w-full">
-      <header className="border-r-[0.5px]">
+      <header className="border-r-[1px]">
         <Navigation />
       </header>
       <div className="flex w-full flex-col">
-        <div className="border-b-[0.5px]">
+        <div className="border-b-[1px]">
           <DashboardHeader />
         </div>
         <div className="p-5">{children}</div>

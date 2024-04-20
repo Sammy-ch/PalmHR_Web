@@ -43,8 +43,11 @@ const Routes = () => {
         <Route path="/about" page={AboutPage} name="about" />
       </Set>
 
-      <PrivateSet wrap={DashoardLayout} unauthenticated="home">
+      <PrivateSet unauthenticated="home">
         <Route path="/createorganization" page={CreateorganizationPage} name="createorganization" />
+      </PrivateSet>
+
+      <PrivateSet wrap={DashoardLayout} unauthenticated="home">
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />
         <Route path="/settings" page={SettingsPage} name="settings" />
         <Route path="/attendance" page={AttendancePage} name="attendance" />

@@ -15,11 +15,9 @@ export const QUERY: TypedDocumentNode<
   query FindAdminById($id: Int!) {
     admin: admin(id: $id) {
       id
+      first_name
+      last_name
       email
-      hashedPassword
-      salt
-      resetToken
-      resetTokenExpiresAt
     }
   }
 `

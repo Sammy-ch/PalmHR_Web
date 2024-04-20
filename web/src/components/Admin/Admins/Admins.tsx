@@ -10,7 +10,7 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Admin/AdminsCell'
-import { timeTag, truncate } from 'src/lib/formatters'
+import { truncate } from 'src/lib/formatters'
 
 const DELETE_ADMIN_MUTATION: TypedDocumentNode<
   DeleteAdminMutation,
@@ -50,11 +50,9 @@ const AdminsList = ({ admins }: FindAdmins) => {
         <thead>
           <tr>
             <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
             <th>Email</th>
-            <th>Hashed password</th>
-            <th>Salt</th>
-            <th>Reset token</th>
-            <th>Reset token expires at</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -62,11 +60,9 @@ const AdminsList = ({ admins }: FindAdmins) => {
           {admins.map((admin) => (
             <tr key={admin.id}>
               <td>{truncate(admin.id)}</td>
+              <td>{truncate(admin.first_name)}</td>
+              <td>{truncate(admin.last_name)}</td>
               <td>{truncate(admin.email)}</td>
-              <td>{truncate(admin.hashedPassword)}</td>
-              <td>{truncate(admin.salt)}</td>
-              <td>{truncate(admin.resetToken)}</td>
-              <td>{timeTag(admin.resetTokenExpiresAt)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

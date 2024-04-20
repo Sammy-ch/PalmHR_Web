@@ -15,7 +15,7 @@ export const QUERY: TypedDocumentNode<
   FindAdminRoleById,
   FindAdminRoleByIdVariables
 > = gql`
-  query FindAdminRoleById($id: String!) {
+  query FindAdminRoleById($id: Int!) {
     adminRole: adminRole(id: $id) {
       id
       createdAt

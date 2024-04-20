@@ -1,6 +1,6 @@
 export const schema = gql`
   type AdminRole {
-    id: String!
+    id: Int!
     createdAt: DateTime!
     updatedAt: DateTime!
     name: String!
@@ -10,7 +10,7 @@ export const schema = gql`
 
   type Query {
     adminRoles: [AdminRole!]! @requireAuth
-    adminRole(id: String!): AdminRole @requireAuth
+    adminRole(id: Int!): AdminRole @requireAuth
   }
 
   input CreateAdminRoleInput {
@@ -25,8 +25,8 @@ export const schema = gql`
 
   type Mutation {
     createAdminRole(input: CreateAdminRoleInput!): AdminRole! @requireAuth
-    updateAdminRole(id: String!, input: UpdateAdminRoleInput!): AdminRole!
+    updateAdminRole(id: Int!, input: UpdateAdminRoleInput!): AdminRole!
       @requireAuth
-    deleteAdminRole(id: String!): AdminRole! @requireAuth
+    deleteAdminRole(id: Int!): AdminRole! @requireAuth
   }
 `

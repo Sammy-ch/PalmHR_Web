@@ -13,11 +13,9 @@ export const QUERY: TypedDocumentNode<FindAdmins, FindAdminsVariables> = gql`
   query FindAdmins {
     admins {
       id
+      first_name
+      last_name
       email
-      hashedPassword
-      salt
-      resetToken
-      resetTokenExpiresAt
     }
   }
 `

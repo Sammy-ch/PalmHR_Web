@@ -10,13 +10,10 @@
   port = 8911
   apiUrl = "/.netlify/functions"
   includeEnvironmentVariables = [
-  "AUTH0_DOMAIN",
-    "AUTH0_CLIENT_ID",
-    "AUTH0_REDIRECT_URI",
-    "AUTH0_AUDIENCE",
+    "CLERK_PUBLISHABLE_KEY",
       ]
 [api]
-  port = 8912
+  port = 8914
 [browser]
   open = true
 [notifications]

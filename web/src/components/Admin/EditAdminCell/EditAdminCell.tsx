@@ -19,11 +19,9 @@ export const QUERY: TypedDocumentNode<EditAdminById> = gql`
   query EditAdminById($id: Int!) {
     admin: admin(id: $id) {
       id
+      first_name
+      last_name
       email
-      hashedPassword
-      salt
-      resetToken
-      resetTokenExpiresAt
     }
   }
 `
@@ -35,11 +33,9 @@ const UPDATE_ADMIN_MUTATION: TypedDocumentNode<
   mutation UpdateAdminMutation($id: Int!, $input: UpdateAdminInput!) {
     updateAdmin(id: $id, input: $input) {
       id
+      first_name
+      last_name
       email
-      hashedPassword
-      salt
-      resetToken
-      resetTokenExpiresAt
     }
   }
 `
