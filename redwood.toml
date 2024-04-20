@@ -8,13 +8,12 @@
 [web]
   title = "Redwood App"
   port = 8911
-  apiUrl = "/api"
+  apiUrl = "/.netlify/functions"
   includeEnvironmentVariables = [
-      "SUPABASE_URL",
-      "SUPABASE_KEY",
-  ]
+    "CLERK_PUBLISHABLE_KEY",
+      ]
 [api]
-  port = 8912
+  port = 8914
 [browser]
   open = true
 [notifications]

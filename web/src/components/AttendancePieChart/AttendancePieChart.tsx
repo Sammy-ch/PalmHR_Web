@@ -11,8 +11,7 @@ export const data = {
     {
       label: 'Attendance %',
       data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: ['#29AB87', '#00308F'],
-      borderColor: ['#29AB87', '#00308F'],
+      backgroundColor: ['#1E90FF', 'rgba(249, 180, 45, 1)'],
       borderWidth: 1,
     },
   ],

@@ -1,107 +1,181 @@
-import { RiFlag2Line } from '@remixicon/react'
+import { Badge } from '../ui/badge'
 import {
-  Badge,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableHeaderCell,
+  TableHeader,
   TableRow,
-} from '@tremor/react'
-const data = [
-  {
-    name: 'Alain Cherubin',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-  {
-    name: 'D Dan',
-    Role: 'Graphics Designer',
-    checkin: '10:02 AM',
-    checkout: '05:03 PM',
-    status: 'Present',
-  },
-  {
-    name: 'Viola Amherd',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-  {
-    name: 'Viola Amherd',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-  {
-    name: 'Viola Amherd',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-  {
-    name: 'Viola Amherd',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-  {
-    name: 'Viola Amherd',
-    Role: 'Software Developer',
-    checkin: '08:02 AM',
-    checkout: '05:23 PM',
-    status: 'Present',
-  },
-]
+} from '../ui/table'
 
-const AttendanceActivityTable = () => {
+export default function AttendanceActivityTable() {
   return (
-    <div>
-      {' '}
-      <h3 className="text-tremor-content-strong font-bold dark:text-dark-tremor-content-strong text-lg">
-        Attendance Activity
-      </h3>{' '}
-      <Table className="mt-5">
-        {' '}
-        <TableHead>
-          {' '}
-          <TableRow>
-            {' '}
-            <TableHeaderCell>Name</TableHeaderCell>{' '}
-            <TableHeaderCell>Role</TableHeaderCell>{' '}
-            <TableHeaderCell>Check In </TableHeaderCell>{' '}
-            <TableHeaderCell>Check Out </TableHeaderCell>{' '}
-            <TableHeaderCell>Status</TableHeaderCell>{' '}
-          </TableRow>{' '}
-        </TableHead>{' '}
-        <TableBody>
-          {' '}
-          {data.map((item) => (
-            <TableRow key={item.name}>
-              {' '}
-              <TableCell>{item.name}</TableCell>{' '}
-              <TableCell> {item.Role} </TableCell>{' '}
-              <TableCell> {item.checkin} </TableCell>{' '}
-              <TableCell> {item.checkout} </TableCell>{' '}
-              <TableCell>
-                {' '}
-                <Badge color="emerald" icon={RiFlag2Line}>
-                  {' '}
-                  {item.status}{' '}
-                </Badge>{' '}
-              </TableCell>{' '}
+    <Card>
+      <CardHeader className="px-7">
+        <CardTitle>Attendance Stat</CardTitle>
+        <CardDescription>Recent attendance activity</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Employee Name</TableHead>
+              <TableHead className="hidden sm:table-cell">Position</TableHead>
+              <TableHead className="hidden sm:table-cell">Status</TableHead>
+              <TableHead className="hidden md:table-cell">Date</TableHead>
+              <TableHead className="text-right">Check In</TableHead>
+              <TableHead className="text-right">Check Out</TableHead>
             </TableRow>
-          ))}{' '}
-        </TableBody>{' '}
-      </Table>{' '}
-    </div>
+          </TableHeader>
+          <TableBody>
+            <TableRow className="bg-accent">
+              <TableCell>
+                <div className="font-medium">Liam Johnson</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  liam@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Olivia Smith</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  olivia@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Refund</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="outline">
+                  Declined
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Noah Williams</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  noah@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                Subscription
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Emma Brown</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  emma@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Liam Johnson</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  liam@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Liam Johnson</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  liam@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Olivia Smith</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  olivia@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Refund</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="outline">
+                  Declined
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Emma Brown</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  emma@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Fulfilled
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   )
 }
-
-export default AttendanceActivityTable

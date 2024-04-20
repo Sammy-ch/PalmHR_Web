@@ -8,10 +8,10 @@ type HomeLayoutProps = {
 const HomeLayout = ({ children }: HomeLayoutProps) => {
   return (
     <>
-      <header>
+      <header className="absolute z-10 my-5 w-full px-20">
         <HomeNavigation />
       </header>
-      {children}
+      <main className="min-h-screen">{children}</main>
       <footer>
         <HomeFooter />
       </footer>

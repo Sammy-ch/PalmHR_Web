@@ -1,31 +1,18 @@
-import { TrendingUp,CircleArrowOutDownLeft } from 'lucide-react'
+import { DollarSign } from 'lucide-react'
 
-export type Kpi = {
-  title: string
-  metric: string
-  progress: number
-}
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
-const KpiCard = ({ title, metric, progress }: any) => {
+export default function Component({ title }: any) {
   return (
-    <div className="mx-auto flex flex-col gap-5 rounded-lg border p-10 px-4 py-3.5 shadow-md">
-      <div className="flex items-center gap-2">
-        <div className="rounded-[100%] bg-slate-400/30 p-1.5"><CircleArrowOutDownLeft color="#0080ff" /></div>
-        <h3 className="text-lg font-medium text-slate-600">
-          Overall Attendance rate
-        </h3>
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="text-4xl font-semibold">24%</span>
-        <div className="flex flex-col items-center text-xs font-bold text-[grey]">
-          <span className='flex items-center gap-2'>
-            <TrendingUp color="#80ff00" /> 16%
-          </span>
-          <span>vs last 7 days</span>
-        </div>
-      </div>
-    </div>
+    <Card className="w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-2xl font-medium">{title}</CardTitle>
+        <DollarSign className="h-4 w-4 text-muted-foreground" />
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">45%</div>
+        <p className="text-md text-muted-foreground">+20.1% from last month</p>
+      </CardContent>
+    </Card>
   )
 }
-
-export default KpiCard

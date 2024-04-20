@@ -4,7 +4,7 @@ import { VictoryBar, VictoryChart, VictoryGroup, VictoryAxis } from 'victory'
 
 const AttendanceChartCard = () => {
   return (
-    <main className="p-5">
+    <main className="p-5 ">
       <h1 className='text-lg text-slate-800 font-semibold'>Attendance Time</h1>
       <VictoryChart>
         <VictoryAxis
