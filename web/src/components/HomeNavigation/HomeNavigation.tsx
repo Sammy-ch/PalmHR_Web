@@ -6,12 +6,11 @@ import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 const HomeNavigation = () => {
-  const { isAuthenticated, signUp, logOut } = useAuth()
+  const { isAuthenticated, signUp, logOut, currentUser } = useAuth()
 
-  // if (isAuthenticated) {
-  //   navigate(routes.dashboard())
-  //   return
-  // }
+  if (isAuthenticated) {
+    console.log(currentUser)
+  }
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">

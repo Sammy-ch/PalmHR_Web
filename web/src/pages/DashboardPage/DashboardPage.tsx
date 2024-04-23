@@ -2,10 +2,17 @@ import React from 'react'
 
 import { Metadata } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
 import AttendanceActivityTable from 'src/components/AttendanceActivityTable/AttendanceActivityTable'
 import KpiCard from 'src/components/KpiCard/KpiCard'
+
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
+  const { isAuthenticated, currentUser } = useAuth()
+
+  if (isAuthenticated) {
+    console.log(currentUser)
+  }
   return (
     <main className="content h-full w-full  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />

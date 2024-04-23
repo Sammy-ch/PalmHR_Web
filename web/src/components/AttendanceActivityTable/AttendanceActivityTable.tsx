@@ -86,7 +86,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -103,7 +103,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -120,7 +120,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -137,7 +137,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -154,7 +154,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -171,7 +171,7 @@ export default function AttendanceActivityTable() {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
           </TableBody>
         </Table>
