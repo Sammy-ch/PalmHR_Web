@@ -12,15 +12,15 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import AttendanceChartCard from './AttendanceChartCard'
+import AttendanceBarChart from './AttendanceBarChart'
 
-const meta: Meta<typeof AttendanceChartCard> = {
-  component: AttendanceChartCard,
+const meta: Meta<typeof AttendanceBarChart> = {
+  component: AttendanceBarChart,
   tags: ['autodocs'],
 }
 
 export default meta
 
-type Story = StoryObj<typeof AttendanceChartCard>
+type Story = StoryObj<typeof AttendanceBarChart>
 
 export const Primary: Story = {}
