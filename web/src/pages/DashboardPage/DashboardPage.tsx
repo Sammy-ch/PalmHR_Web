@@ -4,13 +4,13 @@ import { BadgeCheck } from 'lucide-react'
 import { ListFilter } from 'lucide-react'
 import { Timer } from 'lucide-react'
 import { BookX } from 'lucide-react'
+import AttendanceActivityTable from 'web/src/components/AttendanceActivityTable/AttendanceActivityTable'
 
 import { Metadata } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
-import AttendanceActivityTable from 'src/components/AttendanceActivityTable/AttendanceActivityTable'
-// import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 import KpiCard from 'src/components/KpiCard/KpiCard'
+// import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
   const { isAuthenticated, currentUser } = useAuth()

@@ -12,7 +12,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import AttendanceActivityTable from './AttendanceActivityTable'
+import AttendanceActivityTable from './AttendanceActivityTable.1'
 
 const meta: Meta<typeof AttendanceActivityTable> = {
   component: AttendanceActivityTable,
