@@ -1,11 +1,16 @@
 import React from 'react'
 
+import { BadgeCheck } from 'lucide-react'
+import { ListFilter } from 'lucide-react'
+import { Timer } from 'lucide-react'
+import { BookX } from 'lucide-react'
+
 import { Metadata } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import AttendanceActivityTable from 'src/components/AttendanceActivityTable/AttendanceActivityTable'
+// import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 import KpiCard from 'src/components/KpiCard/KpiCard'
-
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
   const { isAuthenticated, currentUser } = useAuth()
@@ -20,25 +25,34 @@ const DashboardPage = () => {
         <section className="flex flex-col">
           <div className="flex justify-between gap-5 rounded-md ">
             <KpiCard
-              title={'OnTime attendance rate'}
+              title={'OnTime Attendance'}
               metric={'56'}
-              progress={'15'}
+              icon={BadgeCheck}
+              progress={'+20.1% from last month'}
             />
-            <KpiCard title={'Absenteeism rate'} metric={'32'} progress={'57'} />
+            <KpiCard
+              title={'Absenteeism rate'}
+              icon={ListFilter}
+              metric={'32'}
+              progress={'+20.1% from last month'}
+            />
             <KpiCard
               title={'Average working hours'}
               metric={'16'}
-              progress={'5'}
+              progress={'+20.1% from last month'}
+              icon={Timer}
             />
-            <KpiCard title={'Late'} metric={'48'} progress={'75'} />
+            <KpiCard
+              title={'Late Attendance'}
+              metric={'48'}
+              progress={'+20.1% from last month'}
+              icon={BookX}
+            />
           </div>
         </section>
         {/* <section className="flex w-full gap-5">
           <div className="rounded-md   border  shadow-md">
-            <AttendanceChartCard />
-          </div>
-          <div className="rounded-md shadow-md">
-            <AttendancePieChart />
+            <AttendanceBarChart />
           </div>
         </section> */}
         <section className="flex h-full w-full grid-flow-col gap-5">
