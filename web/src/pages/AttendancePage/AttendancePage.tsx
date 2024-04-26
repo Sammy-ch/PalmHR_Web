@@ -1,4 +1,12 @@
-import { Avatar } from 'web/src/components/ui/avatar'
+import { LeafyGreen } from 'lucide-react'
+import { Luggage } from 'lucide-react'
+import { Home } from 'lucide-react'
+import EmployeeLeaveCard from 'web/src/components/EmployeeLeaveCard/EmployeeLeaveCard'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from 'web/src/components/ui/avatar'
 import { Button } from 'web/src/components/ui/button'
 import {
   TableHead,
@@ -10,6 +18,11 @@ import {
 } from 'web/src/components/ui/table'
 
 import { Metadata } from '@redwoodjs/web'
+
+import chaddryDp from './Chaddry1.jpg'
+import gilbertDp from './Gilbert1.jpg'
+import loretteDp from './Lorette1.jpg'
+import alainDp from './santana.jpg'
 
 const AttendancePage = () => {
   return (
@@ -25,85 +38,37 @@ const AttendancePage = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="rounded-lg bg-white shadow-lg dark:bg-gray-950 dark:text-gray-50">
-            <div className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Avatar alt="John Doe" src="/placeholder-user.jpg" />
-                  <div>
-                    <h3 className="font-semibold">John Doe</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Software Engineer
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <h4 className="text-2xl font-semibold">5</h4>
-                  <p className="text-gray-500 dark:text-gray-400">Days</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <LeafIcon className="h-5 w-5 text-green-500" />
-                  <p className="text-green-500">Sick Leave</p>
-                </div>
-                <p className="text-gray-500 dark:text-gray-400">12 Leaves</p>
-              </div>
-            </div>
-          </div>
-          <div className="rounded-lg bg-white shadow-lg dark:bg-gray-950 dark:text-gray-50">
-            <div className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Avatar alt="Jane Smith" src="/placeholder-user.jpg" />
-                  <div>
-                    <h3 className="font-semibold">Jane Smith</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Product Manager
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <h4 className="text-2xl font-semibold">3</h4>
-                  <p className="text-gray-500 dark:text-gray-400">Days</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <LuggageIcon className="h-5 w-5 text-blue-500" />
-                  <p className="text-blue-500">Vacation</p>
-                </div>
-                <p className="text-gray-500 dark:text-gray-400">8 Leaves</p>
-              </div>
-            </div>
-          </div>
-          <div className="rounded-lg bg-white shadow-lg dark:bg-gray-950 dark:text-gray-50">
-            <div className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Avatar alt="Michael Johnson" src="/placeholder-user.jpg" />
-                  <div>
-                    <h3 className="font-semibold">Michael Johnson</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      UI/UX Designer
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <h4 className="text-2xl font-semibold">7</h4>
-                  <p className="text-gray-500 dark:text-gray-400">Days</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <CalendarIcon className="h-5 w-5 text-yellow-500" />
-                  <p className="text-yellow-500">Personal</p>
-                </div>
-                <p className="text-gray-500 dark:text-gray-400">15 Leaves</p>
-              </div>
-            </div>
-          </div>
+          <EmployeeLeaveCard
+            profileDp={alainDp}
+            fullName="Alain Cherubin"
+            position="Full Stack Developer"
+            leaveCount={12}
+            leaveDuration="6"
+            LeaveType="Sick Leave"
+            icon={LeafyGreen}
+          />
+
+          <EmployeeLeaveCard
+            profileDp={loretteDp}
+            fullName="Kelly Lorette"
+            position="Research and statistics manager"
+            leaveCount={8}
+            leaveDuration="17"
+            LeaveType="Vacation Leave"
+            icon={Luggage}
+          />
+
+          <EmployeeLeaveCard
+            profileDp={chaddryDp}
+            fullName="Chaddry Mberincuti"
+            position="Graphics Designer"
+            leaveCount={2}
+            leaveDuration="8"
+            LeaveType="Personal Leave"
+            icon={Home}
+          />
         </div>
+
         <div className="mt-8">
           <h2 className="mb-4 text-xl font-bold">Requested Leaves</h2>
           <div className="overflow-x-auto">
@@ -120,11 +85,20 @@ const AttendancePage = () => {
                 <TableRow>
                   <TableCell>
                     <div className="flex items-center space-x-4">
-                      <Avatar alt="Sarah Lee" src="/placeholder-user.jpg" />
+                      <Avatar className="h-[50px] w-[50px]">
+                        <AvatarImage
+                          height={500}
+                          width={500}
+                          src={gilbertDp}
+                          alt="@shadcn"
+                          className="object-cover object-top"
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>{' '}
                       <div>
-                        <h3 className="font-semibold">Sarah Lee</h3>
+                        <h3 className="font-semibold">Mugisha Gilbert</h3>
                         <p className="text-gray-500 dark:text-gray-400">
-                          Marketing Coordinator
+                          Graphics Designer
                         </p>
                       </div>
                     </div>
@@ -152,11 +126,20 @@ const AttendancePage = () => {
                 <TableRow>
                   <TableCell>
                     <div className="flex items-center space-x-4">
-                      <Avatar alt="David Kim" src="/placeholder-user.jpg" />
+                      <Avatar className="h-[50px] w-[50px]">
+                        <AvatarImage
+                          height={500}
+                          width={500}
+                          src={alainDp}
+                          alt="@shadcn"
+                          className="object-cover object-top"
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>{' '}
                       <div>
-                        <h3 className="font-semibold">David Kim</h3>
+                        <h3 className="font-semibold">Alain Cherubin</h3>
                         <p className="text-gray-500 dark:text-gray-400">
-                          Software Engineer
+                          FullStack Developer
                         </p>
                       </div>
                     </div>
@@ -184,11 +167,20 @@ const AttendancePage = () => {
                 <TableRow>
                   <TableCell>
                     <div className="flex items-center space-x-4">
-                      <Avatar alt="Emily Chen" src="/placeholder-user.jpg" />
+                      <Avatar className="h-[50px] w-[50px]">
+                        <AvatarImage
+                          height={500}
+                          width={500}
+                          src={chaddryDp}
+                          alt="@shadcn"
+                          className="object-cover object-top"
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>{' '}
                       <div>
-                        <h3 className="font-semibold">Emily Chen</h3>
+                        <h3 className="font-semibold">Chaddry Mberincuti</h3>
                         <p className="text-gray-500 dark:text-gray-400">
-                          Product Designer
+                          Graphics Designer
                         </p>
                       </div>
                     </div>

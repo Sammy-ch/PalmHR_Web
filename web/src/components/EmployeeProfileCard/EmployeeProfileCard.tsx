@@ -17,7 +17,13 @@ const EmployeeProfileCard = ({
     <div className="flex  h-80 w-72 flex-col justify-between rounded-lg bg-white shadow-md dark:bg-gray-800 ">
       <div className="relative  flex flex-col items-center overflow-hidden rounded-t-lg">
         <Avatar className="h-[120px] w-[120px]">
-          <AvatarImage height={500} width={500} src={profileDp} alt="@shadcn" className='object-cover object-top' />
+          <AvatarImage
+            height={500}
+            width={500}
+            src={profileDp}
+            alt="@shadcn"
+            className="object-cover object-top"
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         {/* <img
