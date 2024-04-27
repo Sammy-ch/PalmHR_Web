@@ -5,11 +5,13 @@ import { ListFilter } from 'lucide-react'
 import { Timer } from 'lucide-react'
 import { BookX } from 'lucide-react'
 import AttendanceActivityTable from 'web/src/components/AttendanceActivityTable/AttendanceActivityTable'
+import AttendanceLineChart from 'web/src/components/AttendanceLineChart/AttendanceLineChart'
 
 import { Metadata } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import KpiCard from 'src/components/KpiCard/KpiCard'
+
 // import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
@@ -50,11 +52,11 @@ const DashboardPage = () => {
             />
           </div>
         </section>
-        {/* <section className="flex w-full gap-5">
+        <section className="flex w-full gap-5">
           <div className="rounded-md   border  shadow-md">
-            <AttendanceBarChart />
+            <AttendanceLineChart />
           </div>
-        </section> */}
+        </section>
         <section className="flex h-full w-full grid-flow-col gap-5">
           <div className="w-full rounded-md ">
             <AttendanceActivityTable />
