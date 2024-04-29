@@ -10,7 +10,6 @@
   port = 8911
   apiUrl = "/.netlify/functions"
   includeEnvironmentVariables = [
-    "CLERK_PUBLISHABLE_KEY",
       ]
 [api]
   port = 8914
