@@ -30,7 +30,7 @@ admin_role Admin_Role[]
 
 model Admin_Role{
 id Int @id @default(autoincrement())
-adminId  String?
+adminId  String? @db.Uuid
 role String
 admin Admin? @relation(fields: [adminId],references: [id])
 
@@ -39,33 +39,33 @@ admin Admin? @relation(fields: [adminId],references: [id])
 }
 
 model Employee_profile {
-profile_id String @id
+profile_id String @id @db.Uuid
 first_name String
 last_name String
 profile_image String?
 position String
 email String?
-daysOff Int?
+allowed_leaves Int?
 AttendanceData Employee_attendance[]
 LeaveData Leave_Custom[]
 }
 
 model Employee_attendance {
-AttendanceId BigInt @id @default(autoincrement())
-Employee   Employee_profile  @relation(fields: [EmployeeId],references: [profile_id])
-EmployeeId String
-Checkin_time  DateTime? @db.Time()
-Checkout_time DateTime? @db.Time()
-Checking_Date DateTime? @db.Date
-Working_time DateTime? @db.Time()
-presenceTag PresenceTag
+attendance_id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+employee   Employee_profile  @relation(fields: [employee_id],references: [profile_id])
+employee_id String @db.Uuid
+checkin_time  DateTime? @db.Time()
+checkout_time DateTime? @db.Time()
+checking_date DateTime? @db.Date
+working_time DateTime? @db.Time()
+presence_tag PresenceTag
 
 }
 
 
 model Leave_Custom {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  requested_leave_date DateTime
+  requested_leave_date DateTime @db.Date
   leave Employee_profile @relation(fields: [leave_id],references: [profile_id])
   leave_id String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   leave_type String @db.Text
