@@ -10,7 +10,8 @@
   port = 8911
   apiUrl = "/.redwood/functions"
   includeEnvironmentVariables = [
-    "CLERK_PUBLISHABLE_KEY",
+      "SUPABASE_URL",
+      "SUPABASE_KEY",
       ]
 [api]
   port = 8914
