@@ -6,14 +6,12 @@ import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
-import logo from './MD.jpg'
-
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 const DashboardHeader = () => {
-  const { isAuthenticated, hasRole, userMetadata } = useAuth()
+  const { hasRole, userMetadata } = useAuth()
   const routeName = useRouteName()
 
   if (hasRole) {

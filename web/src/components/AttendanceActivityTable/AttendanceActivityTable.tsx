@@ -37,15 +37,17 @@ export default function AttendanceActivityTable() {
           <TableBody>
             <TableRow className="bg-accent">
               <TableCell>
-                <div className="font-medium">Liam Johnson</div>
+                <div className="font-medium">Alain Cherubin</div>
                 <div className="hidden text-sm text-muted-foreground md:inline">
                   liam@example.com
                 </div>
               </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                Software Developer
+              </TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="secondary">
-                  Fulfilled
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
@@ -54,15 +56,17 @@ export default function AttendanceActivityTable() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <div className="font-medium">Olivia Smith</div>
+                <div className="font-medium">Chaddry Mberincuti</div>
                 <div className="hidden text-sm text-muted-foreground md:inline">
                   olivia@example.com
                 </div>
               </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                Graphics Designer
+              </TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="outline">
-                  Declined
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
@@ -71,39 +75,60 @@ export default function AttendanceActivityTable() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <div className="font-medium">Noah Williams</div>
+                <div className="font-medium">Mugisha Gilbert</div>
                 <div className="hidden text-sm text-muted-foreground md:inline">
                   noah@example.com
                 </div>
               </TableCell>
               <TableCell className="hidden sm:table-cell">
-                Subscription
+                Graphics Designer
               </TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="secondary">
-                  Fulfilled
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
-                <div className="font-medium">Emma Brown</div>
+                <div className="font-medium">Kelly Lorette </div>
                 <div className="hidden text-sm text-muted-foreground md:inline">
                   emma@example.com
                 </div>
               </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                Research & Stat Manager
+              </TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="secondary">
-                  Fulfilled
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <div className="font-medium">Dan Lewis</div>
+                <div className="hidden text-sm text-muted-foreground md:inline">
+                  liam@example.com
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                Operations Manager
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">
+                <Badge className="text-xs" variant="secondary">
+                  Present
+                </Badge>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
+              <TableCell className="text-right">08:25 AM</TableCell>
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -115,29 +140,12 @@ export default function AttendanceActivityTable() {
               <TableCell className="hidden sm:table-cell">Sale</TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="secondary">
-                  Fulfilled
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -149,12 +157,12 @@ export default function AttendanceActivityTable() {
               <TableCell className="hidden sm:table-cell">Refund</TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="outline">
-                  Declined
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
@@ -166,12 +174,12 @@ export default function AttendanceActivityTable() {
               <TableCell className="hidden sm:table-cell">Sale</TableCell>
               <TableCell className="hidden sm:table-cell">
                 <Badge className="text-xs" variant="secondary">
-                  Fulfilled
+                  Present
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
-              <TableCell className="text-right">06:23 PM</TableCell>{' '}
+              <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
           </TableBody>
         </Table>

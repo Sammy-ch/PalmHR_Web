@@ -19,6 +19,19 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="UserProfiles" titleTo="userProfiles" buttonLabel="New UserProfile" buttonTo="newUserProfile">
+        <Route path="/user-profiles/new" page={UserProfileNewUserProfilePage} name="newUserProfile" />
+        <Route path="/user-profiles/{user_id:Int}/edit" page={UserProfileEditUserProfilePage} name="editUserProfile" />
+        <Route path="/user-profiles/{user_id:Int}" page={UserProfileUserProfilePage} name="userProfile" />
+        <Route path="/user-profiles" page={UserProfileUserProfilesPage} name="userProfiles" />
+      </Set>
+
+      <Set title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
+        <Route path="/organizations/{OrganizationId:Int}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
+        <Route path="/organizations/{OrganizationId:Int}" page={OrganizationOrganizationPage} name="organization" />
+        <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
+        <Route path="/organizations" page={OrganizationOrganizationsPage} name="organizations" />
+      </Set>
       <Set wrap={ScaffoldLayout} title="AdminRoles" titleTo="adminRoles" buttonLabel="New AdminRole" buttonTo="newAdminRole">
         <Route path="/admin-roles/new" page={AdminRoleNewAdminRolePage} name="newAdminRole" />
         <Route path="/admin-roles/{id}/edit" page={AdminRoleEditAdminRolePage} name="editAdminRole" />
@@ -31,11 +44,6 @@ const Routes = () => {
         <Route path="/admins/{id:Int}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-      <Route path="/signup" page={SignupPage} name="signup" />
-      <Route path="/login" page={LoginPage} name="login" />
-
       <Set wrap={HomeLayout}>
         <Route path="/" page={HomePage} name="home" />
         <Route path="/contact" page={ContactPage} name="contact" />

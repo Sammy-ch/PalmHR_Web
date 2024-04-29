@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import AttendanceChartCard from './AttendanceChartCard'
+import AttendanceBarChart from './AttendanceBarChart'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
 
-describe('AttendanceChartCard', () => {
+describe('AttendanceBarChart', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<AttendanceChartCard />)
+      render(<AttendanceBarChart />)
     }).not.toThrow()
   })
 })

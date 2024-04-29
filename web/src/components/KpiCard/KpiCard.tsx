@@ -1,17 +1,27 @@
-import { DollarSign } from 'lucide-react'
-
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
-export default function Component({ title }: any) {
+interface KpiProps {
+  title: string
+  metric: string
+  progress: string
+  icon: React.ElementType
+}
+
+export default function Component({
+  title,
+  metric,
+  progress,
+  icon: Icon,
+}: KpiProps) {
   return (
-    <Card className="w-full">
+    <Card className="flex w-full flex-col justify-between">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-2xl font-medium">{title}</CardTitle>
-        <DollarSign className="h-4 w-4 text-muted-foreground" />
+        <CardTitle className="text-xl font-medium">{title}</CardTitle>
+        <Icon className="h-6 w-6  text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">45%</div>
-        <p className="text-md text-muted-foreground">+20.1% from last month</p>
+        <div className="text-2xl font-bold">{metric}</div>
+        <p className="text-md text-muted-foreground">{progress}</p>
       </CardContent>
     </Card>
   )
