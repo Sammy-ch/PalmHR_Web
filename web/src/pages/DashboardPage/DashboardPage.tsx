@@ -28,10 +28,7 @@ const DashboardPage = () => {
         </section>
         {/* <section className="flex w-full gap-5">
           <div className="rounded-md   border  shadow-md">
-            <AttendanceChartCard />
-          </div>
-          <div className="rounded-md shadow-md">
-            <AttendancePieChart />
+            <AttendanceBarChart />
           </div>
         </section> */}
         <section className="flex h-full w-full grid-flow-col gap-5">
