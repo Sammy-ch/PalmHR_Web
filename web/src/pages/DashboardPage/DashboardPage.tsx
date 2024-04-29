@@ -51,11 +51,9 @@ const DashboardPage = () => {
             />
           </div>
         </section>
-        {/* <section className="flex w-full gap-5">
-          <div className="rounded-md   border  shadow-md">
-            <AttendanceLineChart />
-          </div>
-        </section> */}
+        <section className="flex w-full gap-5">
+          <div className="rounded-md   border  shadow-md"></div>
+        </section>
         <section className="flex h-full w-full grid-flow-col gap-5">
           <div className="w-full rounded-md ">
             <AttendanceActivityTable />
