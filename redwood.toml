@@ -6,15 +6,17 @@
 # https://redwoodjs.com/docs/app-configuration-redwood-toml
 
 [web]
+  host = "0.0.0.0"
   title = "Redwood App"
-  port = 8913
-  apiUrl = "/.redwood/functions"
+  port = "${PORT:8913}"
+  apiUrl = "/api"
   includeEnvironmentVariables = [
       "SUPABASE_URL",
       "SUPABASE_KEY",
       ]
 [api]
-  port = 8915
+  host = "0.0.0.0"
+  port = "${PORT:8915}"
 [browser]
   open = true
 [notifications]
