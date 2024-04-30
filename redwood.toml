@@ -7,13 +7,14 @@
 
 [web]
   title = "Redwood App"
-  port = 8911
+  port = 8913
   apiUrl = "/.redwood/functions"
   includeEnvironmentVariables = [
-    "CLERK_PUBLISHABLE_KEY",
+      "SUPABASE_URL",
+      "SUPABASE_KEY",
       ]
 [api]
-  port = 8914
+  port = 8915
 [browser]
   open = true
 [notifications]

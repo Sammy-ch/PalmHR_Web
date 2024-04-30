@@ -54,7 +54,7 @@ export default function AttendanceActivityTable() {
               <TableCell className="text-right">08:25 AM</TableCell>
               <TableCell className="text-right">06:23 PM</TableCell>
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
               <TableCell>
                 <div className="font-medium">Chaddry Mberincuti</div>
                 <div className="hidden text-sm text-muted-foreground md:inline">
@@ -180,7 +180,7 @@ export default function AttendanceActivityTable() {
               <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
               <TableCell className="text-right">08:25 AM</TableCell>
               <TableCell className="text-right">06:23 PM</TableCell>
-            </TableRow>
+            </TableRow> */}
           </TableBody>
         </Table>
       </CardContent>

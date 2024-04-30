@@ -19,30 +19,23 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Set wrap={ScaffoldLayout} title="UserProfiles" titleTo="userProfiles" buttonLabel="New UserProfile" buttonTo="newUserProfile">
-        <Route path="/user-profiles/new" page={UserProfileNewUserProfilePage} name="newUserProfile" />
-        <Route path="/user-profiles/{user_id:Int}/edit" page={UserProfileEditUserProfilePage} name="editUserProfile" />
-        <Route path="/user-profiles/{user_id:Int}" page={UserProfileUserProfilePage} name="userProfile" />
-        <Route path="/user-profiles" page={UserProfileUserProfilesPage} name="userProfiles" />
+      <Set wrap={ScaffoldLayout} title="LeaveCustoms" titleTo="leaveCustoms" buttonLabel="New LeaveCustom" buttonTo="newLeaveCustom">
+        <Route path="/leave-customs/new" page={LeaveCustomNewLeaveCustomPage} name="newLeaveCustom" />
+        <Route path="/leave-customs/{id}/edit" page={LeaveCustomEditLeaveCustomPage} name="editLeaveCustom" />
+        <Route path="/leave-customs/{id}" page={LeaveCustomLeaveCustomPage} name="leaveCustom" />
+        <Route path="/leave-customs" page={LeaveCustomLeaveCustomsPage} name="leaveCustoms" />
       </Set>
-
-      <Set title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
-        <Route path="/organizations/{OrganizationId:Int}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
-        <Route path="/organizations/{OrganizationId:Int}" page={OrganizationOrganizationPage} name="organization" />
-        <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
-        <Route path="/organizations" page={OrganizationOrganizationsPage} name="organizations" />
+      <Set wrap={ScaffoldLayout} title="EmployeeAttendances" titleTo="employeeAttendances" buttonLabel="New EmployeeAttendance" buttonTo="newEmployeeAttendance">
+        <Route path="/employee-attendances/new" page={EmployeeAttendanceNewEmployeeAttendancePage} name="newEmployeeAttendance" />
+        <Route path="/employee-attendances/{attendance_id}/edit" page={EmployeeAttendanceEditEmployeeAttendancePage} name="editEmployeeAttendance" />
+        <Route path="/employee-attendances/{attendance_id}" page={EmployeeAttendanceEmployeeAttendancePage} name="employeeAttendance" />
+        <Route path="/employee-attendances" page={EmployeeAttendanceEmployeeAttendancesPage} name="employeeAttendances" />
       </Set>
-      <Set wrap={ScaffoldLayout} title="AdminRoles" titleTo="adminRoles" buttonLabel="New AdminRole" buttonTo="newAdminRole">
-        <Route path="/admin-roles/new" page={AdminRoleNewAdminRolePage} name="newAdminRole" />
-        <Route path="/admin-roles/{id}/edit" page={AdminRoleEditAdminRolePage} name="editAdminRole" />
-        <Route path="/admin-roles/{id}" page={AdminRoleAdminRolePage} name="adminRole" />
-        <Route path="/admin-roles" page={AdminRoleAdminRolesPage} name="adminRoles" />
-      </Set>
-      <Set wrap={ScaffoldLayout} title="Admins" titleTo="admins" buttonLabel="New Admin" buttonTo="newAdmin">
-        <Route path="/admins/new" page={AdminNewAdminPage} name="newAdmin" />
-        <Route path="/admins/{id:Int}/edit" page={AdminEditAdminPage} name="editAdmin" />
-        <Route path="/admins/{id:Int}" page={AdminAdminPage} name="admin" />
-        <Route path="/admins" page={AdminAdminsPage} name="admins" />
+      <Set wrap={ScaffoldLayout} title="EmployeeProfiles" titleTo="employeeProfiles" buttonLabel="New EmployeeProfile" buttonTo="newEmployeeProfile">
+        <Route path="/employee-profiles/new" page={EmployeeProfileNewEmployeeProfilePage} name="newEmployeeProfile" />
+        <Route path="/employee-profiles/{profile_id}/edit" page={EmployeeProfileEditEmployeeProfilePage} name="editEmployeeProfile" />
+        <Route path="/employee-profiles/{profile_id}" page={EmployeeProfileEmployeeProfilePage} name="employeeProfile" />
+        <Route path="/employee-profiles" page={EmployeeProfileEmployeeProfilesPage} name="employeeProfiles" />
       </Set>
       <Set wrap={HomeLayout}>
         <Route path="/" page={HomePage} name="home" />
@@ -50,10 +43,6 @@ const Routes = () => {
         <Route path="/pricing" page={PricingPage} name="pricing" />
         <Route path="/about" page={AboutPage} name="about" />
       </Set>
-
-      <PrivateSet unauthenticated="home">
-        <Route path="/createorganization" page={CreateorganizationPage} name="createorganization" />
-      </PrivateSet>
 
       <PrivateSet wrap={DashoardLayout} unauthenticated="home">
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />

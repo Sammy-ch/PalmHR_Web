@@ -1,4 +1,4 @@
-import { clerkAuthDecoder as authDecoder } from '@redwoodjs/auth-clerk-api'
+import { authDecoder } from '@redwoodjs/auth-supabase-api'
 import { createGraphQLHandler } from '@redwoodjs/graphql-server'
 
 import directives from 'src/directives/**/*.{js,ts}'

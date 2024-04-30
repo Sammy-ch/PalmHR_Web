@@ -11,14 +11,9 @@ function capitalizeFirstLetter(string) {
 }
 
 const DashboardHeader = () => {
-  const { hasRole, userMetadata } = useAuth()
+  const { userMetadata } = useAuth()
+  console.log(userMetadata)
   const routeName = useRouteName()
-
-  if (hasRole) {
-    console.log('He rolled')
-  } else {
-    console.log("ain't rolled")
-  }
 
   return (
     <div className="header-h1 flex h-[80px] w-full items-center justify-between px-5">
@@ -31,7 +26,7 @@ const DashboardHeader = () => {
           <Avatar
             size={45}
             icon={<UserOutlined />}
-            src={userMetadata.imageUrl}
+            src={userMetadata.picture}
           />
         </div>
       </div>
