@@ -7,7 +7,7 @@
 
 [web]
   title = "Redwood App"
-  port = 8912
+  port = 8913
   apiUrl = "/.redwood/functions"
   includeEnvironmentVariables = [
       "SUPABASE_URL",
