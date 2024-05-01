@@ -1,7 +1,18 @@
 import UserOutlined from '@ant-design/icons'
 import { Avatar } from 'antd'
 import { Bell } from 'lucide-react'
+import { SquareUserRound } from 'lucide-react'
 import NotificationCard from 'web/src/components/NotificationCard/NotificationCard'
+import { Button } from 'web/src/components/ui/button'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from 'web/src/components/ui/drawer'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +25,8 @@ import {
 import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+
+import CheckingRequests from '../CheckingRequests/CheckingRequests'
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -31,6 +44,29 @@ const DashboardHeader = () => {
       </h1>
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-5">
+          <Drawer>
+            <DrawerTrigger>
+              <Button>
+                <SquareUserRound />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>
+                  {' '}
+                  <h1 className="mb-6 text-3xl font-bold">
+                    Employee Check-In/Check-Out Requests
+                  </h1>
+                </DrawerTitle>
+              </DrawerHeader>
+              <CheckingRequests />
+              <DrawerFooter>
+                <DrawerClose>
+                  <Button variant="outline">Close</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Bell />

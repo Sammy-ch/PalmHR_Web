@@ -1,6 +1,6 @@
-// import { ResponsiveBar } from '@nivo/bar'
+import { ResponsiveBar } from '@nivo/bar'
 import { ResponsiveLine } from '@nivo/line'
-// import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie'
 import { StepBack } from 'lucide-react'
 import type {
   DeleteEmployeeProfileMutation,
@@ -76,8 +76,11 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
       <div className="flex min-h-screen flex-col">
         <header className="flex items-center justify-between  bg-[#000000] px-6 py-4 text-white">
           <div className="flex items-center space-x-4">
-            <Link to={routes.performance()} className='flex items-center justify-center gap-2'>
-              <Button size="icon" variant="outline" className='bg-black'>
+            <Link
+              to={routes.performance()}
+              className="flex items-center justify-center gap-2"
+            >
+              <Button size="icon" variant="outline" className="bg-black">
                 <StepBack />
               </Button>
               <span>Return</span>
@@ -192,10 +195,10 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               <CardDescription>Detailed attendance analytics</CardDescription>
             </CardHeader>
             <CardContent className="grid h-full gap-6">
-              {/* <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-6">
                 <BarChart className="aspect-[4/3]" />
                 <PieChart className="aspect-[4/3]" />
-              </div> */}
+              </div>
               <div className="grid  gap-6">
                 <LineChart className="aspect-[4/3]" />
               </div>
@@ -209,58 +212,58 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
 
 export default EmployeeProfile
 
-// function BarChart(props) {
-//   return (
-//     <div {...props}>
-//       <ResponsiveBar
-//         data={[
-//           { name: 'Jan', count: 111 },
-//           { name: 'Feb', count: 157 },
-//           { name: 'Mar', count: 129 },
-//           { name: 'Apr', count: 150 },
-//           { name: 'May', count: 119 },
-//           { name: 'Jun', count: 72 },
-//         ]}
-//         keys={['count']}
-//         indexBy="name"
-//         margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-//         padding={0.3}
-//         colors={['#2563eb']}
-//         axisBottom={{
-//           tickSize: 0,
-//           tickPadding: 16,
-//         }}
-//         axisLeft={{
-//           tickSize: 0,
-//           tickValues: 4,
-//           tickPadding: 16,
-//         }}
-//         gridYValues={4}
-//         theme={{
-//           tooltip: {
-//             chip: {
-//               borderRadius: '9999px',
-//             },
-//             container: {
-//               fontSize: '12px',
-//               textTransform: 'capitalize',
-//               borderRadius: '6px',
-//             },
-//           },
-//           grid: {
-//             line: {
-//               stroke: '#f3f4f6',
-//             },
-//           },
-//         }}
-//         tooltipLabel={({ id }) => `${id}`}
-//         enableLabel={false}
-//         role="application"
-//         ariaLabel="A bar chart showing data"
-//       />
-//     </div>
-//   )
-// }
+function BarChart(props) {
+  return (
+    <div {...props}>
+      <ResponsiveBar
+        data={[
+          { name: 'Jan', count: 111 },
+          { name: 'Feb', count: 157 },
+          { name: 'Mar', count: 129 },
+          { name: 'Apr', count: 150 },
+          { name: 'May', count: 119 },
+          { name: 'Jun', count: 72 },
+        ]}
+        keys={['count']}
+        indexBy="name"
+        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
+        padding={0.3}
+        colors={['#2563eb']}
+        axisBottom={{
+          tickSize: 0,
+          tickPadding: 16,
+        }}
+        axisLeft={{
+          tickSize: 0,
+          tickValues: 4,
+          tickPadding: 16,
+        }}
+        gridYValues={4}
+        theme={{
+          tooltip: {
+            chip: {
+              borderRadius: '9999px',
+            },
+            container: {
+              fontSize: '12px',
+              textTransform: 'capitalize',
+              borderRadius: '6px',
+            },
+          },
+          grid: {
+            line: {
+              stroke: '#f3f4f6',
+            },
+          },
+        }}
+        tooltipLabel={({ id }) => `${id}`}
+        enableLabel={false}
+        role="application"
+        ariaLabel="A bar chart showing data"
+      />
+    </div>
+  )
+}
 
 function ClockIcon(props) {
   return (
@@ -355,48 +358,48 @@ function LineChart(props) {
   )
 }
 
-// function PieChart(props) {
-//   return (
-//     <div {...props}>
-//       <ResponsivePie
-//         data={[
-//           { id: 'Jan', value: 111 },
-//           { id: 'Feb', value: 157 },
-//           { id: 'Mar', value: 129 },
-//           { id: 'Apr', value: 150 },
-//           { id: 'May', value: 119 },
-//           { id: 'Jun', value: 72 },
-//         ]}
-//         sortByValue
-//         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-//         cornerRadius={0}
-//         padAngle={0}
-//         borderWidth={1}
-//         borderColor={'#ffffff'}
-//         enableArcLinkLabels={false}
-//         arcLabel={(d) => `${d.id}`}
-//         arcLabelsTextColor={'#ffffff'}
-//         arcLabelsRadiusOffset={0.65}
-//         colors={['#2563eb']}
-//         theme={{
-//           labels: {
-//             text: {
-//               fontSize: '18px',
-//             },
-//           },
-//           tooltip: {
-//             chip: {
-//               borderRadius: '9999px',
-//             },
-//             container: {
-//               fontSize: '12px',
-//               textTransform: 'capitalize',
-//               borderRadius: '6px',
-//             },
-//           },
-//         }}
-//         role="application"
-//       />
-//     </div>
-//   )
-// }
+function PieChart(props) {
+  return (
+    <div {...props}>
+      <ResponsivePie
+        data={[
+          { id: 'Jan', value: 111 },
+          { id: 'Feb', value: 157 },
+          { id: 'Mar', value: 129 },
+          { id: 'Apr', value: 150 },
+          { id: 'May', value: 119 },
+          { id: 'Jun', value: 72 },
+        ]}
+        sortByValue
+        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        cornerRadius={0}
+        padAngle={0}
+        borderWidth={1}
+        borderColor={'#ffffff'}
+        enableArcLinkLabels={false}
+        arcLabel={(d) => `${d.id}`}
+        arcLabelsTextColor={'#ffffff'}
+        arcLabelsRadiusOffset={0.65}
+        colors={['#2563eb']}
+        theme={{
+          labels: {
+            text: {
+              fontSize: '18px',
+            },
+          },
+          tooltip: {
+            chip: {
+              borderRadius: '9999px',
+            },
+            container: {
+              fontSize: '12px',
+              textTransform: 'capitalize',
+              borderRadius: '6px',
+            },
+          },
+        }}
+        role="application"
+      />
+    </div>
+  )
+}
