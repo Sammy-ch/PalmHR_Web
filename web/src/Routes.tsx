@@ -31,10 +31,10 @@ const Routes = () => {
         <Route path="/employee-attendances/{attendance_id}" page={EmployeeAttendanceEmployeeAttendancePage} name="employeeAttendance" />
         <Route path="/employee-attendances" page={EmployeeAttendanceEmployeeAttendancesPage} name="employeeAttendances" />
       </Set>
-      <Set wrap={ScaffoldLayout} title="EmployeeProfiles" titleTo="employeeProfiles" buttonLabel="New EmployeeProfile" buttonTo="newEmployeeProfile">
+      <Set title="EmployeeProfiles" titleTo="employeeProfiles" buttonLabel="New EmployeeProfile" buttonTo="newEmployeeProfile">
         <Route path="/employee-profiles/new" page={EmployeeProfileNewEmployeeProfilePage} name="newEmployeeProfile" />
         <Route path="/employee-profiles/{profile_id}/edit" page={EmployeeProfileEditEmployeeProfilePage} name="editEmployeeProfile" />
-        <Route path="/employee-profiles/{profile_id}" page={EmployeeProfileEmployeeProfilePage} name="employeeProfile" />
+        <Route path="/performance/{profile_id}" page={EmployeeProfileEmployeeProfilePage} name="employeeProfile" />
         <Route path="/employee-profiles" page={EmployeeProfileEmployeeProfilesPage} name="employeeProfiles" />
       </Set>
       <Set wrap={HomeLayout}>

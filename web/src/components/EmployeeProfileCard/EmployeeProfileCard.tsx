@@ -1,5 +1,7 @@
 import { Button } from 'web/src/components/ui/button'
 
+import { Link, routes } from '@redwoodjs/router'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
 import { FindEmployeeProfiles } from '@/types/graphql'
@@ -34,7 +36,21 @@ const EmployeeProfileCard = ({ employeeProfiles }: FindEmployeeProfiles) => {
               {employeeProfile.position}
             </p>
             <div className="flex flex-col gap-2 ">
-              <Button variant="default">Check Performance </Button>
+              <Button variant="default">
+                <Link
+                  to={routes.employeeProfile({
+                    profile_id: employeeProfile.profile_id,
+                  })}
+                  title={
+                    'Show employeeProfile ' +
+                    employeeProfile.profile_id +
+                    ' detail'
+                  }
+                  className="rw-button rw-button-small"
+                >
+                  Check Performance
+                </Link>
+              </Button>
               <Button variant="outline">Remove Employee</Button>
             </div>
           </div>
