@@ -13,7 +13,7 @@ import KpiCard from 'src/components/KpiCard/KpiCard'
 
 // import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
-const DashboardPage = () => {
+export const DashboardPage = () => {
   const { isAuthenticated, currentUser } = useAuth()
 
   if (isAuthenticated) {
@@ -64,5 +64,3 @@ const DashboardPage = () => {
     </main>
   )
 }
-
-export default DashboardPage
