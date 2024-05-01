@@ -67,11 +67,16 @@ model LeaveCustom {
   requested_leave_date DateTime @db.Date
   leave EmployeeProfile @relation(fields: [leave_id],references: [profile_id])
   leave_id String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  leave_type String @db.Text
+  leave_type LeaveType
   leave_days Int @db.Integer
   leave_approval Boolean? @db.Boolean
 }
 
+enum LeaveType {
+  Personal
+  Sick
+  Holiday
+}
 
 model Organization {
 OrganizationId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
