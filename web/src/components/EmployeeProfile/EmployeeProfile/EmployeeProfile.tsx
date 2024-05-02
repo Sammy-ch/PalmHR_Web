@@ -194,7 +194,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               <CardTitle>Analytics</CardTitle>
               <CardDescription>Detailed attendance analytics</CardDescription>
             </CardHeader>
-            <CardContent className="grid h-full gap-6">
+            {/* <CardContent className="grid h-full gap-6">
               <div className="grid grid-cols-2 gap-6">
                 <BarChart className="aspect-[4/3]" />
                 <PieChart className="aspect-[4/3]" />
@@ -202,7 +202,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               <div className="grid  gap-6">
                 <LineChart className="aspect-[4/3]" />
               </div>
-            </CardContent>
+            </CardContent> */}
           </Card>
         </main>
       </div>

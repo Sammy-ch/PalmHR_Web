@@ -62,13 +62,20 @@ export default function AttendanceActivityTable({
                   </Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {employeeAttendance.checking_date}
+                  {new Date(
+                    employeeAttendance.checking_date
+                  ).toLocaleDateString()}
                 </TableCell>
                 <TableCell className="text-right">
-                  {employeeAttendance.checkin_time}
+                  {new Date(employeeAttendance.checkin_time).toLocaleTimeString(
+                    'en-US',
+                    { timeZone: 'GMT' }
+                  )}
                 </TableCell>
                 <TableCell className="text-right">
-                  {employeeAttendance.checkout_time}
+                  {new Date(
+                    employeeAttendance.checkout_time
+                  ).toLocaleTimeString('en-US', { timeZone: 'GMT' })}{' '}
                 </TableCell>
               </TableRow>
             ))}
