@@ -47,7 +47,7 @@ email String?
 allowed_leaves Int?
 AttendanceData EmployeeAttendance[]
 LeaveData LeaveCustom[]
-CheckingRequests CheckingRequests[]
+CheckingRequests CheckingRequest[]
 }
 
 model EmployeeAttendance {
@@ -63,7 +63,7 @@ presence_tag PresenceTag
 }
 
 
-model CheckingRequests {
+model CheckingRequest {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   employee   EmployeeProfile  @relation(fields: [employee_id],references: [profile_id])
   employee_id String @db.Uuid
