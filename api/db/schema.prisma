@@ -47,6 +47,7 @@ email String?
 allowed_leaves Int?
 AttendanceData EmployeeAttendance[]
 LeaveData LeaveCustom[]
+CheckingRequests CheckingRequests[]
 }
 
 model EmployeeAttendance {
@@ -59,6 +60,30 @@ checking_date DateTime? @db.Date
 working_time DateTime? @db.Time()
 presence_tag PresenceTag
 
+}
+
+
+model CheckingRequests {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  employee   EmployeeProfile  @relation(fields: [employee_id],references: [profile_id])
+  employee_id String @db.Uuid
+  checking_date DateTime @db.Date
+  checking_time DateTime @db.Time()
+  checking_type CheckingType
+  checking_status CheckingStatus
+}
+
+
+
+enum CheckingType {
+  checkin
+  checkout
+}
+
+enum CheckingStatus {
+  approved
+  pending
+  declined
 }
 
 

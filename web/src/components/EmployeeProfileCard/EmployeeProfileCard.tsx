@@ -23,7 +23,7 @@ const EmployeeProfileCard = ({ employeeProfiles }: FindEmployeeProfiles) => {
                 alt="@shadcn"
                 className="object-cover object-top"
               />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>DP</AvatarFallback>
             </Avatar>
 
             <span className="absolute bottom-2 right-2 inline-block h-3 w-3 rounded-full bg-green-500" />
