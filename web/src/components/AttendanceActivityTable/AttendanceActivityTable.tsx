@@ -36,6 +36,7 @@ export default function AttendanceActivityTable({
               <TableHead className="hidden md:table-cell">Date</TableHead>
               <TableHead className="text-right">Check In</TableHead>
               <TableHead className="text-right">Check Out</TableHead>
+              <TableHead className="text-right">Working Hours</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -67,15 +68,26 @@ export default function AttendanceActivityTable({
                   ).toLocaleDateString()}
                 </TableCell>
                 <TableCell className="text-right">
-                  {new Date(employeeAttendance.checkin_time).toLocaleTimeString(
-                    'en-US',
-                    { timeZone: 'GMT' }
-                  )}
+                  {employeeAttendance.checkin_time
+                    ? new Date(
+                        employeeAttendance.checkin_time
+                      ).toLocaleTimeString('en-US', { timeZone: 'GMT' })
+                    : '--:--:--'}
                 </TableCell>
                 <TableCell className="text-right">
-                  {new Date(
-                    employeeAttendance.checkout_time
-                  ).toLocaleTimeString('en-US', { timeZone: 'GMT' })}{' '}
+                  {employeeAttendance.checkout_time
+                    ? new Date(
+                        employeeAttendance.checkout_time
+                      ).toLocaleTimeString('en-US', { timeZone: 'GMT' })
+                    : '--:--:--'}{' '}
+                </TableCell>
+                <TableCell className="text-right">
+                  {employeeAttendance.checkout_time
+                    ? calculateWorkingHours(
+                        employeeAttendance.checkin_time,
+                        employeeAttendance.checkout_time
+                      )
+                    : '--:--:--'}{' '}
                 </TableCell>
               </TableRow>
             ))}
@@ -84,4 +96,15 @@ export default function AttendanceActivityTable({
       </CardContent>
     </Card>
   )
+}
+
+function calculateWorkingHours(checkinTime: string, checkoutTime: string) {
+  const checkinDate = new Date(checkinTime)
+  const checkoutDate = new Date(checkoutTime)
+
+  const diffInMilliseconds = checkoutDate.getTime() - checkinDate.getTime()
+  const diffInMinutes = diffInMilliseconds / (1000 * 60)
+  const diffInHours = diffInMinutes / 60
+
+  return diffInHours.toFixed(1)
 }
