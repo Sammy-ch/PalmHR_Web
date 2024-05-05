@@ -9,7 +9,7 @@
   host = "0.0.0.0"
   title = "PALM HR"
   port = "8913"
-  apiUrl = "/api"
+  apiUrl = "/.redwood/functions"
   includeEnvironmentVariables = [
       "SUPABASE_URL",
       "SUPABASE_KEY",
