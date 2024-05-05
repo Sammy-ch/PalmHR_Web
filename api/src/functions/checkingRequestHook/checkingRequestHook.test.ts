@@ -1,11 +1,11 @@
 import { mockHttpEvent } from '@redwoodjs/testing/api'
 
-import { handler } from './supabaseWebhook'
+import { handler } from './checkingRequestHook'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-functions
 
-describe('supabaseWebhook function', () => {
+describe('checkingRequestHook function', () => {
   it('Should respond with 200', async () => {
     const httpEvent = mockHttpEvent({
       queryStringParameters: {
@@ -17,7 +17,7 @@ describe('supabaseWebhook function', () => {
     const { data } = JSON.parse(response.body)
 
     expect(response.statusCode).toBe(200)
-    expect(data).toBe('supabaseWebhook function')
+    expect(data).toBe('checkingRequestHook function')
   })
 
   // You can also use scenarios to test your api functions
