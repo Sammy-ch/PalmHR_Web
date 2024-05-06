@@ -21,6 +21,26 @@ import { logger } from 'src/lib/logger'
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
+  const payload = JSON.parse(event.body)
+  // Handle the webhook event based on the event type
+  switch (payload.event) {
+    case 'INSERT':
+      // Handle INSERT event
+      // Example: Insert the new record into your database
+      break
+    case 'UPDATE':
+      // Handle UPDATE event
+      // Example: Update the existing record in your database
+      break
+    case 'DELETE':
+      // Handle DELETE event
+      // Example: Delete the record from your database
+      break
+    default:
+      // Handle unknown event type
+      break
+  }
+
   // Print the user ID using console.log
   console.log(event)
   return {
@@ -29,7 +49,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      data: 'checkingRequestHook function',
+      data: 'Supabase webhook processed',
     }),
   }
 }
