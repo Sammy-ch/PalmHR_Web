@@ -26,6 +26,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   switch (payload.event) {
     case 'INSERT':
       // Handle INSERT event
+      console.log(payload.data)
       // Example: Insert the new record into your database
       break
     case 'UPDATE':
