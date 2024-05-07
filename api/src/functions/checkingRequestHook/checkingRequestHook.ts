@@ -1,11 +1,30 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 
 import { logger } from 'src/lib/logger'
+
+interface InsertPayload {
+  type: 'INSERT'
+  table: string
+  schema: string
+  record: TableRecord<T>
+  old_record: null
+}
+interface TableRecord<T> {
+  id: string
+  employee_id: string
+  checking_date: string
+  checking_time: string
+  checking_type: 'checkout' | 'checkin'
+  checking_status: 'pending' | 'approved' | 'ejected'
+  // Add any other properties that are present in the record object
+}
+
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const body = event.body
+    const body: InsertPayload = event
+    console.log(body.record)
 
     // if (body.table !== 'CheckingRequest') {
     //   return {
@@ -14,9 +33,6 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
     //   }
     // }
 
-    // Process the checking request data here
-    // For example, save it to your database or perform any other necessary actions
-    console.log(body)
     return {
       statusCode: 201,
       headers: {
