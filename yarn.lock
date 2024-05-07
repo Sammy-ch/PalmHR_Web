@@ -6364,6 +6364,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/auth-netlify-api@npm:7.4.3":
+  version: 7.4.3
+  resolution: "@redwoodjs/auth-netlify-api@npm:7.4.3"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.24.1"
+    core-js: "npm:3.36.1"
+    jsonwebtoken: "npm:9.0.2"
+  checksum: 10c0/1f368fc33f9e6569d11ae672230a677233093bb4cf2c7cd0e8aa25b9dedf748d869161aafd0f42450049e7fac4d19bc0cdc2a669e338acba3588c1fe6b0fb93e
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/auth-netlify-web@npm:7.4.3":
+  version: 7.4.3
+  resolution: "@redwoodjs/auth-netlify-web@npm:7.4.3"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.24.1"
+    "@redwoodjs/auth": "npm:7.4.3"
+    core-js: "npm:3.36.1"
+  peerDependencies:
+    netlify-identity-widget: 1.9.2
+  checksum: 10c0/35e93f6bed7b28f5240800e2b22fad60dfc6da1ad24e0554bdc6fe7f7de969437930773d2631c55a9f5d5b42b76f0f28500eb37ba198758dd3d99c3b3a409117
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/auth-supabase-api@npm:7.4.3":
   version: 7.4.3
   resolution: "@redwoodjs/auth-supabase-api@npm:7.4.3"
@@ -9253,6 +9277,7 @@ __metadata:
     "@libsql/client": "npm:^0.6.0"
     "@prisma/adapter-libsql": "npm:^5.12.1"
     "@redwoodjs/api": "npm:7.4.3"
+    "@redwoodjs/auth-netlify-api": "npm:7.4.3"
     "@redwoodjs/auth-supabase-api": "npm:7.4.3"
     "@redwoodjs/graphql-server": "npm:7.4.3"
     "@simplewebauthn/server": "npm:^7"
@@ -19401,6 +19426,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"netlify-identity-widget@npm:^1":
+  version: 1.9.2
+  resolution: "netlify-identity-widget@npm:1.9.2"
+  checksum: 10c0/fcdc960f3228cdb4c1e6a1c98ca92f570d00d7914d9579712a16ef7ec72fe6d4396fbe07b24e9f9ca2fc12fd724d3193a40d97ed99c7690f209f329ae591af24
+  languageName: node
+  linkType: hard
+
 "new-github-issue-url@npm:0.2.1":
   version: 0.2.1
   resolution: "new-github-issue-url@npm:0.2.1"
@@ -26607,6 +26639,7 @@ __metadata:
     "@radix-ui/react-popover": "npm:^1.0.7"
     "@radix-ui/react-slot": "npm:^1.0.2"
     "@radix-ui/react-switch": "npm:^1.0.3"
+    "@redwoodjs/auth-netlify-web": "npm:7.4.3"
     "@redwoodjs/auth-supabase-web": "npm:7.4.3"
     "@redwoodjs/forms": "npm:7.4.3"
     "@redwoodjs/router": "npm:7.4.3"
@@ -26630,6 +26663,7 @@ __metadata:
     framer-motion: "npm:^11.0.28"
     humanize-string: "npm:2.1.0"
     lucide-react: "npm:^0.364.0"
+    netlify-identity-widget: "npm:^1"
     postcss: "npm:^8.4.38"
     postcss-loader: "npm:^8.1.1"
     react: "npm:18.2.0"

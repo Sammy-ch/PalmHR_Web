@@ -6,14 +6,8 @@ import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 const HomeNavigation = () => {
-  const { isAuthenticated, logIn, logOut, currentUser } = useAuth()
+  const { isAuthenticated, signUp, logOut, currentUser } = useAuth()
 
-  async function LogIn() {
-    await logIn({
-      authMethod: 'oauth',
-      provider: 'google',
-    })
-  }
 
   if (isAuthenticated) {
     console.log(currentUser)
@@ -68,7 +62,7 @@ const HomeNavigation = () => {
           </>
         ) : (
           <Button
-            onClick={LogIn}
+            onClick={signUp}
             className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
           >
             Sign In
