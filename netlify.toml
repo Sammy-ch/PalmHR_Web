@@ -21,6 +21,6 @@
 [dev]
   framework = "redwoodjs"
   # Make sure `targetPort` matches `web.port` in the `redwood.toml`:
-  targetPort = 8913
+  targetPort = 8912
   # Point your browser to this port to access your app:
   port = 8888
