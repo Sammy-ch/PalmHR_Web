@@ -1,34 +1,47 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 
 import { logger } from 'src/lib/logger'
-
-/**
- * The handler function is your code that processes http request events.
- * You can use return and throw to send a response or error, respectively.
- *
- * Important: When deployed, a custom serverless function is an open API endpoint and
- * is your responsibility to secure appropriately.
- *
- * @see {@link https://redwoodjs.com/docs/serverless-functions#security-considerations|Serverless Function Considerations}
- * in the RedwoodJS documentation for more information.
- *
- * @typedef { import('aws-lambda').APIGatewayEvent } APIGatewayEvent
- * @typedef { import('aws-lambda').Context } Context
- * @param { APIGatewayEvent } event - an object which contains information from the invoker.
- * @param { Context } context - contains information about the invocation,
- * function, and execution environment.
- */
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
-  const payload = event
-  console.log(event)
-  return {
-    statusCode: 201,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      data: payload,
-    }),
+
+  try {
+    const payload = event.body
+
+    const checkingRequest = payload
+
+    // Access the fields from the checkingRequest object
+    const id = checkingRequest.id
+    const employeeId = checkingRequest.employee_id
+    const checkingDate = checkingRequest.checking_date
+    const checkingTime = checkingRequest.checking_time
+    const checkingType = checkingRequest.checking_type
+    const checkingStatus = checkingRequest.checking_status
+
+    console.log(
+      id,
+      employeeId,
+      checkingDate,
+      checkingTime,
+      checkingType,
+      checkingStatus
+    )
+    // Process the checking request data here
+    // For example, save it to your database or perform any other necessary actions
+
+    return {
+      statusCode: 201,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: checkingRequest,
+      }),
+    }
+  } catch (error) {
+    logger.error(error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Internal Server Error' }),
+    }
   }
 }
