@@ -7,18 +7,13 @@ import { BookX } from 'lucide-react'
 
 import { Metadata } from '@redwoodjs/web'
 
-import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCard from 'src/components/KpiCard/KpiCard'
 
 // import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 // import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 const DashboardPage = () => {
-  const { isAuthenticated, currentUser } = useAuth()
 
-  if (isAuthenticated) {
-    console.log(currentUser)
-  }
   return (
     <main className="content h-full w-full  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />

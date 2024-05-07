@@ -34,7 +34,6 @@ function capitalizeFirstLetter(string) {
 
 const DashboardHeader = () => {
   const { userMetadata } = useAuth()
-  console.log(userMetadata)
   const routeName = useRouteName()
 
   return (

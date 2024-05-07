@@ -6,13 +6,9 @@ import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 const HomeNavigation = () => {
-  const { isAuthenticated, signUp, logOut, currentUser } = useAuth()
+  const { isAuthenticated, signUp, logOut, userMetadata } = useAuth()
 
-
-  if (isAuthenticated) {
-    console.log(currentUser)
-  }
-
+  console.log(userMetadata)
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
       <img src={logo} alt="Palm_HR_Logo" height={100} width={200} />
