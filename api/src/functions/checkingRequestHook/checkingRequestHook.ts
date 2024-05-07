@@ -20,13 +20,14 @@ import { logger } from 'src/lib/logger'
  */
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
+  const payload = event
   return {
-    statusCode: 200,
+    statusCode: 201,
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      data: event,
+      data: payload,
     }),
   }
 }
