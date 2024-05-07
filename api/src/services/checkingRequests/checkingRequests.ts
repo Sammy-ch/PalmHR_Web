@@ -7,7 +7,11 @@ import type {
 import { db } from 'src/lib/db'
 
 export const checkingRequests: QueryResolvers['checkingRequests'] = () => {
-  return db.checkingRequest.findMany()
+  return db.checkingRequest.findMany({
+    include: {
+      employee: true,
+    },
+  })
 }
 
 export const checkingRequest: QueryResolvers['checkingRequest'] = ({ id }) => {
