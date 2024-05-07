@@ -1,40 +1,40 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 
 import { logger } from 'src/lib/logger'
+
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload = event.body
+    let body = null
 
-    const checkingRequest = payload
+    // Parse the event body if it exists
+    if (event.body) {
+      body = JSON.parse(event.body)
+    } else {
+      throw new Error('Request body is empty')
+    }
 
-    // Access the fields from the checkingRequest object
-    const id = checkingRequest.id
-    const employeeId = checkingRequest.employee_id
-    const checkingDate = checkingRequest.checking_date
-    const checkingTime = checkingRequest.checking_time
-    const checkingType = checkingRequest.checking_type
-    const checkingStatus = checkingRequest.checking_status
-
-    console.log(
+    // Access the fields from the body object
+    const {
       id,
-      employeeId,
-      checkingDate,
-      checkingTime,
-      checkingType,
-      checkingStatus
-    )
+      employee_id: employeeId,
+      checking_date: checkingDate,
+      checking_time: checkingTime,
+      checking_type: checkingType,
+      checking_status: checkingStatus,
+    } = body
+
     // Process the checking request data here
     // For example, save it to your database or perform any other necessary actions
-
+console.log(body)
     return {
       statusCode: 201,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: checkingRequest,
+        data: body,
       }),
     }
   } catch (error) {
