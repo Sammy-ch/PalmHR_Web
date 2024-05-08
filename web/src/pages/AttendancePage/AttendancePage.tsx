@@ -1,6 +1,4 @@
 import { LeafyGreen } from 'lucide-react'
-import { Luggage } from 'lucide-react'
-import { Home } from 'lucide-react'
 import EmployeeLeaveCard from 'web/src/components/EmployeeLeaveCard/EmployeeLeaveCard'
 import {
   Avatar,
@@ -21,7 +19,6 @@ import { Metadata } from '@redwoodjs/web'
 
 import chaddryDp from './Chaddry1.jpg'
 import gilbertDp from './Gilbert1.jpg'
-import loretteDp from './Lorette1.jpg'
 import alainDp from './santana.jpg'
 
 const AttendancePage = () => {
@@ -46,26 +43,6 @@ const AttendancePage = () => {
             leaveDuration="6"
             LeaveType="Sick Leave"
             icon={LeafyGreen}
-          />
-
-          <EmployeeLeaveCard
-            profileDp={loretteDp}
-            fullName="Kelly Lorette"
-            position="Research and statistics manager"
-            leaveCount={8}
-            leaveDuration="17"
-            LeaveType="Vacation Leave"
-            icon={Luggage}
-          />
-
-          <EmployeeLeaveCard
-            profileDp={chaddryDp}
-            fullName="Chaddry Mberincuti"
-            position="Graphics Designer"
-            leaveCount={2}
-            leaveDuration="8"
-            LeaveType="Personal Leave"
-            icon={Home}
           />
         </div>
 

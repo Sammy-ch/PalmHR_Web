@@ -1,10 +1,8 @@
-import { createClient } from '@supabase/supabase-js'
+import netlifyIdentity from 'netlify-identity-widget'
 
-import { createAuth } from '@redwoodjs/auth-supabase-web'
+import { createAuth } from '@redwoodjs/auth-netlify-web'
+import { isBrowser } from '@redwoodjs/prerender/browserUtils'
 
-const supabaseClient = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_KEY || ''
-)
+isBrowser && netlifyIdentity.init()
 
-export const { AuthProvider, useAuth } = createAuth(supabaseClient)
+export const { AuthProvider, useAuth } = createAuth(netlifyIdentity)

@@ -10,7 +10,7 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeeProfiles from 'src/components/EmployeeProfile/EmployeeProfiles'
+import EmployeeProfileCard from '../../EmployeeProfileCard/EmployeeProfileCard'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeeProfiles,
@@ -49,5 +49,5 @@ export const Failure = ({ error }: CellFailureProps<FindEmployeeProfiles>) => (
 export const Success = ({
   employeeProfiles,
 }: CellSuccessProps<FindEmployeeProfiles, FindEmployeeProfilesVariables>) => {
-  return <EmployeeProfiles employeeProfiles={employeeProfiles} />
+  return <EmployeeProfileCard employeeProfiles={employeeProfiles} />
 }

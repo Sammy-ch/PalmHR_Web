@@ -1,10 +1,32 @@
 import UserOutlined from '@ant-design/icons'
 import { Avatar } from 'antd'
 import { Bell } from 'lucide-react'
+import { SquareUserRound } from 'lucide-react'
+import NotificationCard from 'web/src/components/NotificationCard/NotificationCard'
+import { Button } from 'web/src/components/ui/button'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from 'web/src/components/ui/drawer'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from 'web/src/components/ui/dropdown-menu'
 
 import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+
+import CheckingRequests from '../CheckingRequests/CheckingRequests'
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -12,7 +34,6 @@ function capitalizeFirstLetter(string) {
 
 const DashboardHeader = () => {
   const { userMetadata } = useAuth()
-  console.log(userMetadata)
   const routeName = useRouteName()
 
   return (
@@ -22,12 +43,57 @@ const DashboardHeader = () => {
       </h1>
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-5">
-          <Bell />
-          <Avatar
-            size={45}
-            icon={<UserOutlined />}
-            src={userMetadata.picture}
-          />
+          <Drawer>
+            <DrawerTrigger>
+              <Button>
+                <SquareUserRound />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>
+                  {' '}
+                  <h1 className="mb-6 text-3xl font-bold">
+                    Employee Check-In/Check-Out Requests
+                  </h1>
+                </DrawerTitle>
+              </DrawerHeader>
+              <CheckingRequests />
+              <DrawerFooter>
+                <DrawerClose>
+                  <Button variant="outline">Close</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Bell />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>
+                <NotificationCard />
+              </DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar
+                size={45}
+                icon={<UserOutlined />}
+                src={userMetadata.picture}
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Admins</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>

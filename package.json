@@ -7,6 +7,7 @@
     ]
   },
   "devDependencies": {
+    "@edgio/cli": "^7.11.4",
     "@redwoodjs/auth-supabase-setup": "7.4.3",
     "@redwoodjs/cli-data-migrate": "7.4.3",
     "@redwoodjs/core": "7.4.3",

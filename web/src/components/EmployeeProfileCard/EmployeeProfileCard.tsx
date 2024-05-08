@@ -1,53 +1,62 @@
 import { Button } from 'web/src/components/ui/button'
 
+import { Link, routes } from '@redwoodjs/router'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
-interface EmployeeProps {
-  fullName: string
-  profileDp: string
-  position: string
-}
+import { FindEmployeeProfiles } from '@/types/graphql'
 
-const EmployeeProfileCard = ({
-  profileDp,
-  position,
-  fullName,
-}: EmployeeProps) => {
+const EmployeeProfileCard = ({ employeeProfiles }: FindEmployeeProfiles) => {
   return (
-    <div className="flex  h-80 w-72 flex-col justify-between rounded-lg bg-white shadow-md dark:bg-gray-800 ">
-      <div className="relative  flex flex-col items-center overflow-hidden rounded-t-lg">
-        <Avatar className="h-[120px] w-[120px]">
-          <AvatarImage
-            height={500}
-            width={500}
-            src={profileDp}
-            alt="@shadcn"
-            className="object-cover object-top"
-          />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        {/* <img
-          alt={fullName}
-          className="h-full w-full object-cover object-top"
-          height={300}
-          src={profileDp}
-          style={{
-            aspectRatio: '400/300',
-            objectFit: 'cover',
-          }}
-          width={400}
-        /> */}
-        <span className="absolute bottom-2 right-2 inline-block h-3 w-3 rounded-full bg-green-500" />
-      </div>
-      <div className="flex flex-col p-4">
-        <h3 className="mb-2 text-lg font-semibold">{fullName}</h3>
-        <p className="mb-2 text-gray-500 dark:text-gray-400">{position}</p>
-        <div className="flex flex-col gap-2 ">
-          <Button variant="default">Check Performance </Button>
-          <Button variant="outline">Remove Employee</Button>
+    <>
+      {employeeProfiles.map((employeeProfile) => (
+        <div
+          className="flex  h-80 w-72 flex-col justify-between rounded-lg bg-white shadow-md dark:bg-gray-800 "
+          key={employeeProfile.profile_id}
+        >
+          <div className="relative  flex flex-col items-center overflow-hidden rounded-t-lg">
+            <Avatar className="h-[120px] w-[120px]">
+              <AvatarImage
+                height={500}
+                width={500}
+                src={employeeProfile.profile_id}
+                alt="@shadcn"
+                className="object-cover object-top"
+              />
+              <AvatarFallback>DP</AvatarFallback>
+            </Avatar>
+
+            <span className="absolute bottom-2 right-2 inline-block h-3 w-3 rounded-full bg-green-500" />
+          </div>
+          <div className="flex flex-col p-4">
+            <h3 className="mb-2 text-lg font-semibold">
+              {employeeProfile.first_name} {employeeProfile.last_name}
+            </h3>
+            <p className="mb-2 text-gray-500 dark:text-gray-400">
+              {employeeProfile.position}
+            </p>
+            <div className="flex flex-col gap-2 ">
+              <Button variant="default">
+                <Link
+                  to={routes.employeeProfile({
+                    profile_id: employeeProfile.profile_id,
+                  })}
+                  title={
+                    'Show employeeProfile ' +
+                    employeeProfile.profile_id +
+                    ' detail'
+                  }
+                  className="rw-button rw-button-small"
+                >
+                  Check Performance
+                </Link>
+              </Button>
+              <Button variant="outline">Remove Employee</Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ))}
+    </>
   )
 }
 

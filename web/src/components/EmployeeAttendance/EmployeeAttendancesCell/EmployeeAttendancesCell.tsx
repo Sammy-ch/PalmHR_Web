@@ -10,7 +10,7 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeeAttendances from 'src/components/EmployeeAttendance/EmployeeAttendances'
+import AttendanceActivityTable from 'src/components/AttendanceActivityTable'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeeAttendances,
@@ -25,6 +25,12 @@ export const QUERY: TypedDocumentNode<
       checking_date
       working_time
       presence_tag
+      employee {
+        first_name
+        last_name
+        position
+        email
+      }
     }
   }
 `
@@ -54,5 +60,5 @@ export const Success = ({
   FindEmployeeAttendances,
   FindEmployeeAttendancesVariables
 >) => {
-  return <EmployeeAttendances employeeAttendances={employeeAttendances} />
+  return <AttendanceActivityTable employeeAttendances={employeeAttendances} />
 }

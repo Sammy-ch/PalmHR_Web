@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import DashboardPage from './DashboardPage.1'
+import CheckingRequests from './CheckingRequests'
 
 //   Improve this test with help from the Redwood Testing Doc:
-//   https://redwoodjs.com/docs/testing#testing-pages-layouts
+//    https://redwoodjs.com/docs/testing#testing-components
 
-describe('DashboardPage', () => {
+describe('CheckingRequests', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<DashboardPage />)
+      render(<CheckingRequests />)
     }).not.toThrow()
   })
 })

@@ -7,16 +7,16 @@
 
 [web]
   host = "0.0.0.0"
-  title = "Redwood App"
-  port = "${PORT:8913}"
-  apiUrl = "/api"
+  title = "PALM HR"
+  port = "8912"
+  apiUrl = "/.netlify/functions"
   includeEnvironmentVariables = [
       "SUPABASE_URL",
       "SUPABASE_KEY",
       ]
 [api]
   host = "0.0.0.0"
-  port = "${PORT:8915}"
+  port = "8914"
 [browser]
   open = true
 [notifications]
