@@ -19,14 +19,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 
   try {
     const payload: webhookPayload = event.body
-    console.log(payload)
-
-    // if (body.table !== 'CheckingRequest') {
-    //   return {
-    //     statusCode: 400,
-    //     body: JSON.stringify({ error: 'Invalid table' }),
-    //   }
-    // }
+    console.log(payload.record.employee_id)
 
     return {
       statusCode: 200,
