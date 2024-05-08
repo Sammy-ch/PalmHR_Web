@@ -1,30 +1,25 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
+import { Database } from 'types/supabase'
 
 import { logger } from 'src/lib/logger'
 
-interface InsertPayload {
-  type: 'INSERT'
+type CheckingRequestRecord =
+  Database['public']['Tables']['CheckingRequest']['Row']
+
+interface webhookPayload {
+  type: 'INSERT' | 'UPDATE'
   table: string
-  schema: string
-  record: TableRecord<T>
-  old_record: null
-}
-interface TableRecord<T> {
-  id: string
-  employee_id: string
-  checking_date: string
-  checking_time: string
-  checking_type: 'checkout' | 'checkin'
-  checking_status: 'pending' | 'approved' | 'ejected'
-  // Add any other properties that are present in the record object
+  record: CheckingRequestRecord
+  schema: 'public'
+  old_record: null | CheckingRequestRecord
 }
 
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const body: InsertPayload = event
-    console.log(body.record)
+    const payload: webhookPayload = event.body
+    console.log(payload)
 
     // if (body.table !== 'CheckingRequest') {
     //   return {
@@ -34,12 +29,12 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
     // }
 
     return {
-      statusCode: 201,
+      statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: body,
+        data: payload,
       }),
     }
   } catch (error) {
