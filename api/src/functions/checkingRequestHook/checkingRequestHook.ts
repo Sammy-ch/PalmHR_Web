@@ -18,8 +18,8 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload: webhookPayload = event
-    console.log(payload.record)
+    const payload: webhookPayload = event.body
+    console.log(payload)
 
     return {
       statusCode: 200,
