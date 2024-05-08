@@ -1,7 +1,10 @@
 import type {
   FindCheckingRequests,
   FindCheckingRequestsVariables,
+  UpdateCheckingRequestMutation,
+  UpdateCheckingRequestMutationVariables,
 } from 'types/graphql'
+import { Skeleton } from 'web/src/components/ui/skeleton'
 
 import { Link, routes } from '@redwoodjs/router'
 import type {
@@ -32,7 +35,19 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  return (
+    <main className={'flex flex-col gap-y-4'}>
+      <Skeleton className="h-[80px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+      <Skeleton className="h-[30px] w-full rounded-md" />
+    </main>
+  )
+}
 
 export const Empty = () => {
   return (

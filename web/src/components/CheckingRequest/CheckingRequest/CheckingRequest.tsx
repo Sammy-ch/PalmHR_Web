@@ -27,6 +27,7 @@ interface Props {
 }
 
 const CheckingRequest = ({ checkingRequest }: Props) => {
+  
   const [deleteCheckingRequest] = useMutation(
     DELETE_CHECKING_REQUEST_MUTATION,
     {
