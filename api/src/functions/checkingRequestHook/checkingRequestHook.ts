@@ -19,7 +19,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 
   try {
     const payload: webhookPayload = event.body
-    console.log(payload.record.employee_id)
+    console.log(payload.record)
 
     return {
       statusCode: 200,
