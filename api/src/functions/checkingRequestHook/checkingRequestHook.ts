@@ -16,12 +16,14 @@ interface webhookPayload {
   old_record: null | CheckingRequestRecord
 }
 
-export const handler = async (event: APIGatewayEvent, _context: Context) => {
+export const handler = async (event, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload: webhookPayload = parseLambdaEventBody(event.body)
-    console.log(payload.record)
+    const payload: webhookPayload = event.body
+    if (payload) {
+      console.log(payload.record)
+    }
 
     return {
       statusCode: 200,
