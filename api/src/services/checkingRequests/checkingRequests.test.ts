@@ -42,16 +42,16 @@ describe('checkingRequests', () => {
     const result = await createCheckingRequest({
       input: {
         employee_id: scenario.checkingRequest.two.employee_id,
-        checking_date: '2024-05-02T14:39:17.697Z',
-        checking_time: '2024-05-02T14:39:17.697Z',
+        checking_date: '2024-05-08T12:25:43.102Z',
+        checking_time: '2024-05-08T12:25:43.102Z',
         checking_type: 'checkin',
         checking_status: 'approved',
       },
     })
 
     expect(result.employee_id).toEqual(scenario.checkingRequest.two.employee_id)
-    expect(result.checking_date).toEqual(new Date('2024-05-02T14:39:17.697Z'))
-    expect(result.checking_time).toEqual(new Date('2024-05-02T14:39:17.697Z'))
+    expect(result.checking_date).toEqual(new Date('2024-05-08T12:25:43.102Z'))
+    expect(result.checking_time).toEqual(new Date('2024-05-08T12:25:43.102Z'))
     expect(result.checking_type).toEqual('checkin')
     expect(result.checking_status).toEqual('approved')
   })
@@ -62,10 +62,10 @@ describe('checkingRequests', () => {
     })) as CheckingRequest
     const result = await updateCheckingRequest({
       id: original.id,
-      input: { checking_date: '2024-05-03T14:39:17.697Z' },
+      input: { checking_date: '2024-05-09T12:25:43.102Z' },
     })
 
-    expect(result.checking_date).toEqual(new Date('2024-05-03T14:39:17.697Z'))
+    expect(result.checking_date).toEqual(new Date('2024-05-09T12:25:43.102Z'))
   })
 
   scenario('deletes a checkingRequest', async (scenario: StandardScenario) => {

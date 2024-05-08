@@ -12,7 +12,9 @@ import {
   DropdownMenu,
 } from 'web/src/components/ui/dropdown-menu'
 
-const CheckingRequests = () => {
+import { FindCheckingRequests } from '@/types/graphql'
+
+const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
   return (
     <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
@@ -33,139 +35,60 @@ const CheckingRequests = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <td className="whitespace-nowrap px-6 py-4">
-                  <div className="flex items-center">
-                    <Avatar className="mr-3 h-8 w-8">
-                      <AvatarImage alt="John Doe" src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <span>John Doe</span>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  April 15, 2023 - 9:00 AM
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">Check-In</td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <Badge variant="pending">Pending</Badge>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="ghost">
-                        <MoreHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Approve</DropdownMenuItem>
-                      <DropdownMenuItem>Reject</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <td className="whitespace-nowrap px-6 py-4">
-                  <div className="flex items-center">
-                    <Avatar className="mr-3 h-8 w-8">
-                      <AvatarImage
-                        alt="Jane Smith"
-                        src="/placeholder-user.jpg"
-                      />
-                      <AvatarFallback>JS</AvatarFallback>
-                    </Avatar>
-                    <span>Jane Smith</span>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  April 16, 2023 - 5:30 PM
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">Check-Out</td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <Badge variant="pending">Pending</Badge>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="ghost">
-                        <MoreHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Approve</DropdownMenuItem>
-                      <DropdownMenuItem>Reject</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <td className="whitespace-nowrap px-6 py-4">
-                  <div className="flex items-center">
-                    <Avatar className="mr-3 h-8 w-8">
-                      <AvatarImage
-                        alt="Michael Johnson"
-                        src="/placeholder-user.jpg"
-                      />
-                      <AvatarFallback>MJ</AvatarFallback>
-                    </Avatar>
-                    <span>Michael Johnson</span>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  April 17, 2023 - 8:45 AM
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">Check-In</td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <Badge variant="approved">Approved</Badge>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="ghost">
-                        <MoreHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Approve</DropdownMenuItem>
-                      <DropdownMenuItem>Reject</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <td className="whitespace-nowrap px-6 py-4">
-                  <div className="flex items-center">
-                    <Avatar className="mr-3 h-8 w-8">
-                      <AvatarImage
-                        alt="Sarah Lee"
-                        src="/placeholder-user.jpg"
-                      />
-                      <AvatarFallback>SL</AvatarFallback>
-                    </Avatar>
-                    <span>Sarah Lee</span>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  April 18, 2023 - 6:15 PM
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">Check-Out</td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <Badge variant="rejected">Rejected</Badge>
-                </td>
-                <td className="whitespace-nowrap px-6 py-4">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="ghost">
-                        <MoreHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Approve</DropdownMenuItem>
-                      <DropdownMenuItem>Reject</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </td>
-              </tr>
+              {checkingRequests.map((checkingRequest) => (
+                <tr
+                  key={checkingRequest.id}
+                  className="border-b border-gray-200 dark:border-gray-700"
+                >
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <div className="flex items-center">
+                      <Avatar className="mr-3 h-8 w-8">
+                        <AvatarImage
+                          alt="John Doe"
+                          src="/placeholder-user.jpg"
+                        />
+                        <AvatarFallback>JD</AvatarFallback>
+                      </Avatar>
+                      <span>
+                        {checkingRequest.employee.first_name}{' '}
+                        {checkingRequest.employee.last_name}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {new Date(
+                      checkingRequest.checking_date
+                    ).toLocaleDateString()}
+                    -{' '}
+                    {checkingRequest.checking_time
+                      ? new Date(
+                          checkingRequest.checking_time
+                        ).toLocaleTimeString('en-US', { timeZone: 'GMT' })
+                      : '--:--:--'}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {checkingRequest.checking_type}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <Badge variant="default">
+                      {checkingRequest.checking_status}
+                    </Badge>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size="icon" variant="ghost">
+                          <MoreHorizontalIcon className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>Approve</DropdownMenuItem>
+                        <DropdownMenuItem>Reject</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -193,26 +116,6 @@ function MoreHorizontalIcon(props) {
       <circle cx="12" cy="12" r="1" />
       <circle cx="19" cy="12" r="1" />
       <circle cx="5" cy="12" r="1" />
-    </svg>
-  )
-}
-
-function PlusIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
     </svg>
   )
 }

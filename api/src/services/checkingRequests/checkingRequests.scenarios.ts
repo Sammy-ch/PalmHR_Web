@@ -5,8 +5,8 @@ export const standard = defineScenario<Prisma.CheckingRequestCreateArgs>({
   checkingRequest: {
     one: {
       data: {
-        checking_date: '2024-05-02T14:39:17.739Z',
-        checking_time: '2024-05-02T14:39:17.739Z',
+        checking_date: '2024-05-08T12:25:43.113Z',
+        checking_time: '2024-05-08T12:25:43.113Z',
         checking_type: 'checkin',
         checking_status: 'approved',
         employee: {
@@ -21,8 +21,8 @@ export const standard = defineScenario<Prisma.CheckingRequestCreateArgs>({
     },
     two: {
       data: {
-        checking_date: '2024-05-02T14:39:17.739Z',
-        checking_time: '2024-05-02T14:39:17.739Z',
+        checking_date: '2024-05-08T12:25:43.113Z',
+        checking_time: '2024-05-08T12:25:43.113Z',
         checking_type: 'checkin',
         checking_status: 'approved',
         employee: {

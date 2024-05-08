@@ -19,6 +19,12 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="CheckingRequests" titleTo="checkingRequests" buttonLabel="New CheckingRequest" buttonTo="newCheckingRequest">
+        <Route path="/checking-requests/new" page={CheckingRequestNewCheckingRequestPage} name="newCheckingRequest" />
+        <Route path="/checking-requests/{id}/edit" page={CheckingRequestEditCheckingRequestPage} name="editCheckingRequest" />
+        <Route path="/checking-requests/{id}" page={CheckingRequestCheckingRequestPage} name="checkingRequest" />
+        <Route path="/checking-requests" page={CheckingRequestCheckingRequestsPage} name="checkingRequests" />
+      </Set>
       <Set wrap={ScaffoldLayout} title="LeaveCustoms" titleTo="leaveCustoms" buttonLabel="New LeaveCustom" buttonTo="newLeaveCustom">
         <Route path="/leave-customs/new" page={LeaveCustomNewLeaveCustomPage} name="newLeaveCustom" />
         <Route path="/leave-customs/{id}/edit" page={LeaveCustomEditLeaveCustomPage} name="editLeaveCustom" />

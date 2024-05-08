@@ -7,11 +7,7 @@ import type {
 import { db } from 'src/lib/db'
 
 export const checkingRequests: QueryResolvers['checkingRequests'] = () => {
-  return db.checkingRequest.findMany({
-    include: {
-      employee: true,
-    },
-  })
+  return db.checkingRequest.findMany()
 }
 
 export const checkingRequest: QueryResolvers['checkingRequest'] = ({ id }) => {
@@ -46,22 +42,4 @@ export const CheckingRequest: CheckingRequestRelationResolvers = {
   employee: (_obj, { root }) => {
     return db.checkingRequest.findUnique({ where: { id: root?.id } }).employee()
   },
-}
-
-export const approveCheckingRequest = async (id) => {
-  const updatedRequest = await db.checkingRequest.update({
-    where: { id },
-    data: { checking_status: 'approved' },
-  })
-
-  return updatedRequest
-}
-
-export const declineCheckingRequest = async (id) => {
-  const updatedRequest = await db.checkingRequest.update({
-    where: { id },
-    data: { checking_status: 'declined' },
-  })
-
-  return updatedRequest
 }
