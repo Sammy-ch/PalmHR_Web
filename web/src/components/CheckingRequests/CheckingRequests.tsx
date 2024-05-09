@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+
+import { createClient } from '@supabase/supabase-js'
 import type {
   DeleteCheckingRequestMutation,
   DeleteCheckingRequestMutationVariables,
@@ -34,6 +37,35 @@ const DELETE_CHECKING_REQUEST_MUTATION: TypedDocumentNode<
 `
 
 const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
+  const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+  )
+  useEffect(() => {
+    const subscription = supabase
+      .channel('checking_requests_queue')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'checking_requests',
+        },
+        (payload) => {
+          if (payload) {
+            console.log(payload)
+            const newCheckingRequest = payload.new
+            toast.success(
+              `New CheckingRequest created added: ${newCheckingRequest.id}`
+            )
+          }
+        }
+      )
+      .subscribe()
+
+    subscription.subscribe()
+  })
+
   const [deleteCheckingRequest] = useMutation(
     DELETE_CHECKING_REQUEST_MUTATION,
     {
