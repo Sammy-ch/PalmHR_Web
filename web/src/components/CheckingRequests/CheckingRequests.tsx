@@ -53,7 +53,6 @@ const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
         },
         (payload) => {
           if (payload) {
-            console.log(payload)
             const newCheckingRequest = payload.new
             toast.success(
               `New CheckingRequest created added: ${newCheckingRequest.id}`
@@ -62,8 +61,9 @@ const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
         }
       )
       .subscribe()
-
-    subscription.subscribe()
+    return () => {
+      subscription.unsubscribe()
+    }
   })
 
   const [deleteCheckingRequest] = useMutation(
