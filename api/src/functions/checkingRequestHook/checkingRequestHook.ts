@@ -1,7 +1,7 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 import { Database } from 'types/supabase'
 
-import { parseLambdaEventBody } from '@redwoodjs/api'
+import { parseFetchEventBody, parseLambdaEventBody } from '@redwoodjs/api'
 
 import { logger } from 'src/lib/logger'
 
@@ -20,9 +20,12 @@ export const handler = async (event, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload: webhookPayload = event.body
+    const payload: any = event.body
+
     if (payload) {
-      console.log(payload.record)
+      console.log(payload[0].record.checking_date)
+    } else {
+      console.log('Error logging Payload')
     }
 
     return {
@@ -31,7 +34,7 @@ export const handler = async (event, _context: Context) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: payload,
+        data: 'Payload received',
       }),
     }
   } catch (error) {
