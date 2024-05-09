@@ -16,16 +16,16 @@ interface webhookPayload {
   old_record: null | CheckingRequestRecord
 }
 
-export const handler = async (event, _context: Context) => {
+export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload: any = event.body
+    let payload
+    const data: webhookPayload = event.body
 
-    if (payload) {
-      console.log(payload[0].record.checking_date)
-    } else {
-      console.log('Error logging Payload')
+    if (data) {
+      payload = JSON.parse(data)
+      console.log(payload.record.checking_date)
     }
 
     return {
