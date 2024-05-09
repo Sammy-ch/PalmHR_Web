@@ -44,10 +44,10 @@ const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
                     <div className="flex items-center">
                       <Avatar className="mr-3 h-8 w-8">
                         <AvatarImage
-                          alt="John Doe"
-                          src="/placeholder-user.jpg"
+                          alt="profile"
+                          src={checkingRequest.employee.profile_image}
                         />
-                        <AvatarFallback>JD</AvatarFallback>
+                        <AvatarFallback>DP</AvatarFallback>
                       </Avatar>
                       <span>
                         {checkingRequest.employee.first_name}{' '}

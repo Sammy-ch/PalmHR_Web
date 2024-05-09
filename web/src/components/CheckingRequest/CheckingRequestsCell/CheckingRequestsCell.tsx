@@ -30,6 +30,7 @@ export const QUERY: TypedDocumentNode<
       employee {
         first_name
         last_name
+        profile_image
       }
     }
   }
