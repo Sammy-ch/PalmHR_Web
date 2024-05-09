@@ -1,12 +1,9 @@
 import type {
   FindCheckingRequests,
   FindCheckingRequestsVariables,
-  UpdateCheckingRequestMutation,
-  UpdateCheckingRequestMutationVariables,
 } from 'types/graphql'
 import { Skeleton } from 'web/src/components/ui/skeleton'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -51,14 +48,7 @@ export const Loading = () => {
 }
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No checkingRequests yet. '}
-      <Link to={routes.newCheckingRequest()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No checkingRequests yet. '}</div>
 }
 
 export const Failure = ({ error }: CellFailureProps<FindCheckingRequests>) => (

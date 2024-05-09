@@ -1,3 +1,7 @@
+import type {
+  DeleteCheckingRequestMutation,
+  DeleteCheckingRequestMutationVariables,
+} from 'types/graphql'
 import {
   AvatarImage,
   AvatarFallback,
@@ -12,9 +16,44 @@ import {
   DropdownMenu,
 } from 'web/src/components/ui/dropdown-menu'
 
+import { useMutation } from '@redwoodjs/web'
+import type { TypedDocumentNode } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
 import { FindCheckingRequests } from '@/types/graphql'
 
+const DELETE_CHECKING_REQUEST_MUTATION: TypedDocumentNode<
+  DeleteCheckingRequestMutation,
+  DeleteCheckingRequestMutationVariables
+> = gql`
+  mutation DeleteCheckingRequestMutation($id: String!) {
+    deleteCheckingRequest(id: $id) {
+      id
+    }
+  }
+`
+
 const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
+  const [deleteCheckingRequest] = useMutation(
+    DELETE_CHECKING_REQUEST_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('CheckingRequest deleted')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const onDeleteClick = (id: DeleteCheckingRequestMutationVariables['id']) => {
+    if (
+      confirm('Are you sure you want to delete checkingRequest ' + id + '?')
+    ) {
+      deleteCheckingRequest({ variables: { id } })
+    }
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
@@ -58,7 +97,7 @@ const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
                   <td className="whitespace-nowrap px-6 py-4">
                     {new Date(
                       checkingRequest.checking_date
-                    ).toLocaleDateString()}
+                    ).toLocaleDateString()}{' '}
                     -{' '}
                     {checkingRequest.checking_time
                       ? new Date(
@@ -83,7 +122,12 @@ const CheckingRequests = ({ checkingRequests }: FindCheckingRequests) => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem>Approve</DropdownMenuItem>
-                        <DropdownMenuItem>Reject</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => onDeleteClick(checkingRequest.id)}
+                        >
+                          {' '}
+                          Reject
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </td>
