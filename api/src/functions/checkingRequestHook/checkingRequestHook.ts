@@ -27,7 +27,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
       throw Error('Payload is undefined')
     }
 
-    console.log(payload.record.checking_date)
+    console.log(payload.record)
 
     return {
       statusCode: 200,
