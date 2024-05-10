@@ -56,13 +56,14 @@ const Routes = () => {
         <Route path="/about" page={AboutPage} name="about" />
       </Set>
 
-      <PrivateSet wrap={DashoardLayout} unauthenticated="home">
+      <Set wrap={DashoardLayout} >
         <Route path="/dashboard" page={DashboardPage} name="dashboard" />
         <Route path="/settings" page={SettingsPage} name="settings" />
         <Route path="/attendance" page={AttendancePage} name="attendance" />
         <Route path="/performance" page={PerformancePage} name="performance" />
         <Route path="/reports" page={ReportsPage} name="reports" />
-      </PrivateSet>
+        <Route path="/pay-rolls" page={PayRollPayRollsPage} name="payRolls" />
+      </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
   )

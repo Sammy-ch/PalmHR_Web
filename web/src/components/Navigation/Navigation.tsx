@@ -62,6 +62,14 @@ const Navigation = () => {
           <Settings />
           Settings
         </NavLink>
+        <NavLink
+          className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-lg "
+          activeClassName="bg-[grey]/10 text-black "
+          to={routes.payRolls()}
+        >
+          <Settings />
+          Payrolls
+        </NavLink>
       </nav>
     </section>
   )

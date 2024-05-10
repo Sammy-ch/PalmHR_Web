@@ -33,7 +33,7 @@ function capitalizeFirstLetter(string) {
 }
 
 const DashboardHeader = () => {
-  const { userMetadata } = useAuth()
+  // const { userMetadata } = useAuth()
   const routeName = useRouteName()
 
   return (
@@ -79,11 +79,11 @@ const DashboardHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar
+              {/* <Avatar
                 size={45}
                 icon={<UserOutlined />}
                 src={userMetadata.picture}
-              />
+              /> */}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
