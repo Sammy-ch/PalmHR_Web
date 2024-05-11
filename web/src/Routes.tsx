@@ -64,24 +64,7 @@ const Routes = () => {
         <Route path="/admin-roles/{id}" page={AdminRoleAdminRolePage} name="adminRole" />
         <Route path="/admin-roles" page={AdminRoleAdminRolesPage} name="adminRoles" />
       </Set>
-      <Set wrap={ScaffoldLayout} title="PayRolls" titleTo="payRolls" buttonLabel="New PayRoll" buttonTo="newPayRoll">
-        <Route path="/pay-rolls/new" page={PayRollNewPayRollPage} name="newPayRoll" />
-        <Route path="/pay-rolls/{id}/edit" page={PayRollEditPayRollPage} name="editPayRoll" />
-        <Route path="/pay-rolls/{id}" page={PayRollPayRollPage} name="payRoll" />
-        <Route path="/pay-rolls" page={PayRollPayRollsPage} name="payRolls" />
-      </Set>
-      <Set wrap={ScaffoldLayout} title="CheckingRequests" titleTo="checkingRequests" buttonLabel="New CheckingRequest" buttonTo="newCheckingRequest">
-        <Route path="/checking-requests/new" page={CheckingRequestNewCheckingRequestPage} name="newCheckingRequest" />
-        <Route path="/checking-requests/{id}/edit" page={CheckingRequestEditCheckingRequestPage} name="editCheckingRequest" />
-        <Route path="/checking-requests/{id}" page={CheckingRequestCheckingRequestPage} name="checkingRequest" />
-        <Route path="/checking-requests" page={CheckingRequestCheckingRequestsPage} name="checkingRequests" />
-      </Set>
-      <Set wrap={ScaffoldLayout} title="LeaveCustoms" titleTo="leaveCustoms" buttonLabel="New LeaveCustom" buttonTo="newLeaveCustom">
-        <Route path="/leave-customs/new" page={LeaveCustomNewLeaveCustomPage} name="newLeaveCustom" />
-        <Route path="/leave-customs/{id}/edit" page={LeaveCustomEditLeaveCustomPage} name="editLeaveCustom" />
-        <Route path="/leave-customs/{id}" page={LeaveCustomLeaveCustomPage} name="leaveCustom" />
-        <Route path="/leave-customs" page={LeaveCustomLeaveCustomsPage} name="leaveCustoms" />
-      </Set>
+
       <Set wrap={ScaffoldLayout} title="EmployeeAttendances" titleTo="employeeAttendances" buttonLabel="New EmployeeAttendance" buttonTo="newEmployeeAttendance">
         <Route path="/employee-attendances/new" page={EmployeeAttendanceNewEmployeeAttendancePage} name="newEmployeeAttendance" />
         <Route path="/employee-attendances/{attendance_id}/edit" page={EmployeeAttendanceEditEmployeeAttendancePage} name="editEmployeeAttendance" />
@@ -107,7 +90,7 @@ const Routes = () => {
         <Route path="/attendance" page={AttendancePage} name="attendance" />
         <Route path="/performance" page={PerformancePage} name="performance" />
         <Route path="/reports" page={ReportsPage} name="reports" />
-        <Route path="/pay-rolls" page={PayRollPayRollsPage} name="payRolls" />
+        <Route path="/employee-pay-rolls" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
       </PrivateSet>
       <Route notfound page={NotFoundPage} />
     </Router>

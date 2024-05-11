@@ -26,7 +26,6 @@ import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
-import CheckingRequestsCell from '../CheckingRequest/CheckingRequestsCell'
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -56,7 +55,6 @@ const DashboardHeader = () => {
                   </h1>
                 </DrawerTitle>
               </DrawerHeader>
-              <CheckingRequestsCell />
               <DrawerFooter>
                 <DrawerClose>
                   <Button variant="outline">Close</Button>
