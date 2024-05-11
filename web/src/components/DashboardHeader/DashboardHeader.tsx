@@ -33,7 +33,7 @@ function capitalizeFirstLetter(string) {
 }
 
 const DashboardHeader = () => {
-  // const { userMetadata } = useAuth()
+  const { userMetadata } = useAuth()
   const routeName = useRouteName()
 
   return (
@@ -45,9 +45,7 @@ const DashboardHeader = () => {
         <div className="flex items-center gap-5">
           <Drawer>
             <DrawerTrigger>
-              <Button>
-                <SquareUserRound />
-              </Button>
+              <SquareUserRound />
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
@@ -79,11 +77,11 @@ const DashboardHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              {/* <Avatar
+              <Avatar
                 size={45}
                 icon={<UserOutlined />}
                 src={userMetadata.picture}
-              /> */}
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

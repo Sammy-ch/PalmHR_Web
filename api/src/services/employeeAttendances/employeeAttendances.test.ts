@@ -44,14 +44,14 @@ describe('employeeAttendances', () => {
       const result = await createEmployeeAttendance({
         input: {
           employee_id: scenario.employeeAttendance.two.employee_id,
-          presence_tag: 'PRESENT',
+          attendance_tag: 'PRESENT',
         },
       })
 
       expect(result.employee_id).toEqual(
         scenario.employeeAttendance.two.employee_id
       )
-      expect(result.presence_tag).toEqual('PRESENT')
+      expect(result.attendance_tag).toEqual('PRESENT')
     }
   )
 
@@ -63,10 +63,10 @@ describe('employeeAttendances', () => {
       })) as EmployeeAttendance
       const result = await updateEmployeeAttendance({
         attendance_id: original.attendance_id,
-        input: { presence_tag: 'UNNOTIFIED_ABSENCE' },
+        input: { attendance_tag: 'ABSENT' },
       })
 
-      expect(result.presence_tag).toEqual('UNNOTIFIED_ABSENCE')
+      expect(result.attendance_tag).toEqual('ABSENT')
     }
   )
 

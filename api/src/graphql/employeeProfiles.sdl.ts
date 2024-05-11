@@ -8,7 +8,10 @@ export const schema = gql`
     email: String
     allowed_leaves: Int
     AttendanceData: [EmployeeAttendance]!
-    LeaveData: [LeaveCustom]!
+    LeaveData: [EmployeeLeaveForm]!
+    CheckingRequestsData: [CheckingRequestQueue]!
+    PayrollData: [EmployeePayRoll]!
+    AttendanceReport: [EmployeeAttendanceReport]!
   }
 
   type Query {

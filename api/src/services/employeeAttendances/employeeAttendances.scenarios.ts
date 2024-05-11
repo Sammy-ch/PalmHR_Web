@@ -5,7 +5,7 @@ export const standard = defineScenario<Prisma.EmployeeAttendanceCreateArgs>({
   employeeAttendance: {
     one: {
       data: {
-        presence_tag: 'PRESENT',
+        attendance_tag: 'PRESENT',
         employee: {
           create: {
             profile_id: 'String',
@@ -18,7 +18,7 @@ export const standard = defineScenario<Prisma.EmployeeAttendanceCreateArgs>({
     },
     two: {
       data: {
-        presence_tag: 'PRESENT',
+        attendance_tag: 'PRESENT',
         employee: {
           create: {
             profile_id: 'String',

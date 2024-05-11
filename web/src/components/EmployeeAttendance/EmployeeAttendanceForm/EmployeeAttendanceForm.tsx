@@ -137,19 +137,19 @@ const EmployeeAttendanceForm = (props: EmployeeAttendanceFormProps) => {
         <FieldError name="working_time" className="rw-field-error" />
 
         <Label
-          name="presence_tag"
+          name="attendance_tag"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Presence tag
+          Attendance tag
         </Label>
 
         <div className="rw-check-radio-items">
           <RadioField
-            attendance_id="employeeAttendance-presence_tag-0"
-            name="presence_tag"
+            attendance_id="employeeAttendance-attendance_tag-0"
+            name="attendance_tag"
             defaultValue="PRESENT"
-            defaultChecked={props.employeeAttendance?.presence_tag?.includes(
+            defaultChecked={props.employeeAttendance?.attendance_tag?.includes(
               'PRESENT'
             )}
             className="rw-input"
@@ -160,61 +160,19 @@ const EmployeeAttendanceForm = (props: EmployeeAttendanceFormProps) => {
 
         <div className="rw-check-radio-items">
           <RadioField
-            attendance_id="employeeAttendance-presence_tag-1"
-            name="presence_tag"
-            defaultValue="LATE"
-            defaultChecked={props.employeeAttendance?.presence_tag?.includes(
-              'LATE'
+            attendance_id="employeeAttendance-attendance_tag-1"
+            name="attendance_tag"
+            defaultValue="ABSENT"
+            defaultChecked={props.employeeAttendance?.attendance_tag?.includes(
+              'ABSENT'
             )}
             className="rw-input"
             errorClassName="rw-input rw-input-error"
           />
-          <div>Late</div>
+          <div>Absent</div>
         </div>
 
-        <div className="rw-check-radio-items">
-          <RadioField
-            attendance_id="employeeAttendance-presence_tag-2"
-            name="presence_tag"
-            defaultValue="JUSTIFIED_ABSENCE"
-            defaultChecked={props.employeeAttendance?.presence_tag?.includes(
-              'JUSTIFIED_ABSENCE'
-            )}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-          <div>Justified Absence</div>
-        </div>
-
-        <div className="rw-check-radio-items">
-          <RadioField
-            attendance_id="employeeAttendance-presence_tag-3"
-            name="presence_tag"
-            defaultValue="UNJUSTIFIED_ABSENCE"
-            defaultChecked={props.employeeAttendance?.presence_tag?.includes(
-              'UNJUSTIFIED_ABSENCE'
-            )}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-          <div>Unjustified Absence</div>
-        </div>
-
-        <div className="rw-check-radio-items">
-          <RadioField
-            attendance_id="employeeAttendance-presence_tag-4"
-            name="presence_tag"
-            defaultValue="UNNOTIFIED_ABSENCE"
-            defaultChecked={props.employeeAttendance?.presence_tag?.includes(
-              'UNNOTIFIED_ABSENCE'
-            )}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-          <div>Unnotified Absence</div>
-        </div>
-
-        <FieldError name="presence_tag" className="rw-field-error" />
+        <FieldError name="attendance_tag" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

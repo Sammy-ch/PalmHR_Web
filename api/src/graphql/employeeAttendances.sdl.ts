@@ -7,15 +7,12 @@ export const schema = gql`
     checkout_time: DateTime
     checking_date: DateTime
     working_time: DateTime
-    presence_tag: PresenceTag!
+    attendance_tag: AttendanceTag!
   }
 
-  enum PresenceTag {
+  enum AttendanceTag {
     PRESENT
-    LATE
-    JUSTIFIED_ABSENCE
-    UNJUSTIFIED_ABSENCE
-    UNNOTIFIED_ABSENCE
+    ABSENT
   }
 
   type Query {
@@ -29,7 +26,7 @@ export const schema = gql`
     checkout_time: DateTime
     checking_date: DateTime
     working_time: DateTime
-    presence_tag: PresenceTag!
+    attendance_tag: AttendanceTag!
   }
 
   input UpdateEmployeeAttendanceInput {
@@ -38,7 +35,7 @@ export const schema = gql`
     checkout_time: DateTime
     checking_date: DateTime
     working_time: DateTime
-    presence_tag: PresenceTag
+    attendance_tag: AttendanceTag
   }
 
   type Mutation {

@@ -68,7 +68,7 @@ const EmployeeAttendancesList = ({
             <th>Checkout time</th>
             <th>Checking date</th>
             <th>Working time</th>
-            <th>Presence tag</th>
+            <th>Attendance tag</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -81,7 +81,7 @@ const EmployeeAttendancesList = ({
               <td>{timeTag(employeeAttendance.checkout_time)}</td>
               <td>{timeTag(employeeAttendance.checking_date)}</td>
               <td>{timeTag(employeeAttendance.working_time)}</td>
-              <td>{formatEnum(employeeAttendance.presence_tag)}</td>
+              <td>{formatEnum(employeeAttendance.attendance_tag)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

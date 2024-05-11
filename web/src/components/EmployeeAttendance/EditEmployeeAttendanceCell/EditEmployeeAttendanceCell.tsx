@@ -24,7 +24,7 @@ export const QUERY: TypedDocumentNode<EditEmployeeAttendanceByAttendanceId> = gq
       checkout_time
       checking_date
       working_time
-      presence_tag
+      attendance_tag
     }
   }
 `
@@ -44,7 +44,7 @@ const UPDATE_EMPLOYEE_ATTENDANCE_MUTATION: TypedDocumentNode<
       checkout_time
       checking_date
       working_time
-      presence_tag
+      attendance_tag
     }
   }
 `

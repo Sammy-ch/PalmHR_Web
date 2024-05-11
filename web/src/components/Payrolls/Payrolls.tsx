@@ -1,11 +1,4 @@
-import {
-  Form,
-  Label,
-  TextField,
-  TextAreaField,
-  FieldError,
-  Submit,
-} from '@redwoodjs/forms'
+import { Form, Label } from '@redwoodjs/forms'
 
 import { Button } from '../ui/button'
 import {
@@ -99,7 +92,6 @@ const Payrolls = () => {
                     </Label>
                     <Select defaultValue="biweekly">
                       <option value="weekly">Weekly</option>
-                      <option value="biweekly">Bi-Weekly</option>
                       <option value="monthly">Monthly</option>
                     </Select>
                   </div>
@@ -111,7 +103,7 @@ const Payrolls = () => {
                       defaultValue="2023-06-15"
                       id="pay-date"
                       name="pay-date"
-                      type='date'
+                      type="date"
                     />
                   </div>
                   <div className="space-y-2">
@@ -128,11 +120,7 @@ const Payrolls = () => {
                     <Label name="tax-rate" htmlFor="tax-rate">
                       Tax Rate
                     </Label>
-                    <Input
-                      defaultValue="0.25"
-                      id="tax-rate"
-                      name="tax-rate"
-                    />
+                    <Input defaultValue="0.25" id="tax-rate" name="tax-rate" />
                   </div>
                 </div>
               </CardContent>

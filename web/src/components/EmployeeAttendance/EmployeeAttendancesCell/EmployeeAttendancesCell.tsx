@@ -2,7 +2,6 @@ import type {
   FindEmployeeAttendances,
   FindEmployeeAttendancesVariables,
 } from 'types/graphql'
-import { Skeleton } from 'web/src/components/ui/skeleton'
 
 import { Link, routes } from '@redwoodjs/router'
 import type {
@@ -11,7 +10,7 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import AttendanceActivityTable from 'src/components/AttendanceActivityTable'
+import EmployeeAttendances from 'src/components/EmployeeAttendance/EmployeeAttendances'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeeAttendances,
@@ -25,36 +24,12 @@ export const QUERY: TypedDocumentNode<
       checkout_time
       checking_date
       working_time
-      presence_tag
-      employee {
-        first_name
-        last_name
-        position
-        email
-      }
+      attendance_tag
     }
   }
 `
 
-export const Loading = () => {
-  return (
-    <main className={'flex flex-col gap-y-4'}>
-      <Skeleton className="h-[100px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-      <Skeleton className="h-[30px] w-full rounded-md" />
-    </main>
-  )
-}
+export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
   return (
@@ -79,5 +54,5 @@ export const Success = ({
   FindEmployeeAttendances,
   FindEmployeeAttendancesVariables
 >) => {
-  return <AttendanceActivityTable employeeAttendances={employeeAttendances} />
+  return <EmployeeAttendances employeeAttendances={employeeAttendances} />
 }

@@ -36,31 +36,32 @@ model AdminRole {
 }
 
 model EmployeeProfile {
-  profile_id       String               @id @db.Uuid
-  first_name       String
-  last_name        String
-  profile_image    String?
-  position         String
-  email            String?
-  allowed_leaves   Int?
-  AttendanceData   EmployeeAttendance[]
-  LeaveData        LeaveCustom[]
-  CheckingRequests CheckingRequest[]
-  Payroll          PayRoll[]
+  profile_id           String                     @id @db.Uuid
+  first_name           String
+  last_name            String
+  profile_image        String?
+  position             String
+  email                String?
+  allowed_leaves       Int?
+  AttendanceData       EmployeeAttendance[]
+  LeaveData            EmployeeLeaveForm[]
+  CheckingRequestsData CheckingRequestQueue[]
+  PayrollData          EmployeePayRoll[]
+  AttendanceReport     EmployeeAttendanceReport[]
 }
 
 model EmployeeAttendance {
-  attendance_id String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  employee      EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
-  employee_id   String          @db.Uuid
-  checkin_time  DateTime?       @db.Time()
-  checkout_time DateTime?       @db.Time()
-  checking_date DateTime?       @db.Date
-  working_time  DateTime?       @db.Time()
-  presence_tag  PresenceTag
+  attendance_id  String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  employee       EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
+  employee_id    String          @db.Uuid
+  checkin_time   DateTime?       @db.Time()
+  checkout_time  DateTime?       @db.Time()
+  checking_date  DateTime?       @db.Date
+  working_time   DateTime?       @db.Time()
+  attendance_tag AttendanceTag
 }
 
-model CheckingRequest {
+model CheckingRequestQueue {
   id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   employee        EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
   employee_id     String          @db.Uuid
@@ -70,31 +71,20 @@ model CheckingRequest {
   checking_status CheckingStatus
 }
 
-model PayRoll {
+model EmployeePayRoll {
   id               String          @id @db.Uuid
   employee         EmployeeProfile @relation(fields: [id], references: [profile_id])
   pay_period_start DateTime        @db.Date
   pay_period_end   DateTime        @db.Date
   hours_Worked     DateTime        @db.Time()
-  overtime         DateTime?       @db.Time()
   base_salary      Int             @db.Integer
-  netpay           Int             @db.Integer
+  overtime         DateTime?       @db.Time()
+  netpay           Int?            @db.Integer
 
   @@unique([id])
 }
 
-enum CheckingType {
-  checkin
-  checkout
-}
-
-enum CheckingStatus {
-  approved
-  pending
-  declined
-}
-
-model LeaveCustom {
+model EmployeeLeaveForm {
   id                   String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   requested_leave_date DateTime        @db.Date
   leave                EmployeeProfile @relation(fields: [leave_id], references: [profile_id])
@@ -104,10 +94,16 @@ model LeaveCustom {
   leave_approval       Boolean?        @db.Boolean
 }
 
-enum LeaveType {
-  Personal
-  Sick
-  Holiday
+model EmployeeAttendanceReport {
+  id                 String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  employee           EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
+  employee_id        String          @db.Uuid
+  TotalOvertime      DateTime        @db.Time()
+  TotalWorkhours     DateTime        @db.Time()
+  TotalSickLeaves    DateTime        @db.Time()
+  AbstenteeismRate   Int             @db.Integer
+  EarlyAttendaceRate Int             @db.Integer
+  LateAttedanceRate  Int             @db.Integer
 }
 
 model Organization {
@@ -120,10 +116,24 @@ model Organization {
   @@unique([OrganizationId, OrganizationName, Email])
 }
 
-enum PresenceTag {
+enum AttendanceTag {
   PRESENT
-  LATE
-  JUSTIFIED_ABSENCE
-  UNJUSTIFIED_ABSENCE
-  UNNOTIFIED_ABSENCE
+  ABSENT
+}
+
+enum CheckingType {
+  CHECKIN
+  CHECKOUT
+}
+
+enum CheckingStatus {
+  APPROVED
+  PENDING
+  DECLINED
+}
+
+enum LeaveType {
+  PERSONAL
+  SICK
+  HOLIDAY
 }

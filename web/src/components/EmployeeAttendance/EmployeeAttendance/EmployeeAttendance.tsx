@@ -91,8 +91,8 @@ const EmployeeAttendance = ({ employeeAttendance }: Props) => {
               <td>{timeTag(employeeAttendance.working_time)}</td>
             </tr>
             <tr>
-              <th>Presence tag</th>
-              <td>{formatEnum(employeeAttendance.presence_tag)}</td>
+              <th>Attendance tag</th>
+              <td>{formatEnum(employeeAttendance.attendance_tag)}</td>
             </tr>
           </tbody>
         </table>

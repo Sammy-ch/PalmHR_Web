@@ -51,4 +51,19 @@ export const EmployeeProfile: EmployeeProfileRelationResolvers = {
       .findUnique({ where: { profile_id: root?.profile_id } })
       .LeaveData()
   },
+  CheckingRequestsData: (_obj, { root }) => {
+    return db.employeeProfile
+      .findUnique({ where: { profile_id: root?.profile_id } })
+      .CheckingRequestsData()
+  },
+  PayrollData: (_obj, { root }) => {
+    return db.employeeProfile
+      .findUnique({ where: { profile_id: root?.profile_id } })
+      .PayrollData()
+  },
+  AttendanceReport: (_obj, { root }) => {
+    return db.employeeProfile
+      .findUnique({ where: { profile_id: root?.profile_id } })
+      .AttendanceReport()
+  },
 }
