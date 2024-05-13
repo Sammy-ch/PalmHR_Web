@@ -26,7 +26,6 @@ import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
-
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -75,11 +74,11 @@ const DashboardHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar
-                size={45}
-                icon={<UserOutlined />}
-                src={userMetadata.picture}
-              />
+              {/*<Avatar*/}
+              {/*  size={45}*/}
+              {/*  icon={<UserOutlined />}*/}
+              {/*  src={userMetadata.picture}*/}
+              {/*/>*/}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
