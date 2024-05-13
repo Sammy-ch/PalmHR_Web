@@ -23,7 +23,7 @@ export const QUERY: TypedDocumentNode<
       checkout_time
       checking_date
       working_time
-      presence_tag
+      attendance_tag
     }
   }
 `

@@ -8,10 +8,10 @@
   },
   "devDependencies": {
     "@edgio/cli": "^7.11.4",
-    "@redwoodjs/auth-supabase-setup": "7.4.3",
-    "@redwoodjs/cli-data-migrate": "7.4.3",
-    "@redwoodjs/core": "7.4.3",
-    "@redwoodjs/project-config": "7.4.3",
+    "@redwoodjs/auth-supabase-setup": "7.5.0",
+    "@redwoodjs/cli-data-migrate": "7.5.0",
+    "@redwoodjs/core": "7.5.0",
+    "@redwoodjs/project-config": "7.5.0",
     "@redwoodjs/studio": "11",
     "prettier-plugin-tailwindcss": "0.4.1"
   },

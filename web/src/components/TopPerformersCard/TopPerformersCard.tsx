@@ -5,7 +5,7 @@ export default function TopPerformersCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
+        <CardTitle>Top Performers</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-8">
         <div className="flex items-center gap-4">

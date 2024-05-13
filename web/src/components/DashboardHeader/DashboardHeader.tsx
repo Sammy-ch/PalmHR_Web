@@ -26,8 +26,6 @@ import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
-import CheckingRequests from '../CheckingRequests/CheckingRequests'
-
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -45,9 +43,7 @@ const DashboardHeader = () => {
         <div className="flex items-center gap-5">
           <Drawer>
             <DrawerTrigger>
-              <Button>
-                <SquareUserRound />
-              </Button>
+              <SquareUserRound />
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
@@ -58,7 +54,6 @@ const DashboardHeader = () => {
                   </h1>
                 </DrawerTitle>
               </DrawerHeader>
-              <CheckingRequests />
               <DrawerFooter>
                 <DrawerClose>
                   <Button variant="outline">Close</Button>
@@ -79,11 +74,11 @@ const DashboardHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar
-                size={45}
-                icon={<UserOutlined />}
-                src={userMetadata.picture}
-              />
+              {/*<Avatar*/}
+              {/*  size={45}*/}
+              {/*  icon={<UserOutlined />}*/}
+              {/*  src={userMetadata.picture}*/}
+              {/*/>*/}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

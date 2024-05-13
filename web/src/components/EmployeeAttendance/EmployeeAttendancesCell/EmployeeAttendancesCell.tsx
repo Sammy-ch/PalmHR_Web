@@ -3,14 +3,13 @@ import type {
   FindEmployeeAttendancesVariables,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import AttendanceActivityTable from 'src/components/AttendanceActivityTable'
+import EmployeeAttendances from 'src/components/EmployeeAttendance/EmployeeAttendances'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeeAttendances,
@@ -24,12 +23,12 @@ export const QUERY: TypedDocumentNode<
       checkout_time
       checking_date
       working_time
-      presence_tag
+      attendance_tag
       employee {
         first_name
         last_name
+        profile_image
         position
-        email
       }
     }
   }
@@ -38,14 +37,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No employeeAttendances yet. '}
-      <Link to={routes.newEmployeeAttendance()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No Employee Attendances yet. '}</div>
 }
 
 export const Failure = ({
@@ -60,5 +52,5 @@ export const Success = ({
   FindEmployeeAttendances,
   FindEmployeeAttendancesVariables
 >) => {
-  return <AttendanceActivityTable employeeAttendances={employeeAttendances} />
+  return <EmployeeAttendances employeeAttendances={employeeAttendances} />
 }

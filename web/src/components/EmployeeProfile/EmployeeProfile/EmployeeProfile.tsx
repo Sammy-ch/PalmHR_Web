@@ -1,7 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
-import { StepBack } from 'lucide-react'
+import { CircleUserRound } from 'lucide-react'
 import type {
   DeleteEmployeeProfileMutation,
   DeleteEmployeeProfileMutationVariables,
@@ -21,12 +21,13 @@ import {
   Card,
 } from 'web/src/components/ui/card'
 
-import { routes, navigate, Link } from '@redwoodjs/router'
+import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import {} from 'src/lib/formatters'
+import AttendanceRadialBarChart from 'src/components/AttendanceRadialBarChart/AttendanceRadialBarChart'
 
 const DELETE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
   DeleteEmployeeProfileMutation,
@@ -74,34 +75,32 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <header className="flex items-center justify-between  bg-[#000000] px-6 py-4 text-white">
+        <header className="flex items-center justify-between bg-[#1E293B] px-6 py-4 text-white">
           <div className="flex items-center space-x-4">
-            <Link
-              to={routes.performance()}
-              className="flex items-center justify-center gap-2"
-            >
-              <Button size="icon" variant="outline" className="bg-black">
-                <StepBack />
-              </Button>
-              <span>Return</span>
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
+            <div className="flex-shrink-0">
+              <Avatar>
+                <AvatarImage alt="DP" src={employeeProfile.profile_image} />
+                <AvatarFallback>
+                  <CircleUserRound color={'black'} />
+                </AvatarFallback>
+              </Avatar>
+            </div>
             <div>
               <h1 className="text-2xl font-bold">
                 {employeeProfile.first_name} {employeeProfile.last_name}
               </h1>
               <p className="text-gray-400">{employeeProfile.position}</p>
             </div>
-            <div className="flex-shrink-0">
-              <Avatar>
-                <AvatarImage
-                  alt="Profile Image"
-                  src={employeeProfile.profile_image}
-                />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Button
+              type="button"
+              variant={'destructive'}
+              onClick={() => onDeleteClick(employeeProfile.profile_id)}
+              className={'font-medium'}
+            >
+              Delete Employee Profile
+            </Button>
           </div>
         </header>
         <main className="grid flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-2 md:p-10">
@@ -129,7 +128,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
-                  <ClockIcon className="h-6 w-6 fill-primary" />
+                  {/*<ClockIcon className="h-6 w-6 fill-primary" />*/}
                   <span className="text-4xl font-bold">87%</span>
                 </div>
               </CardContent>
@@ -183,7 +182,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
-                  <ClockIcon className="h-6 w-6 fill-primary" />
+                  {/*<ClockIcon className="h-6 w-6 fill-primary" />*/}
                   <span className="text-4xl font-bold">13%</span>
                 </div>
               </CardContent>
@@ -194,24 +193,23 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               <CardTitle>Analytics</CardTitle>
               <CardDescription>Detailed attendance analytics</CardDescription>
             </CardHeader>
-            {/* <CardContent className="grid h-full gap-6">
-              <div className="grid grid-cols-2 gap-6">
+            <CardContent className="grid h-full gap-6">
+              <div className="grid grid-rows-2 gap-6">
                 <BarChart className="aspect-[4/3]" />
-                <PieChart className="aspect-[4/3]" />
+                <AttendanceRadialBarChart className="aspect-[4/2]" />
               </div>
-              <div className="grid  gap-6">
-                <LineChart className="aspect-[4/3]" />
-              </div>
-            </CardContent> */}
+            </CardContent>
           </Card>
         </main>
       </div>
+      <nav className="rw-button-group"></nav>
     </>
   )
 }
 
 export default EmployeeProfile
 
+//
 function BarChart(props) {
   return (
     <div {...props}>
@@ -262,26 +260,6 @@ function BarChart(props) {
         ariaLabel="A bar chart showing data"
       />
     </div>
-  )
-}
-
-function ClockIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
   )
 }
 

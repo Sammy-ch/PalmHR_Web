@@ -10,7 +10,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeeProfileCard from '../../EmployeeProfileCard/EmployeeProfileCard'
+import EmployeeProfiles from 'src/components/EmployeeProfile/EmployeeProfiles'
+import EmployeeProfileCard from 'src/components/EmployeeProfileCard/EmployeeProfileCard'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeeProfiles,

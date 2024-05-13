@@ -15,7 +15,6 @@ import {
   TableRow,
 } from '../ui/table'
 
-import type { FindEmployeeAttendances } from '@/types/graphql'
 
 export default function AttendanceActivityTable({
   employeeAttendances,

@@ -18,15 +18,16 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: checkingRequestHook function`)
 
   try {
-    const payload: webhookPayload = event.body
-    console.log(payload)
+    let payload: webhookPayload
+    const data = event.body
 
-    // if (body.table !== 'CheckingRequest') {
-    //   return {
-    //     statusCode: 400,
-    //     body: JSON.stringify({ error: 'Invalid table' }),
-    //   }
-    // }
+    if (data) {
+      payload = JSON.parse(data)
+    } else {
+      throw Error('Payload is undefined')
+    }
+
+    console.log(payload.record)
 
     return {
       statusCode: 200,
@@ -34,7 +35,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: payload,
+        data: 'Payload received',
       }),
     }
   } catch (error) {
