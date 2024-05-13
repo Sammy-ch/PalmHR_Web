@@ -59,7 +59,6 @@ const Routes = () => {
         <Route path="/employee-pay-rolls/new" page={EmployeePayRollNewEmployeePayRollPage} name="newEmployeePayRoll" />
         <Route path="/employee-pay-rolls/{id}/edit" page={EmployeePayRollEditEmployeePayRollPage} name="editEmployeePayRoll" />
         <Route path="/employee-pay-rolls/{id}" page={EmployeePayRollEmployeePayRollPage} name="employeePayRoll" />
-        <Route path="/employee-pay-rolls" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
       </Set>
       <Set wrap={ScaffoldLayout} title="CheckingRequestQueues" titleTo="checkingRequestQueues" buttonLabel="New CheckingRequestQueue" buttonTo="newCheckingRequestQueue">
         <Route path="/checking-request-queues/new" page={CheckingRequestQueueNewCheckingRequestQueuePage} name="newCheckingRequestQueue" />

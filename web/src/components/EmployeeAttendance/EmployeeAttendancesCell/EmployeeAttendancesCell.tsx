@@ -3,7 +3,6 @@ import type {
   FindEmployeeAttendancesVariables,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -32,14 +31,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No employeeAttendances yet. '}
-      <Link to={routes.newEmployeeAttendance()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No Employee Attendances yet. '}</div>
 }
 
 export const Failure = ({

@@ -1,7 +1,11 @@
-import EmployeePayRollsCell from 'src/components/EmployeePayRoll/EmployeePayRollsCell'
+import Payrolls from 'src/components/Payrolls/Payrolls'
 
 const EmployeePayRollsPage = () => {
-  return <EmployeePayRollsCell />
+  return (
+    <>
+      <Payrolls />
+    </>
+  )
 }
 
 export default EmployeePayRollsPage
