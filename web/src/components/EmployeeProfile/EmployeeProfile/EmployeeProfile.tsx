@@ -1,6 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
+import { CircleUserRound } from 'lucide-react'
 import type {
   DeleteEmployeeProfileMutation,
   DeleteEmployeeProfileMutationVariables,
@@ -26,6 +27,7 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import {} from 'src/lib/formatters'
+import AttendanceRadialBarChart from 'src/components/AttendanceRadialBarChart/AttendanceRadialBarChart'
 
 const DELETE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
   DeleteEmployeeProfileMutation,
@@ -78,7 +80,9 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
             <div className="flex-shrink-0">
               <Avatar>
                 <AvatarImage alt="DP" src={employeeProfile.profile_image} />
-                <AvatarFallback>DP</AvatarFallback>
+                <AvatarFallback>
+                  <CircleUserRound color={'black'} />
+                </AvatarFallback>
               </Avatar>
             </div>
             <div>
@@ -192,7 +196,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
             <CardContent className="grid h-full gap-6">
               <div className="grid grid-rows-2 gap-6">
                 <BarChart className="aspect-[4/3]" />
-                <PieChart className="aspect-[4/2]" />
+                <AttendanceRadialBarChart className="aspect-[4/2]" />
               </div>
             </CardContent>
           </Card>

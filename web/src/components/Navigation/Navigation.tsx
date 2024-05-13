@@ -4,11 +4,13 @@ import {
   FilePieChart,
   UserRoundSearch,
   Settings,
+  HandCoins,
 } from 'lucide-react'
 
 import { NavLink, routes } from '@redwoodjs/router'
 
 import logo from './palmHR_logo.png'
+
 const Navigation = () => {
   return (
     <section className="content flex min-h-screen w-[180px] flex-col items-center px-5 py-5">
@@ -67,7 +69,7 @@ const Navigation = () => {
           activeClassName="bg-[grey]/10 text-black "
           to={routes.employeePayRolls()}
         >
-          <Settings />
+          <HandCoins />
           Payrolls
         </NavLink>
       </nav>
