@@ -3,6 +3,21 @@ import type {
   DeleteEmployeeAttendanceMutationVariables,
   FindEmployeeAttendances,
 } from 'types/graphql'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from 'web/src/components/ui/avatar'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'web/src/components/ui/table'
 
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -59,75 +74,40 @@ const EmployeeAttendancesList = ({
 
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Attendance id</th>
-            <th>Employee id</th>
-            <th>Checkin time</th>
-            <th>Checkout time</th>
-            <th>Checking date</th>
-            <th>Working time</th>
-            <th>Attendance tag</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+        <TableHeader>
+          <TableRow className={'bg-black'}>
+            <TableHead className="text-white">DP</TableHead>
+            <TableHead className="text-white">Employee Name</TableHead>
+            <TableHead className={'text-white'}>Position</TableHead>
+            <TableHead className={'text-white'}>Checking Date</TableHead>
+            <TableHead className="text-white">Check In</TableHead>
+            <TableHead className="text-white">Check Out</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {employeeAttendances.map((employeeAttendance) => (
-            <tr key={employeeAttendance.attendance_id}>
-              <td>{truncate(employeeAttendance.attendance_id)}</td>
-              <td>{truncate(employeeAttendance.employee_id)}</td>
-              <td>{timeTag(employeeAttendance.checkin_time)}</td>
-              <td>{timeTag(employeeAttendance.checkout_time)}</td>
-              <td>{timeTag(employeeAttendance.checking_date)}</td>
-              <td>{timeTag(employeeAttendance.working_time)}</td>
-              <td>{formatEnum(employeeAttendance.attendance_tag)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.employeeAttendance({
-                      attendance_id: employeeAttendance.attendance_id,
-                    })}
-                    title={
-                      'Show employeeAttendance ' +
-                      employeeAttendance.attendance_id +
-                      ' detail'
-                    }
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editEmployeeAttendance({
-                      attendance_id: employeeAttendance.attendance_id,
-                    })}
-                    title={
-                      'Edit employeeAttendance ' +
-                      employeeAttendance.attendance_id
-                    }
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={
-                      'Delete employeeAttendance ' +
-                      employeeAttendance.attendance_id
-                    }
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() =>
-                      onDeleteClick(employeeAttendance.attendance_id)
-                    }
-                  >
-                    Delete
-                  </button>
-                </nav>
-              </td>
-            </tr>
+            <TableRow key={employeeAttendance.attendance_id}>
+              <TableCell>
+                <Avatar>
+                  <AvatarImage
+                    src={employeeAttendance.employee.profile_image}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </TableCell>
+              <TableCell className="font-medium">
+                {employeeAttendance.employee.first_name}{' '}
+                {employeeAttendance.employee.last_name}
+              </TableCell>
+              <TableCell>{employeeAttendance.employee.position}</TableCell>
+              <TableCell>{employeeAttendance.checking_date}</TableCell>
+              <TableCell>{employeeAttendance.checkin_time}</TableCell>
+              <TableCell>{employeeAttendance.checkout_time}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   )
 }

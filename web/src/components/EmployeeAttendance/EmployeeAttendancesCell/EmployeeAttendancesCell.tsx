@@ -24,6 +24,12 @@ export const QUERY: TypedDocumentNode<
       checking_date
       working_time
       attendance_tag
+      employee {
+        first_name
+        last_name
+        profile_image
+        position
+      }
     }
   }
 `
