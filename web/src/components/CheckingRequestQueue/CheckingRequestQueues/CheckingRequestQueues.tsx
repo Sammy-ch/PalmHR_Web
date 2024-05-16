@@ -1,3 +1,6 @@
+import { format } from 'date-fns'
+import { enUS } from 'date-fns/locale/en-US'
+import { toZonedTime } from 'date-fns-tz'
 import type {
   DeleteCheckingRequestQueueMutation,
   DeleteCheckingRequestQueueMutationVariables,
@@ -75,10 +78,6 @@ const CheckingRequestQueuesList = ({
         <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-medium">Pending Requests</h2>
-            <Button size="sm" variant="secondary">
-              <PlusIcon className="mr-2 h-4 w-4" />
-              New Request
-            </Button>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -119,9 +118,9 @@ const CheckingRequestQueuesList = ({
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     {new Date(checkingRequest.checking_date).toDateString()} -{' '}
-                    {new Date(checkingRequest.checking_time).toLocaleTimeString(
-                      'fr-BI',
-                      { timeZone: 'Africa/Bujumbura' }
+                    {format(
+                      toZonedTime(checkingRequest.checking_time, 'GMT'),
+                      'p'
                     )}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">

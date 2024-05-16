@@ -7,31 +7,31 @@ const data = [
     data: [
       {
         x: 'Monday',
-        y: 242,
+        y: 25,
       },
       {
         x: 'Tuesday',
-        y: 295,
+        y: 18,
       },
       {
         x: 'Wednesday',
-        y: 32,
+        y: 1,
       },
       {
         x: 'Thursday',
-        y: 56,
+        y: 16,
       },
       {
         x: 'Friday',
-        y: 206,
+        y: 11,
       },
       {
         x: 'Saturday',
-        y: 59,
+        y: 9,
       },
       {
         x: 'Sunday',
-        y: 87,
+        y: 0,
       },
     ],
   },
@@ -41,31 +41,31 @@ const data = [
     data: [
       {
         x: 'Monday',
-        y: 163,
+        y: 19,
       },
       {
         x: 'Tuesday',
-        y: 282,
+        y: 2,
       },
       {
         x: 'Wednesday',
-        y: 182,
+        y: 8,
       },
       {
         x: 'Thursday',
-        y: 180,
+        y: 25,
       },
       {
         x: 'Friday',
-        y: 279,
+        y: 5,
       },
       {
         x: 'Saturday',
-        y: 114,
+        y: 10,
       },
       {
         x: 'Sunday',
-        y: 281,
+        y: 17,
       },
     ],
   },

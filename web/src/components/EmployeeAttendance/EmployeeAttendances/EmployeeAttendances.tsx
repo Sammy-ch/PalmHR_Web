@@ -11,9 +11,7 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -24,7 +22,6 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
-import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
 
 const DELETE_EMPLOYEE_ATTENDANCE_MUTATION: TypedDocumentNode<
   DeleteEmployeeAttendanceMutation,
@@ -82,6 +79,7 @@ const EmployeeAttendancesList = ({
             <TableHead className={'text-white'}>Checking Date</TableHead>
             <TableHead className="text-white">Check In</TableHead>
             <TableHead className="text-white">Check Out</TableHead>
+            <TableHead className="text-white">Working Hours</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -100,9 +98,36 @@ const EmployeeAttendancesList = ({
                 {employeeAttendance.employee.last_name}
               </TableCell>
               <TableCell>{employeeAttendance.employee.position}</TableCell>
-              <TableCell>{employeeAttendance.checking_date}</TableCell>
-              <TableCell>{employeeAttendance.checkin_time}</TableCell>
-              <TableCell>{employeeAttendance.checkout_time}</TableCell>
+              <TableCell>
+                {' '}
+                {new Date(
+                  employeeAttendance.checking_date
+                ).toLocaleDateString()}
+              </TableCell>
+              <TableCell>
+                {' '}
+                {employeeAttendance.checkin_time
+                  ? new Date(
+                      employeeAttendance.checkin_time
+                    ).toLocaleTimeString('en-US', { timeZone: 'GMT' })
+                  : '--:--:--'}
+              </TableCell>
+              <TableCell>
+                {' '}
+                {employeeAttendance.checkout_time
+                  ? new Date(
+                      employeeAttendance.checkout_time
+                    ).toLocaleTimeString('en-US', { timeZone: 'GMT' })
+                  : '--:--:--'}{' '}
+              </TableCell>
+              <TableCell className="text-right">
+                {employeeAttendance.checkout_time
+                  ? calculateWorkingHours(
+                      employeeAttendance.checkin_time,
+                      employeeAttendance.checkout_time
+                    )
+                  : '--:--:--'}{' '}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -112,3 +137,14 @@ const EmployeeAttendancesList = ({
 }
 
 export default EmployeeAttendancesList
+
+function calculateWorkingHours(checkinTime: string, checkoutTime: string) {
+  const checkinDate = new Date(checkinTime)
+  const checkoutDate = new Date(checkoutTime)
+
+  const diffInMilliseconds = checkoutDate.getTime() - checkinDate.getTime()
+  const diffInMinutes = diffInMilliseconds / (1000 * 60)
+  const diffInHours = diffInMinutes / 60
+
+  return diffInHours.toFixed(1)
+}

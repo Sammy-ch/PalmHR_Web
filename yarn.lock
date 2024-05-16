@@ -12466,6 +12466,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns-tz@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "date-fns-tz@npm:3.1.3"
+  peerDependencies:
+    date-fns: ^3.0.0
+  checksum: 10c0/dcedf178a96632a798966cf5a881441aefc451cc308336a98919e49c2df8eff7a302d19b9d3903c50838dd0912533f862f0bfb9429e8c28c1c3ce5da19ccb64e
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^2.27.0, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
@@ -26665,6 +26674,7 @@ __metadata:
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^3.6.0"
+    date-fns-tz: "npm:^3.1.3"
     framer-motion: "npm:^11.0.28"
     humanize-string: "npm:2.1.0"
     lucide-react: "npm:^0.364.0"
