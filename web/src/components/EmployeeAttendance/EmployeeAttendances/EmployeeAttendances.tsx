@@ -19,7 +19,6 @@ import {
   TableRow,
 } from 'web/src/components/ui/table'
 
-import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -76,7 +75,7 @@ const EmployeeAttendancesList = ({
     <div className="rw-segment rw-table-wrapper-responsive">
       <Table>
         <TableHeader>
-          <TableRow className={'bg-black'}>
+          <TableRow className={'bg-black hover:bg-black'}>
             <TableHead className="text-white">DP</TableHead>
             <TableHead className="text-white">Employee Name</TableHead>
             <TableHead className={'text-white'}>Position</TableHead>

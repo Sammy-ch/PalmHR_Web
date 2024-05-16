@@ -9,8 +9,6 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from 'web/src/components/ui/drawer'
 import {
@@ -25,6 +23,7 @@ import {
 import { useRouteName } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -46,14 +45,7 @@ const DashboardHeader = () => {
               <SquareUserRound />
             </DrawerTrigger>
             <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle>
-                  {' '}
-                  <h1 className="mb-6 text-3xl font-bold">
-                    Employee Check-In/Check-Out Requests
-                  </h1>
-                </DrawerTitle>
-              </DrawerHeader>
+              <CheckingRequestQueuesCell />
               <DrawerFooter>
                 <DrawerClose>
                   <Button variant="outline">Close</Button>
@@ -74,11 +66,11 @@ const DashboardHeader = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              {/*<Avatar*/}
-              {/*  size={45}*/}
-              {/*  icon={<UserOutlined />}*/}
-              {/*  src={userMetadata.picture}*/}
-              {/*/>*/}
+              <Avatar
+                size={45}
+                icon={<UserOutlined />}
+                src={userMetadata.picture}
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
