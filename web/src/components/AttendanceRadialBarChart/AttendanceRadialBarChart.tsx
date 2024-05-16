@@ -2,21 +2,21 @@ import { ResponsiveRadialBar } from '@nivo/radial-bar'
 
 const data = [
   {
-    id: 'Overtime',
+    id: 'Present',
     data: [
-      {
-        x: 'Vegetables',
-        y: 161,
-      },
+      { x: 'January', y: 20 },
+      { x: 'February', y: 18 },
+      { x: 'March', y: 22 },
+      // Add other months as needed
     ],
   },
   {
-    id: 'Undertime',
+    id: 'Absent',
     data: [
-      {
-        x: 'Vegetables',
-        y: 175,
-      },
+      { x: 'January', y: 2 },
+      { x: 'February', y: 4 },
+      { x: 'March', y: 1 },
+      // Add other months as needed
     ],
   },
 ]
