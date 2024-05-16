@@ -73,7 +73,7 @@ const data = [
 
 const AttendanceLineChart = () => {
   return (
-    <main className="h-[500px]">
+    <main className="m-5 h-[500px]">
       <ResponsiveLine
         data={data}
         animate={true}
@@ -93,8 +93,8 @@ const AttendanceLineChart = () => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'transportation',
-          legendOffset: 36,
+          legend: 'Work Days',
+          legendOffset: 40,
           legendPosition: 'middle',
           truncateTickAt: 0,
         }}

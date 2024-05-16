@@ -4,14 +4,13 @@ import { BadgeCheck } from 'lucide-react'
 import { ListFilter } from 'lucide-react'
 import { Timer } from 'lucide-react'
 import { BookX } from 'lucide-react'
+import AttendanceBarChart from 'web/src/components/AttendanceBarChart/AttendanceBarChart'
 
 import { Metadata } from '@redwoodjs/web'
 
 import AttendanceLineChart from 'src/components/AttendanceLineChart/AttendanceLineChart'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCard from 'src/components/KpiCard/KpiCard'
-
-// import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 
 const DashboardPage = () => {
@@ -45,8 +44,8 @@ const DashboardPage = () => {
         />
       </section>
       <h1>Attendance Overview Chart</h1>
-      <section className={'w-full border  shadow-md'}>
-        <AttendanceLineChart />
+      <section className={'w-full border p-5  shadow-md'}>
+        <AttendanceBarChart />
       </section>
       <section className="flex h-full w-full grid-flow-col gap-5">
         <div className="flex w-full  rounded-md shadow-md">
