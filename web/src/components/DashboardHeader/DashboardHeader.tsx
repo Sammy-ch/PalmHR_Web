@@ -76,9 +76,8 @@ const DashboardHeader = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Admins</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Payroll</DropdownMenuItem>
               <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

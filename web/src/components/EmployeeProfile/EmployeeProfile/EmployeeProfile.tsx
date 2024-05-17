@@ -1,3 +1,4 @@
+import { getMilliseconds } from 'date-fns/getMilliseconds'
 import { CircleUserRound } from 'lucide-react'
 import type {
   DeleteEmployeeProfileMutation,
@@ -70,7 +71,6 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
       deleteEmployeeProfile({ variables: { profile_id } })
     }
   }
-  console.log(employeeProfile.AttendanceReport)
 
   return (
     <>
@@ -104,8 +104,8 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
           </div>
         </header>
         <main className="grid flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-2 md:p-10">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
+          <div className="grid h-[300px] grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="flex  flex-col justify-between">
               <CardHeader>
                 <CardTitle>Total Work Hours</CardTitle>
                 <CardDescription>
@@ -114,14 +114,17 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold">
-                  {employeeProfile.AttendanceReport.TotalWorkhours}
+                  {getMilliseconds(
+                    employeeProfile.AttendanceReport[0].TotalWorkhours
+                  )}{' '}
+                  hrs
                 </div>
-                <p className="text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   +5% from last month
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>On-Time Arrivals</CardTitle>
                 <CardDescription>
@@ -130,12 +133,20 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
-                  {/*<ClockIcon className="h-6 w-6 fill-primary" />*/}
-                  <span className="text-4xl font-bold">87%</span>
+                  <span className="text-4xl font-bold">
+                    {' '}
+                    {getMilliseconds(
+                      employeeProfile.AttendanceReport[0].EarlyAttendaceRate
+                    )}{' '}
+                    %
+                  </span>
                 </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  +5% from last month
+                </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>Overtime Hours</CardTitle>
                 <CardDescription>
@@ -143,37 +154,53 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">142 hrs</div>
+                <div className="text-4xl font-bold">
+                  {' '}
+                  {getMilliseconds(
+                    employeeProfile.AttendanceReport[0].TotalOvertime
+                  )}{' '}
+                  hrs
+                </div>
                 <p className="text-gray-500 dark:text-gray-400">
                   +10% from last week
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>Sick Leave</CardTitle>
                 <CardDescription>Sick leave taken this month</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">28 days</div>
+                <div className="text-4xl font-bold">
+                  {' '}
+                  {getMilliseconds(
+                    employeeProfile.AttendanceReport[0].TotalSickLeaves
+                  )} days
+                </div>
                 <p className="text-gray-500 dark:text-gray-400">
                   -3% from last month
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>Absenteeism Rate</CardTitle>
                 <CardDescription>Absenteeism rate this month</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">65 days</div>
+                <div className="text-4xl font-bold">
+                  {' '}
+                  {getMilliseconds(
+                    employeeProfile.AttendanceReport[0].AbstenteeismRate
+                  )} %
+                </div>
                 <p className="text-gray-500 dark:text-gray-400">
                   +2% from last month
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>Late Arrivals</CardTitle>
                 <CardDescription>
@@ -182,8 +209,13 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
-                  <span className="text-4xl font-bold">13%</span>
+                  <span className="text-4xl font-bold">
+                    {employeeProfile.AttendanceReport[0].LateAttedanceRate} %
+                  </span>
                 </div>
+                <p className="text-gray-500 dark:text-gray-400">
+                  +2% from last month
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -194,8 +226,8 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
             </CardHeader>
             <CardContent className="grid h-full gap-6">
               <div className="grid grid-rows-2 gap-6">
-                <AttendanceBarChart className="aspect-[4/3]" />
-                <AttendanceRadialBarChart className="aspect-[4/2]" />
+                <AttendanceBarChart />
+                <AttendanceRadialBarChart />
               </div>
             </CardContent>
           </Card>

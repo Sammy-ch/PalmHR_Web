@@ -30,6 +30,7 @@ export const QUERY: TypedDocumentNode<
         TotalSickLeaves
         AbstenteeismRate
         EarlyAttendaceRate
+        LateAttedanceRate
       }
     }
   }
