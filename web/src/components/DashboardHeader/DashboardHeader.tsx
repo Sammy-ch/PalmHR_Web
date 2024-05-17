@@ -69,7 +69,7 @@ const DashboardHeader = () => {
               <Avatar
                 size={45}
                 icon={<UserOutlined />}
-                src={userMetadata.picture}
+                src={`${userMetadata && userMetadata.picture}`}
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
