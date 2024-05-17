@@ -4,10 +4,14 @@ export const schema = gql`
     employee: EmployeeProfile!
     pay_period_start: DateTime!
     pay_period_end: DateTime!
-    hours_Worked: DateTime!
+    attendance_report: String!
+    report: EmployeeAttendanceReport!
     base_salary: Int!
-    overtime: DateTime
-    netpay: Int
+    overtime: Int
+    net_salary: Int
+    bonuses: Int
+    gross_amount: Int
+    labor_cost: Int
   }
 
   type Query {
@@ -18,19 +22,25 @@ export const schema = gql`
   input CreateEmployeePayRollInput {
     pay_period_start: DateTime!
     pay_period_end: DateTime!
-    hours_Worked: DateTime!
+    attendance_report: String!
     base_salary: Int!
-    overtime: DateTime
-    netpay: Int
+    overtime: Int
+    net_salary: Int
+    bonuses: Int
+    gross_amount: Int
+    labor_cost: Int
   }
 
   input UpdateEmployeePayRollInput {
     pay_period_start: DateTime
     pay_period_end: DateTime
-    hours_Worked: DateTime
+    attendance_report: String
     base_salary: Int
-    overtime: DateTime
-    netpay: Int
+    overtime: Int
+    net_salary: Int
+    bonuses: Int
+    gross_amount: Int
+    labor_cost: Int
   }
 
   type Mutation {

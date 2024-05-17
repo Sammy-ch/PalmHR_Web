@@ -10,6 +10,7 @@ import {
   FieldError,
   Label,
   DatetimeLocalField,
+  TextField,
   NumberField,
   Submit,
 } from '@redwoodjs/forms'
@@ -86,22 +87,22 @@ const EmployeePayRollForm = (props: EmployeePayRollFormProps) => {
         <FieldError name="pay_period_end" className="rw-field-error" />
 
         <Label
-          name="hours_Worked"
+          name="attendance_report"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Hours worked
+          Attendance report
         </Label>
 
-        <DatetimeLocalField
-          name="hours_Worked"
-          defaultValue={formatDatetime(props.employeePayRoll?.hours_Worked)}
+        <TextField
+          name="attendance_report"
+          defaultValue={props.employeePayRoll?.attendance_report}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="hours_Worked" className="rw-field-error" />
+        <FieldError name="attendance_report" className="rw-field-error" />
 
         <Label
           name="base_salary"
@@ -129,9 +130,9 @@ const EmployeePayRollForm = (props: EmployeePayRollFormProps) => {
           Overtime
         </Label>
 
-        <DatetimeLocalField
+        <NumberField
           name="overtime"
-          defaultValue={formatDatetime(props.employeePayRoll?.overtime)}
+          defaultValue={props.employeePayRoll?.overtime}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
@@ -139,21 +140,72 @@ const EmployeePayRollForm = (props: EmployeePayRollFormProps) => {
         <FieldError name="overtime" className="rw-field-error" />
 
         <Label
-          name="netpay"
+          name="net_salary"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Netpay
+          Net salary
         </Label>
 
         <NumberField
-          name="netpay"
-          defaultValue={props.employeePayRoll?.netpay}
+          name="net_salary"
+          defaultValue={props.employeePayRoll?.net_salary}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
 
-        <FieldError name="netpay" className="rw-field-error" />
+        <FieldError name="net_salary" className="rw-field-error" />
+
+        <Label
+          name="bonuses"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Bonuses
+        </Label>
+
+        <NumberField
+          name="bonuses"
+          defaultValue={props.employeePayRoll?.bonuses}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <FieldError name="bonuses" className="rw-field-error" />
+
+        <Label
+          name="gross_amount"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Gross amount
+        </Label>
+
+        <NumberField
+          name="gross_amount"
+          defaultValue={props.employeePayRoll?.gross_amount}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <FieldError name="gross_amount" className="rw-field-error" />
+
+        <Label
+          name="labor_cost"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Labor cost
+        </Label>
+
+        <NumberField
+          name="labor_cost"
+          defaultValue={props.employeePayRoll?.labor_cost}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <FieldError name="labor_cost" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

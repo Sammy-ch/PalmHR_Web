@@ -1,3 +1,6 @@
+import { format } from 'date-fns/format'
+import { getMilliseconds } from 'date-fns/getMilliseconds'
+
 import { Form, Label } from '@redwoodjs/forms'
 
 import { Button } from '../ui/button'
@@ -27,7 +30,9 @@ import {
   TableBody,
   Table,
 } from '../ui/table'
-const Payrolls = () => {
+
+import type { FindEmployeePayRolls } from '@/types/graphql'
+const Payrolls = ({ employeePayRolls }: FindEmployeePayRolls) => {
   return (
     <div className="flex h-full flex-col">
       <header className="flex items-center justify-between bg-gray-100 px-6 py-4 dark:bg-gray-800">
@@ -48,36 +53,26 @@ const Payrolls = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>John Doe</TableCell>
-                  <TableCell>June 1 - June 15</TableCell>
-                  <TableCell>168</TableCell>
-                  <TableCell>Fbu 1,205,468.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Jane Smith</TableCell>
-                  <TableCell>June 1 - June 15</TableCell>
-                  <TableCell>120</TableCell>
-                  <TableCell>Fbu 354,463.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Bob Johnson</TableCell>
-                  <TableCell>June 1 - June 15</TableCell>
-                  <TableCell>117</TableCell>
-                  <TableCell>Fbu 765,136.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Sarah Lee</TableCell>
-                  <TableCell>June 1 - June 15</TableCell>
-                  <TableCell>162</TableCell>
-                  <TableCell>Fbu 468,648.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Michael Brown</TableCell>
-                  <TableCell>June 1 - June 15</TableCell>
-                  <TableCell>90</TableCell>
-                  <TableCell>Fbu 654,845.00</TableCell>
-                </TableRow>
+                {employeePayRolls.map((employeePayRoll) => (
+                  <TableRow key={employeePayRoll.id}>
+                    <TableCell>
+                      {employeePayRoll.employee.first_name +
+                        ' ' +
+                        employeePayRoll.employee.last_name}
+                    </TableCell>
+                    <TableCell>
+                      {format(employeePayRoll.pay_period_start, 'MMMM do')} -{' '}
+                      {format(employeePayRoll.pay_period_end, 'MMMM do')}
+                    </TableCell>
+                    <TableCell>
+                      {getMilliseconds(employeePayRoll.report.TotalWorkhours)}
+                    </TableCell>
+                    <TableCell>
+                      Fbu{' '}
+                      {employeePayRoll.net_salary && employeePayRoll.net_salary}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>

@@ -71,8 +71,8 @@ const EmployeePayRoll = ({ employeePayRoll }: Props) => {
               <td>{timeTag(employeePayRoll.pay_period_end)}</td>
             </tr>
             <tr>
-              <th>Hours worked</th>
-              <td>{timeTag(employeePayRoll.hours_Worked)}</td>
+              <th>Attendance report</th>
+              <td>{employeePayRoll.attendance_report}</td>
             </tr>
             <tr>
               <th>Base salary</th>
@@ -80,11 +80,23 @@ const EmployeePayRoll = ({ employeePayRoll }: Props) => {
             </tr>
             <tr>
               <th>Overtime</th>
-              <td>{timeTag(employeePayRoll.overtime)}</td>
+              <td>{employeePayRoll.overtime}</td>
             </tr>
             <tr>
-              <th>Netpay</th>
-              <td>{employeePayRoll.netpay}</td>
+              <th>Net salary</th>
+              <td>{employeePayRoll.net_salary}</td>
+            </tr>
+            <tr>
+              <th>Bonuses</th>
+              <td>{employeePayRoll.bonuses}</td>
+            </tr>
+            <tr>
+              <th>Gross amount</th>
+              <td>{employeePayRoll.gross_amount}</td>
+            </tr>
+            <tr>
+              <th>Labor cost</th>
+              <td>{employeePayRoll.labor_cost}</td>
             </tr>
           </tbody>
         </table>

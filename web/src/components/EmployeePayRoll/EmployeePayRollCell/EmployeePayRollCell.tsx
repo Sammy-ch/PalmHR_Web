@@ -20,10 +20,13 @@ export const QUERY: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      hours_Worked
+      attendance_report
       base_salary
       overtime
-      netpay
+      net_salary
+      bonuses
+      gross_amount
+      labor_cost
     }
   }
 `

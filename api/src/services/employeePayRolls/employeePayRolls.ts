@@ -42,4 +42,7 @@ export const EmployeePayRoll: EmployeePayRollRelationResolvers = {
   employee: (_obj, { root }) => {
     return db.employeePayRoll.findUnique({ where: { id: root?.id } }).employee()
   },
+  report: (_obj, { root }) => {
+    return db.employeePayRoll.findUnique({ where: { id: root?.id } }).report()
+  },
 }

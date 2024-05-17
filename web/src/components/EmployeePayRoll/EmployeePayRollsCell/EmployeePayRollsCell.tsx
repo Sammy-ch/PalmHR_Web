@@ -10,7 +10,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeePayRolls from 'src/components/EmployeePayRoll/EmployeePayRolls'
+
+import Payrolls from '../../Payrolls/Payrolls'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeePayRolls,
@@ -21,10 +22,22 @@ export const QUERY: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      hours_Worked
+      attendance_report
       base_salary
       overtime
-      netpay
+      net_salary
+      bonuses
+      gross_amount
+      labor_cost
+      employee {
+        profile_id
+        first_name
+        last_name
+      }
+      report {
+        id
+        TotalWorkhours
+      }
     }
   }
 `
@@ -49,5 +62,5 @@ export const Failure = ({ error }: CellFailureProps<FindEmployeePayRolls>) => (
 export const Success = ({
   employeePayRolls,
 }: CellSuccessProps<FindEmployeePayRolls, FindEmployeePayRollsVariables>) => {
-  return <EmployeePayRolls employeePayRolls={employeePayRolls} />
+  return <Payrolls employeePayRolls={employeePayRolls} />
 }
