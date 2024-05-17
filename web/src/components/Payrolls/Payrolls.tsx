@@ -10,7 +10,15 @@ import {
   Card,
 } from '../ui/card'
 import { Input } from '../ui/input'
-import { Select } from '../ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  SelectLabel,
+  SelectGroup,
+  SelectItem,
+} from '../ui/select'
 import {
   TableHead,
   TableRow,
@@ -90,9 +98,20 @@ const Payrolls = () => {
                     <Label name="pay-period" htmlFor="pay-period">
                       Pay Period
                     </Label>
-                    <Select defaultValue="biweekly">
-                      <option value="weekly">Weekly</option>
-                      <option value="monthly">Monthly</option>
+                    <Select>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue
+                          className="text-black"
+                          placeholder="Select a period"
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Pay Period</SelectLabel>
+                          <SelectItem value="weekly">Weekly</SelectItem>
+                          <SelectItem value="monthly">Monthly</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
