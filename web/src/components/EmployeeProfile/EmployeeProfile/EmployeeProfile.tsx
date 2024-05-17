@@ -70,6 +70,7 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
       deleteEmployeeProfile({ variables: { profile_id } })
     }
   }
+  console.log(employeeProfile.AttendanceReport)
 
   return (
     <>
@@ -108,11 +109,13 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
               <CardHeader>
                 <CardTitle>Total Work Hours</CardTitle>
                 <CardDescription>
-                  Total Work Hours for the month
+                  Total Work Hours for this month
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">92%</div>
+                <div className="text-4xl font-bold">
+                  {employeeProfile.AttendanceReport.TotalWorkhours}
+                </div>
                 <p className="text-gray-500 dark:text-gray-400">
                   +5% from last month
                 </p>

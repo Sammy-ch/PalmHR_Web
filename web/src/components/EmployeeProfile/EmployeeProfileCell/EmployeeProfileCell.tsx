@@ -24,6 +24,13 @@ export const QUERY: TypedDocumentNode<
       position
       email
       allowed_leaves
+      AttendanceReport {
+        TotalWorkhours
+        TotalOvertime
+        TotalSickLeaves
+        AbstenteeismRate
+        EarlyAttendaceRate
+      }
     }
   }
 `

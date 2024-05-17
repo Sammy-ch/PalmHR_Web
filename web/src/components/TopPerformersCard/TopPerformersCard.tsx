@@ -19,7 +19,7 @@ export default function TopPerformersCard() {
               olivia.martin@email.com
             </p>
           </div>
-          <div className="ml-auto font-medium">+$1,999.00</div>
+          <div className="ml-auto font-medium">+19%.00</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -32,7 +32,7 @@ export default function TopPerformersCard() {
               jackson.lee@email.com
             </p>
           </div>
-          <div className="ml-auto font-medium">+$39.00</div>
+          <div className="ml-auto font-medium">+3%.00</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -45,7 +45,7 @@ export default function TopPerformersCard() {
               isabella.nguyen@email.com
             </p>
           </div>
-          <div className="ml-auto font-medium">+$299.00</div>
+          <div className="ml-auto font-medium">+29%.00</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -56,7 +56,7 @@ export default function TopPerformersCard() {
             <p className="text-sm font-medium leading-none">William Kim</p>
             <p className="text-sm text-muted-foreground">will@email.com</p>
           </div>
-          <div className="ml-auto font-medium">+$99.00</div>
+          <div className="ml-auto font-medium">+9%.00</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -69,7 +69,7 @@ export default function TopPerformersCard() {
               sofia.davis@email.com
             </p>
           </div>
-          <div className="ml-auto font-medium">+$39.00</div>
+          <div className="ml-auto font-medium">+3%.00</div>
         </div>
       </CardContent>
     </Card>
