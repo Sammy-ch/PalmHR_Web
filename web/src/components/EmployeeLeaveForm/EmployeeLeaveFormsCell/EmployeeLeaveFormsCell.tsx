@@ -3,7 +3,6 @@ import type {
   FindEmployeeLeaveFormsVariables,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -24,6 +23,26 @@ export const QUERY: TypedDocumentNode<
       leave_type
       leave_days
       leave_approval
+      leave {
+        first_name
+        last_name
+        profile_image
+        position
+      }
+    }
+    approvedEmployeeLeaveForms {
+      id
+      requested_leave_date
+      leave_id
+      leave_type
+      leave_days
+      leave_approval
+      leave {
+        first_name
+        last_name
+        profile_image
+        position
+      }
     }
   }
 `
@@ -31,14 +50,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No employeeLeaveForms yet. '}
-      <Link to={routes.newEmployeeLeaveForm()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No Leave Requests yet.'}</div>
 }
 
 export const Failure = ({
@@ -49,9 +61,15 @@ export const Failure = ({
 
 export const Success = ({
   employeeLeaveForms,
+  approvedEmployeeLeaveForms,
 }: CellSuccessProps<
   FindEmployeeLeaveForms,
   FindEmployeeLeaveFormsVariables
 >) => {
-  return <EmployeeLeaveForms employeeLeaveForms={employeeLeaveForms} />
+  return (
+    <EmployeeLeaveForms
+      employeeLeaveForms={employeeLeaveForms}
+      approvedEmployeeLeaveForms={approvedEmployeeLeaveForms}
+    />
+  )
 }

@@ -4,8 +4,7 @@ interface EmployeeLeaveProps {
   fullName: string
   profileDp: string
   position: string
-  leaveDuration: string
-  leaveCount: number
+  leaveDuration: string | number
   LeaveType: string
   icon: React.ElementType
 }
@@ -14,7 +13,6 @@ const EmployeeLeaveCard = ({
   profileDp,
   fullName,
   position,
-  leaveCount,
   leaveDuration,
   LeaveType,
   icon: Icon,
@@ -49,9 +47,6 @@ const EmployeeLeaveCard = ({
             <Icon className="h-5 w-5 text-green-500" />
             <p className="text-green-500">{LeaveType}</p>
           </div>
-          <p className="text-gray-500 dark:text-gray-400">
-            {leaveCount} Leaves
-          </p>
         </div>
       </div>
     </div>

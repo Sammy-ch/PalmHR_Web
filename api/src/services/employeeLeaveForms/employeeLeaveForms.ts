@@ -45,3 +45,12 @@ export const EmployeeLeaveForm: EmployeeLeaveFormRelationResolvers = {
     return db.employeeLeaveForm.findUnique({ where: { id: root?.id } }).leave()
   },
 }
+
+export const approvedEmployeeLeaveForms: QueryResolvers['approvedEmployeeLeaveForms'] =
+  () => {
+    return db.employeeLeaveForm.findMany({
+      where: {
+        leave_approval: true,
+      },
+    })
+  }
