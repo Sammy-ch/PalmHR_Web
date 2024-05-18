@@ -10,8 +10,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-
 import Payrolls from '../../Payrolls/Payrolls'
+import { Skeleton } from '../../ui/skeleton'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeePayRolls,
@@ -42,7 +42,30 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  return (
+    <div className="h-full">
+      <Skeleton className=" h-24  bg-slate-400" />
+      <div className="flex flex-col gap-5 py-10">
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+      </div>
+
+      <div className="flex flex-col gap-5 rounded-md border p-10 py-10">
+        <Skeleton className="h-10 w-36" />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+      </div>
+    </div>
+  )
+}
 
 export const Empty = () => {
   return (

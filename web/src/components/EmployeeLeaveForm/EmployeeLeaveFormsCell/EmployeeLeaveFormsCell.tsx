@@ -11,6 +11,8 @@ import type {
 
 import EmployeeLeaveForms from 'src/components/EmployeeLeaveForm/EmployeeLeaveForms'
 
+import { Skeleton } from '../../ui/skeleton'
+
 export const QUERY: TypedDocumentNode<
   FindEmployeeLeaveForms,
   FindEmployeeLeaveFormsVariables
@@ -47,7 +49,27 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  return (
+    <div>
+      <div className="my-10 flex gap-10">
+        <Skeleton className="h-36 w-80" />
+        <Skeleton className="h-36 w-80" />
+      </div>
+      <Skeleton className="h-14 w-44" />
+
+      <div className="my-10 flex flex-col gap-5 rounded-md p-10">
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+      </div>
+    </div>
+  )
+}
 
 export const Empty = () => {
   return <div className="rw-text-center">{'No Leave Requests yet.'}</div>
