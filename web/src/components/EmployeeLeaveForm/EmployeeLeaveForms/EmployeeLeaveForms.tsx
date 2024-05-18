@@ -1,8 +1,8 @@
 import { LeafyGreen } from 'lucide-react'
 import type {
-  DeleteEmployeeLeaveFormMutation,
-  DeleteEmployeeLeaveFormMutationVariables,
   FindEmployeeLeaveForms,
+  UpdateEmployeeLeaveFormMutation,
+  UpdateEmployeeLeaveFormMutationVariables,
 } from 'types/graphql'
 import {
   Avatar,
@@ -27,13 +27,17 @@ import { QUERY } from 'src/components/EmployeeLeaveForm/EmployeeLeaveFormsCell'
 
 import EmployeeLeaveCard from '../../EmployeeLeaveCard/EmployeeLeaveCard'
 
-const DELETE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
-  DeleteEmployeeLeaveFormMutation,
-  DeleteEmployeeLeaveFormMutationVariables
+const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
+  UpdateEmployeeLeaveFormMutation,
+  UpdateEmployeeLeaveFormMutationVariables
 > = gql`
-  mutation DeleteEmployeeLeaveFormMutation($id: String!) {
-    deleteEmployeeLeaveForm(id: $id) {
+  mutation UpdateEmployeeLeaveFormMutation(
+    $id: String!
+    $input: UpdateEmployeeLeaveFormInput!
+  ) {
+    updateEmployeeLeaveForm(id: $id, input: $input) {
       id
+      leave_approval
     }
   }
 `
@@ -42,32 +46,49 @@ const EmployeeLeaveFormsList = ({
   employeeLeaveForms,
   approvedEmployeeLeaveForms,
 }: FindEmployeeLeaveForms) => {
-  const [deleteEmployeeLeaveForm] = useMutation(
-    DELETE_EMPLOYEE_LEAVE_FORM_MUTATION,
+  const [updateEmployeeLeaveForm] = useMutation(
+    UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION,
     {
       onCompleted: () => {
-        toast.success('EmployeeLeaveForm deleted')
+        toast.success('Leave Request has been approved')
       },
       onError: (error) => {
         toast.error(error.message)
       },
-      // This refetches the query on the list page. Read more about other ways to
-      // update the cache over here:
-      // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
       refetchQueries: [{ query: QUERY }],
       awaitRefetchQueries: true,
     }
   )
 
-  const onDeleteClick = (
-    id: DeleteEmployeeLeaveFormMutationVariables['id']
+  const onApproveClick = (
+    id: UpdateEmployeeLeaveFormMutationVariables['id']
   ) => {
-    if (
-      confirm('Are you sure you want to delete employeeLeaveForm ' + id + '?')
-    ) {
-      deleteEmployeeLeaveForm({ variables: { id } })
+    if (confirm('Do you want to approve this leave request?')) {
+      updateEmployeeLeaveForm({
+        variables: {
+          id,
+          input: { leave_approval: true },
+        },
+      })
     }
   }
+
+  const onDeclineClick = (
+    id: UpdateEmployeeLeaveFormMutationVariables['id']
+  ) => {
+    if (confirm('Do you want to approve this leave request?')) {
+      updateEmployeeLeaveForm({
+        variables: {
+          id,
+          input: { leave_approval: false },
+        },
+      })
+    }
+  }
+
+  const filteredEmployeeLeaveForms = employeeLeaveForms.filter(
+    (leave) => leave.leave_approval !== true
+  )
 
   return (
     <>
@@ -102,7 +123,7 @@ const EmployeeLeaveFormsList = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {employeeLeaveForms.map((employeeLeaveData) => (
+                {filteredEmployeeLeaveForms.map((employeeLeaveData) => (
                   <TableRow key={employeeLeaveData.id}>
                     <TableCell>
                       <div className="flex items-center space-x-4">
@@ -139,18 +160,28 @@ const EmployeeLeaveFormsList = ({
                       <h4 className="text-2xl font-semibold">3</h4>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center space-x-2">
-                        <Button size="sm" variant="outline">
-                          Approve
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => onDeleteClick(employeeLeaveData.id)}
-                        >
-                          Decline
-                        </Button>
-                      </div>
+                      {employeeLeaveData.leave_approval === null ? (
+                        <div className="flex items-center space-x-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => onApproveClick(employeeLeaveData.id)}
+                          >
+                            Approve
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => onDeclineClick(employeeLeaveData.id)}
+                          >
+                            Decline
+                          </Button>
+                        </div>
+                      ) : employeeLeaveData.leave_approval === true ? (
+                        'Approved'
+                      ) : (
+                        'Declined'
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
