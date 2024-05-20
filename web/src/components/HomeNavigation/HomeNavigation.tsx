@@ -1,13 +1,37 @@
-import { NavLink, routes, Link } from '@redwoodjs/router'
+import { NavLink, routes, Link, navigate } from '@redwoodjs/router'
+import { useQuery } from '@redwoodjs/web'
+import { TypedDocumentNode } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 
 import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
+
+import type { FindUserById, FindUserByIdVariables } from '@/types/graphql'
+
+const GET_USER_ID: TypedDocumentNode<FindUserById, FindUserByIdVariables> = gql`
+  query GetUser($id: String!) {
+    user(id: $id) {
+      id
+    }
+  }
+`
+
 const HomeNavigation = () => {
   const { isAuthenticated, signUp, logOut, userMetadata } = useAuth()
-  console.log(userMetadata?.id)
+  const userId = userMetadata?.id
+
+  const { data, error } = useQuery(GET_USER_ID, {
+    variables: { id: userId },
+  })
+  if (isAuthenticated) {
+    if (data?.user?.id) {
+      console.log(data.user.id)
+    } else {
+      navigate(routes.newUser())
+    }
+  }
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
