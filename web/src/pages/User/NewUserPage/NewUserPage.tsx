@@ -1,6 +1,7 @@
-import CreateUserProfile from 'src/components/CreateUserProfile/CreateUserProfile'
+import NewUser from 'src/components/User/NewUser'
+
 const NewUserPage = () => {
-  return <CreateUserProfile />
+  return <NewUser />
 }
 
 export default NewUserPage

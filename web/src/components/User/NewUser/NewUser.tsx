@@ -9,6 +9,7 @@ import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import UserForm from 'src/components/User/UserForm'
 
 const CREATE_USER_MUTATION: TypedDocumentNode<
@@ -23,6 +24,7 @@ const CREATE_USER_MUTATION: TypedDocumentNode<
 `
 
 const NewUser = () => {
+  const { currentUser } = useAuth()
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User created')
@@ -34,7 +36,8 @@ const NewUser = () => {
   })
 
   const onSave = (input: CreateUserInput) => {
-    createUser({ variables: { input } })
+    const updatedInput = { ...input, id: currentUser?.sub as string }
+    createUser({ variables: { input: updatedInput } })
   }
 
   return (

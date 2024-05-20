@@ -28,20 +28,20 @@ import { QUERY } from 'src/components/EmployeeLeaveForm/EmployeeLeaveFormsCell'
 
 import EmployeeLeaveCard from '../../EmployeeLeaveCard/EmployeeLeaveCard'
 
-const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
-  FindEmployeeLeaveFormById,
-  UpdateEmployeeLeaveFormMutationVariables
-> = gql`
-  mutation UpdateEmployeeLeaveFormMutation(
-    $id: String!
-    $input: UpdateEmployeeLeaveFormInput!
-  ) {
-    updateEmployeeLeaveForm(id: $id, input: $input) {
-      id
-      leave_approval
-    }
-  }
-`
+// const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
+//   FindEmployeeLeaveFormById,
+//   UpdateEmployeeLeaveFormMutationVariables
+// > = gql`
+//   mutation UpdateEmployeeLeaveFormMutation(
+//     $id: String!
+//     $input: UpdateEmployeeLeaveFormInput!
+//   ) {
+//     updateEmployeeLeaveForm(id: $id, input: $input) {
+//       id
+//       leave_approval
+//     }
+//   }
+// `
 
 const EmployeeLeaveFormsList = ({
   employeeLeaveForms,

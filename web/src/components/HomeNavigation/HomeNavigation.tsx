@@ -1,4 +1,4 @@
-import { NavLink, routes, Link, navigate } from '@redwoodjs/router'
+import { NavLink, routes, Link } from '@redwoodjs/router'
 import { useQuery } from '@redwoodjs/web'
 import { TypedDocumentNode } from '@redwoodjs/web'
 
@@ -21,17 +21,17 @@ const GET_USER_ID: TypedDocumentNode<FindUserById, FindUserByIdVariables> = gql`
 const HomeNavigation = () => {
   const { isAuthenticated, signUp, logOut, userMetadata } = useAuth()
   const userId = userMetadata?.id
-
-  const { data, error } = useQuery(GET_USER_ID, {
+  const { data } = useQuery(GET_USER_ID, {
     variables: { id: userId },
   })
-  if (isAuthenticated) {
-    if (data?.user?.id) {
-      console.log(data.user.id)
-    } else {
-      navigate(routes.newUser())
-    }
-  }
+
+  const HasProfileId = data?.user?.id
+
+  // if (data?.user?.id) {
+  //   console.log(data.user.id)
+  // } else {
+  //   // navigate(routes.newUser())
+  // }
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
@@ -70,7 +70,11 @@ const HomeNavigation = () => {
         {isAuthenticated ? (
           <>
             <Button className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   ">
-              <Link to={routes.dashboard()}>Dashboard</Link>
+              {HasProfileId ? (
+                <Link to={routes.organizations()}>Organizations</Link>
+              ) : (
+                <Link to={routes.dashboard()}>Create Profile</Link>
+              )}
             </Button>
             <Button
               onClick={logOut}

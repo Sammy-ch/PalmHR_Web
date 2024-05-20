@@ -15,7 +15,7 @@ const CreateUserProfile = () => {
     console.log(data)
   }
   return (
-    <div className="animated-background flex h-screen min-h-screen w-screen items-center justify-center bg-gradient-to-r from-green-300  to-green-200">
+    <div className="animated-background flex h-screen min-h-screen w-screen items-center justify-center bg-gradient-to-r from-green-300 via-green-200 to-green-400">
       <Form onSubmit={onSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
