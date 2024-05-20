@@ -1,7 +1,8 @@
 import { LeafyGreen } from 'lucide-react'
 import type {
+  EditEmployeeLeaveFormById,
+  FindEmployeeLeaveFormById,
   FindEmployeeLeaveForms,
-  UpdateEmployeeLeaveFormMutation,
   UpdateEmployeeLeaveFormMutationVariables,
 } from 'types/graphql'
 import {
@@ -28,7 +29,7 @@ import { QUERY } from 'src/components/EmployeeLeaveForm/EmployeeLeaveFormsCell'
 import EmployeeLeaveCard from '../../EmployeeLeaveCard/EmployeeLeaveCard'
 
 const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
-  UpdateEmployeeLeaveFormMutation,
+  FindEmployeeLeaveFormById,
   UpdateEmployeeLeaveFormMutationVariables
 > = gql`
   mutation UpdateEmployeeLeaveFormMutation(
@@ -61,7 +62,7 @@ const EmployeeLeaveFormsList = ({
   )
 
   const onApproveClick = (
-    id: UpdateEmployeeLeaveFormMutationVariables['id']
+    id: EditEmployeeLeaveFormById['employeeLeaveForm']['id']
   ) => {
     if (confirm('Do you want to approve this leave request?')) {
       updateEmployeeLeaveForm({

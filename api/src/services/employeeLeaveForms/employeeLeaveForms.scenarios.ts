@@ -5,9 +5,9 @@ export const standard = defineScenario<Prisma.EmployeeLeaveFormCreateArgs>({
   employeeLeaveForm: {
     one: {
       data: {
-        requested_leave_date: '2024-05-11T12:43:17.681Z',
+        requested_leave_date: '2024-05-20T13:31:50.933Z',
         leave_type: 'PERSONAL',
-        leave_days: 9967221,
+        leave_days: 3964571,
         leave: {
           create: {
             profile_id: 'String',
@@ -20,9 +20,9 @@ export const standard = defineScenario<Prisma.EmployeeLeaveFormCreateArgs>({
     },
     two: {
       data: {
-        requested_leave_date: '2024-05-11T12:43:17.681Z',
+        requested_leave_date: '2024-05-20T13:31:50.933Z',
         leave_type: 'PERSONAL',
-        leave_days: 6248414,
+        leave_days: 7744169,
         leave: {
           create: {
             profile_id: 'String',

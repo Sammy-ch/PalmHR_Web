@@ -41,17 +41,17 @@ describe('employeeLeaveForms', () => {
   scenario('creates a employeeLeaveForm', async () => {
     const result = await createEmployeeLeaveForm({
       input: {
-        requested_leave_date: '2024-05-11T12:43:17.671Z',
+        requested_leave_date: '2024-05-20T13:31:50.920Z',
         leave_type: 'PERSONAL',
-        leave_days: 6599718,
+        leave_days: 2559548,
       },
     })
 
     expect(result.requested_leave_date).toEqual(
-      new Date('2024-05-11T12:43:17.671Z')
+      new Date('2024-05-20T13:31:50.920Z')
     )
     expect(result.leave_type).toEqual('PERSONAL')
-    expect(result.leave_days).toEqual(6599718)
+    expect(result.leave_days).toEqual(2559548)
   })
 
   scenario(
@@ -62,11 +62,11 @@ describe('employeeLeaveForms', () => {
       })) as EmployeeLeaveForm
       const result = await updateEmployeeLeaveForm({
         id: original.id,
-        input: { requested_leave_date: '2024-05-12T12:43:17.671Z' },
+        input: { requested_leave_date: '2024-05-21T13:31:50.920Z' },
       })
 
       expect(result.requested_leave_date).toEqual(
-        new Date('2024-05-12T12:43:17.671Z')
+        new Date('2024-05-21T13:31:50.920Z')
       )
     }
   )
