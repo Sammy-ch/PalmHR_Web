@@ -19,6 +19,18 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="PayRollSettings" titleTo="payRollSettings" buttonLabel="New PayRollSetting" buttonTo="newPayRollSetting">
+        <Route path="/pay-roll-settings/new" page={PayRollSettingNewPayRollSettingPage} name="newPayRollSetting" />
+        <Route path="/pay-roll-settings/{id}/edit" page={PayRollSettingEditPayRollSettingPage} name="editPayRollSetting" />
+        <Route path="/pay-roll-settings/{id}" page={PayRollSettingPayRollSettingPage} name="payRollSetting" />
+        <Route path="/pay-roll-settings" page={PayRollSettingPayRollSettingsPage} name="payRollSettings" />
+      </Set>
+      <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
+        <Route path="/users/new" page={UserNewUserPage} name="newUser" />
+        <Route path="/users/{id}/edit" page={UserEditUserPage} name="editUser" />
+        <Route path="/users/{id}" page={UserUserPage} name="user" />
+        <Route path="/users" page={UserUsersPage} name="users" />
+      </Set>
       <Set wrap={ScaffoldLayout} title="EmployeeAttendances" titleTo="employeeAttendances" buttonLabel="New EmployeeAttendance" buttonTo="newEmployeeAttendance">
         <Route path="/employee-attendances/new" page={EmployeeAttendanceNewEmployeeAttendancePage} name="newEmployeeAttendance" />
         <Route path="/employee-attendances/{attendance_id}/edit" page={EmployeeAttendanceEditEmployeeAttendancePage} name="editEmployeeAttendance" />
