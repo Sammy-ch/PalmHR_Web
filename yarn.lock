@@ -5598,7 +5598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:^1.0.4":
+"@radix-ui/react-dialog@npm:^1.0.4, @radix-ui/react-dialog@npm:^1.0.5":
   version: 1.0.5
   resolution: "@radix-ui/react-dialog@npm:1.0.5"
   dependencies:
@@ -26647,6 +26647,7 @@ __metadata:
     "@nivo/radial-bar": "npm:^0.87.0"
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
+    "@radix-ui/react-dialog": "npm:^1.0.5"
     "@radix-ui/react-dropdown-menu": "npm:^2.0.6"
     "@radix-ui/react-label": "npm:^2.0.2"
     "@radix-ui/react-popover": "npm:^1.0.7"
