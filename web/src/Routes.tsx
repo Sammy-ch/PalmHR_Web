@@ -15,6 +15,7 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import { useAuth } from './auth'
 import DashoardLayout from './layouts/DashoardLayout/DashoardLayout'
 import HomeLayout from './layouts/HomeLayout/HomeLayout'
+import UserDashboardLayout from './layouts/UserDashboardLayout/UserDashboardLayout'
 
 const Routes = () => {
   return (
@@ -49,7 +50,7 @@ const Routes = () => {
         <Route path="/admins/{id}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <Set wrap={null} title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
+      <Set wrap={UserDashboardLayout} title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
         <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
         <Route path="/organizations/{OrganizationId}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
         <Route path="/organizations/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />

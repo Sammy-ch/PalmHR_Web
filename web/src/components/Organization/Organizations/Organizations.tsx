@@ -65,127 +65,64 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
   }
 
   return (
-    // <div className="rw-segment rw-table-wrapper-responsive">
-    //   <table className="rw-table">
-    //     <thead>
-    //       <tr>
-    //         <th>Organization id</th>
-    //         <th>Organization name</th>
-    //         <th>Address</th>
-    //         <th>Email</th>
-    //         <th>Phone</th>
-    //         <th>&nbsp;</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {organizations.map((organization) => (
-    //         <tr key={organization.OrganizationId}>
-    //           <td>{truncate(organization.OrganizationId)}</td>
-    //           <td>{truncate(organization.OrganizationName)}</td>
-    //           <td>{truncate(organization.Address)}</td>
-    //           <td>{truncate(organization.Email)}</td>
-    //           <td>{truncate(organization.Phone)}</td>
-    //           <td>
-    //             <nav className="rw-table-actions">
-    //               <Link
-    //                 to={routes.organization({
-    //                   OrganizationId: organization.OrganizationId,
-    //                 })}
-    //                 title={
-    //                   'Show organization ' +
-    //                   organization.OrganizationId +
-    //                   ' detail'
-    //                 }
-    //                 className="rw-button rw-button-small"
-    //               >
-    //                 Show
-    //               </Link>
-    //               <Link
-    //                 to={routes.editOrganization({
-    //                   OrganizationId: organization.OrganizationId,
-    //                 })}
-    //                 title={'Edit organization ' + organization.OrganizationId}
-    //                 className="rw-button rw-button-small rw-button-blue"
-    //               >
-    //                 Edit
-    //               </Link>
-    //               <button
-    //                 type="button"
-    //                 title={'Delete organization ' + organization.OrganizationId}
-    //                 className="rw-button rw-button-small rw-button-red"
-    //                 onClick={() => onDeleteClick(organization.OrganizationId)}
-    //               >
-    //                 Delete
-    //               </button>
-    //             </nav>
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
-    <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <nav className="flex-col items-center gap-6 text-lg font-medium md:flex md:flex-row md:gap-5 md:text-sm lg:gap-6">
-          <Link
-            to={routes.home()}
-            className="flex items-center gap-2 text-lg font-semibold md:text-base"
-            href="#"
-          >
-            <Package2Icon className="h-6 w-6" />
-            <span className="sr-only">PALM HR</span>
-          </Link>
-          <Link
-            to={routes.organizations()}
-            className="text-foreground transition-colors hover:text-foreground"
-            href="#"
-          >
-            Organizations
-          </Link>
-        </nav>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-full" size="icon" variant="secondary">
-                <CircleUserIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          <Card x-chunk="">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-bold">MIREGO AFRICA</CardTitle>
-              <ActivityIcon className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent className="flex flex-col gap-2">
-              <div className="flex gap-2 text-xs font-bold text-muted-foreground">
-                <ActivityIcon className="h-4 w-4 text-muted-foreground" />
-                <span>No. Employees</span>
-              </div>
-              <div className="flex gap-2 text-xs font-bold text-muted-foreground">
-                <ActivityIcon className="h-4 w-4 text-muted-foreground" />
-                <span>Address</span>
-              </div>
-              <div className="flex gap-2 text-xs font-bold text-muted-foreground">
-                <ActivityIcon className="h-4 w-4 text-muted-foreground" />
-                <span>Email</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
+    <div className="rw-segment rw-table-wrapper-responsive">
+      <table className="rw-table">
+        <thead>
+          <tr>
+            <th>Organization id</th>
+            <th>Organization name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          {organizations.map((organization) => (
+            <tr key={organization.OrganizationId}>
+              <td>{truncate(organization.OrganizationId)}</td>
+              <td>{truncate(organization.OrganizationName)}</td>
+              <td>{truncate(organization.Address)}</td>
+              <td>{truncate(organization.Email)}</td>
+              <td>{truncate(organization.Phone)}</td>
+              <td>
+                <nav className="rw-table-actions">
+                  <Link
+                    to={routes.organization({
+                      OrganizationId: organization.OrganizationId,
+                    })}
+                    title={
+                      'Show organization ' +
+                      organization.OrganizationId +
+                      ' detail'
+                    }
+                    className="rw-button rw-button-small"
+                  >
+                    Show
+                  </Link>
+                  <Link
+                    to={routes.editOrganization({
+                      OrganizationId: organization.OrganizationId,
+                    })}
+                    title={'Edit organization ' + organization.OrganizationId}
+                    className="rw-button rw-button-small rw-button-blue"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    type="button"
+                    title={'Delete organization ' + organization.OrganizationId}
+                    className="rw-button rw-button-small rw-button-red"
+                    onClick={() => onDeleteClick(organization.OrganizationId)}
+                  >
+                    Delete
+                  </button>
+                </nav>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
