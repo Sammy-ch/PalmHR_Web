@@ -19,7 +19,6 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Route path="/test" page={TestPage} name="test" />
       <Set wrap={ScaffoldLayout} title="PayRollSettings" titleTo="payRollSettings" buttonLabel="New PayRollSetting" buttonTo="newPayRollSetting">
         <Route path="/pay-roll-settings/new" page={PayRollSettingNewPayRollSettingPage} name="newPayRollSetting" />
         <Route path="/pay-roll-settings/{id}/edit" page={PayRollSettingEditPayRollSettingPage} name="editPayRollSetting" />
@@ -50,7 +49,7 @@ const Routes = () => {
         <Route path="/admins/{id}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <Set wrap={DashoardLayout} title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
+      <Set wrap={null} title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
         <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
         <Route path="/organizations/{OrganizationId}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
         <Route path="/organizations/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />
