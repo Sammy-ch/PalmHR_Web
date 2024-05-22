@@ -19,7 +19,7 @@ export const QUERY: TypedDocumentNode<EditPayRollSettingById> = gql`
   query EditPayRollSettingById($id: String!) {
     payRollSetting: payRollSetting(id: $id) {
       id
-      user_id
+      org_id
       housing
       transport
       INSS
@@ -27,6 +27,7 @@ export const QUERY: TypedDocumentNode<EditPayRollSettingById> = gql`
       INSS_payroll_risks
       medical_insurance
       IPR
+      userId
     }
   }
 `
@@ -41,7 +42,7 @@ const UPDATE_PAY_ROLL_SETTING_MUTATION: TypedDocumentNode<
   ) {
     updatePayRollSetting(id: $id, input: $input) {
       id
-      user_id
+      org_id
       housing
       transport
       INSS
@@ -49,6 +50,7 @@ const UPDATE_PAY_ROLL_SETTING_MUTATION: TypedDocumentNode<
       INSS_payroll_risks
       medical_insurance
       IPR
+      userId
     }
   }
 `

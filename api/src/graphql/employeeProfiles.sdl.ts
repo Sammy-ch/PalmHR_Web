@@ -1,6 +1,8 @@
 export const schema = gql`
   type EmployeeProfile {
     profile_id: String!
+    org_id: String!
+    Organization: Organization!
     first_name: String!
     last_name: String!
     profile_image: String
@@ -20,6 +22,7 @@ export const schema = gql`
   }
 
   input CreateEmployeeProfileInput {
+    org_id: String!
     first_name: String!
     last_name: String!
     profile_image: String
@@ -29,6 +32,7 @@ export const schema = gql`
   }
 
   input UpdateEmployeeProfileInput {
+    org_id: String
     first_name: String
     last_name: String
     profile_image: String

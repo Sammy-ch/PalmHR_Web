@@ -38,10 +38,10 @@ describe('payRollSettings', () => {
 
   scenario('creates a payRollSetting', async (scenario: StandardScenario) => {
     const result = await createPayRollSetting({
-      input: { user_id: scenario.payRollSetting.two.user_id },
+      input: { org_id: scenario.payRollSetting.two.org_id },
     })
 
-    expect(result.user_id).toEqual(scenario.payRollSetting.two.user_id)
+    expect(result.org_id).toEqual(scenario.payRollSetting.two.org_id)
   })
 
   scenario('updates a payRollSetting', async (scenario: StandardScenario) => {
@@ -50,10 +50,10 @@ describe('payRollSettings', () => {
     })) as PayRollSetting
     const result = await updatePayRollSetting({
       id: original.id,
-      input: { user_id: scenario.payRollSetting.two.user_id },
+      input: { org_id: scenario.payRollSetting.two.org_id },
     })
 
-    expect(result.user_id).toEqual(scenario.payRollSetting.two.user_id)
+    expect(result.org_id).toEqual(scenario.payRollSetting.two.org_id)
   })
 
   scenario('deletes a payRollSetting', async (scenario: StandardScenario) => {

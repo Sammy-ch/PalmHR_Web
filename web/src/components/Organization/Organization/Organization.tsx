@@ -68,6 +68,10 @@ const Organization = ({ organization }: Props) => {
               <td>{organization.OrganizationName}</td>
             </tr>
             <tr>
+              <th>Organisation tag</th>
+              <td>{organization.Organisation_tag}</td>
+            </tr>
+            <tr>
               <th>Address</th>
               <td>{organization.Address}</td>
             </tr>

@@ -9,6 +9,22 @@ export const standard = defineScenario<Prisma.EmployeeProfileCreateArgs>({
         first_name: 'String',
         last_name: 'String',
         position: 'String',
+        Organization: {
+          create: {
+            OrganizationName: 'String',
+            Address: 'String',
+            Email: 'String',
+            Phone: 'String',
+            User: {
+              create: {
+                id: 'String',
+                first_name: 'String',
+                last_name: 'String',
+                email: 'String',
+              },
+            },
+          },
+        },
       },
     },
     two: {
@@ -17,6 +33,22 @@ export const standard = defineScenario<Prisma.EmployeeProfileCreateArgs>({
         first_name: 'String',
         last_name: 'String',
         position: 'String',
+        Organization: {
+          create: {
+            OrganizationName: 'String',
+            Address: 'String',
+            Email: 'String',
+            Phone: 'String',
+            User: {
+              create: {
+                id: 'String',
+                first_name: 'String',
+                last_name: 'String',
+                email: 'String',
+              },
+            },
+          },
+        },
       },
     },
   },

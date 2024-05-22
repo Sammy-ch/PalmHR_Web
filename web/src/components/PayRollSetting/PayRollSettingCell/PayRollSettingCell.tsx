@@ -18,7 +18,7 @@ export const QUERY: TypedDocumentNode<
   query FindPayRollSettingById($id: String!) {
     payRollSetting: payRollSetting(id: $id) {
       id
-      user_id
+      org_id
       housing
       transport
       INSS
@@ -26,6 +26,7 @@ export const QUERY: TypedDocumentNode<
       INSS_payroll_risks
       medical_insurance
       IPR
+      userId
     }
   }
 `

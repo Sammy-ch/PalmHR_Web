@@ -39,7 +39,12 @@ export const deletePayRollSetting: MutationResolvers['deletePayRollSetting'] =
   }
 
 export const PayRollSetting: PayRollSettingRelationResolvers = {
-  user: (_obj, { root }) => {
-    return db.payRollSetting.findUnique({ where: { id: root?.id } }).user()
+  organization: (_obj, { root }) => {
+    return db.payRollSetting
+      .findUnique({ where: { id: root?.id } })
+      .organization()
+  },
+  User: (_obj, { root }) => {
+    return db.payRollSetting.findUnique({ where: { id: root?.id } }).User()
   },
 }

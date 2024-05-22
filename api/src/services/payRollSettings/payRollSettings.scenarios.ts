@@ -5,22 +5,40 @@ export const standard = defineScenario<Prisma.PayRollSettingCreateArgs>({
   payRollSetting: {
     one: {
       data: {
-        user: {
+        organization: {
           create: {
-            first_name: 'String',
-            last_name: 'String',
-            email: 'String',
+            OrganizationName: 'String',
+            Address: 'String',
+            Email: 'String',
+            Phone: 'String',
+            User: {
+              create: {
+                id: 'String',
+                first_name: 'String',
+                last_name: 'String',
+                email: 'String',
+              },
+            },
           },
         },
       },
     },
     two: {
       data: {
-        user: {
+        organization: {
           create: {
-            first_name: 'String',
-            last_name: 'String',
-            email: 'String',
+            OrganizationName: 'String',
+            Address: 'String',
+            Email: 'String',
+            Phone: 'String',
+            User: {
+              create: {
+                id: 'String',
+                first_name: 'String',
+                last_name: 'String',
+                email: 'String',
+              },
+            },
           },
         },
       },

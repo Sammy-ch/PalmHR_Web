@@ -4,7 +4,8 @@ export const schema = gql`
     first_name: String!
     last_name: String!
     email: String!
-    payroll_setting: [PayRollSetting]!
+    organization: [Organization]!
+    PayRollSetting: [PayRollSetting]!
   }
 
   type Query {

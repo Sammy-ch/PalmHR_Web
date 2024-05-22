@@ -1,8 +1,8 @@
 export const schema = gql`
   type PayRollSetting {
     id: String!
-    user_id: String!
-    user: User!
+    org_id: String!
+    organization: Organization!
     housing: Int
     transport: Int
     INSS: Int
@@ -10,6 +10,8 @@ export const schema = gql`
     INSS_payroll_risks: Int
     medical_insurance: Int
     IPR: Int
+    User: User
+    userId: String
   }
 
   type Query {
@@ -18,7 +20,7 @@ export const schema = gql`
   }
 
   input CreatePayRollSettingInput {
-    user_id: String!
+    org_id: String!
     housing: Int
     transport: Int
     INSS: Int
@@ -26,10 +28,11 @@ export const schema = gql`
     INSS_payroll_risks: Int
     medical_insurance: Int
     IPR: Int
+    userId: String
   }
 
   input UpdatePayRollSettingInput {
-    user_id: String
+    org_id: String
     housing: Int
     transport: Int
     INSS: Int
@@ -37,6 +40,7 @@ export const schema = gql`
     INSS_payroll_risks: Int
     medical_insurance: Int
     IPR: Int
+    userId: String
   }
 
   type Mutation {

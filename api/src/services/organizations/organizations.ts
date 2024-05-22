@@ -1,4 +1,8 @@
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  OrganizationRelationResolvers,
+} from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
@@ -38,4 +42,27 @@ export const deleteOrganization: MutationResolvers['deleteOrganization'] = ({
   return db.organization.delete({
     where: { OrganizationId },
   })
+}
+
+export const Organization: OrganizationRelationResolvers = {
+  User: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .User()
+  },
+  PayRollSetting: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .PayRollSetting()
+  },
+  Admin: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .Admin()
+  },
+  EmployeeProfiles: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .EmployeeProfiles()
+  },
 }

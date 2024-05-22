@@ -58,8 +58,8 @@ const PayRollSetting = ({ payRollSetting }: Props) => {
               <td>{payRollSetting.id}</td>
             </tr>
             <tr>
-              <th>User id</th>
-              <td>{payRollSetting.user_id}</td>
+              <th>Org id</th>
+              <td>{payRollSetting.org_id}</td>
             </tr>
             <tr>
               <th>Housing</th>
@@ -88,6 +88,10 @@ const PayRollSetting = ({ payRollSetting }: Props) => {
             <tr>
               <th>Ipr</th>
               <td>{payRollSetting.IPR}</td>
+            </tr>
+            <tr>
+              <th>User id</th>
+              <td>{payRollSetting.userId}</td>
             </tr>
           </tbody>
         </table>

@@ -27,11 +27,7 @@ const HomeNavigation = () => {
 
   const HasProfileId = data?.user?.id
 
-  // if (data?.user?.id) {
-  //   console.log(data.user.id)
-  // } else {
-  //   // navigate(routes.newUser())
-  // }
+  console.log(HasProfileId)
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
@@ -73,7 +69,7 @@ const HomeNavigation = () => {
               {HasProfileId ? (
                 <Link to={routes.organizations()}>Organizations</Link>
               ) : (
-                <Link to={routes.dashboard()}>Create Profile</Link>
+                <Link to={routes.newUser()}>Create Profile</Link>
               )}
             </Button>
             <Button

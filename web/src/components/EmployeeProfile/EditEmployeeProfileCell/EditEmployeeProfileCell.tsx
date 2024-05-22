@@ -19,6 +19,7 @@ export const QUERY: TypedDocumentNode<EditEmployeeProfileByProfileId> = gql`
   query EditEmployeeProfileByProfileId($profile_id: String!) {
     employeeProfile: employeeProfile(profile_id: $profile_id) {
       profile_id
+      org_id
       first_name
       last_name
       profile_image
@@ -39,6 +40,7 @@ const UPDATE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
   ) {
     updateEmployeeProfile(profile_id: $profile_id, input: $input) {
       profile_id
+      org_id
       first_name
       last_name
       profile_image

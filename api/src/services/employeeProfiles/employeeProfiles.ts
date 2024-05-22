@@ -41,6 +41,11 @@ export const deleteEmployeeProfile: MutationResolvers['deleteEmployeeProfile'] =
   }
 
 export const EmployeeProfile: EmployeeProfileRelationResolvers = {
+  Organization: (_obj, { root }) => {
+    return db.employeeProfile
+      .findUnique({ where: { profile_id: root?.profile_id } })
+      .Organization()
+  },
   AttendanceData: (_obj, { root }) => {
     return db.employeeProfile
       .findUnique({ where: { profile_id: root?.profile_id } })

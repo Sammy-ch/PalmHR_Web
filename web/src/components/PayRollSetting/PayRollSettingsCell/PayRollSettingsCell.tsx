@@ -19,7 +19,7 @@ export const QUERY: TypedDocumentNode<
   query FindPayRollSettings {
     payRollSettings {
       id
-      user_id
+      org_id
       housing
       transport
       INSS
@@ -27,6 +27,7 @@ export const QUERY: TypedDocumentNode<
       INSS_payroll_risks
       medical_insurance
       IPR
+      userId
     }
   }
 `

@@ -10,21 +10,8 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Organization/OrganizationsCell'
-import { Button } from 'src/components/ui/button'
-import {
-  CardTitle,
-  CardHeader,
-  CardContent,
-  Card,
-} from 'src/components/ui/card'
-import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from 'src/components/ui/dropdown-menu'
+import { truncate } from 'src/lib/formatters'
+import OrganizationCard from '../../OrganizationCard/OrganizationCard'
 
 const DELETE_ORGANIZATION_MUTATION: TypedDocumentNode<
   DeleteOrganizationMutation,
@@ -65,12 +52,13 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
+    <div>
+      {/* <table className="rw-table">
         <thead>
           <tr>
             <th>Organization id</th>
             <th>Organization name</th>
+            <th>Organisation tag</th>
             <th>Address</th>
             <th>Email</th>
             <th>Phone</th>
@@ -82,6 +70,7 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
             <tr key={organization.OrganizationId}>
               <td>{truncate(organization.OrganizationId)}</td>
               <td>{truncate(organization.OrganizationName)}</td>
+              <td>{truncate(organization.Organisation_tag)}</td>
               <td>{truncate(organization.Address)}</td>
               <td>{truncate(organization.Email)}</td>
               <td>{truncate(organization.Phone)}</td>
@@ -122,70 +111,10 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+      <OrganizationCard />
     </div>
   )
 }
 
 export default OrganizationsList
-
-function ActivityIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-    </svg>
-  )
-}
-
-function CircleUserIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="10" r="3" />
-      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
-    </svg>
-  )
-}
-
-function Package2Icon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-      <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
-      <path d="M12 3v6" />
-    </svg>
-  )
-}

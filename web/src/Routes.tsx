@@ -95,7 +95,7 @@ const Routes = () => {
       </Set>
 
       <PrivateSet wrap={DashoardLayout} unauthenticated="home">
-        <Route path="/dashboard" page={DashboardPage} name="dashboard" />
+        <Route path="/dashboard/{id}" page={DashboardPage} name="dashboard" />
         <Route path="/settings" page={SettingsPage} name="settings" />
         <Route path="/attendance" page={AttendancePage} name="attendance" />
         <Route path="/performance" page={PerformancePage} name="performance" />

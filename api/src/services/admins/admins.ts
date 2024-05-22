@@ -39,6 +39,9 @@ export const deleteAdmin: MutationResolvers['deleteAdmin'] = ({ id }) => {
 }
 
 export const Admin: AdminRelationResolvers = {
+  Organization: (_obj, { root }) => {
+    return db.admin.findUnique({ where: { id: root?.id } }).Organization()
+  },
   admin_role: (_obj, { root }) => {
     return db.admin.findUnique({ where: { id: root?.id } }).admin_role()
   },

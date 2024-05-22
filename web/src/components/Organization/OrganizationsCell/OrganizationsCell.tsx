@@ -20,6 +20,7 @@ export const QUERY: TypedDocumentNode<
     organizations {
       OrganizationId
       OrganizationName
+      Organisation_tag
       Address
       Email
       Phone

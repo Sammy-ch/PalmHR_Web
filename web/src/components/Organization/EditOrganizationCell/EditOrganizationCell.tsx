@@ -20,6 +20,7 @@ export const QUERY: TypedDocumentNode<EditOrganizationByOrganizationId> = gql`
     organization: organization(OrganizationId: $OrganizationId) {
       OrganizationId
       OrganizationName
+      Organisation_tag
       Address
       Email
       Phone
@@ -38,6 +39,7 @@ const UPDATE_ORGANIZATION_MUTATION: TypedDocumentNode<
     updateOrganization(OrganizationId: $OrganizationId, input: $input) {
       OrganizationId
       OrganizationName
+      Organisation_tag
       Address
       Email
       Phone

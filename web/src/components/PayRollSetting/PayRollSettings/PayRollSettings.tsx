@@ -50,7 +50,7 @@ const PayRollSettingsList = ({ payRollSettings }: FindPayRollSettings) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>User id</th>
+            <th>Org id</th>
             <th>Housing</th>
             <th>Transport</th>
             <th>Inss</th>
@@ -58,6 +58,7 @@ const PayRollSettingsList = ({ payRollSettings }: FindPayRollSettings) => {
             <th>Inss payroll risks</th>
             <th>Medical insurance</th>
             <th>Ipr</th>
+            <th>User id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -65,7 +66,7 @@ const PayRollSettingsList = ({ payRollSettings }: FindPayRollSettings) => {
           {payRollSettings.map((payRollSetting) => (
             <tr key={payRollSetting.id}>
               <td>{truncate(payRollSetting.id)}</td>
-              <td>{truncate(payRollSetting.user_id)}</td>
+              <td>{truncate(payRollSetting.org_id)}</td>
               <td>{truncate(payRollSetting.housing)}</td>
               <td>{truncate(payRollSetting.transport)}</td>
               <td>{truncate(payRollSetting.INSS)}</td>
@@ -73,6 +74,7 @@ const PayRollSettingsList = ({ payRollSettings }: FindPayRollSettings) => {
               <td>{truncate(payRollSetting.INSS_payroll_risks)}</td>
               <td>{truncate(payRollSetting.medical_insurance)}</td>
               <td>{truncate(payRollSetting.IPR)}</td>
+              <td>{truncate(payRollSetting.userId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

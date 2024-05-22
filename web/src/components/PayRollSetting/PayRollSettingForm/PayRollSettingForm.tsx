@@ -42,22 +42,22 @@ const PayRollSettingForm = (props: PayRollSettingFormProps) => {
         />
 
         <Label
-          name="user_id"
+          name="org_id"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          User id
+          Org id
         </Label>
 
         <TextField
-          name="user_id"
-          defaultValue={props.payRollSetting?.user_id}
+          name="org_id"
+          defaultValue={props.payRollSetting?.org_id}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="user_id" className="rw-field-error" />
+        <FieldError name="org_id" className="rw-field-error" />
 
         <Label
           name="housing"
@@ -177,6 +177,23 @@ const PayRollSettingForm = (props: PayRollSettingFormProps) => {
         />
 
         <FieldError name="IPR" className="rw-field-error" />
+
+        <Label
+          name="userId"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          User id
+        </Label>
+
+        <TextField
+          name="userId"
+          defaultValue={props.payRollSetting?.userId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <FieldError name="userId" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

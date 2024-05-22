@@ -15,6 +15,7 @@ export const QUERY: TypedDocumentNode<
   query FindAdminById($id: String!) {
     admin: admin(id: $id) {
       id
+      org_id
       first_name
       last_name
       email

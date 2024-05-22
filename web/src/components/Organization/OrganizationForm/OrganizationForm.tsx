@@ -61,6 +61,24 @@ const OrganizationForm = (props: OrganizationFormProps) => {
         <FieldError name="OrganizationName" className="rw-field-error" />
 
         <Label
+          name="Organisation_tag"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Organisation tag
+        </Label>
+
+        <TextField
+          name="Organisation_tag"
+          defaultValue={props.organization?.Organisation_tag}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="Organisation_tag" className="rw-field-error" />
+
+        <Label
           name="Address"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

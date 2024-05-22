@@ -50,6 +50,7 @@ const AdminsList = ({ admins }: FindAdmins) => {
         <thead>
           <tr>
             <th>Id</th>
+            <th>Org id</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Email</th>
@@ -60,6 +61,7 @@ const AdminsList = ({ admins }: FindAdmins) => {
           {admins.map((admin) => (
             <tr key={admin.id}>
               <td>{truncate(admin.id)}</td>
+              <td>{truncate(admin.org_id)}</td>
               <td>{truncate(admin.first_name)}</td>
               <td>{truncate(admin.last_name)}</td>
               <td>{truncate(admin.email)}</td>
