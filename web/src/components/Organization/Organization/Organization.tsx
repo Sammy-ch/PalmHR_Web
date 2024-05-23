@@ -11,16 +11,16 @@ import { toast } from '@redwoodjs/web/toast'
 
 import {} from 'src/lib/formatters'
 
-const DELETE_ORGANIZATION_MUTATION: TypedDocumentNode<
-  DeleteOrganizationMutation,
-  DeleteOrganizationMutationVariables
-> = gql`
-  mutation DeleteOrganizationMutation($OrganizationId: String!) {
-    deleteOrganization(OrganizationId: $OrganizationId) {
-      OrganizationId
-    }
-  }
-`
+// const DELETE_ORGANIZATION_MUTATION: TypedDocumentNode<
+//   DeleteOrganizationMutation,
+//   DeleteOrganizationMutationVariables
+// > = gql`
+//   mutation DeleteOrganizationMutation($OrganizationId: String!) {
+//     deleteOrganization(OrganizationId: $OrganizationId) {
+//       OrganizationId
+//     }
+//   }
+// `
 
 interface Props {
   organization: NonNullable<FindOrganizationByOrganizationId['organization']>

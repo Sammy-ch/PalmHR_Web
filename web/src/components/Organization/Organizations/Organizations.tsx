@@ -39,17 +39,17 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (
-    OrganizationId: DeleteOrganizationMutationVariables['OrganizationId']
-  ) => {
-    if (
-      confirm(
-        'Are you sure you want to delete organization ' + OrganizationId + '?'
-      )
-    ) {
-      deleteOrganization({ variables: { OrganizationId } })
-    }
-  }
+  // const onDeleteClick = (
+  //   OrganizationId: DeleteOrganizationMutationVariables['OrganizationId']
+  // ) => {
+  //   if (
+  //     confirm(
+  //       'Are you sure you want to delete organization ' + OrganizationId + '?'
+  //     )
+  //   ) {
+  //     deleteOrganization({ variables: { OrganizationId } })
+  //   }
+  // }
 
   return (
     <main>
