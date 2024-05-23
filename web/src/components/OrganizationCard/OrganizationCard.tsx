@@ -1,6 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import { useAuth } from 'src/auth'
 import { Button } from 'src/components/ui/button'
 import {
   CardTitle,
@@ -13,13 +12,18 @@ import { Avatar, AvatarImage } from '../ui/avatar'
 
 import Logo from './MiregoLogo.png'
 
-const OrganizationCard = () => {
-  const { currentUser } = useAuth()
-  const org_id = currentUser?.sub as string
+import { FindOrganizationByOrganizationId } from '@/types/graphql'
+interface Props {
+  organization: NonNullable<FindOrganizationByOrganizationId['organization']>
+}
+
+const OrganizationCard = ({ organization }: Props) => {
   return (
     <Card className="w-[350px]">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-5">
-        <CardTitle className="text-sm font-bold">MIREGO AFRICA</CardTitle>
+        <CardTitle className="text-sm font-bold">
+          {organization.OrganizationName}
+        </CardTitle>
         <Avatar className="mr-3 h-[4rem] w-[3.5rem] rounded-none">
           <AvatarImage alt="OrgLogo" src={Logo} />
         </Avatar>{' '}
@@ -32,12 +36,17 @@ const OrganizationCard = () => {
         <div className="flex gap-2 text-xs font-bold text-muted-foreground">
           <ActivityIcon className="h-4 w-4 text-muted-foreground" />
           <span>Address</span>
+          <span>{organization.Address}</span>
         </div>
         <div className="flex gap-2 text-xs font-bold text-muted-foreground">
           <ActivityIcon className="h-4 w-4 text-muted-foreground" />
           <span>Email</span>
+          <span>{organization.Email}</span>
         </div>
-        <Link to={routes.dashboard({ id: '123' })} className="w-full">
+        <Link
+          to={routes.dashboard({ id: organization.Organisation_tag })}
+          className="w-full"
+        >
           <Button className="mt-5 h-8 w-full bg-[#03a550] hover:border hover:bg-white hover:text-muted-foreground">
             View
           </Button>
