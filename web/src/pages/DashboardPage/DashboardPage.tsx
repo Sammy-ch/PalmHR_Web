@@ -6,6 +6,7 @@ import { Timer } from 'lucide-react'
 import { BookX } from 'lucide-react'
 import AttendanceBarChart from 'web/src/components/AttendanceBarChart/AttendanceBarChart'
 
+import { useParams } from '@redwoodjs/router'
 import { navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
 
@@ -13,21 +14,18 @@ import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCard from 'src/components/KpiCard/KpiCard'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
-type DashboardPageProps = {
-  OrganizationId: string
-}
 
-const DashboardPage = ({ OrganizationId }: DashboardPageProps) => {
+const DashboardPage = () => {
+  const { id } = useParams()
   const { currentUser } = useAuth()
-  const org_id = currentUser?.sub as string
 
-  if (!org_id && org_id !== OrganizationId) {
-    navigate(routes.settings())
+  const org_id = currentUser?.sub
+  if (org_id === id) {
+    console.log(id)
+  } else {
+    navigate(routes.organizations())
   }
 
-  if (org_id === OrganizationId) {
-    console.log('Welcome to your Dashboard')
-  }
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />
