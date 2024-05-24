@@ -35,59 +35,11 @@ function capitalizeFirstLetter(string) {
 }
 
 const DashboardHeader = () => {
-  const { userMetadata } = useAuth()
+  const { currentUser } = useAuth()
   const routeName = useRouteName()
 
+  const org_id = currentUser?.sub as string
   return (
-    // <div className="header-h1 flex h-[80px] w-full items-center justify-between px-5">
-    //   <h1 className="text-3xl font-semibold ">
-    //     {capitalizeFirstLetter(routeName)}
-    //   </h1>
-    //   <div className="flex items-center gap-5">
-    //     <div className="flex items-center gap-5">
-    //       <Drawer>
-    //         <DrawerTrigger>
-    //           <SquareUserRound />
-    //         </DrawerTrigger>
-    //         <DrawerContent>
-    //           <CheckingRequestQueuesCell />
-    //           <DrawerFooter>
-    //             <DrawerClose>
-    //               <Button variant="outline">Close</Button>
-    //             </DrawerClose>
-    //           </DrawerFooter>
-    //         </DrawerContent>
-    //       </Drawer>
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger>
-    //           <Bell />
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent>
-    //           <DropdownMenuLabel>
-    //             <NotificationCard />
-    //           </DropdownMenuLabel>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger>
-    //           <Avatar
-    //             size={45}
-    //             icon={<UserOutlined />}
-    //             src={`${userMetadata && userMetadata.picture}`}
-    //           />
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent>
-    //           <DropdownMenuLabel>My Account</DropdownMenuLabel>
-    //           <DropdownMenuSeparator />
-    //           <DropdownMenuItem>Admins</DropdownMenuItem>
-    //           <DropdownMenuItem>Payroll</DropdownMenuItem>
-    //           <DropdownMenuItem>Team</DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     </div>
-    //   </div>
-    // </div>
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
         <SheetTrigger asChild>
@@ -99,7 +51,7 @@ const DashboardHeader = () => {
         <SheetContent className="flex flex-col" side="left">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              to={routes.dashboard({ id: '123' })}
+              to={routes.dashboard({  id: org_id })}
               className="flex items-center gap-2 text-lg font-semibold"
               href="#"
             >
@@ -107,7 +59,7 @@ const DashboardHeader = () => {
               <span className="sr-only">PALM HR</span>
             </Link>
             <Link
-              to={routes.dashboard({ id: '123' })}
+              to={routes.dashboard({ id: org_id })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >

@@ -28,7 +28,7 @@ const NewUser = () => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User created')
-      navigate(routes.users())
+      navigate(routes.organizations())
     },
     onError: (error) => {
       toast.error(error.message)

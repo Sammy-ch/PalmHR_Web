@@ -26,7 +26,26 @@ export const QUERY: TypedDocumentNode<
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => {
+  const {logOut} = useAuth()
+  return (
+      <main className='flex'>
+        <Link to={routes.newUser()}>
+          <Button className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white">
+            Create Profile
+          </Button>
+        </Link>
+        <Button
+          onClick={logOut}
+          variant="link"
+          className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg  "
+        >
+          Sign Out
+        </Button>
+      </main>
+
+  )
+}
 
 export const Failure = ({
   error,

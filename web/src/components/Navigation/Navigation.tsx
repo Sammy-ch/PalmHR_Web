@@ -2,6 +2,7 @@ import { BookUp2, FilePieChart, Settings, HandCoins } from 'lucide-react'
 
 import { NavLink, routes, Link } from '@redwoodjs/router'
 
+import { useAuth } from 'src/auth'
 import { Badge } from 'src/components/ui/badge'
 import { Button } from 'src/components/ui/button'
 import {
@@ -14,13 +15,16 @@ import {
 
 import logo from './palmHR_logo.png'
 
+
 const Navigation = () => {
+  const {currentUser} = useAuth()
+  const org_id = currentUser?.sub as string
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link
-            to={routes.dashboard({ id: '123' })}
+            to={routes.dashboard({ id: org_id })}
             className="flex items-center gap-2 font-semibold"
             href="#"
           >
@@ -40,7 +44,7 @@ const Navigation = () => {
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <NavLink
-              to={routes.dashboard({ id: '123' })}
+              to={routes.dashboard({ id: org_id })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
