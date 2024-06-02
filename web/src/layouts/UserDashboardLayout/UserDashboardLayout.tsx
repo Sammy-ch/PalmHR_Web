@@ -1,4 +1,5 @@
 import { BookUp2, FilePieChart, Settings, HandCoins } from 'lucide-react'
+import { CopyPlus } from 'lucide-react'
 import DashboardHeader from 'web/src/components/DashboardHeader/DashboardHeader'
 
 import { routes, Link } from '@redwoodjs/router'
@@ -71,6 +72,11 @@ const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
       <div className="flex flex-col">
         <DashboardHeader />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <Link to={routes.newOrganization()}>
+            <Button className="w-40 gap-2 bg-[#03a550]" size="sm">
+              New Organization <CopyPlus />
+            </Button>
+          </Link>
           {children}
         </main>
       </div>

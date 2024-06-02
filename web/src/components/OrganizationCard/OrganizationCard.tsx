@@ -19,9 +19,9 @@ interface Props {
 
 const OrganizationCard = ({ organization }: Props) => {
   return (
-    <Card className="w-[350px]">
+    <Card className="m-5 w-[350px]">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-5">
-        <CardTitle className="text-sm font-bold">
+        <CardTitle className="text-2xl font-bold">
           {organization.OrganizationName}
         </CardTitle>
         <Avatar className="mr-3 h-[4rem] w-[3.5rem] rounded-none">
