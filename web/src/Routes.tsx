@@ -50,12 +50,12 @@ const Routes = () => {
         <Route path="/admins/{id}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <Set wrap={UserDashboardLayout} title="Organizations" titleTo="organizations" buttonLabel="New Organization" buttonTo="newOrganization">
+      <PrivateSet wrap={UserDashboardLayout} unauthenticated="home">
         <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
         <Route path="/organizations/{OrganizationId}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
         <Route path="/organizations/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />
         <Route path="/organizations" page={OrganizationOrganizationsPage} name="organizations" />
-      </Set>
+      </PrivateSet>
       <Set wrap={ScaffoldLayout} title="EmployeeAttendanceReports" titleTo="employeeAttendanceReports" buttonLabel="New EmployeeAttendanceReport" buttonTo="newEmployeeAttendanceReport">
         <Route path="/employee-attendance-reports/new" page={EmployeeAttendanceReportNewEmployeeAttendanceReportPage} name="newEmployeeAttendanceReport" />
         <Route path="/employee-attendance-reports/{id}/edit" page={EmployeeAttendanceReportEditEmployeeAttendanceReportPage} name="editEmployeeAttendanceReport" />

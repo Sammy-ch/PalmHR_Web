@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { BadgeCheck } from 'lucide-react'
 import { ListFilter } from 'lucide-react'
@@ -19,12 +19,15 @@ const DashboardPage = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()
 
-  const org_id = currentUser?.sub
-  if (org_id === id) {
-    console.log(id)
-  } else {
-    navigate(routes.organizations())
-  }
+  useEffect(() => {
+    const org_id = currentUser?.sub
+    if (!org_id) {
+      throw new Error('User is not logged in')
+    }
+    if (id !== org_id) {
+      navigate(routes.organizations())
+    }
+  }, [currentUser, id])
 
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
