@@ -44,7 +44,7 @@ const OrganizationCard = ({ organization }: Props) => {
           <span>{organization.Email}</span>
         </div>
         <Link
-          to={routes.dashboard({ id: organization.Organisation_tag })}
+          to={routes.dashboard({ id: organization.OrganizationId })}
           className="w-full"
         >
           <Button className="mt-5 h-8 w-full bg-[#03a550] hover:border hover:bg-white hover:text-muted-foreground">

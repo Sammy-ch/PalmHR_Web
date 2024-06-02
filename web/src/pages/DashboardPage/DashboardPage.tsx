@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { BadgeCheck } from 'lucide-react'
 import { ListFilter } from 'lucide-react'
@@ -9,25 +9,51 @@ import AttendanceBarChart from 'web/src/components/AttendanceBarChart/Attendance
 import { useParams } from '@redwoodjs/router'
 import { navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
+import { useQuery } from '@redwoodjs/web'
+import { TypedDocumentNode } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCard from 'src/components/KpiCard/KpiCard'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 
+import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
+import { FindOrganizationByOrganizationId } from '@/types/graphql'
+const QUERY: TypedDocumentNode<
+  FindOrganizationByOrganizationId,
+  FindOrganizationByOrganizationIdVariables
+> = gql`
+  query FindOrganizationByOrganizationId($OrganizationId: String!) {
+    organization: organization(OrganizationId: $OrganizationId) {
+      OrganizationId
+      Organisation_tag
+    }
+  }
+`
 const DashboardPage = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()
 
-  useEffect(() => {
-    const org_id = currentUser?.sub
-    if (!org_id) {
-      throw new Error('User is not logged in')
-    }
-    if (id !== org_id) {
-      navigate(routes.organizations())
-    }
-  }, [currentUser, id])
+  if (!currentUser) {
+    console.log('Not logged in')
+  }
+  const userId = currentUser?.sub
+
+  const { data, loading, error } = useQuery(QUERY, {
+    variables: {
+      OrganizationId: id,
+    },
+  })
+  if (loading) return <div>Loading...</div>
+  if (!data && error) {
+    navigate(routes.organizations())
+  }
+  if (
+    data?.organization?.OrganizationId === id &&
+    data?.organization?.Organisation_tag === userId
+  ) {
+    alert('Welcome to your Dashboard')
+  }
 
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">

@@ -24,7 +24,6 @@ export const QUERY: TypedDocumentNode<
       Address
       Email
       Phone
- 
     }
   }
 `
