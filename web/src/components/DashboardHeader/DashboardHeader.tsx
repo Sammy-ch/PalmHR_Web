@@ -51,7 +51,7 @@ const DashboardHeader = () => {
         <SheetContent className="flex flex-col" side="left">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              to={routes.dashboard({  id: org_id })}
+              to={routes.dashboard({ id: org_id })}
               className="flex items-center gap-2 text-lg font-semibold"
               href="#"
             >
@@ -67,7 +67,7 @@ const DashboardHeader = () => {
               Dashboard
             </Link>
             <Link
-              to={routes.reports()}
+              to={routes.reports({ id: '123' })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
               href="#"
             >

@@ -1,6 +1,8 @@
 import { BookUp2, FilePieChart, Settings, HandCoins } from 'lucide-react'
 
-import { NavLink, routes, Link } from '@redwoodjs/router'
+import { NavLink, routes, navigate, useParams } from '@redwoodjs/router'
+import { TypedDocumentNode } from '@redwoodjs/web'
+import { useQuery } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import { Badge } from 'src/components/ui/badge'
@@ -15,9 +17,40 @@ import {
 
 import logo from './palmHR_logo.png'
 
+import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
+import { FindOrganizationByOrganizationId } from '@/types/graphql'
+const QUERY: TypedDocumentNode<
+  FindOrganizationByOrganizationId,
+  FindOrganizationByOrganizationIdVariables
+> = gql`
+  query FindOrganizationByOrganizationId($OrganizationId: String!) {
+    organization: organization(OrganizationId: $OrganizationId) {
+      OrganizationId
+      Organisation_tag
+    }
+  }
+`
 const Navigation = () => {
   const { currentUser } = useAuth()
+  const { id } = useParams()
+
   const org_id = currentUser?.sub as string
+  const { data, loading, error } = useQuery(QUERY, {
+    variables: {
+      OrganizationId: id,
+    },
+  })
+  if (loading) return <div>Loading...</div>
+  if (!data && error) {
+    navigate(routes.organizations())
+  }
+  if (
+    data?.organization?.OrganizationId === id &&
+    data?.organization?.Organisation_tag === org_id
+  ) {
+    console.log('Welcome to your Dashboard')
+  }
+  const organizationId = data?.organization?.OrganizationId
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -37,7 +70,7 @@ const Navigation = () => {
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <NavLink
-              to={routes.dashboard({ id: org_id })}
+              to={routes.dashboard({ id: organizationId })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -45,7 +78,7 @@ const Navigation = () => {
               Dashboard
             </NavLink>
             <NavLink
-              to={routes.reports()}
+              to={routes.reports({ id: organizationId })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
