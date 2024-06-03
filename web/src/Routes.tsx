@@ -96,11 +96,11 @@ const Routes = () => {
 
       <PrivateSet wrap={DashoardLayout} unauthenticated="home">
         <Route path="/dashboard/organization/{id}" page={DashboardPage} name="dashboard" />
-        <Route path="/organization/reports/{id}" page={ReportsPage} name="reports" />
-        <Route path="/organization/employee-stats" page={PerformancePage} name="performance" />
-        <Route path="/organization/attendance" page={AttendancePage} name="attendance" />
-        <Route path="/organization/employee-pay-rolls" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
-        <Route path="/organization/settings" page={SettingsPage} name="settings" />
+        <Route path="/dashboard/reports/{id}" page={ReportsPage} name="reports" />
+        <Route path="/dashboard/employee-stats/{id}" page={PerformancePage} name="performance" />
+        <Route path="/organization/attendance/{id}" page={AttendancePage} name="attendance" />
+        <Route path="/organization/pay-rolls/{id}" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
+        <Route path="/organization/settings/{id}" page={SettingsPage} name="settings" />
       </PrivateSet>
       <Route notfound page={NotFoundPage} />
     </Router>

@@ -1,3 +1,4 @@
+import { HandCoins } from 'lucide-react'
 import { Button } from 'web/src/components/ui/button'
 import {
   Drawer,
@@ -15,8 +16,15 @@ import {
   DropdownMenuTrigger,
 } from 'web/src/components/ui/dropdown-menu'
 
-import { Link, routes } from '@redwoodjs/router'
-import { useRouteName } from '@redwoodjs/router'
+import {
+  Link,
+  routes,
+  navigate,
+  useRouteName,
+  useParams,
+} from '@redwoodjs/router'
+import { useQuery } from '@redwoodjs/web'
+import { TypedDocumentNode } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
@@ -30,15 +38,45 @@ import {
 } from 'src/components/ui/card'
 import { SheetTrigger, SheetContent, Sheet } from 'src/components/ui/sheet'
 
+import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
+import { FindOrganizationByOrganizationId } from '@/types/graphql'
+const QUERY: TypedDocumentNode<
+  FindOrganizationByOrganizationId,
+  FindOrganizationByOrganizationIdVariables
+> = gql`
+  query FindOrganizationByOrganizationId($OrganizationId: String!) {
+    organization: organization(OrganizationId: $OrganizationId) {
+      OrganizationId
+      Organisation_tag
+    }
+  }
+`
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 const DashboardHeader = () => {
-  const { currentUser } = useAuth()
   const routeName = useRouteName()
+  const { currentUser } = useAuth()
+  const { id } = useParams()
 
   const org_id = currentUser?.sub as string
+  const { data, loading, error } = useQuery(QUERY, {
+    variables: {
+      OrganizationId: id,
+    },
+  })
+  if (loading) return <div>Loading...</div>
+  if (!data && error) {
+    navigate(routes.organizations())
+  }
+  if (
+    data?.organization?.OrganizationId === id &&
+    data?.organization?.Organisation_tag === org_id
+  ) {
+    console.log('Welcome to your Dashboard')
+  }
+  const organizationId = data?.organization?.OrganizationId
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -51,7 +89,7 @@ const DashboardHeader = () => {
         <SheetContent className="flex flex-col" side="left">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              to={routes.dashboard({ id: org_id })}
+              to={routes.dashboard({ id: organizationId })}
               className="flex items-center gap-2 text-lg font-semibold"
               href="#"
             >
@@ -59,7 +97,7 @@ const DashboardHeader = () => {
               <span className="sr-only">PALM HR</span>
             </Link>
             <Link
-              to={routes.dashboard({ id: org_id })}
+              to={routes.dashboard({ id: organizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -67,18 +105,15 @@ const DashboardHeader = () => {
               Dashboard
             </Link>
             <Link
-              to={routes.reports({ id: '123' })}
+              to={routes.reports({ id: organizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
               href="#"
             >
               <ShoppingCartIcon className="h-5 w-5" />
               Reports
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                6
-              </Badge>
             </Link>
             <Link
-              to={routes.performance()}
+              to={routes.performance({ id: organizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -86,7 +121,7 @@ const DashboardHeader = () => {
               Employee Stats
             </Link>
             <Link
-              to={routes.attendance()}
+              to={routes.attendance({ id: organizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -94,7 +129,15 @@ const DashboardHeader = () => {
               Leave Management
             </Link>
             <Link
-              to={routes.settings()}
+              to={routes.employeePayRolls({ id: organizationId })}
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+              href="#"
+            >
+              <HandCoins className="h-4 w-4" />
+              Payroll{' '}
+            </Link>
+            <Link
+              to={routes.settings({ id: organizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
