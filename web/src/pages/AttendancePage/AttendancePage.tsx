@@ -9,8 +9,8 @@ const AttendancePage = () => {
     <>
       <Metadata title="Attendance" description="Attendance page" />
 
-      <div className="mx-auto px-4">
-        <div className="mb-6 flex items-center justify-between">
+      <div className="mx-auto w-full px-4">
+        <div className="mb-6 flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Attendance Management</h1>
           <div className="flex items-center space-x-4">
             <Button variant="default">Add Leave</Button>

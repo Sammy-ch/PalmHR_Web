@@ -15,27 +15,20 @@ import {
 
 import logo from './palmHR_logo.png'
 
-
 const Navigation = () => {
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth()
   const org_id = currentUser?.sub as string
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link
-            to={routes.dashboard({ id: org_id })}
-            className="flex items-center gap-2 font-semibold"
-            href="#"
-          >
-            <img
-              src={logo}
-              alt={'Palm HR Logo'}
-              height={150}
-              width={150}
-              className="h-auto"
-            />
-          </Link>
+          <img
+            src={logo}
+            alt={'Palm HR Logo'}
+            height={150}
+            width={150}
+            className="h-auto"
+          />
           <Button className="ml-auto h-8 w-8" size="icon" variant="outline">
             <BellIcon className="h-4 w-4" />
             <span className="sr-only">Toggle notifications</span>
