@@ -17,7 +17,7 @@ export const QUERY: TypedDocumentNode<
   FindOrganizationsByTagVariables
 > = gql`
   query FindOrganizationsByTag($tag: String!) {
-    organisations: organizationByTag(Organisation_tag: $tag) {
+    organisations: organizationsByTag(Organisation_tag: $tag) {
       OrganizationId
       OrganizationName
       Organisation_tag
