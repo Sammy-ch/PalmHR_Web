@@ -38,45 +38,33 @@ import {
 } from 'src/components/ui/card'
 import { SheetTrigger, SheetContent, Sheet } from 'src/components/ui/sheet'
 
-import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
 import { FindOrganizationByOrganizationId } from '@/types/graphql'
-const QUERY: TypedDocumentNode<
-  FindOrganizationByOrganizationId,
-  FindOrganizationByOrganizationIdVariables
-> = gql`
-  query FindOrganizationByOrganizationId($OrganizationId: String!) {
-    organization: organization(OrganizationId: $OrganizationId) {
-      OrganizationId
-      Organisation_tag
-    }
-  }
-`
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-const DashboardHeader = () => {
+interface Props {
+  organizationId: NonNullable<
+    FindOrganizationByOrganizationId['organization']['OrganizationId']
+  >
+}
+
+const DashboardHeader = ({ organizationId }: Props) => {
   const routeName = useRouteName()
   const { currentUser } = useAuth()
-  const { id } = useParams()
 
-  const org_id = currentUser?.sub as string
-  const { data, loading, error } = useQuery(QUERY, {
-    variables: {
-      OrganizationId: id,
-    },
-  })
-  if (loading) return <div>Loading...</div>
-  if (!data && error) {
-    navigate(routes.organizations())
-  }
-  if (
-    data?.organization?.OrganizationId === id &&
-    data?.organization?.Organisation_tag === org_id
-  ) {
-    console.log('Welcome to your Dashboard')
-  }
-  const organizationId = data?.organization?.OrganizationId
+  // const org_id = currentUser?.sub as string
+  // const { data, loading, error } = useQuery(QUERY, {
+  //   variables: {
+  //     OrganizationId: id,
+  //   },
+  // })
+  // if (loading) return <div>Loading...</div>
+  // if (!data && error) {
+  //   navigate(routes.organizations())
+  // }
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>

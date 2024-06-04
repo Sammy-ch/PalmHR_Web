@@ -19,17 +19,17 @@ import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCar
 
 import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
 import { FindOrganizationByOrganizationId } from '@/types/graphql'
-const QUERY: TypedDocumentNode<
-  FindOrganizationByOrganizationId,
-  FindOrganizationByOrganizationIdVariables
-> = gql`
-  query FindOrganizationByOrganizationId($OrganizationId: String!) {
-    organization: organization(OrganizationId: $OrganizationId) {
-      OrganizationId
-      Organisation_tag
-    }
-  }
-`
+// const QUERY: TypedDocumentNode<
+//   FindOrganizationByOrganizationId,
+//   FindOrganizationByOrganizationIdVariables
+// > = gql`
+//   query FindOrganizationByOrganizationId($OrganizationId: String!) {
+//     organization: organization(OrganizationId: $OrganizationId) {
+//       OrganizationId
+//       Organisation_tag
+//     }
+//   }
+// `
 const DashboardPage = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()

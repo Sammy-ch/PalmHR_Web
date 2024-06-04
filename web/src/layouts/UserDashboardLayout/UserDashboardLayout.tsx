@@ -1,25 +1,24 @@
-import { BookUp2, FilePieChart, Settings, HandCoins } from 'lucide-react'
 import { CopyPlus } from 'lucide-react'
-import DashboardHeader from 'web/src/components/DashboardHeader/DashboardHeader'
 
-import { routes, Link } from '@redwoodjs/router'
+import { routes, Link, navigate } from '@redwoodjs/router'
 
-import Navigation from 'src/components/Navigation/Navigation'
-import { Badge } from 'src/components/ui/badge'
+import { useAuth } from 'src/auth'
+import DashboardHeaderCell from 'src/components/DashboardHeaderCell'
 import { Button } from 'src/components/ui/button'
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  Card,
-} from 'src/components/ui/card'
+import { Card } from 'src/components/ui/card'
 
 type UserDashboardLayoutProps = {
   children?: React.ReactNode
 }
 
 const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
+  const { currentUser } = useAuth()
+  if (!currentUser) {
+    navigate(routes.organizations())
+  }
+  const OrgTag = currentUser?.sub as string
+  console.log(currentUser)
+
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -51,12 +50,6 @@ const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
                 >
                   Security{' '}
                 </Link>
-                <Link
-                  to={routes.settings()}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                >
-                  Settings{' '}
-                </Link>
               </div>
             </nav>
           </div>
@@ -70,7 +63,7 @@ const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <DashboardHeader />
+        <DashboardHeaderCell tag={OrgTag} />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <Link to={routes.newOrganization()}>
             <Button className="w-40 gap-2 bg-[#03a550]" size="sm">

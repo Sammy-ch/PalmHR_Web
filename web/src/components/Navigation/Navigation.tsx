@@ -17,40 +17,27 @@ import {
 
 import logo from './palmHR_logo.png'
 
-import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
-import { FindOrganizationByOrganizationId } from '@/types/graphql'
-const QUERY: TypedDocumentNode<
-  FindOrganizationByOrganizationId,
-  FindOrganizationByOrganizationIdVariables
-> = gql`
-  query FindOrganizationByOrganizationId($OrganizationId: String!) {
-    organization: organization(OrganizationId: $OrganizationId) {
-      OrganizationId
-      Organisation_tag
-    }
-  }
-`
 const Navigation = () => {
   const { currentUser } = useAuth()
   const { id } = useParams()
 
-  const org_id = currentUser?.sub as string
-  const { data, loading, error } = useQuery(QUERY, {
-    variables: {
-      OrganizationId: id,
-    },
-  })
-  if (loading) return <div>Loading...</div>
-  if (!data && error) {
-    navigate(routes.organizations())
-  }
-  if (
-    data?.organization?.OrganizationId === id &&
-    data?.organization?.Organisation_tag === org_id
-  ) {
-    console.log('Welcome to your Dashboard')
-  }
-  const organizationId = data?.organization?.OrganizationId
+  // const org_id = currentUser?.sub as string
+  // const { data, loading, error } = useQuery(QUERY, {
+  //   variables: {
+  //     OrganizationId: id,
+  //   },
+  // })
+  // if (loading) return <div>Loading...</div>
+  // if (!data && error) {
+  //   navigate(routes.organizations())
+  // }
+  // if (
+  //   data?.organization?.OrganizationId === id &&
+  //   data?.organization?.Organisation_tag === org_id
+  // ) {
+  //   console.log('Welcome to your Dashboard')
+  // }
+  // const organizationId = data?.organization?.OrganizationId
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -70,7 +57,7 @@ const Navigation = () => {
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <NavLink
-              to={routes.dashboard({ id: organizationId })}
+              to={routes.dashboard({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -78,7 +65,7 @@ const Navigation = () => {
               Dashboard
             </NavLink>
             <NavLink
-              to={routes.reports({ id: organizationId })}
+              to={routes.reports({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -86,7 +73,7 @@ const Navigation = () => {
               Reports
             </NavLink>
             <NavLink
-              to={routes.performance({ id: organizationId })}
+              to={routes.performance({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -94,7 +81,7 @@ const Navigation = () => {
               Employee Stats
             </NavLink>
             <NavLink
-              to={routes.attendance({ id: organizationId })}
+              to={routes.attendance({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -102,7 +89,7 @@ const Navigation = () => {
               Leave Management
             </NavLink>
             <NavLink
-              to={routes.employeePayRolls({ id: organizationId })}
+              to={routes.employeePayRolls({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >
@@ -110,7 +97,7 @@ const Navigation = () => {
               Payroll
             </NavLink>
             <NavLink
-              to={routes.settings({ id: organizationId })}
+              to={routes.settings({ id: 'organizationId' })}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               activeClassName="bg-muted text-slate-800"
             >

@@ -10,6 +10,15 @@ export const organizations: QueryResolvers['organizations'] = () => {
   return db.organization.findMany()
 }
 
+export const organizationByTag: QueryResolvers['organizationByTag'] = ({
+  Organisation_tag,
+}) => {
+  console.log('Querying for Organisation_tag:', Organisation_tag)
+  return db.organization.findFirst({
+    where: { Organisation_tag },
+  })
+}
+
 export const organization: QueryResolvers['organization'] = ({
   OrganizationId,
 }) => {
