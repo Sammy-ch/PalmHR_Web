@@ -10,6 +10,7 @@ import type {
 } from '@redwoodjs/web'
 
 import DashboardHeader from '../DashboardHeader/DashboardHeader'
+import { Skeleton } from '../ui/skeleton'
 
 export const QUERY: TypedDocumentNode<
   FindDashboardHeaderQuery,
@@ -23,7 +24,7 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Skeleton className="m-5 h-10 w-full" />
 
 export const Empty = () => <div>Empty</div>
 
@@ -39,5 +40,6 @@ export const Success = ({
   FindDashboardHeaderQuery,
   FindDashboardHeaderQueryVariables
 >) => {
+  console.log(dashboard)
   return <DashboardHeader organizationId={dashboard.OrganizationId} />
 }

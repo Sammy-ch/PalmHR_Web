@@ -1,12 +1,12 @@
 import { HandCoins } from 'lucide-react'
 import { Button } from 'web/src/components/ui/button'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTrigger,
-} from 'web/src/components/ui/drawer'
+// import {
+//   Drawer,
+//   DrawerClose,
+//   DrawerContent,
+//   DrawerFooter,
+//   DrawerTrigger,
+// } from 'web/src/components/ui/drawer'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,19 +16,9 @@ import {
   DropdownMenuTrigger,
 } from 'web/src/components/ui/dropdown-menu'
 
-import {
-  Link,
-  routes,
-  navigate,
-  useRouteName,
-  useParams,
-} from '@redwoodjs/router'
-import { useQuery } from '@redwoodjs/web'
-import { TypedDocumentNode } from '@redwoodjs/web'
+import { Link, routes, useRouteName } from '@redwoodjs/router'
 
-import { useAuth } from 'src/auth'
-import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
-import { Badge } from 'src/components/ui/badge'
+// import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
 import {
   CardTitle,
   CardDescription,
@@ -52,19 +42,6 @@ interface Props {
 
 const DashboardHeader = ({ organizationId }: Props) => {
   const routeName = useRouteName()
-  const { currentUser } = useAuth()
-
-  // const org_id = currentUser?.sub as string
-  // const { data, loading, error } = useQuery(QUERY, {
-  //   variables: {
-  //     OrganizationId: id,
-  //   },
-  // })
-  // if (loading) return <div>Loading...</div>
-  // if (!data && error) {
-  //   navigate(routes.organizations())
-  // }
-
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -277,28 +254,6 @@ function Package2Icon(props) {
       <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
       <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
       <path d="M12 3v6" />
-    </svg>
-  )
-}
-
-function PackageIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m7.5 4.27 9 5.15" />
-      <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-      <path d="m3.3 7 8.7 5 8.7-5" />
-      <path d="M12 22V12" />
     </svg>
   )
 }

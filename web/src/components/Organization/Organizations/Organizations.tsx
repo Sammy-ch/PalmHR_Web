@@ -52,7 +52,7 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
   // }
 
   return (
-    <main className="flex ">
+    <main className="flex flex-col lg:flex-row ">
       {organizations.map((organization) => (
         <OrganizationCard
           key={organization.OrganizationId}

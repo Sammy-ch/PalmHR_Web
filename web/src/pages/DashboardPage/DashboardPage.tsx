@@ -34,26 +34,26 @@ const DashboardPage = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()
 
-  if (!currentUser) {
-    console.log('Not logged in')
-  }
-  const userId = currentUser?.sub
+  // if (!currentUser) {
+  //   console.log('Not logged in')
+  // }
+  // const userId = currentUser?.sub
 
-  const { data, loading, error } = useQuery(QUERY, {
-    variables: {
-      OrganizationId: id,
-    },
-  })
-  if (loading) return <div>Loading...</div>
-  if (!data && error) {
-    navigate(routes.organizations())
-  }
-  if (
-    data?.organization?.OrganizationId === id &&
-    data?.organization?.Organisation_tag === userId
-  ) {
-    alert('Welcome to your Dashboard')
-  }
+  // const { data, loading, error } = useQuery(QUERY, {
+  //   variables: {
+  //     OrganizationId: id,
+  //   },
+  // })
+  // if (loading) return <div>Loading...</div>
+  // if (!data && error) {
+  //   navigate(routes.organizations())
+  // }
+  // if (
+  //   data?.organization?.OrganizationId === id &&
+  //   data?.organization?.Organisation_tag === userId
+  // ) {
+  //   alert('Welcome to your Dashboard')
+  // }
 
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
