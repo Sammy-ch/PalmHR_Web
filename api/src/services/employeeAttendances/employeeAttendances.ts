@@ -19,6 +19,20 @@ export const employeeAttendance: QueryResolvers['employeeAttendance'] = ({
   })
 }
 
+export const employeeAttendancesByOrganization: QueryResolvers['employeeAttendancesByOrganization'] =
+  ({ orgId }) => {
+    return db.employeeAttendance.findMany({
+      where: {
+        employee: {
+          org_id: orgId,
+        },
+      },
+      include: {
+        employee: true,
+      },
+    })
+  }
+
 export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendance'] =
   ({ input }) => {
     return db.employeeAttendance.create({
