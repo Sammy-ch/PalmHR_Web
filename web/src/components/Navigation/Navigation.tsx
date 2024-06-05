@@ -1,11 +1,7 @@
-import { BookUp2, FilePieChart, Settings, HandCoins } from 'lucide-react'
-
-import { NavLink, routes, navigate, useParams } from '@redwoodjs/router'
-import { TypedDocumentNode } from '@redwoodjs/web'
-import { useQuery } from '@redwoodjs/web'
+import { routes, navigate } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
-import { Badge } from 'src/components/ui/badge'
+import DashboardNavigationCell from 'src/components/DashboardNavigationCell'
 import { Button } from 'src/components/ui/button'
 import {
   CardTitle,
@@ -19,25 +15,10 @@ import logo from './palmHR_logo.png'
 
 const Navigation = () => {
   const { currentUser } = useAuth()
-  const { id } = useParams()
-
-  // const org_id = currentUser?.sub as string
-  // const { data, loading, error } = useQuery(QUERY, {
-  //   variables: {
-  //     OrganizationId: id,
-  //   },
-  // })
-  // if (loading) return <div>Loading...</div>
-  // if (!data && error) {
-  //   navigate(routes.organizations())
-  // }
-  // if (
-  //   data?.organization?.OrganizationId === id &&
-  //   data?.organization?.Organisation_tag === org_id
-  // ) {
-  //   console.log('Welcome to your Dashboard')
-  // }
-  // const organizationId = data?.organization?.OrganizationId
+  if (!currentUser) {
+    navigate(routes.organizations())
+  }
+  const OrgTag = currentUser?.sub as string
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -55,56 +36,7 @@ const Navigation = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            <NavLink
-              to={routes.dashboard({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <HomeIcon className="h-4 w-4" />
-              Dashboard
-            </NavLink>
-            <NavLink
-              to={routes.reports({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <BookUp2 className="h-4 w-4" />
-              Reports
-            </NavLink>
-            <NavLink
-              to={routes.performance({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <UsersIcon className="h-4 w-4" />
-              Employee Stats
-            </NavLink>
-            <NavLink
-              to={routes.attendance({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <FilePieChart className="h-4 w-4" />
-              Leave Management
-            </NavLink>
-            <NavLink
-              to={routes.employeePayRolls({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <HandCoins className="h-4 w-4" />
-              Payroll
-            </NavLink>
-            <NavLink
-              to={routes.settings({ id: 'organizationId' })}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              activeClassName="bg-muted text-slate-800"
-            >
-              <Settings className="h-4 w-4" />
-              Settings
-            </NavLink>
-          </nav>
+          <DashboardNavigationCell tag={OrgTag} />
         </div>
         <div className="mt-auto p-4">
           <Card x-chunk="dashboard-02-chunk-0">
@@ -145,48 +77,6 @@ function BellIcon(props) {
     >
       <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
       <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>
-  )
-}
-
-function HomeIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  )
-}
-
-function UsersIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   )
 }
