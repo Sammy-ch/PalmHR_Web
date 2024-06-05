@@ -34,13 +34,13 @@ export const QUERY: TypedDocumentNode<
 
 export const Loading = () => {
   return (
-    <main>
-      <Skeleton className="h-10 w-full" />
-      <Skeleton className="h-10 w-full" />
-      <Skeleton className="h-10 w-full" />
-      <Skeleton className="h-10 w-full" />
-      <Skeleton className="h-10 w-full" />
-      <Skeleton className="h-10 w-full" />
+    <main className="grid items-start gap-5 px-2 lg:px-4">
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
     </main>
   )
 }
