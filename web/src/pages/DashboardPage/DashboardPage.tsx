@@ -14,22 +14,9 @@ import { TypedDocumentNode } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
-import KpiCard from 'src/components/KpiCard/KpiCard'
+import KpiCardCell from 'src/components/KpiCardCell'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 
-import { FindOrganizationByOrganizationIdVariables } from '@/types/graphql'
-import { FindOrganizationByOrganizationId } from '@/types/graphql'
-// const QUERY: TypedDocumentNode<
-//   FindOrganizationByOrganizationId,
-//   FindOrganizationByOrganizationIdVariables
-// > = gql`
-//   query FindOrganizationByOrganizationId($OrganizationId: String!) {
-//     organization: organization(OrganizationId: $OrganizationId) {
-//       OrganizationId
-//       Organisation_tag
-//     }
-//   }
-// `
 const DashboardPage = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()
@@ -59,30 +46,7 @@ const DashboardPage = () => {
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />
       <section className=" mb-10 grid w-full gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
-        <KpiCard
-          title={'OnTime Attendance'}
-          metric={'56'}
-          icon={BadgeCheck}
-          progress={'+20.1% from last month'}
-        />
-        <KpiCard
-          title={'Absenteeism rate'}
-          icon={ListFilter}
-          metric={'32'}
-          progress={'+20.1% from last month'}
-        />
-        <KpiCard
-          title={'Average working hours'}
-          metric={'16'}
-          progress={'+20.1% from last month'}
-          icon={Timer}
-        />
-        <KpiCard
-          title={'Late Attendance'}
-          metric={'48'}
-          progress={'+20.1% from last month'}
-          icon={BookX}
-        />
+        <KpiCardCell id={id} />
       </section>
       <h1>Attendance Overview Chart</h1>
       <section className={'w-full border p-5  shadow-md'}>
