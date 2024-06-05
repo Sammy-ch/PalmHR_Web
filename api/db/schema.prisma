@@ -142,18 +142,31 @@ model EmployeeAttendanceReport {
 }
 
 model Organization {
-  OrganizationId   String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  OrganizationName String            @db.Text
-  User             User              @relation(fields: [Organisation_tag], references: [id])
-  Organisation_tag String            @db.Uuid
-  Address          String            @db.Text
-  Email            String            @db.Text
-  Phone            String            @db.Text
-  PayRollSetting   PayRollSetting[]
-  Admin            Admin[]
-  EmployeeProfiles EmployeeProfile[]
+  OrganizationId             String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  OrganizationName           String                       @db.Text
+  User                       User                         @relation(fields: [Organisation_tag], references: [id])
+  Organisation_tag           String                       @db.Uuid
+  Address                    String                       @db.Text
+  Email                      String                       @db.Text
+  Phone                      String                       @db.Text
+  PayRollSetting             PayRollSetting[]
+  Admin                      Admin[]
+  EmployeeProfiles           EmployeeProfile[]
+  OrganizationAttendanceKpi OrganizationAttendanceKpi[]
 
   @@unique([OrganizationId, OrganizationName, Email])
+}
+
+model OrganizationAttendanceKpi {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  TotalOvertime      Int          @db.Integer
+  TotalWorkhours     Int          @db.Integer
+  TotalSickLeaves    Int          @db.Integer
+  AbstenteeismRate   Int          @db.Integer
+  EarlyAttendaceRate Int          @db.Integer
+  LateAttedanceRate  Int          @db.Integer
+  org_id             String       @db.Uuid
+  Organization       Organization @relation(fields: [org_id], references: [OrganizationId])
 }
 
 enum AttendanceTag {
