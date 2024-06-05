@@ -19,6 +19,15 @@ export const organizationByTag: QueryResolvers['organizationByTag'] = ({
   })
 }
 
+export const organizationsByTag: QueryResolvers['organizationsByTag'] = async ({
+  Organisation_tag,
+}) => {
+  const organizations = await db.organization.findMany({
+    where: { Organisation_tag },
+  })
+  return organizations || []
+}
+
 export const organization: QueryResolvers['organization'] = ({
   OrganizationId,
 }) => {
