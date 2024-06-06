@@ -1,4 +1,5 @@
 import { routes, navigate } from '@redwoodjs/router'
+import { useParams } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import DashboardNavigationCell from 'src/components/DashboardNavigationCell'
@@ -14,11 +15,13 @@ import {
 import logo from './palmHR_logo.png'
 
 const Navigation = () => {
+  const { id } = useParams()
   const { currentUser } = useAuth()
   if (!currentUser) {
     navigate(routes.organizations())
   }
   const OrgTag = currentUser?.sub as string
+  console.log(OrgTag)
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -36,7 +39,7 @@ const Navigation = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <DashboardNavigationCell tag={OrgTag} />
+          <DashboardNavigationCell tag={OrgTag} id={id} />
         </div>
         <div className="mt-auto p-4">
           <Card x-chunk="dashboard-02-chunk-0">

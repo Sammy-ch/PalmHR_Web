@@ -1,6 +1,6 @@
 import { CopyPlus } from 'lucide-react'
 
-import { routes, Link, navigate } from '@redwoodjs/router'
+import { routes, Link, navigate, useParams } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import DashboardHeaderCell from 'src/components/DashboardHeaderCell'
@@ -16,20 +16,14 @@ const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
   if (!currentUser) {
     navigate(routes.organizations())
   }
-  const OrgTag = currentUser?.sub as string
-
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-            <Link
-              to={routes.dashboard({ id: '123' })}
-              className="flex items-center gap-2 font-semibold"
-              href="#"
-            >
-              <h1>User Dashboard</h1>
-            </Link>
+            <h1 className="flex items-center gap-2 font-semibold">
+              Projects Dashboard
+            </h1>
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
@@ -62,7 +56,6 @@ const UserDashboardLayout = ({ children }: UserDashboardLayoutProps) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <DashboardHeaderCell tag={OrgTag} />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <Link to={routes.newOrganization()}>
             <Button className="w-40 gap-2 bg-[#03a550]" size="sm">

@@ -1,4 +1,4 @@
-import { navigate, routes } from '@redwoodjs/router'
+import { navigate, routes, useParams } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import DashboardHeaderCell from 'src/components/DashboardHeaderCell'
@@ -9,6 +9,7 @@ type DashoardLayoutProps = {
 }
 
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
+  const { id } = useParams()
   const { currentUser } = useAuth()
   if (!currentUser) {
     navigate(routes.organizations())
@@ -18,7 +19,7 @@ const DashoardLayout = ({ children }: DashoardLayoutProps) => {
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <Navigation />
       <div className="flex flex-col">
-        <DashboardHeaderCell tag={OrgTag} />
+        <DashboardHeaderCell tag={OrgTag} id={id} />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
         </main>

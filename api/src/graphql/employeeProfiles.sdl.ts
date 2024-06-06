@@ -19,6 +19,7 @@ export const schema = gql`
   type Query {
     employeeProfiles: [EmployeeProfile!]! @requireAuth
     employeeProfile(profile_id: String!): EmployeeProfile @requireAuth
+    employeeProfilesByOrg(org_id: String!): [EmployeeProfile!]! @requireAuth
   }
 
   input CreateEmployeeProfileInput {

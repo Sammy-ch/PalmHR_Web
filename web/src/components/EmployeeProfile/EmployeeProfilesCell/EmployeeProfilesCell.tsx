@@ -1,6 +1,6 @@
 import type {
-  FindEmployeeProfiles,
-  FindEmployeeProfilesVariables,
+  GetEmployeeProfilesByOrg,
+  GetEmployeeProfilesByOrgVariables,
 } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -10,23 +10,19 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeeProfiles from 'src/components/EmployeeProfile/EmployeeProfiles'
-import EmployeeProfileCard from "src/components/EmployeeProfileCard/EmployeeProfileCard"
+import EmployeeProfileCard from 'src/components/EmployeeProfileCard/EmployeeProfileCard'
 
 export const QUERY: TypedDocumentNode<
-  FindEmployeeProfiles,
-  FindEmployeeProfilesVariables
+  GetEmployeeProfilesByOrg,
+  GetEmployeeProfilesByOrgVariables
 > = gql`
-  query FindEmployeeProfiles {
-    employeeProfiles {
+  query GetEmployeeProfilesByOrg($org_id: String!) {
+    employeeProfiles: employeeProfilesByOrg(org_id: $org_id) {
       profile_id
-      org_id
       first_name
       last_name
-      profile_image
       position
       email
-      allowed_leaves
     }
   }
 `
@@ -44,12 +40,17 @@ export const Empty = () => {
   )
 }
 
-export const Failure = ({ error }: CellFailureProps<FindEmployeeProfiles>) => (
+export const Failure = ({
+  error,
+}: CellFailureProps<GetEmployeeProfilesByOrg>) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
 export const Success = ({
   employeeProfiles,
-}: CellSuccessProps<FindEmployeeProfiles, FindEmployeeProfilesVariables>) => {
+}: CellSuccessProps<
+  GetEmployeeProfilesByOrg,
+  GetEmployeeProfilesByOrgVariables
+>) => {
   return <EmployeeProfileCard employeeProfiles={employeeProfiles} />
 }

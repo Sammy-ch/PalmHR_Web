@@ -24,8 +24,11 @@ export const QUERY: TypedDocumentNode<
   FindDashboardNavigationQuery,
   FindDashboardNavigationQueryVariables
 > = gql`
-  query FindDashboardNavigationQuery($tag: String!) {
-    dashboardNavigation: organizationByTag(Organisation_tag: $tag) {
+  query FindDashboardNavigationQuery($tag: String!, $id: String!) {
+    dashboardNavigation: organizationByTag(
+      Organisation_tag: $tag
+      OrganizationId: $id
+    ) {
       Organisation_tag
       OrganizationId
     }

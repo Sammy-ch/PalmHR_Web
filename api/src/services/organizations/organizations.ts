@@ -12,10 +12,11 @@ export const organizations: QueryResolvers['organizations'] = () => {
 
 export const organizationByTag: QueryResolvers['organizationByTag'] = ({
   Organisation_tag,
+  OrganizationId,
 }) => {
   console.log('Querying for Organisation_tag:', Organisation_tag)
   return db.organization.findFirst({
-    where: { Organisation_tag },
+    where: { Organisation_tag, OrganizationId },
   })
 }
 

@@ -16,8 +16,8 @@ export const QUERY: TypedDocumentNode<
   FindDashboardHeaderQuery,
   FindDashboardHeaderQueryVariables
 > = gql`
-  query FindDashboardHeaderQuery($tag: String!) {
-    dashboard: organizationByTag(Organisation_tag: $tag) {
+  query FindDashboardHeaderQuery($tag: String!, $id: String!) {
+    dashboard: organizationByTag(Organisation_tag: $tag, OrganizationId: $id) {
       OrganizationId
       Organisation_tag
     }
