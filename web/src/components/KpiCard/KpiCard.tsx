@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 interface KpiProps {
   title: string
-  metric: number
+  metric: number | string
   progress: string
   icon: React.ElementType
 }
