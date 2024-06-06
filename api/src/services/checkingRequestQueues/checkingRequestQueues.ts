@@ -19,6 +19,20 @@ export const checkingRequestQueue: QueryResolvers['checkingRequestQueue'] = ({
   })
 }
 
+export const checkingRequestQueuesByOrganization: QueryResolvers['checkingRequestQueuesByOrganization'] =
+  ({ organizationId }) => {
+    return db.checkingRequestQueue.findMany({
+      where: {
+        employee: {
+          org_id: organizationId,
+        },
+      },
+      include: {
+        employee: true,
+      },
+    })
+  }
+
 export const createCheckingRequestQueue: MutationResolvers['createCheckingRequestQueue'] =
   ({ input }) => {
     return db.checkingRequestQueue.create({
