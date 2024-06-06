@@ -59,6 +59,7 @@ const EmployeeProfilesList = ({ employeeProfiles }: FindEmployeeProfiles) => {
         <thead>
           <tr>
             <th>Profile id</th>
+            <th>Org id</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Profile image</th>
@@ -72,6 +73,7 @@ const EmployeeProfilesList = ({ employeeProfiles }: FindEmployeeProfiles) => {
           {employeeProfiles.map((employeeProfile) => (
             <tr key={employeeProfile.profile_id}>
               <td>{truncate(employeeProfile.profile_id)}</td>
+              <td>{truncate(employeeProfile.org_id)}</td>
               <td>{truncate(employeeProfile.first_name)}</td>
               <td>{truncate(employeeProfile.last_name)}</td>
               <td>{truncate(employeeProfile.profile_image)}</td>

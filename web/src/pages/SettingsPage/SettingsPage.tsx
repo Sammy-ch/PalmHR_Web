@@ -123,7 +123,7 @@ const SettingsPage = () => {
                 </CardFooter>
               </Card>
             </Form>
-
+{/*
             <Form>
               <Card>
                 <CardHeader>
@@ -164,9 +164,9 @@ const SettingsPage = () => {
                   </Button>{' '}
                 </CardFooter>
               </Card>
-            </Form>
+            </Form> */}
 
-            <Form>
+            {/* <Form>
               <Card>
                 <CardHeader>
                   <CardTitle>Integrations</CardTitle>
@@ -210,7 +210,7 @@ const SettingsPage = () => {
                   </Button>{' '}
                 </CardFooter>
               </Card>
-            </Form>
+            </Form> */}
           </div>
         </main>
       </div>

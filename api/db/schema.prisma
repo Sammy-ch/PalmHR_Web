@@ -16,12 +16,25 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
+model User {
+  id             String           @id @db.Uuid
+  first_name     String
+  last_name      String
+  email          String
+  organization   Organization[]
+  PayRollSetting PayRollSetting[]
+
+  @@unique([id, email])
+}
+
 model Admin {
-  id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  first_name String
-  last_name  String
-  email      String
-  admin_role AdminRole[]
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  org_id       String       @db.Uuid
+  Organization Organization @relation(fields: [org_id], references: [OrganizationId])
+  first_name   String
+  last_name    String
+  email        String
+  admin_role   AdminRole[]
 
   @@unique([id, email])
 }
@@ -37,6 +50,8 @@ model AdminRole {
 
 model EmployeeProfile {
   profile_id           String                     @id @db.Uuid
+  org_id               String                     @db.Uuid
+  Organization         Organization               @relation(fields: [org_id], references: [OrganizationId])
   first_name           String
   last_name            String
   profile_image        String?
@@ -72,20 +87,39 @@ model CheckingRequestQueue {
 }
 
 model EmployeePayRoll {
-  id               String          @id @db.Uuid
-  employee         EmployeeProfile @relation(fields: [id], references: [profile_id])
-  pay_period_start DateTime        @db.Date
-  pay_period_end   DateTime        @db.Date
-  hours_Worked     DateTime        @db.Time()
-  base_salary      Int             @db.Integer
-  overtime         DateTime?       @db.Time()
-  netpay           Int?            @db.Integer
+  id                String                   @id @db.Uuid
+  employee          EmployeeProfile          @relation(fields: [id], references: [profile_id])
+  pay_period_start  DateTime                 @db.Date
+  pay_period_end    DateTime                 @db.Date
+  attendance_report String                   @db.Uuid
+  report            EmployeeAttendanceReport @relation(fields: [attendance_report], references: [employee_id])
+  base_salary       Int                      @db.Integer
+  overtime          Int?                     @db.Integer
+  net_salary        Int?                     @db.Integer
+  bonuses           Int?                     @db.Integer
+  gross_amount      Int?                     @db.Integer
+  labor_cost        Int?                     @db.Integer
 
   @@unique([id])
 }
 
+model PayRollSetting {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  org_id             String       @db.Uuid
+  organization       Organization @relation(fields: [org_id], references: [OrganizationId])
+  housing            Int?         @db.Integer
+  transport          Int?         @db.Integer
+  INSS               Int?         @db.Integer
+  INSS_contribution  Int?         @db.Integer
+  INSS_payroll_risks Int?         @db.Integer
+  medical_insurance  Int?         @db.Integer
+  IPR                Int?         @db.Integer
+  User               User?        @relation(fields: [userId], references: [id])
+  userId             String?      @db.Uuid
+}
+
 model EmployeeLeaveForm {
-  id                   String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id                   String          @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   requested_leave_date DateTime        @db.Date
   leave                EmployeeProfile @relation(fields: [leave_id], references: [profile_id])
   leave_id             String          @default(dbgenerated("gen_random_uuid()")) @db.Uuid
@@ -95,25 +129,44 @@ model EmployeeLeaveForm {
 }
 
 model EmployeeAttendanceReport {
-  id                 String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  employee           EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
-  employee_id        String          @db.Uuid
-  TotalOvertime      DateTime        @db.Time()
-  TotalWorkhours     DateTime        @db.Time()
-  TotalSickLeaves    DateTime        @db.Time()
-  AbstenteeismRate   Int             @db.Integer
-  EarlyAttendaceRate Int             @db.Integer
-  LateAttedanceRate  Int             @db.Integer
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  employee           EmployeeProfile   @relation(fields: [employee_id], references: [profile_id])
+  employee_id        String            @unique @db.Uuid
+  TotalOvertime      Int               @db.Integer
+  TotalWorkhours     Int               @db.Integer
+  TotalSickLeaves    Int               @db.Integer
+  AbstenteeismRate   Int               @db.Integer
+  EarlyAttendaceRate Int               @db.Integer
+  LateAttedanceRate  Int               @db.Integer
+  payrollData        EmployeePayRoll[]
 }
 
 model Organization {
-  OrganizationId   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  OrganizationName String @db.Text
-  Address          String @db.Text
-  Email            String @db.Text
-  Phone            String @db.Text
+  OrganizationId             String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  OrganizationName           String                       @db.Text
+  User                       User                         @relation(fields: [Organisation_tag], references: [id])
+  Organisation_tag           String                       @db.Uuid
+  Address                    String                       @db.Text
+  Email                      String                       @db.Text
+  Phone                      String                       @db.Text
+  PayRollSetting             PayRollSetting[]
+  Admin                      Admin[]
+  EmployeeProfiles           EmployeeProfile[]
+  OrganizationAttendanceKpi OrganizationAttendanceKpi[]
 
   @@unique([OrganizationId, OrganizationName, Email])
+}
+
+model OrganizationAttendanceKpi {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  TotalOvertime      Int          @db.Integer
+  TotalWorkhours     Int          @db.Integer
+  TotalSickLeaves    Int          @db.Integer
+  AbstenteeismRate   Int          @db.Integer
+  EarlyAttendaceRate Int          @db.Integer
+  LateAttedanceRate  Int          @db.Integer
+  org_id             String       @db.Uuid
+  Organization       Organization @relation(fields: [org_id], references: [OrganizationId])
 }
 
 enum AttendanceTag {

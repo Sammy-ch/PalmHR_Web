@@ -18,6 +18,7 @@ export const QUERY: TypedDocumentNode<
   query FindEmployeeProfileByProfileId($profile_id: String!) {
     employeeProfile: employeeProfile(profile_id: $profile_id) {
       profile_id
+      org_id
       first_name
       last_name
       profile_image

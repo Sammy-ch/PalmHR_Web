@@ -2,87 +2,21 @@ import { ResponsiveRadialBar } from '@nivo/radial-bar'
 
 const data = [
   {
-    id: 'Supermarket',
+    id: 'Present',
     data: [
-      {
-        x: 'Vegetables',
-        y: 161,
-      },
-      {
-        x: 'Fruits',
-        y: 291,
-      },
-      {
-        x: 'Meat',
-        y: 167,
-      },
-      {
-        x: 'Fish',
-        y: 47,
-      },
+      { x: 'January', y: 20 },
+      { x: 'February', y: 18 },
+      { x: 'March', y: 22 },
+      // Add other months as needed
     ],
   },
   {
-    id: 'Combini',
+    id: 'Absent',
     data: [
-      {
-        x: 'Vegetables',
-        y: 175,
-      },
-      {
-        x: 'Fruits',
-        y: 98,
-      },
-      {
-        x: 'Meat',
-        y: 52,
-      },
-      {
-        x: 'Fish',
-        y: 230,
-      },
-    ],
-  },
-  {
-    id: 'Online',
-    data: [
-      {
-        x: 'Vegetables',
-        y: 212,
-      },
-      {
-        x: 'Fruits',
-        y: 166,
-      },
-      {
-        x: 'Meat',
-        y: 46,
-      },
-      {
-        x: 'Fish',
-        y: 9,
-      },
-    ],
-  },
-  {
-    id: 'Marché',
-    data: [
-      {
-        x: 'Vegetables',
-        y: 224,
-      },
-      {
-        x: 'Fruits',
-        y: 127,
-      },
-      {
-        x: 'Meat',
-        y: 170,
-      },
-      {
-        x: 'Fish',
-        y: 28,
-      },
+      { x: 'January', y: 2 },
+      { x: 'February', y: 4 },
+      { x: 'March', y: 1 },
+      // Add other months as needed
     ],
   },
 ]

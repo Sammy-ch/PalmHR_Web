@@ -38,10 +38,11 @@ describe('employeeProfiles', () => {
     }
   )
 
-  scenario('creates a employeeProfile', async () => {
+  scenario('creates a employeeProfile', async (scenario: StandardScenario) => {
     const result = await createEmployeeProfile({
       input: {
         profile_id: 'String',
+        org_id: scenario.employeeProfile.two.org_id,
         first_name: 'String',
         last_name: 'String',
         position: 'String',
@@ -49,6 +50,7 @@ describe('employeeProfiles', () => {
     })
 
     expect(result.profile_id).toEqual('String')
+    expect(result.org_id).toEqual(scenario.employeeProfile.two.org_id)
     expect(result.first_name).toEqual('String')
     expect(result.last_name).toEqual('String')
     expect(result.position).toEqual('String')

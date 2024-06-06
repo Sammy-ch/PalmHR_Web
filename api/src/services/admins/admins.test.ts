@@ -22,11 +22,17 @@ describe('admins', () => {
     expect(result).toEqual(scenario.admin.one)
   })
 
-  scenario('creates a admin', async () => {
+  scenario('creates a admin', async (scenario: StandardScenario) => {
     const result = await createAdmin({
-      input: { first_name: 'String', last_name: 'String', email: 'String' },
+      input: {
+        org_id: scenario.admin.two.org_id,
+        first_name: 'String',
+        last_name: 'String',
+        email: 'String',
+      },
     })
 
+    expect(result.org_id).toEqual(scenario.admin.two.org_id)
     expect(result.first_name).toEqual('String')
     expect(result.last_name).toEqual('String')
     expect(result.email).toEqual('String')

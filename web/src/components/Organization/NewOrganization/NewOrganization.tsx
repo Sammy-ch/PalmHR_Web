@@ -9,6 +9,7 @@ import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import OrganizationForm from 'src/components/Organization/OrganizationForm'
 
 const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
@@ -23,6 +24,13 @@ const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
 `
 
 const NewOrganization = () => {
+  const { currentUser } = useAuth()
+  if (!currentUser) {
+    navigate(routes.organizations())
+  }
+
+  const userId = currentUser?.sub as string
+
   const [createOrganization, { loading, error }] = useMutation(
     CREATE_ORGANIZATION_MUTATION,
     {
@@ -37,7 +45,11 @@ const NewOrganization = () => {
   )
 
   const onSave = (input: CreateOrganizationInput) => {
-    createOrganization({ variables: { input } })
+    const updatedInput: CreateOrganizationInput = {
+      ...input,
+      Organisation_tag: userId, // Add the generated tag to the input
+    }
+    createOrganization({ variables: { input: updatedInput } })
   }
 
   return (

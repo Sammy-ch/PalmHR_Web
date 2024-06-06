@@ -18,6 +18,9 @@ export const schema = gql`
   type Query {
     employeeAttendances: [EmployeeAttendance!]! @requireAuth
     employeeAttendance(attendance_id: String!): EmployeeAttendance @requireAuth
+
+    employeeAttendancesByOrganization(orgId: String!): [EmployeeAttendance!]!
+      @requireAuth
   }
 
   input CreateEmployeeAttendanceInput {

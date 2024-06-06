@@ -4,53 +4,35 @@ import { BadgeCheck } from 'lucide-react'
 import { ListFilter } from 'lucide-react'
 import { Timer } from 'lucide-react'
 import { BookX } from 'lucide-react'
+import AttendanceBarChart from 'web/src/components/AttendanceBarChart/AttendanceBarChart'
 
+import { useParams } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
+import { useQuery } from '@redwoodjs/web'
+import { TypedDocumentNode } from '@redwoodjs/web'
 
-import AttendanceLineChart from 'src/components/AttendanceLineChart/AttendanceLineChart'
+import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
-import KpiCard from 'src/components/KpiCard/KpiCard'
-
-// import AttendanceBarChart from 'src/components/AttendanceBarChart/AttendanceBarChart'
+import KpiCardCell from 'src/components/KpiCardCell'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 
 const DashboardPage = () => {
+  const { id } = useParams()
+  const { currentUser } = useAuth()
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />
       <section className=" mb-10 grid w-full gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
-        <KpiCard
-          title={'OnTime Attendance'}
-          metric={'56'}
-          icon={BadgeCheck}
-          progress={'+20.1% from last month'}
-        />
-        <KpiCard
-          title={'Absenteeism rate'}
-          icon={ListFilter}
-          metric={'32'}
-          progress={'+20.1% from last month'}
-        />
-        <KpiCard
-          title={'Average working hours'}
-          metric={'16'}
-          progress={'+20.1% from last month'}
-          icon={Timer}
-        />
-        <KpiCard
-          title={'Late Attendance'}
-          metric={'48'}
-          progress={'+20.1% from last month'}
-          icon={BookX}
-        />
+        <KpiCardCell id={id} />
       </section>
       <h1>Attendance Overview Chart</h1>
-      <section className={'w-full border  shadow-md'}>
-        <AttendanceLineChart />
+      <section className={'w-full border p-5  shadow-md'}>
+        <AttendanceBarChart />
       </section>
       <section className="flex h-full w-full grid-flow-col gap-5">
         <div className="flex w-full  rounded-md shadow-md">
-          <EmployeeAttendancesCell />
+          <EmployeeAttendancesCell orgId={id} />
         </div>
         <div className={'shadow-md'}>
           <TopPerformersCard />

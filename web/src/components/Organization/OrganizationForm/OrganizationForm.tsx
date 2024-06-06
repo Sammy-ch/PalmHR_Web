@@ -41,7 +41,6 @@ const OrganizationForm = (props: OrganizationFormProps) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-
         <Label
           name="OrganizationName"
           className="rw-label"
@@ -49,7 +48,6 @@ const OrganizationForm = (props: OrganizationFormProps) => {
         >
           Organization name
         </Label>
-
         <TextField
           name="OrganizationName"
           defaultValue={props.organization?.OrganizationName}
@@ -57,9 +55,7 @@ const OrganizationForm = (props: OrganizationFormProps) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-
         <FieldError name="OrganizationName" className="rw-field-error" />
-
         <Label
           name="Address"
           className="rw-label"
@@ -67,7 +63,6 @@ const OrganizationForm = (props: OrganizationFormProps) => {
         >
           Address
         </Label>
-
         <TextField
           name="Address"
           defaultValue={props.organization?.Address}
@@ -75,9 +70,7 @@ const OrganizationForm = (props: OrganizationFormProps) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-
         <FieldError name="Address" className="rw-field-error" />
-
         <Label
           name="Email"
           className="rw-label"
@@ -85,7 +78,6 @@ const OrganizationForm = (props: OrganizationFormProps) => {
         >
           Email
         </Label>
-
         <TextField
           name="Email"
           defaultValue={props.organization?.Email}
@@ -93,9 +85,7 @@ const OrganizationForm = (props: OrganizationFormProps) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-
         <FieldError name="Email" className="rw-field-error" />
-
         <Label
           name="Phone"
           className="rw-label"
@@ -103,7 +93,6 @@ const OrganizationForm = (props: OrganizationFormProps) => {
         >
           Phone
         </Label>
-
         <TextField
           name="Phone"
           defaultValue={props.organization?.Phone}
@@ -111,9 +100,7 @@ const OrganizationForm = (props: OrganizationFormProps) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-
         <FieldError name="Phone" className="rw-field-error" />
-
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

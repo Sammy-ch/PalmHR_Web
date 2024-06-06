@@ -18,6 +18,7 @@ export const schema = gql`
   type Query {
     employeeLeaveForms: [EmployeeLeaveForm!]! @requireAuth
     employeeLeaveForm(id: String!): EmployeeLeaveForm @requireAuth
+    approvedEmployeeLeaveForms: [EmployeeLeaveForm!]! @requireAuth
   }
 
   input CreateEmployeeLeaveFormInput {

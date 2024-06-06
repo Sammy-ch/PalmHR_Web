@@ -10,7 +10,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import EmployeePayRolls from 'src/components/EmployeePayRoll/EmployeePayRolls'
+import Payrolls from '../../Payrolls/Payrolls'
+import { Skeleton } from '../../ui/skeleton'
 
 export const QUERY: TypedDocumentNode<
   FindEmployeePayRolls,
@@ -21,15 +22,50 @@ export const QUERY: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      hours_Worked
+      attendance_report
       base_salary
       overtime
-      netpay
+      net_salary
+      bonuses
+      gross_amount
+      labor_cost
+      employee {
+        profile_id
+        first_name
+        last_name
+      }
+      report {
+        id
+        TotalWorkhours
+      }
     }
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  return (
+    <div className="h-full">
+      <Skeleton className=" h-24  bg-slate-400" />
+      <div className="flex flex-col gap-5 py-10">
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+      </div>
+
+      <div className="flex flex-col gap-5 rounded-md border p-10 py-10">
+        <Skeleton className="h-10 w-36" />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+        <Skeleton className="h-5 " />
+      </div>
+    </div>
+  )
+}
 
 export const Empty = () => {
   return (
@@ -49,5 +85,5 @@ export const Failure = ({ error }: CellFailureProps<FindEmployeePayRolls>) => (
 export const Success = ({
   employeePayRolls,
 }: CellSuccessProps<FindEmployeePayRolls, FindEmployeePayRollsVariables>) => {
-  return <EmployeePayRolls employeePayRolls={employeePayRolls} />
+  return <Payrolls employeePayRolls={employeePayRolls} />
 }

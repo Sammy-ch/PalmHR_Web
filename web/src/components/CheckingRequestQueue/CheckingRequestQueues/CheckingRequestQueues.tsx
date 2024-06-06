@@ -1,16 +1,29 @@
+import { format } from 'date-fns'
+import { toZonedTime } from 'date-fns-tz'
 import type {
   DeleteCheckingRequestQueueMutation,
   DeleteCheckingRequestQueueMutationVariables,
   FindCheckingRequestQueues,
 } from 'types/graphql'
+import {
+  AvatarImage,
+  AvatarFallback,
+  Avatar,
+} from 'web/src/components/ui/avatar'
+import { Badge } from 'web/src/components/ui/badge'
+import { Button } from 'web/src/components/ui/button'
+import {
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuContent,
+  DropdownMenu,
+} from 'web/src/components/ui/dropdown-menu'
 
-import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
-import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
 
 const DELETE_CHECKING_REQUEST_QUEUE_MUTATION: TypedDocumentNode<
   DeleteCheckingRequestQueueMutation,
@@ -56,72 +69,113 @@ const CheckingRequestQueuesList = ({
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Employee id</th>
-            <th>Checking date</th>
-            <th>Checking time</th>
-            <th>Checking type</th>
-            <th>Checking status</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {checkingRequestQueues.map((checkingRequestQueue) => (
-            <tr key={checkingRequestQueue.id}>
-              <td>{truncate(checkingRequestQueue.id)}</td>
-              <td>{truncate(checkingRequestQueue.employee_id)}</td>
-              <td>{timeTag(checkingRequestQueue.checking_date)}</td>
-              <td>{timeTag(checkingRequestQueue.checking_time)}</td>
-              <td>{formatEnum(checkingRequestQueue.checking_type)}</td>
-              <td>{formatEnum(checkingRequestQueue.checking_status)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.checkingRequestQueue({
-                      id: checkingRequestQueue.id,
-                    })}
-                    title={
-                      'Show checkingRequestQueue ' +
-                      checkingRequestQueue.id +
-                      ' detail'
-                    }
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editCheckingRequestQueue({
-                      id: checkingRequestQueue.id,
-                    })}
-                    title={
-                      'Edit checkingRequestQueue ' + checkingRequestQueue.id
-                    }
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={
-                      'Delete checkingRequestQueue ' + checkingRequestQueue.id
-                    }
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(checkingRequestQueue.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <h1 className="mb-6 text-3xl font-bold">
+        Employee Check-In/Check-Out Requests
+      </h1>
+      <div className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
+        <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium">Pending Requests</h2>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="bg-gray-100 text-left text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                <th className="px-6 py-3 font-medium">Employee</th>
+                <th className="px-6 py-3 font-medium">Date/Time</th>
+                <th className="px-6 py-3 font-medium">Type</th>
+                <th className="px-6 py-3 font-medium">Status</th>
+                <th className="px-6 py-3 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {checkingRequestQueues.map((checkingRequest) => (
+                <tr
+                  className="border-b border-gray-200 dark:border-gray-700"
+                  key={checkingRequest.employee_id}
+                >
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <div className="flex items-center">
+                      <Avatar className="mr-3 h-8 w-8">
+                        {checkingRequest ? (
+                          <AvatarImage
+                            alt="John Doe"
+                            src={checkingRequest.employee.profile_image}
+                          />
+                        ) : (
+                          <AvatarFallback>DP</AvatarFallback>
+                        )}
+                      </Avatar>
+                      <span>
+                        {checkingRequest.employee.first_name +
+                          ' ' +
+                          checkingRequest.employee.last_name}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {new Date(checkingRequest.checking_date).toDateString()} -{' '}
+                    {format(
+                      toZonedTime(checkingRequest.checking_time, 'GMT'),
+                      'p'
+                    )}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {checkingRequest.checking_type}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <Badge variant="default">
+                      {checkingRequest.checking_status}
+                    </Badge>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size="icon" variant="ghost">
+                          <MoveHorizontalIcon className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem>Approve</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => onDeleteClick(checkingRequest.id)}
+                        >
+                          Reject
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default CheckingRequestQueuesList
+
+function MoveHorizontalIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="18 8 22 12 18 16" />
+      <polyline points="6 8 2 12 6 16" />
+      <line x1="2" x2="22" y1="12" y2="12" />
+    </svg>
+  )
+}

@@ -1,6 +1,8 @@
 export const schema = gql`
   type EmployeeProfile {
     profile_id: String!
+    org_id: String!
+    Organization: Organization!
     first_name: String!
     last_name: String!
     profile_image: String
@@ -17,9 +19,11 @@ export const schema = gql`
   type Query {
     employeeProfiles: [EmployeeProfile!]! @requireAuth
     employeeProfile(profile_id: String!): EmployeeProfile @requireAuth
+    employeeProfilesByOrg(org_id: String!): [EmployeeProfile!]! @requireAuth
   }
 
   input CreateEmployeeProfileInput {
+    org_id: String!
     first_name: String!
     last_name: String!
     profile_image: String
@@ -29,6 +33,7 @@ export const schema = gql`
   }
 
   input UpdateEmployeeProfileInput {
+    org_id: String
     first_name: String
     last_name: String
     profile_image: String

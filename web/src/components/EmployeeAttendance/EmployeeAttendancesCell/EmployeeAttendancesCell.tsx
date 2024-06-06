@@ -1,6 +1,6 @@
 import type {
-  FindEmployeeAttendances,
-  FindEmployeeAttendancesVariables,
+  FindEmployeeAttendancesByOrganization,
+  FindEmployeeAttendancesByOrganizationVariables,
 } from 'types/graphql'
 
 import type {
@@ -12,11 +12,11 @@ import type {
 import EmployeeAttendances from 'src/components/EmployeeAttendance/EmployeeAttendances'
 
 export const QUERY: TypedDocumentNode<
-  FindEmployeeAttendances,
-  FindEmployeeAttendancesVariables
+  FindEmployeeAttendancesByOrganization,
+  FindEmployeeAttendancesByOrganizationVariables
 > = gql`
-  query FindEmployeeAttendances {
-    employeeAttendances {
+  query FindEmployeeAttendancesByOrganization($orgId: String!) {
+    employeeAttendances: employeeAttendancesByOrganization(orgId: $orgId) {
       attendance_id
       employee_id
       checkin_time
@@ -42,15 +42,15 @@ export const Empty = () => {
 
 export const Failure = ({
   error,
-}: CellFailureProps<FindEmployeeAttendances>) => (
+}: CellFailureProps<FindEmployeeAttendancesByOrganization>) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
 export const Success = ({
   employeeAttendances,
 }: CellSuccessProps<
-  FindEmployeeAttendances,
-  FindEmployeeAttendancesVariables
+  FindEmployeeAttendancesByOrganization,
+  FindEmployeeAttendancesByOrganizationVariables
 >) => {
   return <EmployeeAttendances employeeAttendances={employeeAttendances} />
 }

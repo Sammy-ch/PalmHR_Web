@@ -18,6 +18,14 @@ export const employeeProfile: QueryResolvers['employeeProfile'] = ({
   })
 }
 
+export const employeeProfilesByOrg: QueryResolvers['employeeProfilesByOrg'] = ({
+  org_id,
+}) => {
+  return db.employeeProfile.findMany({
+    where: { org_id },
+  })
+}
+
 export const createEmployeeProfile: MutationResolvers['createEmployeeProfile'] =
   ({ input }) => {
     return db.employeeProfile.create({
@@ -41,6 +49,11 @@ export const deleteEmployeeProfile: MutationResolvers['deleteEmployeeProfile'] =
   }
 
 export const EmployeeProfile: EmployeeProfileRelationResolvers = {
+  Organization: (_obj, { root }) => {
+    return db.employeeProfile
+      .findUnique({ where: { profile_id: root?.profile_id } })
+      .Organization()
+  },
   AttendanceData: (_obj, { root }) => {
     return db.employeeProfile
       .findUnique({ where: { profile_id: root?.profile_id } })

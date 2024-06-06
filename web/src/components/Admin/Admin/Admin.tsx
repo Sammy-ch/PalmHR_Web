@@ -58,6 +58,10 @@ const Admin = ({ admin }: Props) => {
               <td>{admin.id}</td>
             </tr>
             <tr>
+              <th>Org id</th>
+              <td>{admin.org_id}</td>
+            </tr>
+            <tr>
               <th>First name</th>
               <td>{admin.first_name}</td>
             </tr>

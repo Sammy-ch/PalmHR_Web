@@ -1,6 +1,8 @@
 export const schema = gql`
   type Admin {
     id: String!
+    org_id: String!
+    Organization: Organization!
     first_name: String!
     last_name: String!
     email: String!
@@ -13,12 +15,14 @@ export const schema = gql`
   }
 
   input CreateAdminInput {
+    org_id: String!
     first_name: String!
     last_name: String!
     email: String!
   }
 
   input UpdateAdminInput {
+    org_id: String
     first_name: String
     last_name: String
     email: String

@@ -3,14 +3,12 @@ import { Download } from 'lucide-react'
 
 import { Link, routes } from '@redwoodjs/router'
 
-import { useAuth } from 'src/auth'
 
 import { AuroraBackground } from '../ui/aurora-background'
 
 // import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
 
 const HeroSection = () => {
-  const { isAuthenticated } = useAuth()
   return (
     <AuroraBackground>
       <motion.div

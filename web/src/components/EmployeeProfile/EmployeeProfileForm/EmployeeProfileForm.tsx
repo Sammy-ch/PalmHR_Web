@@ -44,6 +44,24 @@ const EmployeeProfileForm = (props: EmployeeProfileFormProps) => {
         />
 
         <Label
+          name="org_id"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Org id
+        </Label>
+
+        <TextField
+          name="org_id"
+          defaultValue={props.employeeProfile?.org_id}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="org_id" className="rw-field-error" />
+
+        <Label
           name="first_name"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
