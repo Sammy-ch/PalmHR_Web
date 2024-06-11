@@ -16,7 +16,7 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-model User {
+model UserAccount {
   id             String           @id @db.Uuid
   first_name     String
   last_name      String
@@ -114,7 +114,7 @@ model PayRollSetting {
   INSS_payroll_risks Int?         @db.Integer
   medical_insurance  Int?         @db.Integer
   IPR                Int?         @db.Integer
-  User               User?        @relation(fields: [userId], references: [id])
+  UserAccount               UserAccount?        @relation(fields: [userId], references: [id])
   userId             String?      @db.Uuid
 }
 
@@ -142,16 +142,15 @@ model EmployeeAttendanceReport {
 }
 
 model Organization {
-  OrganizationId             String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  OrganizationName           String                       @db.Text
-  User                       User                         @relation(fields: [Organisation_tag], references: [id])
-  Organisation_tag           String                       @db.Uuid
-  Address                    String                       @db.Text
-  Email                      String                       @db.Text
-  Phone                      String                       @db.Text
-  PayRollSetting             PayRollSetting[]
-  Admin                      Admin[]
-  EmployeeProfiles           EmployeeProfile[]
+  OrganizationId            String                      @id @db.Uuid
+  OrganizationName          String                      @db.Text
+  User                      UserAccount                        @relation(fields: [OrganizationId], references: [id])
+  Address                   String                      @db.Text
+  Email                     String                      @db.Text
+  Phone                     String                      @db.Text
+  PayRollSetting            PayRollSetting[]
+  Admin                     Admin[]
+  EmployeeProfiles          EmployeeProfile[]
   OrganizationAttendanceKpi OrganizationAttendanceKpi[]
 
   @@unique([OrganizationId, OrganizationName, Email])
