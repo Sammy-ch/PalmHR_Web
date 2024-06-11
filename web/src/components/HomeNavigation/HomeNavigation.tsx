@@ -1,4 +1,4 @@
-import { NavLink, routes, Link } from '@redwoodjs/router'
+import { NavLink, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import UserNavigationCell from 'src/components/UserNavigationCell'
@@ -7,14 +7,8 @@ import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 
-import type { FindUserById } from '@/types/graphql'
-
-interface Props {
-  user: NonNullable<FindUserById['user']>
-}
-
-const HomeNavigation = ({ user }: Props) => {
-  const { isAuthenticated, signUp, logOut, currentUser } = useAuth()
+const HomeNavigation = () => {
+  const { isAuthenticated, signUp, currentUser } = useAuth()
   let org_id
   if (currentUser) {
     org_id = currentUser.sub as string
@@ -55,7 +49,7 @@ const HomeNavigation = ({ user }: Props) => {
       <div className="flex">
         {isAuthenticated ? (
           <>
-            <UserNavigationCell id={org_id} />
+            <UserNavigationCell id={org_id}  />
           </>
         ) : (
           <>
