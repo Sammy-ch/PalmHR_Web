@@ -59,9 +59,7 @@ const DashoardLayout = ({ children }: DashoardLayoutProps) => {
                   <AlertDialogTitle>Welcome to PALM HR</AlertDialogTitle>
                   <AlertDialogDescription>
                     Before proceeding to use the app, users must verify their
-                    organization email address. Upon sign-up or email change
-                    requests, a verification email containing a unique link or
-                    code is sent to the provided email address.
+                    organization email address.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

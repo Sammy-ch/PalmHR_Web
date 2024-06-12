@@ -94,7 +94,14 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
                 name="Email"
                 id="email"
                 placeholder="Enter email"
-                validation={{ required: true }}
+                validation={{
+                  required: true,
+                  pattern: {
+                    value:
+                      /^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: 'Please enter a valid organization email',
+                  },
+                }}
               />
               <FieldError name="Email" className="rw-field-error" />
             </div>
