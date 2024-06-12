@@ -90,8 +90,8 @@ export const Success = ({
         {userAccount.id && userOrganization.OrganizationId ? (
           <main className="flex">
             <Link
-              to={routes.organization({
-                OrganizationId: userOrganization.OrganizationId,
+              to={routes.dashboard({
+                id: userOrganization.OrganizationId,
               })}
             >
               <Button className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white">

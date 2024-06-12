@@ -51,7 +51,7 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
             Enter the details of your new organization.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-10">
           <div className="space-y-2">
             <FormError
               error={props.error}
@@ -115,7 +115,7 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
         </CardContent>
         <CardFooter>
           <Button type="submit" className="ml-auto">
-            <Submit disabled={props.loading}>Create Organization</Submit>
+            <Submit disabled={props.loading}>Verify Organization Email</Submit>
           </Button>
         </CardFooter>
       </Card>

@@ -13,6 +13,8 @@ import { useAuth } from 'src/auth'
 
 import CreateOrganizationForm from '../../CreateOrganizationForm/CreateOrganizationForm'
 
+import logo from './palmhr-alter.png'
+
 const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
   CreateOrganizationMutation,
   CreateOrganizationMutationVariables
@@ -34,7 +36,7 @@ const NewOrganization = () => {
     {
       onCompleted: () => {
         toast.success('Organization created')
-        navigate(routes.organizations())
+        navigate(routes.dashboard())
       },
       onError: (error) => {
         toast.error(error.message)
@@ -51,9 +53,9 @@ const NewOrganization = () => {
   }
 
   return (
-    <div className=" min-h-screen ">
-      <div className="flex h-10 w-full items-center bg-black p-10 text-2xl text-white">
-        Create Organization
+    <div className=" min-h-screen">
+      <div className="flex w-full items-center border-b  p-5 text-2xl text-white">
+        <img src={logo} alt="palm-logo" height={100} width={100} />
       </div>
       <div className="flex min-h-screen items-center justify-center">
         <CreateOrganizationForm
