@@ -2,29 +2,24 @@ export const schema = gql`
   type Organization {
     OrganizationId: String!
     OrganizationName: String!
-    User: User!
-    Organisation_tag: String!
+    User: UserAccount!
     Address: String!
     Email: String!
     Phone: String!
     PayRollSetting: [PayRollSetting]!
     Admin: [Admin]!
     EmployeeProfiles: [EmployeeProfile]!
+    OrganizationAttendanceKpi: [OrganizationAttendanceKpi]!
   }
 
   type Query {
     organizations: [Organization!]! @requireAuth
     organization(OrganizationId: String!): Organization @requireAuth
-    organizationsByTag(Organisation_tag: String!): [Organization!]! @requireAuth
-    organizationByTag(
-      Organisation_tag: String!
-      OrganizationId: String!
-    ): Organization @requireAuth
   }
 
   input CreateOrganizationInput {
+    OrganizationId: String!
     OrganizationName: String!
-    Organisation_tag: String!
     Address: String!
     Email: String!
     Phone: String!
@@ -32,7 +27,6 @@ export const schema = gql`
 
   input UpdateOrganizationInput {
     OrganizationName: String
-    Organisation_tag: String
     Address: String
     Email: String
     Phone: String

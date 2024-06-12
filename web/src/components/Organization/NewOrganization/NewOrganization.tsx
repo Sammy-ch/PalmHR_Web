@@ -10,7 +10,8 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
-import OrganizationForm from 'src/components/Organization/OrganizationForm'
+
+import CreateOrganizationForm from '../../CreateOrganizationForm/CreateOrganizationForm'
 
 const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
   CreateOrganizationMutation,
@@ -25,9 +26,6 @@ const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
 
 const NewOrganization = () => {
   const { currentUser } = useAuth()
-  if (!currentUser) {
-    navigate(routes.organizations())
-  }
 
   const userId = currentUser?.sub as string
 
@@ -47,18 +45,22 @@ const NewOrganization = () => {
   const onSave = (input: CreateOrganizationInput) => {
     const updatedInput: CreateOrganizationInput = {
       ...input,
-      Organisation_tag: userId, // Add the generated tag to the input
+      OrganizationId: userId,
     }
     createOrganization({ variables: { input: updatedInput } })
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Organization</h2>
-      </header>
-      <div className="rw-segment-main">
-        <OrganizationForm onSave={onSave} loading={loading} error={error} />
+    <div className=" min-h-screen ">
+      <div className="flex h-10 w-full items-center bg-black p-10 text-2xl text-white">
+        Create Organization
+      </div>
+      <div className="flex min-h-screen items-center justify-center">
+        <CreateOrganizationForm
+          onSave={onSave}
+          loading={loading}
+          error={error}
+        />
       </div>
     </div>
   )

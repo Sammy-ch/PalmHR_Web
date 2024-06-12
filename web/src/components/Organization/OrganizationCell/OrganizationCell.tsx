@@ -19,7 +19,6 @@ export const QUERY: TypedDocumentNode<
     organization: organization(OrganizationId: $OrganizationId) {
       OrganizationId
       OrganizationName
-      Organisation_tag
       Address
       Email
       Phone

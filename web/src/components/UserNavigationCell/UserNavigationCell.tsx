@@ -3,7 +3,7 @@ import type {
   FindUserNavigationQueryVariables,
 } from 'types/graphql'
 
-import { routes, Link, navigate } from '@redwoodjs/router'
+import { routes, Link } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,

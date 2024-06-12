@@ -10,12 +10,7 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
         Email: 'String',
         Phone: 'String',
         User: {
-          create: {
-            id: 'String',
-            first_name: 'String',
-            last_name: 'String',
-            email: 'String',
-          },
+          create: { id: 'String', first_name: 'String', email: 'String' },
         },
       },
     },
@@ -26,12 +21,7 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
         Email: 'String',
         Phone: 'String',
         User: {
-          create: {
-            id: 'String',
-            first_name: 'String',
-            last_name: 'String',
-            email: 'String',
-          },
+          create: { id: 'String', first_name: 'String', email: 'String' },
         },
       },
     },

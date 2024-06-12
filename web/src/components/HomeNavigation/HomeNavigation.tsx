@@ -49,7 +49,7 @@ const HomeNavigation = () => {
       <div className="flex">
         {isAuthenticated ? (
           <>
-            <UserNavigationCell id={org_id}  />
+            <UserNavigationCell id={org_id} />
           </>
         ) : (
           <>

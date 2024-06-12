@@ -25,9 +25,7 @@ const CREATE_USER_ACCOUNT_MUTATION: TypedDocumentNode<
 
 const NewUserAccount = () => {
   const { currentUser } = useAuth()
-  if (!currentUser) {
-    navigate(routes.organizations())
-  }
+
 
   const userId = currentUser?.sub as string
 

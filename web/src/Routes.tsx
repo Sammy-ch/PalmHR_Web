@@ -56,8 +56,8 @@ const Routes = () => {
         <Route path="/admins/{id}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <PrivateSet wrap={UserDashboardLayout} unauthenticated="home">
-        <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
+      <PrivateSet unauthenticated="home">
+        <Route path="/organization/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
         <Route path="/organizations/{OrganizationId}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
         <Route path="/organization/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />
         <Route path="/organizations" page={OrganizationOrganizationsPage} name="organizations" />

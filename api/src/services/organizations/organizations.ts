@@ -10,25 +10,6 @@ export const organizations: QueryResolvers['organizations'] = () => {
   return db.organization.findMany()
 }
 
-export const organizationByTag: QueryResolvers['organizationByTag'] = ({
-  Organisation_tag,
-  OrganizationId,
-}) => {
-  console.log('Querying for Organisation_tag:', Organisation_tag)
-  return db.organization.findFirst({
-    where: { Organisation_tag, OrganizationId },
-  })
-}
-
-export const organizationsByTag: QueryResolvers['organizationsByTag'] = async ({
-  Organisation_tag,
-}) => {
-  const organizations = await db.organization.findMany({
-    where: { Organisation_tag },
-  })
-  return organizations || []
-}
-
 export const organization: QueryResolvers['organization'] = ({
   OrganizationId,
 }) => {
@@ -83,5 +64,10 @@ export const Organization: OrganizationRelationResolvers = {
     return db.organization
       .findUnique({ where: { OrganizationId: root?.OrganizationId } })
       .EmployeeProfiles()
+  },
+  OrganizationAttendanceKpi: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .OrganizationAttendanceKpi()
   },
 }
