@@ -148,6 +148,7 @@ model Organization {
   Address                   String                      @db.Text
   Email                     String                      @db.Text
   Phone                     String                      @db.Text
+  isVerified                Boolean                     @db.Boolean @default(false)
   PayRollSetting            PayRollSetting[]
   Admin                     Admin[]
   EmployeeProfiles          EmployeeProfile[]

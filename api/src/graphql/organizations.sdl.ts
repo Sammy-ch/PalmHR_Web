@@ -5,6 +5,7 @@ export const schema = gql`
     User: UserAccount!
     Address: String!
     Email: String!
+    isVerified: Boolean!
     Phone: String!
     PayRollSetting: [PayRollSetting]!
     Admin: [Admin]!
