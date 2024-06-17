@@ -34,6 +34,11 @@ export const schema = gql`
   }
 
   type Mutation {
+    sendVerificationEmail(
+      organizationId: String!
+      email: String!
+    ): Organization!
+
     createOrganization(input: CreateOrganizationInput!): Organization!
       @requireAuth
     updateOrganization(
