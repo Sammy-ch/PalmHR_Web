@@ -73,7 +73,6 @@ export const Success = ({
       alert('Verification email sent successfully')
     } catch (error) {
       console.error(error.message)
-      alert('Failed to send verification email')
     }
   }
 
