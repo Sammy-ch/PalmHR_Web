@@ -3,14 +3,9 @@ import { Download } from 'lucide-react'
 
 import { Link, routes } from '@redwoodjs/router'
 
-
-import { AuroraBackground } from '../ui/aurora-background'
-
-// import logo from './iphone-15-pro-on-white-background-top-view-removebg-preview.png'
-
 const HeroSection = () => {
   return (
-    <AuroraBackground>
+    <main>
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +44,7 @@ const HeroSection = () => {
           </div>
         </section>
       </motion.div>
-    </AuroraBackground>
+    </main>
   )
 }
 

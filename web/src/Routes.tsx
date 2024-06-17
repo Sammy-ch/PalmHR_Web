@@ -15,11 +15,16 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import { useAuth } from './auth'
 import DashoardLayout from './layouts/DashoardLayout/DashoardLayout'
 import HomeLayout from './layouts/HomeLayout/HomeLayout'
-import UserDashboardLayout from './layouts/UserDashboardLayout/UserDashboardLayout'
 
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="UserAccounts" titleTo="userAccounts" buttonLabel="New UserAccount" buttonTo="newUserAccount">
+        <Route path="/user-accounts/new" page={UserAccountNewUserAccountPage} name="newUserAccount" />
+        <Route path="/user-accounts/{id}/edit" page={UserAccountEditUserAccountPage} name="editUserAccount" />
+        <Route path="/user-accounts/{id}" page={UserAccountUserAccountPage} name="userAccount" />
+        <Route path="/user-accounts" page={UserAccountUserAccountsPage} name="userAccounts" />
+      </Set>
       <Set wrap={ScaffoldLayout} title="PayRollSettings" titleTo="payRollSettings" buttonLabel="New PayRollSetting" buttonTo="newPayRollSetting">
         <Route path="/pay-roll-settings/new" page={PayRollSettingNewPayRollSettingPage} name="newPayRollSetting" />
         <Route path="/pay-roll-settings/{id}/edit" page={PayRollSettingEditPayRollSettingPage} name="editPayRollSetting" />
@@ -50,11 +55,10 @@ const Routes = () => {
         <Route path="/admins/{id}" page={AdminAdminPage} name="admin" />
         <Route path="/admins" page={AdminAdminsPage} name="admins" />
       </Set>
-      <PrivateSet wrap={UserDashboardLayout} unauthenticated="home">
-        <Route path="/organizations/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
+      <PrivateSet unauthenticated="home">
+        <Route path="/organization/new" page={OrganizationNewOrganizationPage} name="newOrganization" />
         <Route path="/organizations/{OrganizationId}/edit" page={OrganizationEditOrganizationPage} name="editOrganization" />
-        <Route path="/organizations/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />
-        <Route path="/organizations" page={OrganizationOrganizationsPage} name="organizations" />
+        <Route path="/organization/{OrganizationId}" page={OrganizationOrganizationPage} name="organization" />
       </PrivateSet>
       <Set wrap={ScaffoldLayout} title="EmployeeAttendanceReports" titleTo="employeeAttendanceReports" buttonLabel="New EmployeeAttendanceReport" buttonTo="newEmployeeAttendanceReport">
         <Route path="/employee-attendance-reports/new" page={EmployeeAttendanceReportNewEmployeeAttendanceReportPage} name="newEmployeeAttendanceReport" />

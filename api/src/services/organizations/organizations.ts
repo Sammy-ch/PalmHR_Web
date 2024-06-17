@@ -1,3 +1,4 @@
+import { Resend } from 'resend'
 import type {
   QueryResolvers,
   MutationResolvers,
@@ -6,27 +7,28 @@ import type {
 
 import { db } from 'src/lib/db'
 
+const resend = new Resend(process.env.RESEND_API_KEY)
+
 export const organizations: QueryResolvers['organizations'] = () => {
   return db.organization.findMany()
 }
 
-export const organizationByTag: QueryResolvers['organizationByTag'] = ({
-  Organisation_tag,
-  OrganizationId,
-}) => {
-  console.log('Querying for Organisation_tag:', Organisation_tag)
-  return db.organization.findFirst({
-    where: { Organisation_tag, OrganizationId },
-  })
-}
+export const sendVerificationEmail = async (
+  organizationId: string,
+  email: string
+) => {
+  const verificationLink = `${process.env.FRONTEND_URL}/verifyOrganization?id=${organizationId}`
 
-export const organizationsByTag: QueryResolvers['organizationsByTag'] = async ({
-  Organisation_tag,
-}) => {
-  const organizations = await db.organization.findMany({
-    where: { Organisation_tag },
+  const emailContent = `
+    <p>Please verify your organization by clicking the link below:</p>
+    <a href="${verificationLink}">Verify Organization</a>
+  `
+  await resend.emails.send({
+    from: 'Acme <onboarding@resend.dev>',
+    to: email,
+    subject: 'Organization Verification',
+    html: emailContent,
   })
-  return organizations || []
 }
 
 export const organization: QueryResolvers['organization'] = ({
@@ -83,5 +85,10 @@ export const Organization: OrganizationRelationResolvers = {
     return db.organization
       .findUnique({ where: { OrganizationId: root?.OrganizationId } })
       .EmployeeProfiles()
+  },
+  OrganizationAttendanceKpi: (_obj, { root }) => {
+    return db.organization
+      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
+      .OrganizationAttendanceKpi()
   },
 }

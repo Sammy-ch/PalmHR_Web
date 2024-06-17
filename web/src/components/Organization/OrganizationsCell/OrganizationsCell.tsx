@@ -1,6 +1,6 @@
 import type {
-  FindOrganizationsByTag,
-  FindOrganizationsByTagVariables,
+  FindOrganizations,
+  FindOrganizationsVariables,
 } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -13,14 +13,13 @@ import type {
 import Organizations from 'src/components/Organization/Organizations'
 
 export const QUERY: TypedDocumentNode<
-  FindOrganizationsByTag,
-  FindOrganizationsByTagVariables
+  FindOrganizations,
+  FindOrganizationsVariables
 > = gql`
-  query FindOrganizationsByTag($tag: String!) {
-    organisations: organizationsByTag(Organisation_tag: $tag) {
+  query FindOrganizations {
+    organizations {
       OrganizationId
       OrganizationName
-      Organisation_tag
       Address
       Email
       Phone
@@ -41,17 +40,12 @@ export const Empty = () => {
   )
 }
 
-export const Failure = ({
-  error,
-}: CellFailureProps<FindOrganizationsByTag>) => (
+export const Failure = ({ error }: CellFailureProps<FindOrganizations>) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
 export const Success = ({
-  organisations,
-}: CellSuccessProps<
-  FindOrganizationsByTag,
-  FindOrganizationsByTagVariables
->) => {
-  return <Organizations organizations={organisations} />
+  organizations,
+}: CellSuccessProps<FindOrganizations, FindOrganizationsVariables>) => {
+  return <Organizations organizations={organizations} />
 }

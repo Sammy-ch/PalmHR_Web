@@ -23,6 +23,9 @@ export const schema = gql`
   type Query {
     checkingRequestQueues: [CheckingRequestQueue!]! @requireAuth
     checkingRequestQueue(id: String!): CheckingRequestQueue @requireAuth
+    checkingRequestQueuesByOrganization(
+      organizationId: String!
+    ): [CheckingRequestQueue!]! @requireAuth
   }
 
   input CreateCheckingRequestQueueInput {

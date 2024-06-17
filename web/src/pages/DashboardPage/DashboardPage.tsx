@@ -19,7 +19,6 @@ import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCar
 
 const DashboardPage = () => {
   const { id } = useParams()
-  const { currentUser } = useAuth()
   return (
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />

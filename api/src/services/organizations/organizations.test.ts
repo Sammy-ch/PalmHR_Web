@@ -36,18 +36,18 @@ describe('organizations', () => {
   scenario('creates a organization', async (scenario: StandardScenario) => {
     const result = await createOrganization({
       input: {
+        OrganizationId: scenario.organization.two.OrganizationId,
         OrganizationName: 'String',
-        Organisation_tag: scenario.organization.two.Organisation_tag,
         Address: 'String',
         Email: 'String',
         Phone: 'String',
       },
     })
 
-    expect(result.OrganizationName).toEqual('String')
-    expect(result.Organisation_tag).toEqual(
-      scenario.organization.two.Organisation_tag
+    expect(result.OrganizationId).toEqual(
+      scenario.organization.two.OrganizationId
     )
+    expect(result.OrganizationName).toEqual('String')
     expect(result.Address).toEqual('String')
     expect(result.Email).toEqual('String')
     expect(result.Phone).toEqual('String')

@@ -1,12 +1,14 @@
-import { HandCoins } from 'lucide-react'
+import { HandCoins, BookUser } from 'lucide-react'
 import { Button } from 'web/src/components/ui/button'
-// import {
-//   Drawer,
-//   DrawerClose,
-//   DrawerContent,
-//   DrawerFooter,
-//   DrawerTrigger,
-// } from 'web/src/components/ui/drawer'
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerTrigger,
+} from 'web/src/components/ui/drawer'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +19,9 @@ import {
 } from 'web/src/components/ui/dropdown-menu'
 
 import { Link, routes, useRouteName } from '@redwoodjs/router'
+import { useParams } from '@redwoodjs/router'
 
-// import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
+import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
 import {
   CardTitle,
   CardDescription,
@@ -41,6 +44,7 @@ interface Props {
 }
 
 const DashboardHeader = ({ organizationId }: Props) => {
+  const { id } = useParams()
   const routeName = useRouteName()
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -131,6 +135,22 @@ const DashboardHeader = ({ organizationId }: Props) => {
       <div className="w-full flex-1">
         <h1>{capitalizeFirstLetter(routeName)}</h1>
       </div>
+      <Drawer>
+        <DrawerTrigger>
+          <BookUser strokeWidth={2} />
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Attendance Requests</DrawerTitle>
+          </DrawerHeader>
+          <CheckingRequestQueuesCell organizationId={id} />
+          <DrawerFooter>
+            <DrawerClose>
+              <Button variant="outline">Close</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="rounded-full" size="icon" variant="secondary">

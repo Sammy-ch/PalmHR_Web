@@ -1,6 +1,6 @@
 import type {
-  FindCheckingRequestQueues,
-  FindCheckingRequestQueuesVariables,
+  FindCheckingRequestQueuesByOrganization,
+  FindCheckingRequestQueuesByOrganizationVariables,
 } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -13,11 +13,11 @@ import type {
 import CheckingRequestQueues from 'src/components/CheckingRequestQueue/CheckingRequestQueues'
 
 export const QUERY: TypedDocumentNode<
-  FindCheckingRequestQueues,
-  FindCheckingRequestQueuesVariables
+  FindCheckingRequestQueuesByOrganization,
+  FindCheckingRequestQueuesByOrganizationVariables
 > = gql`
-  query FindCheckingRequestQueues {
-    checkingRequestQueues {
+  query FindCheckingRequestQueuesByOrganization($organizationId: String!) {
+    checkingRequestQueuesByOrganization(organizationId: $organizationId) {
       id
       employee_id
       checking_date
@@ -49,15 +49,19 @@ export const Empty = () => {
 
 export const Failure = ({
   error,
-}: CellFailureProps<FindCheckingRequestQueues>) => (
+}: CellFailureProps<FindCheckingRequestQueuesByOrganization>) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
 export const Success = ({
-  checkingRequestQueues,
+  checkingRequestQueuesByOrganization,
 }: CellSuccessProps<
-  FindCheckingRequestQueues,
-  FindCheckingRequestQueuesVariables
+  FindCheckingRequestQueuesByOrganization,
+  FindCheckingRequestQueuesByOrganizationVariables
 >) => {
-  return <CheckingRequestQueues checkingRequestQueues={checkingRequestQueues} />
+  return (
+    <CheckingRequestQueues
+      checkingRequestQueues={checkingRequestQueuesByOrganization}
+    />
+  )
 }
