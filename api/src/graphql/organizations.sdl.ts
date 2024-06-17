@@ -37,7 +37,7 @@ export const schema = gql`
     sendVerificationEmail(
       organizationId: String!
       email: String!
-    ): Organization!
+    ): Organization! @requireAuth
 
     createOrganization(input: CreateOrganizationInput!): Organization!
       @requireAuth
