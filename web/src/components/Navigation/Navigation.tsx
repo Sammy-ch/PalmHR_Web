@@ -18,10 +18,8 @@ const Navigation = () => {
   const { id } = useParams()
   const { currentUser } = useAuth()
   if (!currentUser) {
-    navigate(routes.organizations())
+    navigate(routes.organization())
   }
-  const OrgTag = currentUser?.sub as string
-  console.log(OrgTag)
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -39,7 +37,7 @@ const Navigation = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <DashboardNavigationCell tag={OrgTag} id={id} />
+          <DashboardNavigationCell id={id} />
         </div>
         <div className="mt-auto p-4">
           <Card x-chunk="dashboard-02-chunk-0">

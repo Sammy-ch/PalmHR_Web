@@ -9,6 +9,15 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '../../components/ui/alert-dialog'
 import DashboardHeader from '../DashboardHeader/DashboardHeader'
 import { Skeleton } from '../ui/skeleton'
 
@@ -19,6 +28,7 @@ export const QUERY: TypedDocumentNode<
   query FindDashboardHeaderQuery($id: String!) {
     dashboard: organization(OrganizationId: $id) {
       OrganizationId
+      isVerified
     }
   }
 `
@@ -39,6 +49,24 @@ export const Success = ({
   FindDashboardHeaderQuery,
   FindDashboardHeaderQueryVariables
 >) => {
-  console.log(dashboard)
+  if (dashboard.isVerified === false) {
+    return (
+      <AlertDialog open={true}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Welcome to PALM HR</AlertDialogTitle>
+            <AlertDialogDescription>
+              Before proceeding to use the app, users must verify their
+              organization email address.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction>Verify</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    )
+  }
+
   return <DashboardHeader organizationId={dashboard.OrganizationId} />
 }

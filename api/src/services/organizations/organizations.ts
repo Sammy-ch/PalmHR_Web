@@ -26,7 +26,7 @@ export const sendVerificationEmail = async (
   await resend.emails.send({
     from: 'Acme <onboarding@resend.dev>',
     to: email,
-    subject: 'Hello World',
+    subject: 'Organization Verification',
     html: emailContent,
   })
 }
