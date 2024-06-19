@@ -16,7 +16,6 @@ import { useAuth } from 'src/auth'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn, currentUser } = useAuth()
-  const userId = currentUser?.id
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -41,7 +40,6 @@ const LoginPage = () => {
       toast.error(response.error)
     } else {
       toast.success('Welcome back!')
-      navigate(routes.dashboard({ id: userId }))
     }
   }
 

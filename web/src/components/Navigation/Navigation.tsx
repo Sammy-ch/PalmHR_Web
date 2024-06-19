@@ -4,13 +4,6 @@ import { useParams } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
 import DashboardNavigationCell from 'src/components/DashboardNavigationCell'
 import { Button } from 'src/components/ui/button'
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  Card,
-} from 'src/components/ui/card'
 
 import logo from './palmHR_logo.png'
 
@@ -38,22 +31,6 @@ const Navigation = () => {
         </div>
         <div className="flex-1">
           <DashboardNavigationCell id={id} />
-        </div>
-        <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0">
-            <CardHeader className="p-2 pt-0 md:p-4">
-              <CardTitle>Upgrade to Premium</CardTitle>
-              <CardDescription>
-                Unlock all features and get unlimited access to our support
-                team.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-              <Button className="w-full" size="sm">
-                Upgrade
-              </Button>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

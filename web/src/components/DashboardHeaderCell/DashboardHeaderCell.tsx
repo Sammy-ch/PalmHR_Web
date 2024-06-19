@@ -3,6 +3,8 @@ import type {
   FindDashboardHeaderQueryVariables,
 } from 'types/graphql'
 
+import { navigate } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import type {
   CellSuccessProps,
@@ -48,7 +50,7 @@ export const Loading = () => (
   <Skeleton className="m-5 h-10 w-full bg-slate-300" />
 )
 
-export const Empty = () => <Skeleton className="m-5 h-10 w-full bg-slate-300" />
+export const Empty = () => navigate(routes.newOrganization())
 
 export const Failure = ({
   error,

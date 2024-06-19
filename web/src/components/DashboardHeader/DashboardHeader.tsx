@@ -22,13 +22,6 @@ import { Link, routes, useRouteName } from '@redwoodjs/router'
 import { useParams } from '@redwoodjs/router'
 
 import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  Card,
-} from 'src/components/ui/card'
 import { SheetTrigger, SheetContent, Sheet } from 'src/components/ui/sheet'
 
 import { FindOrganizationByOrganizationId } from '@/types/graphql'
@@ -114,22 +107,6 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Settings
             </Link>
           </nav>
-          <div className="mt-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" size="sm">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
