@@ -1,4 +1,3 @@
-import { Resend } from 'resend'
 import type {
   QueryResolvers,
   MutationResolvers,
@@ -7,28 +6,8 @@ import type {
 
 import { db } from 'src/lib/db'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export const organizations: QueryResolvers['organizations'] = () => {
   return db.organization.findMany()
-}
-
-export const sendVerificationEmail = async (
-  organizationId: string,
-  email: string
-) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verifyOrganization?id=${organizationId}`
-
-  const emailContent = `
-    <p>Please verify your organization by clicking the link below:</p>
-    <a href="${verificationLink}">Verify Organization</a>
-  `
-  await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
-    to: email,
-    subject: 'Organization Verification',
-    html: emailContent,
-  })
 }
 
 export const organization: QueryResolvers['organization'] = ({

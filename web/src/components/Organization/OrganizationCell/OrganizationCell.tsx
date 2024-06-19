@@ -19,9 +19,17 @@ export const QUERY: TypedDocumentNode<
     organization: organization(OrganizationId: $OrganizationId) {
       OrganizationId
       OrganizationName
-      Address
+      organizationType
+      addressStreet
+      addressCity
+      addressState
+      addressCountry
       Email
+      websiteUrl
       Phone
+      isVerified
+      organizationSize
+      Industry
     }
   }
 `

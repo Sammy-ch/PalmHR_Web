@@ -20,15 +20,23 @@ export const QUERY: TypedDocumentNode<EditOrganizationByOrganizationId> = gql`
     organization: organization(OrganizationId: $OrganizationId) {
       OrganizationId
       OrganizationName
-      Address
+      organizationType
+      addressStreet
+      addressCity
+      addressState
+      addressCountry
       Email
+      websiteUrl
       Phone
+      isVerified
+      organizationSize
+      Industry
     }
   }
 `
 
 const UPDATE_ORGANIZATION_MUTATION: TypedDocumentNode<
-  EditOrganizationByOrganizationId,
+  EditOrganizationById,
   UpdateOrganizationMutationVariables
 > = gql`
   mutation UpdateOrganizationMutation(
@@ -38,9 +46,17 @@ const UPDATE_ORGANIZATION_MUTATION: TypedDocumentNode<
     updateOrganization(OrganizationId: $OrganizationId, input: $input) {
       OrganizationId
       OrganizationName
-      Address
+      organizationType
+      addressStreet
+      addressCity
+      addressState
+      addressCountry
       Email
+      websiteUrl
       Phone
+      isVerified
+      organizationSize
+      Industry
     }
   }
 `
@@ -69,16 +85,16 @@ export const Success = ({
 
   const onSave = (
     input: UpdateOrganizationInput,
-    OrganizationId: EditOrganizationByOrganizationId['organization']['OrganizationId']
+    id: EditOrganizationByOrganizationId['organization']['id']
   ) => {
-    updateOrganization({ variables: { OrganizationId, input } })
+    updateOrganization({ variables: { id, input } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit Organization {organization?.OrganizationId}
+          Edit Organization {organization?.id}
         </h2>
       </header>
       <div className="rw-segment-main">

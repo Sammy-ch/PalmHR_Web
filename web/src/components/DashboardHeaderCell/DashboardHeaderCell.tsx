@@ -5,7 +5,6 @@ import type {
 
 import { navigate } from '@redwoodjs/router'
 import { routes } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -37,15 +36,6 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-const SEND_VERIFICATION_EMAIL = gql`
-  mutation SendVerificationEmail($organizationId: String!, $email: String!) {
-    sendVerificationEmail(organizationId: $organizationId, email: $email) {
-      OrganizationId
-      Email
-    }
-  }
-`
-
 export const Loading = () => (
   <Skeleton className="m-5 h-10 w-full bg-slate-300" />
 )
@@ -64,41 +54,8 @@ export const Success = ({
   FindDashboardHeaderQuery,
   FindDashboardHeaderQueryVariables
 >) => {
-  const [sendVerificationEmail] = useMutation(SEND_VERIFICATION_EMAIL)
-
-  const OrgId = dashboard.OrganizationId
-  const OrgEmail = dashboard.Email
-
-  const handleSendVerificationEmail = async () => {
-    try {
-      await sendVerificationEmail({
-        variables: { OrgId, OrgEmail },
-      })
-      alert('Verification email sent successfully')
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-
   if (dashboard.isVerified === false) {
-    return (
-      <AlertDialog open={true}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Welcome to PALM HR</AlertDialogTitle>
-            <AlertDialogDescription>
-              Before proceeding to use the app, users must verify their
-              organization email address.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={handleSendVerificationEmail}>
-              Verify
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
+    return navigate(routes.verifyOrganizationEmail())
   }
 
   return <DashboardHeader organizationId={dashboard.OrganizationId} />

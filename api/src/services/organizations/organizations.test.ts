@@ -38,9 +38,16 @@ describe('organizations', () => {
       input: {
         OrganizationId: scenario.organization.two.OrganizationId,
         OrganizationName: 'String',
-        Address: 'String',
+        organizationType: 'NonProfit',
+        addressStreet: 'String',
+        addressCity: 'String',
+        addressState: 'String',
+        addressCountry: 'String',
         Email: 'String',
+        websiteUrl: 'String',
         Phone: 'String',
+        organizationSize: 'Small',
+        Industry: 'Technology',
       },
     })
 
@@ -48,9 +55,16 @@ describe('organizations', () => {
       scenario.organization.two.OrganizationId
     )
     expect(result.OrganizationName).toEqual('String')
-    expect(result.Address).toEqual('String')
+    expect(result.organizationType).toEqual('NonProfit')
+    expect(result.addressStreet).toEqual('String')
+    expect(result.addressCity).toEqual('String')
+    expect(result.addressState).toEqual('String')
+    expect(result.addressCountry).toEqual('String')
     expect(result.Email).toEqual('String')
+    expect(result.websiteUrl).toEqual('String')
     expect(result.Phone).toEqual('String')
+    expect(result.organizationSize).toEqual('Small')
+    expect(result.Industry).toEqual('Technology')
   })
 
   scenario('updates a organization', async (scenario: StandardScenario) => {

@@ -3,6 +3,7 @@ import {
   Label,
   FormError,
   Submit,
+  SelectField,
   FieldError,
   RWGqlError,
   TextAreaField,
@@ -30,6 +31,7 @@ import {
   EditOrganizationByOrganizationId,
   UpdateOrganizationInput,
 } from '@/types/graphql'
+import { OrganizationType } from '@/types/graphql'
 
 type FormOrganization = NonNullable<
   EditOrganizationByOrganizationId['organization']
@@ -62,32 +64,32 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
         <CardContent>
           <form className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
-              <Label name="name" htmlFor="name">
+              <Label name="OrganizationName" htmlFor="name">
                 Organization Name
               </Label>
               <Input
-                name="name"
+                name="OrganizationName"
                 id="name"
                 placeholder="Enter organization name"
                 required
               />
             </div>
 
-            <div className="space-y-2">
-              <Label name="type" htmlFor="type">
+            <div className=" flex flex-col space-y-2">
+              <Label name="organizationType" htmlFor="type">
                 Organization Type
               </Label>
-              <Select id="type">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select organization type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="non-profit">Non-profit</SelectItem>
-                  <SelectItem value="for-profit">For-profit</SelectItem>
-                  <SelectItem value="government">Government</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+
+
+              <SelectField
+                name="organizationType"
+                className="h-10  rounded-md border"
+              >
+                <option>Other</option>
+                <option>NonProfit</option>
+                <option>ForProfit</option>
+                <option>Government</option>
+              </SelectField>
             </div>
             <div className="space-y-2">
               <Label name="address" htmlFor="address-street">
@@ -111,42 +113,37 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
                   id="address-state"
                   placeholder="State/Province"
                 />
-                <Select id="address-country">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="us">United States</SelectItem>
-                    <SelectItem value="ca">Canada</SelectItem>
-                    <SelectItem value="uk">United Kingdom</SelectItem>
-                    <SelectItem value="au">Australia</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
+                <SelectField
+                  name="addressCountry"
+                  className="h-10 rounded-md border"
+                >
+                  <option>Burundi</option>
+                  <option>Other</option>
+                </SelectField>
               </div>
             </div>
             <div className="space-y-2">
-              <Label name="phone" htmlFor="phone">
+              <Label name="Phone" htmlFor="phone">
                 Phone
               </Label>
-              <Input name="phone" id="phone" placeholder="Enter phone number" />
+              <Input name="Phone" id="phone" placeholder="Enter phone number" />
             </div>
             <div className="space-y-2">
-              <Label name="email" htmlFor="email">
+              <Label name="Email" htmlFor="email">
                 Email
               </Label>
               <Input
-                name="email"
+                name="Email"
                 id="email"
                 placeholder="Enter email address"
               />
             </div>
             <div className="space-y-2">
-              <Label name="website" htmlFor="website">
+              <Label name="websiteUrl" htmlFor="website">
                 Website
               </Label>
               <Input
-                name="website"
+                name="websiteUrl"
                 id="website"
                 placeholder="Enter website URL"
               />
@@ -158,40 +155,33 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
               <div />
             </div>
 
-            <div className="space-y-2">
+            <div className="flex flex-col  space-y-2">
               <Label name="organizationSize" htmlFor="size">
                 Organization Size
               </Label>
-              <Select id="size">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select organization size" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1-10">1-10 employees</SelectItem>
-                  <SelectItem value="11-50">11-50 employees</SelectItem>
-                  <SelectItem value="51-200">51-200 employees</SelectItem>
-                  <SelectItem value="201+">201+ employees</SelectItem>
-                </SelectContent>
-              </Select>
+              <SelectField
+                name="organizationSize"
+                className="h-10 rounded-md border"
+              >
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </SelectField>
             </div>
-            <div className="space-y-2">
-              <Label name="industry" htmlFor="industry">
+            <div className=" flex flex-col space-y-2">
+              <Label name="Industry" htmlFor="industry">
                 Industry
               </Label>
-              <Select id="industry">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select industry" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="technology">Technology</SelectItem>
-                  <SelectItem value="healthcare">Healthcare</SelectItem>
-                  <SelectItem value="finance">Finance</SelectItem>
-                  <SelectItem value="education">Education</SelectItem>
-                  <SelectItem value="retail">Retail</SelectItem>
-                  <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+
+              <SelectField name="Industry" className="h-10 rounded-md border">
+                <option>Technology</option>
+                <option>HealthCare</option>
+                <option>Finance</option>
+                <option>Education</option>
+                <option>Retail</option>
+                <option>Manufactoring</option>
+                <option>Other</option>
+              </SelectField>
             </div>
           </form>
         </CardContent>

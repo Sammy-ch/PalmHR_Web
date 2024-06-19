@@ -26,8 +26,7 @@ const CREATE_USER_ACCOUNT_MUTATION: TypedDocumentNode<
 const NewUserAccount = () => {
   const { currentUser } = useAuth()
 
-
-  const userId = currentUser?.sub as string
+  const userId = currentUser?.id as string
 
   const [createUserAccount, { loading, error }] = useMutation(
     CREATE_USER_ACCOUNT_MUTATION,
