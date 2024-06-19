@@ -1,8 +1,5 @@
-import netlifyIdentity from 'netlify-identity-widget'
+import { createDbAuthClient, createAuth } from '@redwoodjs/auth-dbauth-web'
 
-import { createAuth } from '@redwoodjs/auth-netlify-web'
-import { isBrowser } from '@redwoodjs/prerender/browserUtils'
+const dbAuthClient = createDbAuthClient()
 
-isBrowser && netlifyIdentity.init()
-
-export const { AuthProvider, useAuth } = createAuth(netlifyIdentity)
+export const { AuthProvider, useAuth } = createAuth(dbAuthClient)

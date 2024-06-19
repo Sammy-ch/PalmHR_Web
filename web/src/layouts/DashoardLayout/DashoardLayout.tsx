@@ -15,7 +15,7 @@ const DashoardLayout = ({ children }: DashoardLayoutProps) => {
   const { currentUser } = useAuth()
 
   useEffect(() => {
-    if (currentUser?.sub !== id) {
+    if (currentUser?.id !== id) {
       navigate(routes.home())
     }
   }, [currentUser, id])

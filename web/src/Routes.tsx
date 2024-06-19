@@ -19,6 +19,10 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/signup" page={SignupPage} name="signup" />
+      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={ScaffoldLayout} title="UserAccounts" titleTo="userAccounts" buttonLabel="New UserAccount" buttonTo="newUserAccount">
         <Route path="/user-accounts/new" page={UserAccountNewUserAccountPage} name="newUserAccount" />
         <Route path="/user-accounts/{id}/edit" page={UserAccountEditUserAccountPage} name="editUserAccount" />

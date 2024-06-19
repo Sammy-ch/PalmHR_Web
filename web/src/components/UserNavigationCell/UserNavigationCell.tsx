@@ -81,7 +81,7 @@ export const Success = ({
           Sign Out
         </Button>
       </main>
-    ) // Return null to prevent rendering the rest of the component
+    )
   }
 
   return (

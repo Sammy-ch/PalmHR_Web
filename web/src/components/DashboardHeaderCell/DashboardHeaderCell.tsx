@@ -44,9 +44,11 @@ const SEND_VERIFICATION_EMAIL = gql`
   }
 `
 
-export const Loading = () => <Skeleton className="m-5 h-10 w-full" />
+export const Loading = () => (
+  <Skeleton className="m-5 h-10 w-full bg-slate-300" />
+)
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <Skeleton className="m-5 h-10 w-full bg-slate-300" />
 
 export const Failure = ({
   error,

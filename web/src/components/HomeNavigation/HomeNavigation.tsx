@@ -1,18 +1,17 @@
-import { NavLink, routes } from '@redwoodjs/router'
+import { useEffect } from 'react'
+
+import { NavLink, navigate, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
-import UserNavigationCell from 'src/components/UserNavigationCell'
 
 import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 
 const HomeNavigation = () => {
-  const { isAuthenticated, signUp, currentUser } = useAuth()
-  let org_id
-  if (currentUser) {
-    org_id = currentUser.sub as string
-  }
+  const { isAuthenticated, currentUser } = useAuth()
+  const userId = currentUser?.id
+
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
       <img src={logo} alt="Palm_HR_Logo" height={100} width={200} />
@@ -49,15 +48,20 @@ const HomeNavigation = () => {
       <div className="flex">
         {isAuthenticated ? (
           <>
-            <UserNavigationCell id={org_id} />
+            <Button
+              onClick={() => navigate(routes.dashboard({ id: userId }))}
+              className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
+            >
+              Dashboard
+            </Button>
           </>
         ) : (
           <>
             <Button
-              onClick={signUp}
+              onClick={() => navigate(routes.login())}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >
-              Sign In
+              Log In
             </Button>
           </>
         )}
