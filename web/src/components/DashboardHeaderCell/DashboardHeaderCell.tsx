@@ -11,15 +11,6 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '../../components/ui/alert-dialog'
 import DashboardHeader from '../DashboardHeader/DashboardHeader'
 import { Skeleton } from '../ui/skeleton'
 
@@ -55,7 +46,7 @@ export const Success = ({
   FindDashboardHeaderQueryVariables
 >) => {
   if (dashboard.isVerified === false) {
-    return navigate(routes.verifyOrganizationEmail())
+    navigate(routes.verifyOrganizationEmail())
   }
 
   return <DashboardHeader organizationId={dashboard.OrganizationId} />

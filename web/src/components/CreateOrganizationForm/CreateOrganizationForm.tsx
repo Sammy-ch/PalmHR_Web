@@ -1,13 +1,4 @@
-import {
-  Form,
-  Label,
-  FormError,
-  Submit,
-  SelectField,
-  FieldError,
-  RWGqlError,
-  TextAreaField,
-} from '@redwoodjs/forms'
+import { Form, Label, SelectField, RWGqlError } from '@redwoodjs/forms'
 
 import { Button } from '../ui/button'
 import {
@@ -19,19 +10,11 @@ import {
   CardFooter,
 } from '../ui/card'
 import { Input } from '../ui/input'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '../ui/select'
 
 import {
   EditOrganizationByOrganizationId,
   UpdateOrganizationInput,
 } from '@/types/graphql'
-import { OrganizationType } from '@/types/graphql'
 
 type FormOrganization = NonNullable<
   EditOrganizationByOrganizationId['organization']
@@ -79,7 +62,6 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
               <Label name="organizationType" htmlFor="type">
                 Organization Type
               </Label>
-
 
               <SelectField
                 name="organizationType"
