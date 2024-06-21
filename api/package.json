@@ -12,6 +12,7 @@
     "@redwoodjs/graphql-server": "7.7.1",
     "@simplewebauthn/server": "^7",
     "@supabase/supabase-js": "2.42.7",
+    "ioredis": "^5.4.1",
     "resend": "^3.3.0"
   }
 }
