@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { NavLink, navigate, routes } from '@redwoodjs/router'
 
@@ -9,8 +9,20 @@ import { Button } from '../ui/button'
 import logo from './palmHR_logo.png'
 
 const HomeNavigation = () => {
-  const { isAuthenticated, currentUser } = useAuth()
-  const userId = currentUser?.id
+  const { client } = useAuth()
+  const [userSession, setUserSession] = useState('')
+
+  useEffect(() => {
+    async function getUserSession() {
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
+      }
+    }
+
+    getUserSession()
+  }, [client])
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
@@ -46,10 +58,10 @@ const HomeNavigation = () => {
         </NavLink>
       </nav>
       <div className="flex">
-        {isAuthenticated ? (
+        {userSession ? (
           <>
             <Button
-              onClick={() => navigate(routes.dashboard({ id: userId }))}
+              onClick={() => navigate(routes.dashboard({ id: userSession }))}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >
               Dashboard

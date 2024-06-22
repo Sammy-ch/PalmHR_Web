@@ -15,13 +15,21 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 
 const LoginPage = () => {
-  const { isAuthenticated, logIn, currentUser } = useAuth()
+  const { currentUser, client, logIn } = useAuth()
+
+  console.log(currentUser)
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate(routes.home())
+    async function getUserSession() {
+      const { data, error } = await client.auth.getSession()
+      if (error) {
+        console.error(error)
+      }
+      return data
     }
-  }, [isAuthenticated])
+
+    getUserSession()
+  }, [client])
 
   const emailRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
@@ -30,17 +38,16 @@ const LoginPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await logIn({
-      username: data.email,
+      authMethod: 'password',
+      email: data.email,
       password: data.password,
     })
 
-    if (response.message) {
-      toast(response.message)
-    } else if (response.error) {
-      toast.error(response.error)
+    if (response.error) {
+      toast(response.error.message)
     } else {
       toast.success('Welcome back!')
-      navigate(routes.dashboard({ id: currentUser?.id }))
+      // navigate(routes.dashboard({ id: currentUser?.id }))
     }
   }
 

@@ -1,18 +1,10 @@
 import React from 'react'
 
-import { BadgeCheck } from 'lucide-react'
-import { ListFilter } from 'lucide-react'
-import { Timer } from 'lucide-react'
-import { BookX } from 'lucide-react'
 import AttendanceBarChart from 'web/src/components/AttendanceBarChart/AttendanceBarChart'
 
 import { useParams } from '@redwoodjs/router'
-import { navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
-import { useQuery } from '@redwoodjs/web'
-import { TypedDocumentNode } from '@redwoodjs/web'
 
-import { useAuth } from 'src/auth'
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCardCell from 'src/components/KpiCardCell'
 import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'

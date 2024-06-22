@@ -17,7 +17,7 @@ export const organizations: QueryResolvers['organizations'] = async () => {
   const organizations = await db.organization.findMany()
 
   // Cache the organizations in Redis for 5 minutes
-  redis.set('organizations', JSON.stringify(organizations), 'EX', 300)
+  redis.set('organizations', JSON.stringify(organizations))
 
   return organizations
 }
@@ -36,12 +36,7 @@ export const organization: QueryResolvers['organization'] = async ({
   })
 
   // Cache the organization in Redis for 5 minutes
-  redis.set(
-    `organization:${OrganizationId}`,
-    JSON.stringify(organization),
-    'EX',
-    300
-  )
+  redis.set(`organization:${OrganizationId}`, JSON.stringify(organization))
 
   return organization
 }

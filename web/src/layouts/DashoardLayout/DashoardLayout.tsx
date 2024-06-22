@@ -12,13 +12,6 @@ type DashoardLayoutProps = {
 
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
   const { id } = useParams()
-  const { currentUser } = useAuth()
-
-  useEffect(() => {
-    if (currentUser?.id !== id) {
-      navigate(routes.home())
-    }
-  }, [currentUser, id])
 
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
