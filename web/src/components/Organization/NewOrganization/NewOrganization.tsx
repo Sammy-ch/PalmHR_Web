@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import type {
   CreateOrganizationMutation,
   CreateOrganizationInput,
@@ -25,15 +27,28 @@ const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
 `
 
 const NewOrganization = () => {
-  const { currentUser } = useAuth()
-  const userId = currentUser?.id as string
+  const [userSession, setUserSession] = useState('')
+
+  const { client } = useAuth()
+
+  useEffect(() => {
+    async function getUserSession() {
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
+      }
+    }
+
+    getUserSession()
+  }, [client])
 
   const [createOrganization, { loading, error }] = useMutation(
     CREATE_ORGANIZATION_MUTATION,
     {
       onCompleted: () => {
         toast.success('Organization created')
-        navigate(routes.dashboard({ id: userId }))
+        navigate(routes.dashboard({ id: userSession }))
       },
       onError: (error) => {
         toast.error(error.message)
@@ -44,7 +59,7 @@ const NewOrganization = () => {
   const onSave = (input: CreateOrganizationInput) => {
     const updatedInput: CreateOrganizationInput = {
       ...input,
-      OrganizationId: userId,
+      OrganizationId: userSession,
       isVerified: false,
     }
     createOrganization({ variables: { input: updatedInput } })

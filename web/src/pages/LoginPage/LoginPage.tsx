@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   Form,
@@ -15,17 +15,17 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 
 const LoginPage = () => {
-  const { currentUser, client, logIn } = useAuth()
+  const { client, logIn } = useAuth()
 
-  console.log(currentUser)
+  const [userSession, setUserSession] = useState('')
 
   useEffect(() => {
     async function getUserSession() {
-      const { data, error } = await client.auth.getSession()
-      if (error) {
-        console.error(error)
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
       }
-      return data
     }
 
     getUserSession()
@@ -47,7 +47,7 @@ const LoginPage = () => {
       toast(response.error.message)
     } else {
       toast.success('Welcome back!')
-      // navigate(routes.dashboard({ id: currentUser?.id }))
+      navigate(routes.dashboard({ id: userSession }))
     }
   }
 

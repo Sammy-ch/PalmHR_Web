@@ -1,4 +1,5 @@
 import { Form, Label, SelectField, RWGqlError } from '@redwoodjs/forms'
+import { toast } from '@redwoodjs/web/toast'
 
 import { Button } from '../ui/button'
 import {
@@ -32,6 +33,16 @@ interface OrganizationFormProps {
 
 const CreateOrganizationForm = (props: OrganizationFormProps) => {
   const onSubmit = (data: FormOrganization) => {
+    const emailDomain = data.Email.split('@')[1]
+    const isPublicDomain = ['gmail.com', 'yahoo.com', 'hotmail.com'].includes(
+      emailDomain
+    )
+
+    if (isPublicDomain) {
+      toast.error('Please use a Professional email domain.')
+      return
+    }
+
     props.onSave(data, props?.organization?.OrganizationId)
   }
 
@@ -45,7 +56,7 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label name="OrganizationName" htmlFor="name">
                 Organization Name
@@ -165,7 +176,7 @@ const CreateOrganizationForm = (props: OrganizationFormProps) => {
                 <option>Other</option>
               </SelectField>
             </div>
-          </form>
+          </div>
         </CardContent>
         <CardFooter>
           <Button type="submit" className="ml-auto">
