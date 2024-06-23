@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { navigate, routes, useParams } from '@redwoodjs/router'
 
@@ -12,6 +12,24 @@ type DashoardLayoutProps = {
 
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
   const { id } = useParams()
+  const { client } = useAuth()
+  const [userSession, setUserSession] = useState('')
+
+  useEffect(() => {
+    async function getUserSession() {
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
+      }
+    }
+
+    getUserSession()
+  }, [client])
+
+  if (!userSession) {
+    navigate(routes.login())
+  }
 
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

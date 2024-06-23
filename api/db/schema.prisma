@@ -16,21 +16,6 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-model UserAccount {
-  id                  String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  first_name          String
-  last_name           String?
-  email               String
-  organization        Organization[]
-  PayRollSetting      PayRollSetting[]
-  hashedPassword      String
-  salt                String
-  resetToken          String?
-  resetTokenExpiresAt DateTime?
-
-  @@unique([id, email])
-}
-
 model Admin {
   id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   org_id       String       @db.Uuid
@@ -107,7 +92,7 @@ model EmployeePayRoll {
   @@unique([id])
 }
 
-model PayRollSetting {
+model PayrollData {
   id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   org_id             String       @db.Uuid
   organization       Organization @relation(fields: [org_id], references: [OrganizationId])
@@ -118,7 +103,6 @@ model PayRollSetting {
   INSS_payroll_risks Int?         @db.Integer
   medical_insurance  Int?         @db.Integer
   IPR                Int?         @db.Integer
-  UserAccount        UserAccount? @relation(fields: [userId], references: [id])
   userId             String?      @db.Uuid
 }
 
@@ -148,7 +132,6 @@ model EmployeeAttendanceReport {
 model Organization {
   OrganizationId            String                      @id @db.Uuid
   OrganizationName          String                      @db.Text
-  User                      UserAccount                 @relation(fields: [OrganizationId], references: [id])
   organizationType          OrganizationType
   addressStreet             String                      @db.Text
   addressCity               String                      @db.Text
@@ -160,7 +143,7 @@ model Organization {
   isVerified                Boolean                     @default(false) @db.Boolean
   organizationSize          OrganizationSize
   Industry                  Industry
-  PayRollSetting            PayRollSetting[]
+  PayrollData            PayrollData[]
   Admin                     Admin[]
   EmployeeProfiles          EmployeeProfile[]
   OrganizationAttendanceKpi OrganizationAttendanceKpi[]

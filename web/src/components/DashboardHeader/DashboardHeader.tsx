@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'web/src/components/ui/dropdown-menu'
-
+import { useAuth } from 'src/auth'
 import { Link, routes, useRouteName } from '@redwoodjs/router'
 import { useParams } from '@redwoodjs/router'
 
@@ -38,6 +38,7 @@ interface Props {
 
 const DashboardHeader = ({ organizationId }: Props) => {
   const { id } = useParams()
+  const { logOut } = useAuth()
   const routeName = useRouteName()
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -138,12 +139,10 @@ const DashboardHeader = ({ organizationId }: Props) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Organizations</DropdownMenuItem>
           <DropdownMenuItem>Admins</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => logOut()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

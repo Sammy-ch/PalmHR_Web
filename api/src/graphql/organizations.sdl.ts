@@ -2,7 +2,6 @@ export const schema = gql`
   type Organization {
     OrganizationId: String!
     OrganizationName: String!
-    User: UserAccount!
     organizationType: OrganizationType!
     addressStreet: String!
     addressCity: String!
@@ -14,7 +13,7 @@ export const schema = gql`
     isVerified: Boolean!
     organizationSize: OrganizationSize!
     Industry: Industry!
-    PayRollSetting: [PayRollSetting]!
+    PayrollData: [PayrollData]!
     Admin: [Admin]!
     EmployeeProfiles: [EmployeeProfile]!
     OrganizationAttendanceKpi: [OrganizationAttendanceKpi]!

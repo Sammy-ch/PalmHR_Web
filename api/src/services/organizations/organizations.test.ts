@@ -33,10 +33,10 @@ describe('organizations', () => {
     }
   )
 
-  scenario('creates a organization', async (scenario: StandardScenario) => {
+  scenario('creates a organization', async () => {
     const result = await createOrganization({
       input: {
-        OrganizationId: scenario.organization.two.OrganizationId,
+        OrganizationId: 'String',
         OrganizationName: 'String',
         organizationType: 'NonProfit',
         addressStreet: 'String',
@@ -51,9 +51,7 @@ describe('organizations', () => {
       },
     })
 
-    expect(result.OrganizationId).toEqual(
-      scenario.organization.two.OrganizationId
-    )
+    expect(result.OrganizationId).toEqual('String')
     expect(result.OrganizationName).toEqual('String')
     expect(result.organizationType).toEqual('NonProfit')
     expect(result.addressStreet).toEqual('String')
@@ -73,10 +71,10 @@ describe('organizations', () => {
     })) as Organization
     const result = await updateOrganization({
       OrganizationId: original.OrganizationId,
-      input: { OrganizationName: 'String2' },
+      input: { OrganizationId: 'String2' },
     })
 
-    expect(result.OrganizationName).toEqual('String2')
+    expect(result.OrganizationId).toEqual('String2')
   })
 
   scenario('deletes a organization', async (scenario: StandardScenario) => {

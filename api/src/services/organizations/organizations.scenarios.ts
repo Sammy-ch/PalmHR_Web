@@ -5,6 +5,7 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
   organization: {
     one: {
       data: {
+        OrganizationId: 'String',
         OrganizationName: 'String',
         organizationType: 'NonProfit',
         addressStreet: 'String',
@@ -16,18 +17,11 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
         Phone: 'String',
         organizationSize: 'Small',
         Industry: 'Technology',
-        User: {
-          create: {
-            first_name: 'String',
-            email: 'String',
-            hashedPassword: 'String',
-            salt: 'String',
-          },
-        },
       },
     },
     two: {
       data: {
+        OrganizationId: 'String',
         OrganizationName: 'String',
         organizationType: 'NonProfit',
         addressStreet: 'String',
@@ -39,14 +33,6 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
         Phone: 'String',
         organizationSize: 'Small',
         Industry: 'Technology',
-        User: {
-          create: {
-            first_name: 'String',
-            email: 'String',
-            hashedPassword: 'String',
-            salt: 'String',
-          },
-        },
       },
     },
   },
