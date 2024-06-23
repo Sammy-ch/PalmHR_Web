@@ -33,30 +33,10 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <section className="grid grid-flow-col gap-5 rounded-md ">
-      <KpiCard
-        title={'OnTime Attendance'}
-        metric={'--/'}
-        icon={BadgeCheck}
-        progress={'+20.1% from last month'}
-      />
-      <KpiCard
-        title={'Absenteeism rate'}
-        icon={ListFilter}
-        metric={'--/'}
-        progress={'+20.1% from last month'}
-      />
-      <KpiCard
-        title={'Average working hours'}
-        metric={'--/'}
-        progress={'+20.1% from last month'}
-        icon={Timer}
-      />
-      <KpiCard
-        title={'Late Attendance'}
-        metric={'--/'}
-        progress={'+20.1% from last month'}
-        icon={BookX}
-      />
+      <KpiCard title={'OnTime Attendance'} metric={'--/'} icon={BadgeCheck} />
+      <KpiCard title={'Absenteeism rate'} icon={ListFilter} metric={'--/'} />
+      <KpiCard title={'Average working hours'} metric={'--/'} icon={Timer} />
+      <KpiCard title={'Late Attendance'} metric={'--/'} icon={BookX} />
     </section>
   )
 }
@@ -76,24 +56,20 @@ export const Success = ({
         title={'OnTime Attendance'}
         metric={kpiCard.EarlyAttendaceRate}
         icon={BadgeCheck}
-        progress={'+20.1% from last month'}
       />
       <KpiCard
         title={'Absenteeism rate'}
         icon={ListFilter}
         metric={kpiCard.AbstenteeismRate}
-        progress={'+20.1% from last month'}
       />
       <KpiCard
         title={'Average working hours'}
         metric={kpiCard.TotalWorkhours}
-        progress={'+20.1% from last month'}
         icon={Timer}
       />
       <KpiCard
         title={'Late Attendance'}
         metric={kpiCard.LateAttedanceRate}
-        progress={'+20.1% from last month'}
         icon={BookX}
       />
     </section>
