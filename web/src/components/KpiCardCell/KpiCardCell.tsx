@@ -32,28 +32,28 @@ export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
   return (
-    <section className=" grid w-full grid-flow-col gap-5 rounded-md ">
+    <section className="grid grid-flow-col gap-5 rounded-md ">
       <KpiCard
         title={'OnTime Attendance'}
-        metric={"--/"}
+        metric={'--/'}
         icon={BadgeCheck}
         progress={'+20.1% from last month'}
       />
       <KpiCard
         title={'Absenteeism rate'}
         icon={ListFilter}
-        metric={"--/"}
+        metric={'--/'}
         progress={'+20.1% from last month'}
       />
       <KpiCard
         title={'Average working hours'}
-        metric={"--/"}
+        metric={'--/'}
         progress={'+20.1% from last month'}
         icon={Timer}
       />
       <KpiCard
         title={'Late Attendance'}
-        metric={"--/"}
+        metric={'--/'}
         progress={'+20.1% from last month'}
         icon={BookX}
       />

@@ -22,7 +22,7 @@ const DashboardPage = () => {
         <AttendanceBarChart />
       </section>
       <section className="flex h-full w-full grid-flow-col gap-5">
-        <div className="flex w-full  rounded-md shadow-md">
+        <div className="flex w-full items-center justify-center  rounded-md shadow-md">
           <EmployeeAttendancesCell orgId={id} />
         </div>
         <div className={'shadow-md'}>

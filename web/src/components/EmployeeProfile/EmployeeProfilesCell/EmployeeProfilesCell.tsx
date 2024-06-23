@@ -30,14 +30,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No employeeProfiles yet. '}
-      <Link to={routes.newEmployeeProfile()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="">{'No Employee Profiles yet. '}</div>
 }
 
 export const Failure = ({

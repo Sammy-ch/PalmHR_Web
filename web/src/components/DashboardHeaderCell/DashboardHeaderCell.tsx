@@ -21,8 +21,18 @@ export const QUERY: TypedDocumentNode<
   query FindDashboardHeaderQuery($id: String!) {
     dashboard: organization(OrganizationId: $id) {
       OrganizationId
+      OrganizationName
       isVerified
       Email
+      addressCountry
+      addressState
+      addressStreet
+      organizationSize
+      organizationType
+      addressCity
+      websiteUrl
+      Phone
+      Industry
     }
   }
 `
@@ -49,5 +59,5 @@ export const Success = ({
     navigate(routes.verifyOrganizationEmail())
   }
 
-  return <DashboardHeader organizationId={dashboard.OrganizationId} />
+  return <DashboardHeader organization={dashboard} />
 }

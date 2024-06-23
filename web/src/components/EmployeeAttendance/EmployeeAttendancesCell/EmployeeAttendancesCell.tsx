@@ -37,7 +37,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return <div className="rw-text-center">{'No Employee Attendances yet. '}</div>
+  return <div className="text-lg">{'No Employee Attendances yet. '}</div>
 }
 
 export const Failure = ({

@@ -27,10 +27,6 @@ const DashoardLayout = ({ children }: DashoardLayoutProps) => {
     getUserSession()
   }, [client])
 
-  if (!userSession) {
-    navigate(routes.login())
-  }
-
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <Navigation />

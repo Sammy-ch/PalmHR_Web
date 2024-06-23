@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import type {
   CreateEmployeeProfileMutation,
   CreateEmployeeProfileInput,
@@ -9,8 +11,8 @@ import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import EmployeeProfileForm from 'src/components/EmployeeProfile/EmployeeProfileForm'
-
 const CREATE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
   CreateEmployeeProfileMutation,
   CreateEmployeeProfileMutationVariables
@@ -23,6 +25,22 @@ const CREATE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
 `
 
 const NewEmployeeProfile = () => {
+  const [userSession, setUserSession] = useState('')
+
+  const { client } = useAuth()
+
+  useEffect(() => {
+    async function getUserSession() {
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
+      }
+    }
+
+    getUserSession()
+  }, [client])
+
   const [createEmployeeProfile, { loading, error }] = useMutation(
     CREATE_EMPLOYEE_PROFILE_MUTATION,
     {
@@ -37,7 +55,11 @@ const NewEmployeeProfile = () => {
   )
 
   const onSave = (input: CreateEmployeeProfileInput) => {
-    createEmployeeProfile({ variables: { input } })
+    const updatedInput: CreateEmployeeProfileInput = {
+      ...input,
+      org_id: userSession,
+    }
+    createEmployeeProfile({ variables: { input: updatedInput } })
   }
 
   return (
