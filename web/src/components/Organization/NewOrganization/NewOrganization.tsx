@@ -51,11 +51,11 @@ const NewOrganization = () => {
   }
 
   return (
-    <div className="rw-segment">
+    <div className="min-h-screen">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">New Organization</h2>
       </header>
-      <div className="rw-segment-main">
+      <div className="flex min-h-screen items-center justify-center">
         <CreateOrganizationForm
           onSave={onSave}
           loading={loading}
