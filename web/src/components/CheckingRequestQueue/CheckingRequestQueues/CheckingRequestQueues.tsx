@@ -4,6 +4,8 @@ import type {
   DeleteCheckingRequestQueueMutation,
   DeleteCheckingRequestQueueMutationVariables,
   FindCheckingRequestQueues,
+  CreateEmployeeAttendanceMutation,
+  CreateEmployeeAttendanceMutationVariables,
 } from 'types/graphql'
 import {
   AvatarImage,
@@ -36,6 +38,23 @@ const DELETE_CHECKING_REQUEST_QUEUE_MUTATION: TypedDocumentNode<
   }
 `
 
+const ADD_EMPLOYEE_ATTENDANCE_MUTATION: TypedDocumentNode<
+  CreateEmployeeAttendanceMutation,
+  CreateEmployeeAttendanceMutationVariables
+> = gql`
+  mutation CreateEmployeeAttendanceMutation(
+    $data: CreateEmployeeAttendanceInput!
+  ) {
+    createEmployeeAttendance(input: $data) {
+      employee_id
+      attendance_tag
+      checkin_time
+      checkout_time
+      checking_date
+    }
+  }
+`
+
 const CheckingRequestQueuesList = ({
   checkingRequestQueues,
 }: FindCheckingRequestQueues) => {
@@ -56,6 +75,20 @@ const CheckingRequestQueuesList = ({
     }
   )
 
+  const [createEmployeeAttendance] = useMutation(
+    ADD_EMPLOYEE_ATTENDANCE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('EmployeeAttendance approved')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
+    }
+  )
+
   const onDeleteClick = (
     id: DeleteCheckingRequestQueueMutationVariables['id']
   ) => {
@@ -65,6 +98,35 @@ const CheckingRequestQueuesList = ({
       )
     ) {
       deleteCheckingRequestQueue({ variables: { id } })
+    }
+  }
+
+  const approveCheckin = (
+    checkingRequest: FindCheckingRequestQueues['checkingRequestQueues']
+  ) => {
+    if (
+      confirm(
+        'Are you sure you want to approve checkingRequestQueue ' +
+          checkingRequest.id +
+          '?'
+      )
+    ) {
+      const employeeAttendanceData: CreateEmployeeAttendanceMutation['createEmployeeAttendance'] =
+        {
+          employee_id: checkingRequest.employee_id,
+          checkin_time: checkingRequest.checking_time,
+          checking_date: checkingRequest.checking_date,
+          attendance_tag: 'PRESENT',
+        }
+
+      createEmployeeAttendance({ variables: { data: employeeAttendanceData } })
+        .then(() => {
+          // Delete the checking request after approving the check-in
+          deleteCheckingRequestQueue({ variables: { id: checkingRequest.id } })
+        })
+        .catch((error) => {
+          toast.error(error.message)
+        })
     }
   }
 
@@ -138,7 +200,11 @@ const CheckingRequestQueuesList = ({
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Approve</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => approveCheckin(checkingRequest)}
+                        >
+                          Approve
+                        </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => onDeleteClick(checkingRequest.id)}
                         >
