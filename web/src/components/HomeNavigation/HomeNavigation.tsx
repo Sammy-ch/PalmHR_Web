@@ -9,7 +9,7 @@ import { Button } from '../ui/button'
 import logo from './palmHR_logo.png'
 
 const HomeNavigation = () => {
-  const { client } = useAuth()
+  const { client, logOut } = useAuth()
   const [userSession, setUserSession] = useState('')
 
   useEffect(() => {
@@ -59,14 +59,20 @@ const HomeNavigation = () => {
       </nav>
       <div className="flex">
         {userSession ? (
-          <>
+          <main className="flex gap-2">
             <Button
               onClick={() => navigate(routes.dashboard({ id: userSession }))}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >
               Dashboard
             </Button>
-          </>
+            <Button
+              onClick={() => logOut()}
+              className="navbar hover:border-green flex  items-center justify-center rounded-lg  text-white   "
+            >
+              Log out
+            </Button>
+          </main>
         ) : (
           <>
             <Button

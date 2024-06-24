@@ -47,6 +47,7 @@ const LoginPage = () => {
       toast(response.error.message)
     } else {
       toast.success('Welcome back!')
+      navigate(routes.dashboard({ id: userSession }))
     }
   }
 
