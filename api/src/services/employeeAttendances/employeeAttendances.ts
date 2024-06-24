@@ -48,6 +48,21 @@ export const updateEmployeeAttendance: MutationResolvers['updateEmployeeAttendan
     })
   }
 
+export const approveEmployeeCheckout: MutationResolvers['approveEmployeeCheckout'] =
+  async ({ attendance_id, checkout_time }) => {
+    try {
+      const updatedAttendance = await db.employeeAttendance.update({
+        where: { attendance_id: attendance_id },
+        data: { checkout_time: checkout_time },
+      })
+
+      return updatedAttendance
+    } catch (error) {
+      console.error('Error approving employee checkout:', error)
+      throw error
+    }
+  }
+
 export const deleteEmployeeAttendance: MutationResolvers['deleteEmployeeAttendance'] =
   ({ attendance_id }) => {
     return db.employeeAttendance.delete({

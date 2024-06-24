@@ -55,7 +55,7 @@ model EmployeeProfile {
 }
 
 model EmployeeAttendance {
-  attendance_id  String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  attendance_id  String          @id @db.Uuid
   employee       EmployeeProfile @relation(fields: [employee_id], references: [profile_id])
   employee_id    String          @db.Uuid
   checkin_time   DateTime?       @db.Time()

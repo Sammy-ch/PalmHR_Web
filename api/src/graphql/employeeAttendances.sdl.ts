@@ -24,6 +24,7 @@ export const schema = gql`
   }
 
   input CreateEmployeeAttendanceInput {
+    attendance_id: String!
     employee_id: String!
     checkin_time: DateTime
     checkout_time: DateTime
@@ -42,6 +43,11 @@ export const schema = gql`
   }
 
   type Mutation {
+    approveEmployeeCheckout(
+      attendance_id: String!
+      checkout_time: DateTime!
+    ): EmployeeAttendance! @requireAuth
+
     createEmployeeAttendance(
       input: CreateEmployeeAttendanceInput!
     ): EmployeeAttendance! @requireAuth
