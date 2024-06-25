@@ -7,7 +7,6 @@ import { Metadata } from '@redwoodjs/web'
 
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCardCell from 'src/components/KpiCardCell'
-import TopPerformersCard from 'src/components/TopPerformersCard/TopPerformersCard'
 
 const DashboardPage = () => {
   const { id } = useParams()
@@ -25,9 +24,6 @@ const DashboardPage = () => {
         <div className="flex w-full  justify-center rounded-md shadow-md">
           <EmployeeAttendancesCell orgId={id} />
         </div>
-        {/* <div className={'shadow-md'}>
-          <TopPerformersCard />
-        </div> */}
       </section>
     </main>
   )
