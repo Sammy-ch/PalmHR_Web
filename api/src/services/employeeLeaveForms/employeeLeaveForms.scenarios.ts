@@ -5,30 +5,66 @@ export const standard = defineScenario<Prisma.EmployeeLeaveFormCreateArgs>({
   employeeLeaveForm: {
     one: {
       data: {
-        requested_leave_date: '2024-05-20T13:31:50.933Z',
+        requested_leave_date: '2024-06-25T09:25:21.080Z',
         leave_type: 'PERSONAL',
-        leave_days: 3964571,
+        leave_start: '2024-06-25T09:25:21.080Z',
+        leave_end: '2024-06-25T09:25:21.080Z',
+        leave_status: 'APPROVED',
         leave: {
           create: {
             profile_id: 'String',
             first_name: 'String',
             last_name: 'String',
             position: 'String',
+            Organization: {
+              create: {
+                OrganizationId: 'String',
+                OrganizationName: 'String',
+                organizationType: 'NonProfit',
+                addressStreet: 'String',
+                addressCity: 'String',
+                addressState: 'String',
+                addressCountry: 'String',
+                Email: 'String',
+                websiteUrl: 'String',
+                Phone: 'String',
+                organizationSize: 'Small',
+                Industry: 'Technology',
+              },
+            },
           },
         },
       },
     },
     two: {
       data: {
-        requested_leave_date: '2024-05-20T13:31:50.933Z',
+        requested_leave_date: '2024-06-25T09:25:21.080Z',
         leave_type: 'PERSONAL',
-        leave_days: 7744169,
+        leave_start: '2024-06-25T09:25:21.080Z',
+        leave_end: '2024-06-25T09:25:21.080Z',
+        leave_status: 'APPROVED',
         leave: {
           create: {
             profile_id: 'String',
             first_name: 'String',
             last_name: 'String',
             position: 'String',
+            Organization: {
+              create: {
+                OrganizationId: 'String',
+                OrganizationName: 'String',
+                organizationType: 'NonProfit',
+                addressStreet: 'String',
+                addressCity: 'String',
+                addressState: 'String',
+                addressCountry: 'String',
+                Email: 'String',
+                websiteUrl: 'String',
+                Phone: 'String',
+                organizationSize: 'Small',
+                Industry: 'Technology',
+              },
+            },
           },
         },
       },

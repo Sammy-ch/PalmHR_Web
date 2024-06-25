@@ -13,7 +13,6 @@ const AttendancePage = () => {
         <div className="mb-6 flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Attendance Management</h1>
           <div className="flex items-center space-x-4">
-            <Button variant="default">Add Leave</Button>
             <Button variant="outline">Export Report</Button>
           </div>
         </div>

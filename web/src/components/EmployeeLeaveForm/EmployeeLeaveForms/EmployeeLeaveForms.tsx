@@ -1,3 +1,6 @@
+import { format } from 'date-fns'
+import { differenceInDays } from 'date-fns'
+import { toZonedTime } from 'date-fns-tz'
 import { LeafyGreen } from 'lucide-react'
 import type {
   EditEmployeeLeaveFormById,
@@ -28,20 +31,20 @@ import { QUERY } from 'src/components/EmployeeLeaveForm/EmployeeLeaveFormsCell'
 
 import EmployeeLeaveCard from '../../EmployeeLeaveCard/EmployeeLeaveCard'
 
-// const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
-//   FindEmployeeLeaveFormById,
-//   UpdateEmployeeLeaveFormMutationVariables
-// > = gql`
-//   mutation UpdateEmployeeLeaveFormMutation(
-//     $id: String!
-//     $input: UpdateEmployeeLeaveFormInput!
-//   ) {
-//     updateEmployeeLeaveForm(id: $id, input: $input) {
-//       id
-//       leave_approval
-//     }
-//   }
-// `
+const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
+  FindEmployeeLeaveFormById,
+  UpdateEmployeeLeaveFormMutationVariables
+> = gql`
+  mutation UpdateEmployeeLeaveFormMutation(
+    $id: String!
+    $input: UpdateEmployeeLeaveFormInput!
+  ) {
+    updateEmployeeLeaveForm(id: $id, input: $input) {
+      id
+      leave_status
+    }
+  }
+`
 
 const EmployeeLeaveFormsList = ({
   employeeLeaveForms,
@@ -68,7 +71,7 @@ const EmployeeLeaveFormsList = ({
       updateEmployeeLeaveForm({
         variables: {
           id,
-          input: { leave_approval: true },
+          input: { leave_status: 'APPROVED' },
         },
       })
     }
@@ -77,18 +80,18 @@ const EmployeeLeaveFormsList = ({
   const onDeclineClick = (
     id: UpdateEmployeeLeaveFormMutationVariables['id']
   ) => {
-    if (confirm('Do you want to approve this leave request?')) {
+    if (confirm('Do you want to declined this leave request?')) {
       updateEmployeeLeaveForm({
         variables: {
           id,
-          input: { leave_approval: false },
+          input: { leave_status: 'DENIED' },
         },
       })
     }
   }
 
   const filteredEmployeeLeaveForms = employeeLeaveForms.filter(
-    (leave) => leave.leave_approval !== true
+    (leave) => leave.leave_status === 'PENDING'
   )
 
   return (
@@ -119,6 +122,8 @@ const EmployeeLeaveFormsList = ({
                 <TableRow>
                   <TableHead>Employee</TableHead>
                   <TableHead>Leave Type</TableHead>
+                  <TableHead>Start Date</TableHead>
+                  <TableHead>End Date</TableHead>
                   <TableHead>Days</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
@@ -158,10 +163,35 @@ const EmployeeLeaveFormsList = ({
                       </div>
                     </TableCell>
                     <TableCell>
-                      <h4 className="text-2xl font-semibold">3</h4>
+                      <h4 className="text-md font-semibold">
+                        {new Date(employeeLeaveData.leave_start).toDateString()}{' '}
+                        -{' '}
+                        {format(
+                          toZonedTime(employeeLeaveData.leave_start, 'GMT'),
+                          'p'
+                        )}{' '}
+                      </h4>
                     </TableCell>
                     <TableCell>
-                      {employeeLeaveData.leave_approval === null ? (
+                      <h4 className="text-md font-semibold">
+                        {new Date(employeeLeaveData.leave_end).toDateString()} -{' '}
+                        {format(
+                          toZonedTime(employeeLeaveData.leave_end, 'GMT'),
+                          'p'
+                        )}{' '}
+                      </h4>
+                    </TableCell>
+                    <TableCell>
+                      <h4 className="text-2xl font-semibold">
+                        {' '}
+                        {differenceInDays(
+                          new Date(employeeLeaveData.leave_end),
+                          new Date(employeeLeaveData.leave_start)
+                        )}
+                      </h4>
+                    </TableCell>
+                    <TableCell>
+                      {employeeLeaveData.leave_status === 'PENDING' ? (
                         <div className="flex items-center space-x-2">
                           <Button
                             size="sm"
@@ -178,10 +208,10 @@ const EmployeeLeaveFormsList = ({
                             Decline
                           </Button>
                         </div>
-                      ) : employeeLeaveData.leave_approval === true ? (
-                        'Approved'
+                      ) : employeeLeaveData.leave_status === 'APPROVED' ? (
+                        'APPROVED'
                       ) : (
-                        'Declined'
+                        'DENIED'
                       )}
                     </TableCell>
                   </TableRow>

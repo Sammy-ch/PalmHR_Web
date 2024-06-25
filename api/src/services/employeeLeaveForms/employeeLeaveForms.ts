@@ -50,7 +50,7 @@ export const approvedEmployeeLeaveForms: QueryResolvers['approvedEmployeeLeaveFo
   () => {
     return db.employeeLeaveForm.findMany({
       where: {
-        leave_approval: true,
+        leave_status: 'APPROVED',
       },
     })
   }

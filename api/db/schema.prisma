@@ -112,8 +112,10 @@ model EmployeeLeaveForm {
   leave                EmployeeProfile @relation(fields: [leave_id], references: [profile_id])
   leave_id             String          @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   leave_type           LeaveType
-  leave_days           Int             @db.Integer
-  leave_approval       Boolean?        @db.Boolean
+  leave_start          DateTime        @db.Date
+  leave_end            DateTime        @db.Date
+  leave_days           Int?            @db.Integer
+  leave_status         LeaveStatus
 }
 
 model EmployeeAttendanceReport {
@@ -143,7 +145,7 @@ model Organization {
   isVerified                Boolean                     @default(false) @db.Boolean
   organizationSize          OrganizationSize
   Industry                  Industry
-  PayrollData            PayrollData[]
+  PayrollData               PayrollData[]
   Admin                     Admin[]
   EmployeeProfiles          EmployeeProfile[]
   OrganizationAttendanceKpi OrganizationAttendanceKpi[]
@@ -183,6 +185,12 @@ enum LeaveType {
   PERSONAL
   SICK
   HOLIDAY
+}
+
+enum LeaveStatus {
+  APPROVED
+  PENDING
+  DENIED
 }
 
 enum OrganizationSize {

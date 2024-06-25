@@ -5,14 +5,22 @@ export const schema = gql`
     leave: EmployeeProfile!
     leave_id: String!
     leave_type: LeaveType!
-    leave_days: Int!
-    leave_approval: Boolean
+    leave_start: DateTime!
+    leave_end: DateTime!
+    leave_days: Int
+    leave_status: LeaveStatus!
   }
 
   enum LeaveType {
     PERSONAL
     SICK
     HOLIDAY
+  }
+
+  enum LeaveStatus {
+    APPROVED
+    PENDING
+    DENIED
   }
 
   type Query {
@@ -25,16 +33,20 @@ export const schema = gql`
     requested_leave_date: DateTime!
     leave_id: String!
     leave_type: LeaveType!
-    leave_days: Int!
-    leave_approval: Boolean
+    leave_start: DateTime!
+    leave_end: DateTime!
+    leave_days: Int
+    leave_status: LeaveStatus!
   }
 
   input UpdateEmployeeLeaveFormInput {
     requested_leave_date: DateTime
     leave_id: String
     leave_type: LeaveType
+    leave_start: DateTime
+    leave_end: DateTime
     leave_days: Int
-    leave_approval: Boolean
+    leave_status: LeaveStatus
   }
 
   type Mutation {

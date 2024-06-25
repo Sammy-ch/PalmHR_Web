@@ -22,7 +22,7 @@ export const QUERY: TypedDocumentNode<
       leave_id
       leave_type
       leave_days
-      leave_approval
+      leave_status
     }
   }
 `

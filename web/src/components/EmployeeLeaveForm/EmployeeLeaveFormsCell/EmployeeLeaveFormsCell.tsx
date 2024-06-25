@@ -23,8 +23,10 @@ export const QUERY: TypedDocumentNode<
       requested_leave_date
       leave_id
       leave_type
+      leave_start
+      leave_end
       leave_days
-      leave_approval
+      leave_status
       leave {
         first_name
         last_name
@@ -37,8 +39,10 @@ export const QUERY: TypedDocumentNode<
       requested_leave_date
       leave_id
       leave_type
+      leave_start
+      leave_end
       leave_days
-      leave_approval
+      leave_status
       leave {
         first_name
         last_name
