@@ -3,7 +3,6 @@ import type {
   GetEmployeeProfilesByOrgVariables,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -23,6 +22,7 @@ export const QUERY: TypedDocumentNode<
       last_name
       position
       email
+      profile_image
     }
   }
 `
