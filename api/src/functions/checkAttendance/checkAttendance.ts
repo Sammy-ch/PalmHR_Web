@@ -1,5 +1,6 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 import { CreateEmployeeAttendanceInput } from 'types/graphql'
+import { v4 as uuidv4 } from 'uuid'
 
 import { db } from 'src/lib/db'
 import { logger } from 'src/lib/logger'
@@ -8,13 +9,14 @@ export const handler = async (_event: APIGatewayEvent, _context: Context) => {
   logger.info('checkAttendance function')
 
   try {
-    const currentDate = new Date().toISOString().split('T')[0]
-    const employees = await db.employeeAttendance.findMany()
+    const currentDate =
+      new Date().toISOString().split('T')[0] + 'T00:00:00.000Z'
+    const employees = await db.employeeProfile.findMany()
 
     for (const employee of employees) {
       const checkInRecord = await db.employeeAttendance.findFirst({
         where: {
-          employee_id: employee.employee_id,
+          employee_id: employee.profile_id,
           checking_date: currentDate,
         },
       })
@@ -22,7 +24,8 @@ export const handler = async (_event: APIGatewayEvent, _context: Context) => {
       if (!checkInRecord) {
         await db.employeeAttendance.create({
           data: {
-            employee_id: employee.employee_id,
+            attendance_id: uuidv4(),
+            employee_id: employee.profile_id,
             attendance_tag: 'ABSENT',
             checking_date: currentDate,
           } as CreateEmployeeAttendanceInput,
