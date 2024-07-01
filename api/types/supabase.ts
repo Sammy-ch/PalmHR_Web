@@ -48,20 +48,31 @@ export type Database = {
           first_name: string
           id: string
           last_name: string
+          org_id: string
         }
         Insert: {
           email: string
           first_name: string
           id?: string
           last_name: string
+          org_id: string
         }
         Update: {
           email?: string
           first_name?: string
           id?: string
           last_name?: string
+          org_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'Admin_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'Organization'
+            referencedColumns: ['OrganizationId']
+          }
+        ]
       }
       AdminRole: {
         Row: {
@@ -89,7 +100,7 @@ export type Database = {
           }
         ]
       }
-      CheckingRequest: {
+      CheckingRequestQueue: {
         Row: {
           checking_date: string
           checking_status: Database['public']['Enums']['CheckingStatus']
@@ -116,7 +127,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: 'CheckingRequest_employee_id_fkey'
+            foreignKeyName: 'CheckingRequestQueue_employee_id_fkey'
             columns: ['employee_id']
             isOneToOne: false
             referencedRelation: 'EmployeeProfile'
@@ -127,29 +138,29 @@ export type Database = {
       EmployeeAttendance: {
         Row: {
           attendance_id: string
+          attendance_tag: Database['public']['Enums']['AttendanceTag']
           checkin_time: string | null
           checking_date: string | null
           checkout_time: string | null
           employee_id: string
-          presence_tag: Database['public']['Enums']['PresenceTag']
           working_time: string | null
         }
         Insert: {
-          attendance_id?: string
+          attendance_id: string
+          attendance_tag: Database['public']['Enums']['AttendanceTag']
           checkin_time?: string | null
           checking_date?: string | null
           checkout_time?: string | null
           employee_id: string
-          presence_tag: Database['public']['Enums']['PresenceTag']
           working_time?: string | null
         }
         Update: {
           attendance_id?: string
+          attendance_tag?: Database['public']['Enums']['AttendanceTag']
           checkin_time?: string | null
           checking_date?: string | null
           checkout_time?: string | null
           employee_id?: string
-          presence_tag?: Database['public']['Enums']['PresenceTag']
           working_time?: string | null
         }
         Relationships: [
@@ -162,12 +173,149 @@ export type Database = {
           }
         ]
       }
+      EmployeeAttendanceReport: {
+        Row: {
+          AbstenteeismRate: number
+          EarlyAttendaceRate: number
+          employee_id: string
+          id: string
+          LateAttedanceRate: number
+          TotalOvertime: number
+          TotalSickLeaves: number
+          TotalWorkhours: number
+        }
+        Insert: {
+          AbstenteeismRate: number
+          EarlyAttendaceRate: number
+          employee_id: string
+          id?: string
+          LateAttedanceRate: number
+          TotalOvertime: number
+          TotalSickLeaves: number
+          TotalWorkhours: number
+        }
+        Update: {
+          AbstenteeismRate?: number
+          EarlyAttendaceRate?: number
+          employee_id?: string
+          id?: string
+          LateAttedanceRate?: number
+          TotalOvertime?: number
+          TotalSickLeaves?: number
+          TotalWorkhours?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'EmployeeAttendanceReport_employee_id_fkey'
+            columns: ['employee_id']
+            isOneToOne: false
+            referencedRelation: 'EmployeeProfile'
+            referencedColumns: ['profile_id']
+          }
+        ]
+      }
+      EmployeeLeaveForm: {
+        Row: {
+          id: string
+          leave_days: number | null
+          leave_end: string
+          leave_id: string
+          leave_start: string
+          leave_status: Database['public']['Enums']['LeaveStatus']
+          leave_type: Database['public']['Enums']['LeaveType']
+          requested_leave_date: string
+        }
+        Insert: {
+          id?: string
+          leave_days?: number | null
+          leave_end: string
+          leave_id?: string
+          leave_start: string
+          leave_status: Database['public']['Enums']['LeaveStatus']
+          leave_type: Database['public']['Enums']['LeaveType']
+          requested_leave_date: string
+        }
+        Update: {
+          id?: string
+          leave_days?: number | null
+          leave_end?: string
+          leave_id?: string
+          leave_start?: string
+          leave_status?: Database['public']['Enums']['LeaveStatus']
+          leave_type?: Database['public']['Enums']['LeaveType']
+          requested_leave_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'EmployeeLeaveForm_leave_id_fkey'
+            columns: ['leave_id']
+            isOneToOne: false
+            referencedRelation: 'EmployeeProfile'
+            referencedColumns: ['profile_id']
+          }
+        ]
+      }
+      EmployeePayRoll: {
+        Row: {
+          attendance_report: string
+          base_salary: number
+          bonuses: number | null
+          gross_amount: number | null
+          id: string
+          labor_cost: number | null
+          net_salary: number | null
+          overtime: number | null
+          pay_period_end: string
+          pay_period_start: string
+        }
+        Insert: {
+          attendance_report: string
+          base_salary: number
+          bonuses?: number | null
+          gross_amount?: number | null
+          id: string
+          labor_cost?: number | null
+          net_salary?: number | null
+          overtime?: number | null
+          pay_period_end: string
+          pay_period_start: string
+        }
+        Update: {
+          attendance_report?: string
+          base_salary?: number
+          bonuses?: number | null
+          gross_amount?: number | null
+          id?: string
+          labor_cost?: number | null
+          net_salary?: number | null
+          overtime?: number | null
+          pay_period_end?: string
+          pay_period_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'EmployeePayRoll_attendance_report_fkey'
+            columns: ['attendance_report']
+            isOneToOne: false
+            referencedRelation: 'EmployeeAttendanceReport'
+            referencedColumns: ['employee_id']
+          },
+          {
+            foreignKeyName: 'EmployeePayRoll_id_fkey'
+            columns: ['id']
+            isOneToOne: true
+            referencedRelation: 'EmployeeProfile'
+            referencedColumns: ['profile_id']
+          }
+        ]
+      }
       EmployeeProfile: {
         Row: {
           allowed_leaves: number | null
           email: string | null
           first_name: string
           last_name: string
+          org_id: string
           position: string
           profile_id: string
           profile_image: string | null
@@ -177,6 +325,7 @@ export type Database = {
           email?: string | null
           first_name: string
           last_name: string
+          org_id: string
           position: string
           profile_id: string
           profile_image?: string | null
@@ -186,94 +335,180 @@ export type Database = {
           email?: string | null
           first_name?: string
           last_name?: string
+          org_id?: string
           position?: string
           profile_id?: string
           profile_image?: string | null
         }
-        Relationships: []
-      }
-      LeaveCustom: {
-        Row: {
-          id: string
-          leave_approval: boolean | null
-          leave_days: number
-          leave_id: string
-          leave_type: Database['public']['Enums']['LeaveType']
-          requested_leave_date: string
-        }
-        Insert: {
-          id?: string
-          leave_approval?: boolean | null
-          leave_days: number
-          leave_id?: string
-          leave_type: Database['public']['Enums']['LeaveType']
-          requested_leave_date: string
-        }
-        Update: {
-          id?: string
-          leave_approval?: boolean | null
-          leave_days?: number
-          leave_id?: string
-          leave_type?: Database['public']['Enums']['LeaveType']
-          requested_leave_date?: string
-        }
         Relationships: [
           {
-            foreignKeyName: 'LeaveCustom_leave_id_fkey'
-            columns: ['leave_id']
+            foreignKeyName: 'EmployeeProfile_org_id_fkey'
+            columns: ['org_id']
             isOneToOne: false
-            referencedRelation: 'EmployeeProfile'
-            referencedColumns: ['profile_id']
+            referencedRelation: 'Organization'
+            referencedColumns: ['OrganizationId']
           }
         ]
       }
       Organization: {
         Row: {
-          Address: string
+          addressCity: string
+          addressCountry: string
+          addressState: string
+          addressStreet: string
           Email: string
+          Industry: Database['public']['Enums']['Industry']
+          isVerified: boolean
           OrganizationId: string
           OrganizationName: string
+          organizationSize: Database['public']['Enums']['OrganizationSize']
+          organizationType: Database['public']['Enums']['OrganizationType']
           Phone: string
+          websiteUrl: string
         }
         Insert: {
-          Address: string
+          addressCity: string
+          addressCountry: string
+          addressState: string
+          addressStreet: string
           Email: string
-          OrganizationId?: string
+          Industry: Database['public']['Enums']['Industry']
+          isVerified?: boolean
+          OrganizationId: string
           OrganizationName: string
+          organizationSize: Database['public']['Enums']['OrganizationSize']
+          organizationType: Database['public']['Enums']['OrganizationType']
           Phone: string
+          websiteUrl: string
         }
         Update: {
-          Address?: string
+          addressCity?: string
+          addressCountry?: string
+          addressState?: string
+          addressStreet?: string
           Email?: string
+          Industry?: Database['public']['Enums']['Industry']
+          isVerified?: boolean
           OrganizationId?: string
           OrganizationName?: string
+          organizationSize?: Database['public']['Enums']['OrganizationSize']
+          organizationType?: Database['public']['Enums']['OrganizationType']
           Phone?: string
+          websiteUrl?: string
         }
         Relationships: []
+      }
+      OrganizationAttendanceKpi: {
+        Row: {
+          AbstenteeismRate: number
+          EarlyAttendaceRate: number
+          id: string
+          LateAttedanceRate: number
+          org_id: string
+          TotalOvertime: number
+          TotalSickLeaves: number
+          TotalWorkhours: number
+        }
+        Insert: {
+          AbstenteeismRate: number
+          EarlyAttendaceRate: number
+          id?: string
+          LateAttedanceRate: number
+          org_id: string
+          TotalOvertime: number
+          TotalSickLeaves: number
+          TotalWorkhours: number
+        }
+        Update: {
+          AbstenteeismRate?: number
+          EarlyAttendaceRate?: number
+          id?: string
+          LateAttedanceRate?: number
+          org_id?: string
+          TotalOvertime?: number
+          TotalSickLeaves?: number
+          TotalWorkhours?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'OrganizationAttendanceKpi_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'Organization'
+            referencedColumns: ['OrganizationId']
+          }
+        ]
+      }
+      PayrollData: {
+        Row: {
+          housing: number | null
+          id: string
+          INSS: number | null
+          INSS_contribution: number | null
+          INSS_payroll_risks: number | null
+          IPR: number | null
+          medical_insurance: number | null
+          org_id: string
+          transport: number | null
+          userId: string | null
+        }
+        Insert: {
+          housing?: number | null
+          id?: string
+          INSS?: number | null
+          INSS_contribution?: number | null
+          INSS_payroll_risks?: number | null
+          IPR?: number | null
+          medical_insurance?: number | null
+          org_id: string
+          transport?: number | null
+          userId?: string | null
+        }
+        Update: {
+          housing?: number | null
+          id?: string
+          INSS?: number | null
+          INSS_contribution?: number | null
+          INSS_payroll_risks?: number | null
+          IPR?: number | null
+          medical_insurance?: number | null
+          org_id?: string
+          transport?: number | null
+          userId?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'PayrollData_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'Organization'
+            referencedColumns: ['OrganizationId']
+          }
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      calculate_working_hours: {
-        Args: {
-          checkin_time: string
-          checkout_time: string
-        }
-        Returns: unknown
-      }
+      [_ in never]: never
     }
     Enums: {
-      CheckingStatus: 'approved' | 'pending' | 'declined'
-      CheckingType: 'checkin' | 'checkout'
-      LeaveType: 'Personal' | 'Sick' | 'Holiday'
-      PresenceTag:
-        | 'PRESENT'
-        | 'LATE'
-        | 'JUSTIFIED_ABSENCE'
-        | 'UNJUSTIFIED_ABSENCE'
-        | 'UNNOTIFIED_ABSENCE'
+      AttendanceTag: 'PRESENT' | 'ABSENT'
+      CheckingStatus: 'APPROVED' | 'PENDING' | 'DECLINED'
+      CheckingType: 'CHECKIN' | 'CHECKOUT'
+      Industry:
+        | 'Technology'
+        | 'HealthCare'
+        | 'Finance'
+        | 'Education'
+        | 'Retail'
+        | 'Manufactoring'
+        | 'Other'
+      LeaveStatus: 'APPROVED' | 'PENDING' | 'DENIED'
+      LeaveType: 'PERSONAL' | 'SICK' | 'HOLIDAY'
+      OrganizationSize: 'Small' | 'Medium' | 'Large'
+      OrganizationType: 'NonProfit' | 'ForProfit' | 'Government' | 'Other'
     }
     CompositeTypes: {
       [_ in never]: never
