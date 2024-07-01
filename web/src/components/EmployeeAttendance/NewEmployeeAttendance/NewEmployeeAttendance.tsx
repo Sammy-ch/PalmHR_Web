@@ -11,18 +11,18 @@
 
 // import EmployeeAttendanceForm from 'src/components/EmployeeAttendance/EmployeeAttendanceForm'
 
-// // const CREATE_EMPLOYEE_ATTENDANCE_MUTATION: TypedDocumentNode<
-// //   CreateEmployeeAttendanceMutation,
-// //   CreateEmployeeAttendanceMutationVariables
-// // > = gql`
-// //   mutation CreateEmployeeAttendanceMutation(
-// //     $input: CreateEmployeeAttendanceInput!
-// //   ) {
-// //     createEmployeeAttendance(input: $input) {
-// //       attendance_id
-// //     }
-// //   }
-// // `
+// const CREATE_EMPLOYEE_ATTENDANCE_MUTATION: TypedDocumentNode<
+//   CreateEmployeeAttendanceMutation,
+//   CreateEmployeeAttendanceMutationVariables
+// > = gql`
+//   mutation CreateEmployeeAttendanceMutation(
+//     $input: CreateEmployeeAttendanceInput!
+//   ) {
+//     createEmployeeAttendance(input: $input) {
+//       attendance_id
+//     }
+//   }
+// `
 
 // const NewEmployeeAttendance = () => {
 //   const [createEmployeeAttendance, { loading, error }] = useMutation(
@@ -38,9 +38,9 @@
 //     }
 //   )
 
-//   const onSave = (input: CreateEmployeeAttendanceInput) => {
-//     createEmployeeAttendance({ variables: { input } })
-//   }
+//   // const onSave = (input: CreateEmployeeAttendanceInput) => {
+//   //   createEmployeeAttendance({ variables: {input} })
+//   // }
 
 //   return (
 //     <div className="rw-segment">
