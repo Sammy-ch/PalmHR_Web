@@ -5,6 +5,7 @@ import type {
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
+import { kyselyDB } from 'src/lib/kysely'
 import { redis } from 'src/lib/redis'
 
 export const organizations: QueryResolvers['organizations'] = async () => {
@@ -14,7 +15,10 @@ export const organizations: QueryResolvers['organizations'] = async () => {
     return JSON.parse(cachedOrganizations)
   }
 
-  const organizations = await db.organization.findMany()
+  const organizations = await kyselyDB
+    .selectFrom('Organization')
+    .selectAll()
+    .execute()
 
   // Cache the organizations in Redis for 5 minutes
   redis.set('organizations', JSON.stringify(organizations), 'EX', 1800)
@@ -31,9 +35,11 @@ export const organization: QueryResolvers['organization'] = async ({
     return JSON.parse(cachedOrganization)
   }
 
-  const organization = await db.organization.findUnique({
-    where: { OrganizationId },
-  })
+  const organization = await kyselyDB
+    .selectFrom('Organization')
+    .selectAll()
+    .where('OrganizationId', '=', OrganizationId)
+    .executeTakeFirst()
 
   // Cache the organization in Redis for 5 minutes
   redis.set(
@@ -48,9 +54,11 @@ export const organization: QueryResolvers['organization'] = async ({
 
 export const createOrganization: MutationResolvers['createOrganization'] =
   async ({ input }) => {
-    const newOrganization = await db.organization.create({
-      data: input,
-    })
+    const newOrganization = await kyselyDB
+      .insertInto('Organization')
+      .values(input)
+      .returningAll()
+      .executeTakeFirstOrThrow()
 
     // Invalidate the cache for the organizations list and the new organization
     redis.del('organizations')
@@ -61,10 +69,12 @@ export const createOrganization: MutationResolvers['createOrganization'] =
 
 export const updateOrganization: MutationResolvers['updateOrganization'] =
   async ({ OrganizationId, input }) => {
-    const updatedOrganization = await db.organization.update({
-      data: input,
-      where: { OrganizationId },
-    })
+    const updatedOrganization = await kyselyDB
+      .updateTable('Organization')
+      .set(input)
+      .where('OrganizationId', '=', OrganizationId)
+      .returningAll()
+      .executeTakeFirstOrThrow()
 
     // Invalidate the cache for the updated organization
     redis.del(`organization:${OrganizationId}`)
@@ -74,9 +84,11 @@ export const updateOrganization: MutationResolvers['updateOrganization'] =
 
 export const deleteOrganization: MutationResolvers['deleteOrganization'] =
   async ({ OrganizationId }) => {
-    const deletedOrganization = await db.organization.delete({
-      where: { OrganizationId },
-    })
+    const deletedOrganization = await kyselyDB
+      .deleteFrom('Organization')
+      .where('OrganizationId', '=', OrganizationId)
+      .returningAll()
+      .executeTakeFirstOrThrow()
 
     // Invalidate the cache for the deleted organization
     redis.del(`organization:${OrganizationId}`)

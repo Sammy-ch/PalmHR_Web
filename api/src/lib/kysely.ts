@@ -3,7 +3,7 @@ import { Pool } from 'pg'
 
 import { DB } from 'src/db/types'
 
-const db = new Kysely<DB>({
+const kyselyDB = new Kysely<DB>({
   dialect: new PostgresDialect({
     pool: new Pool({
       connectionString: process.env.DIRECT_URL,
@@ -11,4 +11,4 @@ const db = new Kysely<DB>({
   }),
 })
 
-export { db }
+export { kyselyDB }

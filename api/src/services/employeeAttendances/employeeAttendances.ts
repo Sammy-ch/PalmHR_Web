@@ -4,7 +4,7 @@ import type {
   EmployeeAttendanceRelationResolvers,
 } from 'types/graphql'
 
-import { db } from 'src/lib/kysely'
+import { kyselyDB } from 'src/lib/kysely'
 
 const formatDatetime = (dateTime: string | Date): Date => {
   if (typeof dateTime === 'string' && /^\d{2}:\d{2}:\d{2}$/.test(dateTime)) {
@@ -20,7 +20,7 @@ const formatDatetime = (dateTime: string | Date): Date => {
 
 export const employeeAttendances: QueryResolvers['employeeAttendances'] =
   async () => {
-    const attendances = await db
+    const attendances = await kyselyDB
       .selectFrom('EmployeeAttendance')
       .selectAll()
       .execute()
@@ -34,7 +34,7 @@ export const employeeAttendances: QueryResolvers['employeeAttendances'] =
 export const employeeAttendance: QueryResolvers['employeeAttendance'] = async ({
   attendance_id,
 }) => {
-  const attendance = await db
+  const attendance = await kyselyDB
     .selectFrom('EmployeeAttendance')
     .selectAll()
     .where('attendance_id', '=', attendance_id)
@@ -48,7 +48,7 @@ export const employeeAttendance: QueryResolvers['employeeAttendance'] = async ({
 
 export const employeeAttendancesByOrganization: QueryResolvers['employeeAttendancesByOrganization'] =
   async ({ orgId }) => {
-    const attendances = await db
+    const attendances = await kyselyDB
       .selectFrom('EmployeeAttendance')
       .innerJoin(
         'EmployeeProfile',
@@ -67,7 +67,7 @@ export const employeeAttendancesByOrganization: QueryResolvers['employeeAttendan
 
 export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendance'] =
   async ({ input }) => {
-    const attendance = await db
+    const attendance = await kyselyDB
       .insertInto('EmployeeAttendance')
       .values(input)
       .returningAll()
@@ -81,7 +81,7 @@ export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendan
 
 export const updateEmployeeAttendance: MutationResolvers['updateEmployeeAttendance'] =
   async ({ attendance_id, input }) => {
-    const attendance = await db
+    const attendance = await kyselyDB
       .updateTable('EmployeeAttendance')
       .set(input)
       .where('attendance_id', '=', attendance_id)
@@ -97,7 +97,7 @@ export const updateEmployeeAttendance: MutationResolvers['updateEmployeeAttendan
 export const approveEmployeeCheckout: MutationResolvers['approveEmployeeCheckout'] =
   async ({ attendance_id, checkout_time }) => {
     try {
-      const updatedAttendance = await db
+      const updatedAttendance = await kyselyDB
         .updateTable('EmployeeAttendance')
         .set({ checkout_time: formatDatetime(checkout_time) })
         .where('attendance_id', '=', attendance_id)
@@ -113,7 +113,7 @@ export const approveEmployeeCheckout: MutationResolvers['approveEmployeeCheckout
 
 export const deleteEmployeeAttendance: MutationResolvers['deleteEmployeeAttendance'] =
   async ({ attendance_id }) => {
-    const attendance = await db
+    const attendance = await kyselyDB
       .deleteFrom('EmployeeAttendance')
       .where('attendance_id', '=', attendance_id)
       .returningAll()
@@ -127,7 +127,7 @@ export const deleteEmployeeAttendance: MutationResolvers['deleteEmployeeAttendan
 
 export const EmployeeAttendance: EmployeeAttendanceRelationResolvers = {
   employee: async (_obj, { root }) => {
-    return await db
+    return await kyselyDB
       .selectFrom('EmployeeProfile')
       .selectAll()
       .where('profile_id', '=', root?.employee_id)
@@ -136,7 +136,7 @@ export const EmployeeAttendance: EmployeeAttendanceRelationResolvers = {
 }
 
 export const getOrganizationAttendanceKPI = async () => {
-  const employees = await db
+  const employees = await kyselyDB
     .selectFrom('EmployeeProfile')
     .innerJoin(
       'EmployeeAttendance',
@@ -207,7 +207,7 @@ export const weeklyAttendance = async () => {
   endOfWeek.setDate(endOfWeek.getDate() + 6)
   endOfWeek.setHours(23, 59, 59, 999) // Set to end of the day
 
-  const attendances = await db
+  const attendances = await kyselyDB
     .selectFrom('EmployeeAttendance')
     .selectAll()
     .where('checking_date', '>=', startOfWeek)
