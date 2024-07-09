@@ -1,3 +1,6 @@
+import { addDays, format } from 'date-fns'
+import { CalendarIcon } from 'lucide-react'
+import { DateRange } from 'react-day-picker'
 import { Button } from 'web/src/components/ui/button'
 import { Calendar } from 'web/src/components/ui/calendar'
 import {
@@ -11,9 +14,15 @@ import {
   PopoverContent,
   Popover,
 } from 'web/src/components/ui/popover'
+import { cn } from 'web/src/lib/utils'
 
 import { Metadata } from '@redwoodjs/web'
+
 const ReportsPage = () => {
+  const [date, setDate] = React.useState<DateRange | undefined>({
+    from: new Date(2024, 0, 20),
+    to: addDays(new Date(2024, 0, 20), 20),
+  })
   return (
     <>
       <Metadata title="Reports" description="Reports page" />
@@ -25,32 +34,7 @@ const ReportsPage = () => {
               View and download employee attendance data.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <CardTitle>Total Hours Worked</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl font-bold">2,345</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Average Hours per Employee</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl font-bold">40</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Number of Employees</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl font-bold">59</div>
-              </CardContent>
-            </Card>
-          </div>
+          <div className="grid gap-6 md:grid-cols-3"></div>
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
@@ -59,13 +43,38 @@ const ReportsPage = () => {
               <CardContent>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button className="w-full justify-start" variant="outline">
-                      <CalendarDaysIcon className="mr-2 h-4 w-4" />
-                      June 1, 2023 - June 30, 2023
+                    <Button
+                      id="date"
+                      variant={'outline'}
+                      className={cn(
+                        'w-[300px] justify-start text-left font-normal',
+                        !date && 'text-muted-foreground'
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {date?.from ? (
+                        date.to ? (
+                          <>
+                            {format(date.from, 'LLL dd, y')} -{' '}
+                            {format(date.to, 'LLL dd, y')}
+                          </>
+                        ) : (
+                          format(date.from, 'LLL dd, y')
+                        )
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent align="start" className="w-auto p-0">
-                    <Calendar mode="range" numberOfMonths={2} />
+                    <Calendar
+                      initialFocus
+                      mode="range"
+                      defaultMonth={date?.from}
+                      selected={date}
+                      onSelect={setDate}
+                      numberOfMonths={2}
+                    />{' '}
                   </PopoverContent>
                 </Popover>
               </CardContent>
@@ -142,34 +151,6 @@ const ReportsPage = () => {
 }
 
 export default ReportsPage
-
-function CalendarDaysIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-      <line x1="16" x2="16" y1="2" y2="6" />
-      <line x1="8" x2="8" y1="2" y2="6" />
-      <line x1="3" x2="21" y1="10" y2="10" />
-      <path d="M8 14h.01" />
-      <path d="M12 14h.01" />
-      <path d="M16 14h.01" />
-      <path d="M8 18h.01" />
-      <path d="M12 18h.01" />
-      <path d="M16 18h.01" />
-    </svg>
-  )
-}
 
 function DownloadIcon(props) {
   return (

@@ -1,31 +1,20 @@
 import { ResponsiveBar } from '@nivo/bar'
 
-import { useQuery } from '@redwoodjs/web'
-
-const WEEKLY_ATTENDANCE_QUERY = gql`
-  query GetWeeklyAttendance {
-    employeesWeeklyAttendance {
-      day
-      onTime
-      late
-    }
-  }
-`
 const AttendanceBarChart = () => {
-  const { data, loading, error } = useQuery(WEEKLY_ATTENDANCE_QUERY)
-
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
-
-  const chartData = data?.employeesWeeklyAttendance || []
-
   return (
     <main className="h-[500px] ">
       <ResponsiveBar
-        data={chartData}
+        data={[
+          { Day: 'Mon', Early: 25, Late: 19 },
+          { Day: 'Tue', Early: 9, Late: 2 },
+          { Day: 'Wed', Early: 5, Late: 8 },
+          { Day: 'Thur', Early: 2, Late: 16 },
+          { Day: 'Fri', Early: 11, Late: 5 },
+          { Day: 'Sat', Early: 8, Late: 10 },
+        ]}
         borderRadius={10}
-        keys={['onTime', 'late']}
-        indexBy="day"
+        keys={['Early', 'Late']}
+        indexBy="Day"
         margin={{ top: 10, right: 0, bottom: 60, left: 60 }}
         padding={0.3}
         groupMode="grouped"
@@ -66,9 +55,8 @@ const AttendanceBarChart = () => {
             },
           },
         }}
-        tooltipLabel={({ id }) => (id === 'onTime' ? 'On Time' : 'Late')}
-        enableLabel={true}
-        label={(d) => d.value.toString()}
+        tooltipLabel={({ id }) => `${id}`}
+        enableLabel={false}
         role="application"
         ariaLabel="A bar chart showing attendance data"
       />
