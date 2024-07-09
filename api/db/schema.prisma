@@ -10,11 +10,17 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-generator client {
-  provider        = "prisma-client-js"
-  binaryTargets   = "native"
-  previewFeatures = ["driverAdapters"]
+generator kysely {
+    provider = "prisma-kysely"
+
+    // Optionally provide a destination directory for the generated file
+    // and a filename of your choice
+    output = "../src/db"
+    fileName = "types.ts"
+    // Optionally generate runtime enums to a separate file
+     enumFileName = "enums.ts"
 }
+
 
 model Admin {
   id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
