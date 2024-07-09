@@ -9,7 +9,7 @@ interface KpiProps {
 export default function Component({ title, metric, icon: Icon }: KpiProps) {
   return (
     <Card className="flex h-[150px]  flex-col justify-between shadow-md">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <CardHeader className="flex flex-row items-center justify-between gap-5 space-y-0 pb-2">
         <CardTitle className="text-xl font-medium">{title}</CardTitle>
         <Icon className="h-6 w-6  text-muted-foreground" />
       </CardHeader>

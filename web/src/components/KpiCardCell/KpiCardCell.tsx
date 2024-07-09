@@ -16,14 +16,12 @@ export const QUERY: TypedDocumentNode<
   FindKpiCardQuery,
   FindKpiCardQueryVariables
 > = gql`
-  query FindKpiCardQuery($id: String!) {
-    kpiCard: organizationAttendanceKpi(id: $id) {
-      TotalWorkhours
-      AbstenteeismRate
-      EarlyAttendaceRate
-      LateAttedanceRate
-      TotalOvertime
-      TotalSickLeaves
+  query FindKpiCardQuery {
+    kpiCard: getOrganizationAttendanceKPI {
+      onTimePercentage
+      absenteeismRate
+      averageWorkingHours
+      lateAttendanceRate
     }
   }
 `
@@ -51,25 +49,25 @@ export const Success = ({
   kpiCard,
 }: CellSuccessProps<FindKpiCardQuery, FindKpiCardQueryVariables>) => {
   return (
-    <section className=" mb-10 grid w-full gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
+    <section className=" mb-10 grid w-[1000px] gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
       <KpiCard
-        title={'OnTime Attendance'}
-        metric={kpiCard.EarlyAttendaceRate}
+        title={'On-Time Attendance'}
+        metric={`${kpiCard.onTimePercentage}%`}
         icon={BadgeCheck}
       />
       <KpiCard
-        title={'Absenteeism rate'}
+        title={'Absenteeism Rate'}
         icon={ListFilter}
-        metric={kpiCard.AbstenteeismRate}
+        metric={`${kpiCard.absenteeismRate}%`}
       />
       <KpiCard
-        title={'Average working hours'}
-        metric={kpiCard.TotalWorkhours}
+        title={'Average Working Hours'}
+        metric={`${kpiCard.averageWorkingHours}h`}
         icon={Timer}
       />
       <KpiCard
         title={'Late Attendance'}
-        metric={kpiCard.LateAttedanceRate}
+        metric={`${kpiCard.lateAttendanceRate}%`}
         icon={BookX}
       />
     </section>

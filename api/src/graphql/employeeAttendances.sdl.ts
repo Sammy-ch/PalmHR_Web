@@ -15,12 +15,19 @@ export const schema = gql`
     ABSENT
   }
 
+  type OrganizationAttendanceKPI {
+    onTimePercentage: Float!
+    absenteeismRate: Float!
+    averageWorkingHours: Float!
+    lateAttendanceRate: Float!
+  }
   type Query {
     employeeAttendances: [EmployeeAttendance!]! @requireAuth
     employeeAttendance(attendance_id: String!): EmployeeAttendance @requireAuth
-
     employeeAttendancesByOrganization(orgId: String!): [EmployeeAttendance!]!
       @requireAuth
+
+    getOrganizationAttendanceKPI: OrganizationAttendanceKPI! @requireAuth
   }
 
   input CreateEmployeeAttendanceInput {
