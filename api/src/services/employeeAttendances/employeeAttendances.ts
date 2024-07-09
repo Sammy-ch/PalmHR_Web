@@ -132,3 +132,53 @@ export const getOrganizationAttendanceKPI = async () => {
     lateAttendanceRate: parseFloat(lateAttendanceRate.toFixed(2)),
   }
 }
+
+export const weeklyAttendance: QueryResolvers['employeesWeeklyAttendance'] =
+  async () => {
+    // Calculate start and end of the current week
+    const today = new Date()
+    const currentDay = today.getDay() // 0 (Sunday) to 6 (Saturday)
+    const diff = today.getDate() - currentDay + (currentDay === 0 ? -6 : 1) // adjust when Sunday
+
+    const startOfWeek = new Date(today.setDate(diff))
+    startOfWeek.setHours(0, 0, 0, 0) // Set to beginning of the day
+
+    const endOfWeek = new Date(startOfWeek)
+    endOfWeek.setDate(endOfWeek.getDate() + 6)
+    endOfWeek.setHours(23, 59, 59, 999) // Set to end of the day
+
+    const attendances = await db.employeeAttendance.findMany({
+      where: {
+        checking_date: {
+          gte: startOfWeek,
+          lte: endOfWeek,
+        },
+      },
+    })
+
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    const result = days.map((day) => ({
+      day,
+      onTime: 0,
+      late: 0,
+    }))
+
+    attendances.forEach((attendance) => {
+      const attendanceDate = new Date(attendance.checking_date)
+      const dayIndex = (attendanceDate.getDay() + 6) % 7 // Adjust so Monday is 0, Sunday is 6
+
+      if (attendance.checkin_time) {
+        const checkInTime = new Date(attendance.checkin_time)
+        if (
+          checkInTime.getHours() < 9 ||
+          (checkInTime.getHours() === 9 && checkInTime.getMinutes() === 0)
+        ) {
+          result[dayIndex].onTime++
+        } else {
+          result[dayIndex].late++
+        }
+      }
+    })
+
+    return result
+  }

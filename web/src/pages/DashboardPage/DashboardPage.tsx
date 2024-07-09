@@ -14,7 +14,7 @@ const DashboardPage = () => {
     <main className="content flex h-full w-full flex-col justify-between  gap-5  ">
       <Metadata title="Dashboard" description="Access your Dashboard" />
       <section className=" mb-10 grid w-full gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
-        <KpiCardCell id={id} />
+        <KpiCardCell />
       </section>
       <h1>Attendance Overview Chart</h1>
       <section className={'w-full border p-5  shadow-md'}>

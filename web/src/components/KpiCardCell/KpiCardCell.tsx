@@ -1,16 +1,10 @@
-import { BadgeCheck } from 'lucide-react'
-import { ListFilter } from 'lucide-react'
-import { Timer } from 'lucide-react'
-import { BookX } from 'lucide-react'
+import { BadgeCheck, ListFilter, Timer, BookX } from 'lucide-react'
 import type { FindKpiCardQuery, FindKpiCardQueryVariables } from 'types/graphql'
 
-import type {
-  CellSuccessProps,
-  CellFailureProps,
-  TypedDocumentNode,
-} from '@redwoodjs/web'
+import type { CellSuccessProps, TypedDocumentNode } from '@redwoodjs/web'
 
 import KpiCard from 'src/components/KpiCard/KpiCard'
+import { useRetry } from 'src/hooks/useRetry'
 
 export const QUERY: TypedDocumentNode<
   FindKpiCardQuery,
@@ -39,17 +33,51 @@ export const Empty = () => {
   )
 }
 
-export const Failure = ({
-  error,
-}: CellFailureProps<FindKpiCardQueryVariables>) => (
-  <div style={{ color: 'red' }}>Error: {error?.message}</div>
-)
+export const Failure = () => {
+  const {
+    data,
+    error: retryError,
+    loading,
+  } = useRetry(
+    async () => {
+      const result = await fetch('/api/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: QUERY.loc?.source.body,
+        }),
+      })
+      if (!result.ok) {
+        throw new Error('Network response was not ok')
+      }
+      return result.json()
+    },
+    3,
+    2000
+  )
+
+  if (loading) {
+    return <Loading />
+  }
+
+  if (retryError) {
+    return <div style={{ color: 'red' }}>Error: {retryError.message}</div>
+  }
+
+  if (data) {
+    return <Success kpiCard={data.data.kpiCard} />
+  }
+
+  return null
+}
 
 export const Success = ({
   kpiCard,
 }: CellSuccessProps<FindKpiCardQuery, FindKpiCardQueryVariables>) => {
   return (
-    <section className=" mb-10 grid w-[1000px] gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4  ">
+    <section className="mb-10 grid w-[1000px] gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4">
       <KpiCard
         title={'On-Time Attendance'}
         metric={`${kpiCard.onTimePercentage}%`}

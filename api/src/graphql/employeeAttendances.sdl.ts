@@ -15,6 +15,12 @@ export const schema = gql`
     ABSENT
   }
 
+  type WeeklyAttendance {
+    day: String!
+    onTime: Int!
+    late: Int!
+  }
+
   type OrganizationAttendanceKPI {
     onTimePercentage: Float!
     absenteeismRate: Float!
@@ -28,6 +34,7 @@ export const schema = gql`
       @requireAuth
 
     getOrganizationAttendanceKPI: OrganizationAttendanceKPI! @requireAuth
+    employeesWeeklyAttendance: [WeeklyAttendance] @requireAuth
   }
 
   input CreateEmployeeAttendanceInput {
