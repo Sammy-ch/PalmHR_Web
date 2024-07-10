@@ -58,10 +58,14 @@ const HomeNavigation = () => {
         </NavLink>
       </nav>
       <div className="flex">
-        {userSession ? (
+        {client.auth.getSession() ? (
           <main className="flex gap-2">
             <Button
-              onClick={() => navigate(routes.dashboard({ id: userSession }))}
+              onClick={() => {
+                if (userSession) {
+                  navigate(routes.dashboard({ id: userSession }))
+                }
+              }}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >
               Dashboard
