@@ -2,15 +2,15 @@ import { ResponsiveBar } from '@nivo/bar'
 
 const AttendanceBarChart = () => {
   return (
-    <main className="h-[500px] ">
+    <main className="h-[300px] ">
       <ResponsiveBar
         data={[
-          { Day: 'Mon', Early: 25, Late: 19 },
-          { Day: 'Tue', Early: 9, Late: 2 },
-          { Day: 'Wed', Early: 5, Late: 8 },
-          { Day: 'Thur', Early: 2, Late: 16 },
-          { Day: 'Fri', Early: 11, Late: 5 },
-          { Day: 'Sat', Early: 8, Late: 10 },
+          { Day: 'Mon', Early: 0, Late: 0 },
+          { Day: 'Tue', Early: 0, Late: 0 },
+          { Day: 'Wed', Early: 0, Late: 0 },
+          { Day: 'Thur', Early: 0, Late: 0 },
+          { Day: 'Fri', Early: 0, Late: 0 },
+          { Day: 'Sat', Early: 0, Late: 0 },
         ]}
         borderRadius={10}
         keys={['Early', 'Late']}
