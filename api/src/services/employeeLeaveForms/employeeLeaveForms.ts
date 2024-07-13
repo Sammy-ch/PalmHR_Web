@@ -5,41 +5,50 @@ import type {
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
+import { kyselyDB } from 'src/lib/kysely'
 
-export const employeeLeaveForms: QueryResolvers['employeeLeaveForms'] = () => {
-  return db.employeeLeaveForm.findMany()
-}
+export const employeeLeaveForms: QueryResolvers['employeeLeaveForms'] =
+  async () => {
+    return await kyselyDB.selectFrom('EmployeeLeaveForm').selectAll().execute()
+  }
 
-export const employeeLeaveForm: QueryResolvers['employeeLeaveForm'] = ({
+export const employeeLeaveForm: QueryResolvers['employeeLeaveForm'] = async ({
   id,
 }) => {
-  return db.employeeLeaveForm.findUnique({
-    where: { id },
-  })
+  return await kyselyDB
+    .selectFrom('EmployeeLeaveForm')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirst()
 }
 
 export const createEmployeeLeaveForm: MutationResolvers['createEmployeeLeaveForm'] =
-  ({ input }) => {
-    return db.employeeLeaveForm.create({
-      data: input,
-    })
+  async ({ input }) => {
+    return await kyselyDB
+      .insertInto('EmployeeLeaveForm')
+      .values(input)
+      .returningAll()
+      .executeTakeFirst()
   }
 
 export const updateEmployeeLeaveForm: MutationResolvers['updateEmployeeLeaveForm'] =
-  ({ id, input }) => {
-    return db.employeeLeaveForm.update({
-      data: input,
-      where: { id },
-    })
+  async ({ id, input }) => {
+    return await kyselyDB
+      .updateTable('EmployeeLeaveForm')
+      .set(input)
+      .where('id', '=', id)
+      .returningAll()
+      .executeTakeFirst()
   }
 
 export const deleteEmployeeLeaveForm: MutationResolvers['deleteEmployeeLeaveForm'] =
-  ({ id }) => {
-    return db.employeeLeaveForm.delete({
-      where: { id },
-    })
+  async ({ id }) => {
+    return await kyselyDB
+      .deleteFrom('EmployeeLeaveForm')
+      .where('id', '=', id)
+      .returningAll()
+      .executeTakeFirst()
   }
-
 export const EmployeeLeaveForm: EmployeeLeaveFormRelationResolvers = {
   leave: (_obj, { root }) => {
     return db.employeeLeaveForm.findUnique({ where: { id: root?.id } }).leave()
@@ -47,10 +56,10 @@ export const EmployeeLeaveForm: EmployeeLeaveFormRelationResolvers = {
 }
 
 export const approvedEmployeeLeaveForms: QueryResolvers['approvedEmployeeLeaveForms'] =
-  () => {
-    return db.employeeLeaveForm.findMany({
-      where: {
-        leave_status: 'APPROVED',
-      },
-    })
+  async () => {
+    return await kyselyDB
+      .selectFrom('EmployeeLeaveForm')
+      .selectAll()
+      .where('leave_status', '=', 'APPROVED')
+      .execute()
   }
