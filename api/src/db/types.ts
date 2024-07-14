@@ -44,16 +44,6 @@ export type EmployeeAttendance = {
   working_time: Timestamp | null
   attendance_tag: AttendanceTag
 }
-export type EmployeeAttendanceReport = {
-  id: Generated<string>
-  employee_id: string
-  TotalOvertime: number
-  TotalWorkhours: number
-  TotalSickLeaves: number
-  AbstenteeismRate: number
-  EarlyAttendaceRate: number
-  LateAttedanceRate: number
-}
 export type EmployeeLeaveForm = {
   id: Generated<string>
   requested_leave_date: Timestamp
@@ -68,7 +58,6 @@ export type EmployeePayRoll = {
   id: string
   pay_period_start: Timestamp
   pay_period_end: Timestamp
-  attendance_report: string
   base_salary: number
   overtime: number | null
   net_salary: number | null
@@ -128,7 +117,6 @@ export type DB = {
   AdminRole: AdminRole
   CheckingRequestQueue: CheckingRequestQueue
   EmployeeAttendance: EmployeeAttendance
-  EmployeeAttendanceReport: EmployeeAttendanceReport
   EmployeeLeaveForm: EmployeeLeaveForm
   EmployeePayRoll: EmployeePayRoll
   EmployeeProfile: EmployeeProfile
