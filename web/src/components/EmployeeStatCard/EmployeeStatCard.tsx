@@ -1,5 +1,5 @@
-import { ResponsiveBar } from '@nivo/bar'
-import { ResponsiveLine } from '@nivo/line'
+import { GaugeIcon } from 'lucide-react'
+import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import type { FindEmployeeProfileByProfileId } from 'types/graphql'
 
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
@@ -11,6 +11,9 @@ import {
   CardDescription,
   CardContent,
 } from '../ui/card'
+import { ChartTooltip, ChartTooltipContent } from '../ui/chart'
+import { ChartConfig, ChartContainer } from '../ui/chart'
+import { ChartLegend, ChartLegendContent } from '../ui/chart'
 
 interface Props {
   employeeProfile: NonNullable<
@@ -21,7 +24,7 @@ interface Props {
 const EmployeeStatCard = ({ employeeProfile }: Props) => {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between bg-[#1E293B] px-6 py-4 text-white">
+      <header className="flex items-center justify-between rounded-md bg-black px-6 py-4 text-white">
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
             <Avatar>
@@ -37,18 +40,14 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="icon">
-            <GaugeIcon className="h-5 w-5" />
+          <Button variant="default" className="bg-white" size="icon">
+            <GaugeIcon color="green" className="h-5 w-5" />
             <span className="sr-only">Settings</span>
-          </Button>
-          <Button variant="outline" size="icon">
-            <BellIcon className="h-5 w-5" />
-            <span className="sr-only">Notifications</span>
           </Button>
         </div>
       </header>
       <main className="grid flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-2 md:p-10">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Total Attendance</CardTitle>
@@ -137,10 +136,7 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           </CardHeader>
           <CardContent className="grid h-full gap-6">
             <div className="grid grid-cols-1 gap-6">
-              <BarChart className="aspect-[4/3]" />
-            </div>
-            <div className="grid grid-cols-1 gap-6">
-              <LineChart className="aspect-[4/3]" />
+              <EmployeeAttendanceBarChart className="aspect-[4/3]" />
             </div>
           </CardContent>
         </Card>
@@ -151,76 +147,46 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
 
 export default EmployeeStatCard
 
-function BarChart(props) {
+function EmployeeAttendanceBarChart(props: any) {
+  const chartConfig = {
+    OnTime: {
+      label: 'OnTime',
+      color: '#2563eb',
+    },
+    Late: {
+      label: 'Late',
+      color: '#60a5fa',
+    },
+  } satisfies ChartConfig
+  const chartData = [
+    { month: 'January', OnTime: 186, Late: 80 },
+    { month: 'February', OnTime: 305, Late: 200 },
+    { month: 'March', OnTime: 237, Late: 120 },
+    { month: 'April', OnTime: 73, Late: 190 },
+    { month: 'May', OnTime: 209, Late: 130 },
+    { month: 'June', OnTime: 214, Late: 140 },
+  ]
   return (
-    <div {...props}>
-      <ResponsiveBar
-        data={[
-          { name: 'Jan', count: 111 },
-          { name: 'Feb', count: 157 },
-          { name: 'Mar', count: 129 },
-          { name: 'Apr', count: 150 },
-          { name: 'May', count: 119 },
-          { name: 'Jun', count: 72 },
-        ]}
-        keys={['count']}
-        indexBy="name"
-        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-        padding={0.3}
-        colors={['#2563eb']}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 16,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickValues: 4,
-          tickPadding: 16,
-        }}
-        gridYValues={4}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: '9999px',
-            },
-            container: {
-              fontSize: '12px',
-              textTransform: 'capitalize',
-              borderRadius: '6px',
-            },
-          },
-          grid: {
-            line: {
-              stroke: '#f3f4f6',
-            },
-          },
-        }}
-        tooltipLabel={({ id }) => `${id}`}
-        enableLabel={false}
-        role="application"
-        ariaLabel="A bar chart showing data"
-      />
-    </div>
-  )
-}
-
-function BellIcon(props) {
-  return (
-    <svg
+    <ChartContainer
+      config={chartConfig}
+      className="min-h-[200px] w-full"
       {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     >
-      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>
+      <BarChart accessibilityLayer data={chartData}>
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="month"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          tickFormatter={(value) => value.slice(0, 3)}
+        />
+        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Bar dataKey="OnTime" fill="var(--color-OnTime)" radius={4} />
+        <Bar dataKey="Late" fill="var(--color-Late)" radius={4} />
+      </BarChart>
+    </ChartContainer>
   )
 }
 
@@ -241,98 +207,5 @@ function ClockIcon(props) {
       <circle cx="12" cy="12" r="10" />
       <polyline points="12 6 12 12 16 14" />
     </svg>
-  )
-}
-
-function GaugeIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m12 14 4-4" />
-      <path d="M3.34 19a10 10 0 1 1 17.32 0" />
-    </svg>
-  )
-}
-
-function LineChart(props) {
-  return (
-    <div {...props}>
-      <ResponsiveLine
-        data={[
-          {
-            id: 'Desktop',
-            data: [
-              { x: 'Jan', y: 43 },
-              { x: 'Feb', y: 137 },
-              { x: 'Mar', y: 61 },
-              { x: 'Apr', y: 145 },
-              { x: 'May', y: 26 },
-              { x: 'Jun', y: 154 },
-            ],
-          },
-          {
-            id: 'Mobile',
-            data: [
-              { x: 'Jan', y: 60 },
-              { x: 'Feb', y: 48 },
-              { x: 'Mar', y: 177 },
-              { x: 'Apr', y: 78 },
-              { x: 'May', y: 96 },
-              { x: 'Jun', y: 204 },
-            ],
-          },
-        ]}
-        margin={{ top: 10, right: 10, bottom: 40, left: 40 }}
-        xScale={{
-          type: 'point',
-        }}
-        yScale={{
-          type: 'linear',
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 16,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickValues: 5,
-          tickPadding: 16,
-        }}
-        colors={['#2563eb', '#e11d48']}
-        pointSize={6}
-        useMesh={true}
-        gridYValues={6}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: '9999px',
-            },
-            container: {
-              fontSize: '12px',
-              textTransform: 'capitalize',
-              borderRadius: '6px',
-            },
-          },
-          grid: {
-            line: {
-              stroke: '#f3f4f6',
-            },
-          },
-        }}
-        role="application"
-      />
-    </div>
   )
 }
