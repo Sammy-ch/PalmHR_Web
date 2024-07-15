@@ -9532,6 +9532,7 @@ __metadata:
     "@redwoodjs/graphql-server": "npm:7.7.1"
     "@simplewebauthn/server": "npm:^7"
     "@supabase/supabase-js": "npm:2.42.7"
+    date-fns: "npm:^3.6.0"
     ioredis: "npm:^5.4.1"
     kysely: "npm:^0.27.4"
     pg: "npm:^8.12.0"
