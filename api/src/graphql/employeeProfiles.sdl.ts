@@ -13,7 +13,6 @@ export const schema = gql`
     LeaveData: [EmployeeLeaveForm]!
     CheckingRequestsData: [CheckingRequestQueue]!
     PayrollData: [EmployeePayRoll]!
-    AttendanceReport: [EmployeeAttendanceReport]!
   }
 
   type Query {
