@@ -4,8 +4,6 @@ export const schema = gql`
     employee: EmployeeProfile!
     pay_period_start: DateTime!
     pay_period_end: DateTime!
-    attendance_report: String!
-    report: EmployeeAttendanceReport!
     base_salary: Int!
     overtime: Int
     net_salary: Int

@@ -21,7 +21,6 @@ export const QUERY: TypedDocumentNode<EditEmployeePayRollById> = gql`
       id
       pay_period_start
       pay_period_end
-      attendance_report
       base_salary
       overtime
       net_salary
@@ -44,7 +43,6 @@ const UPDATE_EMPLOYEE_PAY_ROLL_MUTATION: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      attendance_report
       base_salary
       overtime
       net_salary

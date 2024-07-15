@@ -22,7 +22,6 @@ export const QUERY: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      attendance_report
       base_salary
       overtime
       net_salary
@@ -33,10 +32,6 @@ export const QUERY: TypedDocumentNode<
         profile_id
         first_name
         last_name
-      }
-      report {
-        id
-        TotalWorkhours
       }
     }
   }
