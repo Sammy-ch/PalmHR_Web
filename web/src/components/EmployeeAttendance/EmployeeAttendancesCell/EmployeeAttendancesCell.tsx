@@ -5,8 +5,8 @@ import type {
 
 import type {
   CellSuccessProps,
-  CellFailureProps,
   TypedDocumentNode,
+  CellFailureProps,
 } from '@redwoodjs/web'
 
 import EmployeeAttendances from 'src/components/EmployeeAttendance/EmployeeAttendances'
@@ -34,10 +34,16 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  return (
+    <main className="grid items-start gap-1 px-2 lg:px-4">
+      <span>Loading</span>
+    </main>
+  )
+}
 
 export const Empty = () => {
-  return <div className="rw-text-center">{'No Employee Attendances yet. '}</div>
+  return <div className="text-lg">{'No Employee Attendances yet. '}</div>
 }
 
 export const Failure = ({

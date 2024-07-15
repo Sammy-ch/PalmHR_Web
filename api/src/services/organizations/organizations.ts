@@ -1,4 +1,3 @@
-import { Resend } from 'resend'
 import type {
   QueryResolvers,
   MutationResolvers,
@@ -6,75 +5,102 @@ import type {
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
+import { kyselyDB } from 'src/lib/kysely'
+import { redis } from 'src/lib/redis'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+export const organizations: QueryResolvers['organizations'] = async () => {
+  const cachedOrganizations = await redis.get('organizations')
 
-export const organizations: QueryResolvers['organizations'] = () => {
-  return db.organization.findMany()
+  if (cachedOrganizations) {
+    return JSON.parse(cachedOrganizations)
+  }
+
+  const organizations = await kyselyDB
+    .selectFrom('Organization')
+    .selectAll()
+    .execute()
+
+  // Cache the organizations in Redis for 5 minutes
+  redis.set('organizations', JSON.stringify(organizations), 'EX', 1800)
+
+  return organizations
 }
 
-export const sendVerificationEmail = async (
-  organizationId: string,
-  email: string
-) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verifyOrganization?id=${organizationId}`
-
-  const emailContent = `
-    <p>Please verify your organization by clicking the link below:</p>
-    <a href="${verificationLink}">Verify Organization</a>
-  `
-  await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
-    to: email,
-    subject: 'Organization Verification',
-    html: emailContent,
-  })
-}
-
-export const organization: QueryResolvers['organization'] = ({
+export const organization: QueryResolvers['organization'] = async ({
   OrganizationId,
 }) => {
-  return db.organization.findUnique({
-    where: { OrganizationId },
-  })
+  const cachedOrganization = await redis.get(`organization:${OrganizationId}`)
+
+  if (cachedOrganization) {
+    return JSON.parse(cachedOrganization)
+  }
+
+  const organization = await kyselyDB
+    .selectFrom('Organization')
+    .selectAll()
+    .where('OrganizationId', '=', OrganizationId)
+    .executeTakeFirst()
+
+  // Cache the organization in Redis for 5 minutes
+  redis.set(
+    `organization:${OrganizationId}`,
+    JSON.stringify(organization),
+    'EX',
+    1800
+  )
+
+  return organization
 }
 
-export const createOrganization: MutationResolvers['createOrganization'] = ({
-  input,
-}) => {
-  return db.organization.create({
-    data: input,
-  })
-}
+export const createOrganization: MutationResolvers['createOrganization'] =
+  async ({ input }) => {
+    const newOrganization = await kyselyDB
+      .insertInto('Organization')
+      .values(input)
+      .returningAll()
+      .executeTakeFirstOrThrow()
 
-export const updateOrganization: MutationResolvers['updateOrganization'] = ({
-  OrganizationId,
-  input,
-}) => {
-  return db.organization.update({
-    data: input,
-    where: { OrganizationId },
-  })
-}
+    // Invalidate the cache for the organizations list and the new organization
+    redis.del('organizations')
+    redis.del(`organization:${newOrganization.OrganizationId}`)
 
-export const deleteOrganization: MutationResolvers['deleteOrganization'] = ({
-  OrganizationId,
-}) => {
-  return db.organization.delete({
-    where: { OrganizationId },
-  })
-}
+    return newOrganization
+  }
+
+export const updateOrganization: MutationResolvers['updateOrganization'] =
+  async ({ OrganizationId, input }) => {
+    const updatedOrganization = await kyselyDB
+      .updateTable('Organization')
+      .set(input)
+      .where('OrganizationId', '=', OrganizationId)
+      .returningAll()
+      .executeTakeFirstOrThrow()
+
+    // Invalidate the cache for the updated organization
+    redis.del(`organization:${OrganizationId}`)
+
+    return updatedOrganization
+  }
+
+export const deleteOrganization: MutationResolvers['deleteOrganization'] =
+  async ({ OrganizationId }) => {
+    const deletedOrganization = await kyselyDB
+      .deleteFrom('Organization')
+      .where('OrganizationId', '=', OrganizationId)
+      .returningAll()
+      .executeTakeFirstOrThrow()
+
+    // Invalidate the cache for the deleted organization
+    redis.del(`organization:${OrganizationId}`)
+
+    return deletedOrganization
+  }
 
 export const Organization: OrganizationRelationResolvers = {
-  User: (_obj, { root }) => {
+  PayrollData: (_obj, { root }) => {
     return db.organization
       .findUnique({ where: { OrganizationId: root?.OrganizationId } })
-      .User()
-  },
-  PayRollSetting: (_obj, { root }) => {
-    return db.organization
-      .findUnique({ where: { OrganizationId: root?.OrganizationId } })
-      .PayRollSetting()
+      .PayrollData()
   },
   Admin: (_obj, { root }) => {
     return db.organization

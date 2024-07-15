@@ -5,24 +5,34 @@ export const standard = defineScenario<Prisma.OrganizationCreateArgs>({
   organization: {
     one: {
       data: {
+        OrganizationId: 'String',
         OrganizationName: 'String',
-        Address: 'String',
+        organizationType: 'NonProfit',
+        addressStreet: 'String',
+        addressCity: 'String',
+        addressState: 'String',
+        addressCountry: 'String',
         Email: 'String',
+        websiteUrl: 'String',
         Phone: 'String',
-        User: {
-          create: { id: 'String', first_name: 'String', email: 'String' },
-        },
+        organizationSize: 'Small',
+        Industry: 'Technology',
       },
     },
     two: {
       data: {
+        OrganizationId: 'String',
         OrganizationName: 'String',
-        Address: 'String',
+        organizationType: 'NonProfit',
+        addressStreet: 'String',
+        addressCity: 'String',
+        addressState: 'String',
+        addressCountry: 'String',
         Email: 'String',
+        websiteUrl: 'String',
         Phone: 'String',
-        User: {
-          create: { id: 'String', first_name: 'String', email: 'String' },
-        },
+        organizationSize: 'Small',
+        Industry: 'Technology',
       },
     },
   },

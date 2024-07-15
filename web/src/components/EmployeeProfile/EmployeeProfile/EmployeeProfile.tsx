@@ -4,12 +4,13 @@ import type {
   FindEmployeeProfileByProfileId,
 } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import {} from 'src/lib/formatters'
+import EmployeeStatCard from '../../EmployeeStatCard/EmployeeStatCard'
 
 const DELETE_EMPLOYEE_PROFILE_MUTATION: TypedDocumentNode<
   DeleteEmployeeProfileMutation,
@@ -55,68 +56,9 @@ const EmployeeProfile = ({ employeeProfile }: Props) => {
   }
 
   return (
-    <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            EmployeeProfile {employeeProfile.profile_id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>Profile id</th>
-              <td>{employeeProfile.profile_id}</td>
-            </tr>
-            <tr>
-              <th>Org id</th>
-              <td>{employeeProfile.org_id}</td>
-            </tr>
-            <tr>
-              <th>First name</th>
-              <td>{employeeProfile.first_name}</td>
-            </tr>
-            <tr>
-              <th>Last name</th>
-              <td>{employeeProfile.last_name}</td>
-            </tr>
-            <tr>
-              <th>Profile image</th>
-              <td>{employeeProfile.profile_image}</td>
-            </tr>
-            <tr>
-              <th>Position</th>
-              <td>{employeeProfile.position}</td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td>{employeeProfile.email}</td>
-            </tr>
-            <tr>
-              <th>Allowed leaves</th>
-              <td>{employeeProfile.allowed_leaves}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editEmployeeProfile({
-            profile_id: employeeProfile.profile_id,
-          })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(employeeProfile.profile_id)}
-        >
-          Delete
-        </button>
-      </nav>
-    </>
+    <main>
+      <EmployeeStatCard employeeProfile={employeeProfile} />
+    </main>
   )
 }
 

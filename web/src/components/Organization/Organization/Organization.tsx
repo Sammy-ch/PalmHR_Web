@@ -9,7 +9,7 @@ import { useMutation } from '@redwoodjs/web'
 import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import {} from 'src/lib/formatters'
+import { checkboxInputTag, formatEnum } from 'src/lib/formatters'
 
 const DELETE_ORGANIZATION_MUTATION: TypedDocumentNode<
   DeleteOrganizationMutation,
@@ -68,16 +68,48 @@ const Organization = ({ organization }: Props) => {
               <td>{organization.OrganizationName}</td>
             </tr>
             <tr>
-              <th>Address</th>
-              <td>{organization.Address}</td>
+              <th>Organization type</th>
+              <td>{formatEnum(organization.organizationType)}</td>
+            </tr>
+            <tr>
+              <th>Address street</th>
+              <td>{organization.addressStreet}</td>
+            </tr>
+            <tr>
+              <th>Address city</th>
+              <td>{organization.addressCity}</td>
+            </tr>
+            <tr>
+              <th>Address state</th>
+              <td>{organization.addressState}</td>
+            </tr>
+            <tr>
+              <th>Address country</th>
+              <td>{organization.addressCountry}</td>
             </tr>
             <tr>
               <th>Email</th>
               <td>{organization.Email}</td>
             </tr>
             <tr>
+              <th>Website url</th>
+              <td>{organization.websiteUrl}</td>
+            </tr>
+            <tr>
               <th>Phone</th>
               <td>{organization.Phone}</td>
+            </tr>
+            <tr>
+              <th>Is verified</th>
+              <td>{checkboxInputTag(organization.isVerified)}</td>
+            </tr>
+            <tr>
+              <th>Organization size</th>
+              <td>{formatEnum(organization.organizationSize)}</td>
+            </tr>
+            <tr>
+              <th>Industry</th>
+              <td>{formatEnum(organization.Industry)}</td>
             </tr>
           </tbody>
         </table>

@@ -44,7 +44,18 @@ export const Loading = () => {
   )
 }
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => {
+  return (
+    <main className="grid items-start gap-5 px-2 lg:px-4">
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+      <Skeleton className="h-7 w-full bg-slate-300" />
+    </main>
+  )
+}
 
 export const Failure = ({
   error,

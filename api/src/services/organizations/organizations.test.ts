@@ -33,24 +33,36 @@ describe('organizations', () => {
     }
   )
 
-  scenario('creates a organization', async (scenario: StandardScenario) => {
+  scenario('creates a organization', async () => {
     const result = await createOrganization({
       input: {
-        OrganizationId: scenario.organization.two.OrganizationId,
+        OrganizationId: 'String',
         OrganizationName: 'String',
-        Address: 'String',
+        organizationType: 'NonProfit',
+        addressStreet: 'String',
+        addressCity: 'String',
+        addressState: 'String',
+        addressCountry: 'String',
         Email: 'String',
+        websiteUrl: 'String',
         Phone: 'String',
+        organizationSize: 'Small',
+        Industry: 'Technology',
       },
     })
 
-    expect(result.OrganizationId).toEqual(
-      scenario.organization.two.OrganizationId
-    )
+    expect(result.OrganizationId).toEqual('String')
     expect(result.OrganizationName).toEqual('String')
-    expect(result.Address).toEqual('String')
+    expect(result.organizationType).toEqual('NonProfit')
+    expect(result.addressStreet).toEqual('String')
+    expect(result.addressCity).toEqual('String')
+    expect(result.addressState).toEqual('String')
+    expect(result.addressCountry).toEqual('String')
     expect(result.Email).toEqual('String')
+    expect(result.websiteUrl).toEqual('String')
     expect(result.Phone).toEqual('String')
+    expect(result.organizationSize).toEqual('Small')
+    expect(result.Industry).toEqual('Technology')
   })
 
   scenario('updates a organization', async (scenario: StandardScenario) => {
@@ -59,10 +71,10 @@ describe('organizations', () => {
     })) as Organization
     const result = await updateOrganization({
       OrganizationId: original.OrganizationId,
-      input: { OrganizationName: 'String2' },
+      input: { OrganizationId: 'String2' },
     })
 
-    expect(result.OrganizationName).toEqual('String2')
+    expect(result.OrganizationId).toEqual('String2')
   })
 
   scenario('deletes a organization', async (scenario: StandardScenario) => {

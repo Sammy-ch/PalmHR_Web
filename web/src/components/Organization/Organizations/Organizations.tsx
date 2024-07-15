@@ -10,7 +10,7 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Organization/OrganizationsCell'
-import { truncate } from 'src/lib/formatters'
+import { checkboxInputTag, formatEnum, truncate } from 'src/lib/formatters'
 
 const DELETE_ORGANIZATION_MUTATION: TypedDocumentNode<
   DeleteOrganizationMutation,
@@ -57,9 +57,17 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
           <tr>
             <th>Organization id</th>
             <th>Organization name</th>
-            <th>Address</th>
+            <th>Organization type</th>
+            <th>Address street</th>
+            <th>Address city</th>
+            <th>Address state</th>
+            <th>Address country</th>
             <th>Email</th>
+            <th>Website url</th>
             <th>Phone</th>
+            <th>Is verified</th>
+            <th>Organization size</th>
+            <th>Industry</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -68,9 +76,17 @@ const OrganizationsList = ({ organizations }: FindOrganizations) => {
             <tr key={organization.OrganizationId}>
               <td>{truncate(organization.OrganizationId)}</td>
               <td>{truncate(organization.OrganizationName)}</td>
-              <td>{truncate(organization.Address)}</td>
+              <td>{formatEnum(organization.organizationType)}</td>
+              <td>{truncate(organization.addressStreet)}</td>
+              <td>{truncate(organization.addressCity)}</td>
+              <td>{truncate(organization.addressState)}</td>
+              <td>{truncate(organization.addressCountry)}</td>
               <td>{truncate(organization.Email)}</td>
+              <td>{truncate(organization.websiteUrl)}</td>
               <td>{truncate(organization.Phone)}</td>
+              <td>{checkboxInputTag(organization.isVerified)}</td>
+              <td>{formatEnum(organization.organizationSize)}</td>
+              <td>{formatEnum(organization.Industry)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import type {
   CreateOrganizationMutation,
   CreateOrganizationInput,
@@ -13,8 +15,6 @@ import { useAuth } from 'src/auth'
 
 import CreateOrganizationForm from '../../CreateOrganizationForm/CreateOrganizationForm'
 
-import logo from './palmhr-alter.png'
-
 const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
   CreateOrganizationMutation,
   CreateOrganizationMutationVariables
@@ -27,16 +27,28 @@ const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
 `
 
 const NewOrganization = () => {
-  const { currentUser } = useAuth()
+  const [userSession, setUserSession] = useState('')
 
-  const userId = currentUser?.sub as string
+  const { client } = useAuth()
+
+  useEffect(() => {
+    async function getUserSession() {
+      const { data } = await client.auth.getSession()
+
+      if (data) {
+        setUserSession(data.session.user.id)
+      }
+    }
+
+    getUserSession()
+  }, [client])
 
   const [createOrganization, { loading, error }] = useMutation(
     CREATE_ORGANIZATION_MUTATION,
     {
       onCompleted: () => {
         toast.success('Organization created')
-        navigate(routes.dashboard())
+        navigate(routes.dashboard({ id: userSession }))
       },
       onError: (error) => {
         toast.error(error.message)
@@ -47,16 +59,17 @@ const NewOrganization = () => {
   const onSave = (input: CreateOrganizationInput) => {
     const updatedInput: CreateOrganizationInput = {
       ...input,
-      OrganizationId: userId,
+      OrganizationId: userSession,
+      isVerified: false,
     }
     createOrganization({ variables: { input: updatedInput } })
   }
 
   return (
-    <div className=" min-h-screen">
-      <div className="flex w-full items-center border-b  p-5 text-2xl text-white">
-        <img src={logo} alt="palm-logo" height={100} width={100} />
-      </div>
+    <div className="min-h-screen">
+      <header className="rw-segment-header">
+        <h2 className="rw-heading rw-heading-secondary">New Organization</h2>
+      </header>
       <div className="flex min-h-screen items-center justify-center">
         <CreateOrganizationForm
           onSave={onSave}

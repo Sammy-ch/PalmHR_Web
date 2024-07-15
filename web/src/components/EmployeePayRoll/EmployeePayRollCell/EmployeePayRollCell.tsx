@@ -20,7 +20,6 @@ export const QUERY: TypedDocumentNode<
       id
       pay_period_start
       pay_period_end
-      attendance_report
       base_salary
       overtime
       net_salary

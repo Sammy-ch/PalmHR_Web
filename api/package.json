@@ -5,12 +5,17 @@
   "dependencies": {
     "@libsql/client": "^0.6.0",
     "@prisma/adapter-libsql": "^5.12.1",
-    "@redwoodjs/api": "7.6.3",
-    "@redwoodjs/auth-netlify-api": "7.6.3",
-    "@redwoodjs/auth-supabase-api": "7.6.3",
-    "@redwoodjs/graphql-server": "7.6.3",
+    "@redwoodjs/api": "7.7.1",
+    "@redwoodjs/auth-dbauth-api": "7.7.1",
+    "@redwoodjs/auth-netlify-api": "7.7.1",
+    "@redwoodjs/auth-supabase-api": "7.7.1",
+    "@redwoodjs/graphql-server": "7.7.1",
     "@simplewebauthn/server": "^7",
     "@supabase/supabase-js": "2.42.7",
-    "resend": "^3.3.0"
+    "ioredis": "^5.4.1",
+    "kysely": "^0.27.4",
+    "pg": "^8.12.0",
+    "resend": "^3.3.0",
+    "uuid": "^10.0.0"
   }
 }

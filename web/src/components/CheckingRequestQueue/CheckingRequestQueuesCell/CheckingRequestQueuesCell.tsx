@@ -3,7 +3,6 @@ import type {
   FindCheckingRequestQueuesByOrganizationVariables,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import type {
   CellSuccessProps,
   CellFailureProps,
@@ -37,14 +36,7 @@ export const QUERY: TypedDocumentNode<
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No checkingRequestQueues yet. '}
-      <Link to={routes.newCheckingRequestQueue()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
+  return <div className="rw-text-center">{'No Checking Requests yet. '}</div>
 }
 
 export const Failure = ({

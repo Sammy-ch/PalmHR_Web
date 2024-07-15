@@ -23,29 +23,28 @@ export const QUERY: TypedDocumentNode<EditEmployeeLeaveFormById> = gql`
       leave_id
       leave_type
       leave_days
-      leave_approval
     }
   }
 `
 
-const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
-  EditEmployeeLeaveFormById,
-  UpdateEmployeeLeaveFormMutationVariables
-> = gql`
-  mutation UpdateEmployeeLeaveFormMutation(
-    $id: String!
-    $input: UpdateEmployeeLeaveFormInput!
-  ) {
-    updateEmployeeLeaveForm(id: $id, input: $input) {
-      id
-      requested_leave_date
-      leave_id
-      leave_type
-      leave_days
-      leave_approval
-    }
-  }
-`
+// const UPDATE_EMPLOYEE_LEAVE_FORM_MUTATION: TypedDocumentNode<
+//   EditEmployeeLeaveFormById,
+//   UpdateEmployeeLeaveFormMutationVariables
+// > = gql`
+//   mutation UpdateEmployeeLeaveFormMutation(
+//     $id: String!
+//     $input: UpdateEmployeeLeaveFormInput!
+//   ) {
+//     updateEmployeeLeaveForm(id: $id, input: $input) {
+//       id
+//       requested_leave_date
+//       leave_id
+//       leave_type
+//       leave_days
+//       Leave_status
+//     }
+//   }
+// `
 
 export const Loading = () => <div>Loading...</div>
 

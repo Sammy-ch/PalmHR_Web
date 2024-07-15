@@ -21,14 +21,8 @@ import {
 import { Link, routes, useRouteName } from '@redwoodjs/router'
 import { useParams } from '@redwoodjs/router'
 
+import { useAuth } from 'src/auth'
 import CheckingRequestQueuesCell from 'src/components/CheckingRequestQueue/CheckingRequestQueuesCell'
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  Card,
-} from 'src/components/ui/card'
 import { SheetTrigger, SheetContent, Sheet } from 'src/components/ui/sheet'
 
 import { FindOrganizationByOrganizationId } from '@/types/graphql'
@@ -38,13 +32,12 @@ function capitalizeFirstLetter(string) {
 }
 
 interface Props {
-  organizationId: NonNullable<
-    FindOrganizationByOrganizationId['organization']['OrganizationId']
-  >
+  organization: NonNullable<FindOrganizationByOrganizationId['organization']>
 }
 
-const DashboardHeader = ({ organizationId }: Props) => {
+const DashboardHeader = ({ organization }: Props) => {
   const { id } = useParams()
+  const { logOut } = useAuth()
   const routeName = useRouteName()
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -58,7 +51,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
         <SheetContent className="flex flex-col" side="left">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              to={routes.dashboard({ id: organizationId })}
+              to={routes.dashboard({ id: organization.OrganizationId })}
               className="flex items-center gap-2 text-lg font-semibold"
               href="#"
             >
@@ -66,7 +59,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               <span className="sr-only">PALM HR</span>
             </Link>
             <Link
-              to={routes.dashboard({ id: organizationId })}
+              to={routes.dashboard({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -74,7 +67,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Dashboard
             </Link>
             <Link
-              to={routes.reports({ id: organizationId })}
+              to={routes.reports({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
               href="#"
             >
@@ -82,7 +75,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Reports
             </Link>
             <Link
-              to={routes.performance({ id: organizationId })}
+              to={routes.performance({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -90,7 +83,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Employee Stats
             </Link>
             <Link
-              to={routes.attendance({ id: organizationId })}
+              to={routes.attendance({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -98,7 +91,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Leave Management
             </Link>
             <Link
-              to={routes.employeePayRolls({ id: organizationId })}
+              to={routes.employeePayRolls({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -106,7 +99,7 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Payroll{' '}
             </Link>
             <Link
-              to={routes.settings({ id: organizationId })}
+              to={routes.settings({ id: organization.OrganizationId })}
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               href="#"
             >
@@ -114,26 +107,13 @@ const DashboardHeader = ({ organizationId }: Props) => {
               Settings
             </Link>
           </nav>
-          <div className="mt-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" size="sm">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <h1>{capitalizeFirstLetter(routeName)}</h1>
+        <h1>
+          {organization.OrganizationName}
+          {' > '} {capitalizeFirstLetter(routeName)}
+        </h1>
       </div>
       <Drawer>
         <DrawerTrigger>
@@ -161,12 +141,10 @@ const DashboardHeader = ({ organizationId }: Props) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Organizations</DropdownMenuItem>
           <DropdownMenuItem>Admins</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => logOut()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

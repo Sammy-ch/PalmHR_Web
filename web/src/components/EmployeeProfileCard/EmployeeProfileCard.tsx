@@ -11,15 +11,15 @@ const EmployeeProfileCard = ({ employeeProfiles }: FindEmployeeProfiles) => {
     <>
       {employeeProfiles.map((employeeProfile) => (
         <div
-          className="flex  h-80 w-72 flex-col justify-between rounded-lg bg-white shadow-md dark:bg-gray-800 "
+          className="p flex h-80 w-72 flex-col justify-between rounded-lg bg-white shadow-md dark:bg-gray-800 "
           key={employeeProfile.profile_id}
         >
           <div className="relative  flex flex-col items-center overflow-hidden rounded-t-lg">
-            <Avatar className="h-[120px] w-[120px]">
+            <Avatar className="h-[100px] w-[100px]">
               <AvatarImage
                 height={500}
                 width={500}
-                src={employeeProfile.profile_id}
+                src={employeeProfile.profile_image}
                 alt="@shadcn"
                 className="object-cover object-top"
               />
@@ -28,7 +28,7 @@ const EmployeeProfileCard = ({ employeeProfiles }: FindEmployeeProfiles) => {
 
             <span className="absolute bottom-2 right-2 inline-block h-3 w-3 rounded-full bg-green-500" />
           </div>
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col items-center justify-center p-4">
             <h3 className="mb-2 text-lg font-semibold">
               {employeeProfile.first_name} {employeeProfile.last_name}
             </h3>

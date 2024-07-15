@@ -2,15 +2,44 @@ export const schema = gql`
   type Organization {
     OrganizationId: String!
     OrganizationName: String!
-    User: UserAccount!
-    Address: String!
+    organizationType: OrganizationType!
+    addressStreet: String!
+    addressCity: String!
+    addressState: String!
+    addressCountry: String!
     Email: String!
-    isVerified: Boolean!
+    websiteUrl: String!
     Phone: String!
-    PayRollSetting: [PayRollSetting]!
+    isVerified: Boolean!
+    organizationSize: OrganizationSize!
+    Industry: Industry!
+    PayrollData: [PayrollData]!
     Admin: [Admin]!
     EmployeeProfiles: [EmployeeProfile]!
     OrganizationAttendanceKpi: [OrganizationAttendanceKpi]!
+  }
+
+  enum OrganizationType {
+    NonProfit
+    ForProfit
+    Government
+    Other
+  }
+
+  enum OrganizationSize {
+    Small
+    Medium
+    Large
+  }
+
+  enum Industry {
+    Technology
+    HealthCare
+    Finance
+    Education
+    Retail
+    Manufactoring
+    Other
   }
 
   type Query {
@@ -21,24 +50,35 @@ export const schema = gql`
   input CreateOrganizationInput {
     OrganizationId: String!
     OrganizationName: String!
-    Address: String!
+    organizationType: OrganizationType!
+    addressStreet: String!
+    addressCity: String!
+    addressState: String!
+    addressCountry: String!
     Email: String!
+    websiteUrl: String!
     Phone: String!
+    isVerified: Boolean!
+    organizationSize: OrganizationSize!
+    Industry: Industry!
   }
 
   input UpdateOrganizationInput {
     OrganizationName: String
-    Address: String
+    organizationType: OrganizationType
+    addressStreet: String
+    addressCity: String
+    addressState: String
+    addressCountry: String
     Email: String
+    websiteUrl: String
     Phone: String
+    isVerified: Boolean
+    organizationSize: OrganizationSize
+    Industry: Industry
   }
 
   type Mutation {
-    sendVerificationEmail(
-      organizationId: String!
-      email: String!
-    ): Organization! @requireAuth
-
     createOrganization(input: CreateOrganizationInput!): Organization!
       @requireAuth
     updateOrganization(

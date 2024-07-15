@@ -15,15 +15,30 @@ export const schema = gql`
     ABSENT
   }
 
+  type WeeklyAttendance {
+    day: String!
+    onTime: Int!
+    late: Int!
+  }
+
+  type OrganizationAttendanceKPI {
+    onTimePercentage: Float!
+    absenteeismRate: Float!
+    averageWorkingHours: Float!
+    lateAttendanceRate: Float!
+  }
   type Query {
     employeeAttendances: [EmployeeAttendance!]! @requireAuth
     employeeAttendance(attendance_id: String!): EmployeeAttendance @requireAuth
-
     employeeAttendancesByOrganization(orgId: String!): [EmployeeAttendance!]!
       @requireAuth
+
+    getOrganizationAttendanceKPI: OrganizationAttendanceKPI! @requireAuth
+    employeesWeeklyAttendance: [WeeklyAttendance] @requireAuth
   }
 
   input CreateEmployeeAttendanceInput {
+    attendance_id: String!
     employee_id: String!
     checkin_time: DateTime
     checkout_time: DateTime
@@ -42,6 +57,11 @@ export const schema = gql`
   }
 
   type Mutation {
+    approveEmployeeCheckout(
+      attendance_id: String!
+      checkout_time: DateTime!
+    ): EmployeeAttendance! @requireAuth
+
     createEmployeeAttendance(
       input: CreateEmployeeAttendanceInput!
     ): EmployeeAttendance! @requireAuth
