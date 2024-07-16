@@ -104,7 +104,7 @@ const Routes = () => {
         <Route path="/about" page={AboutPage} name="about" />
       </Set>
 
-      <PrivateSet wrap={DashoardLayout} unauthenticated="home">
+      <PrivateSet wrap={DashoardLayout} unauthenticated="home" prerender>
         <Route path="/dashboard/organization/{id}" page={DashboardPage} name="dashboard" />
         <Route path="/dashboard/reports/{id}" page={ReportsPage} name="reports" />
         <Route path="/dashboard/employee-stats/{id}" page={PerformancePage} name="performance" />
