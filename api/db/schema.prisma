@@ -11,20 +11,28 @@ datasource db {
 }
 
 generator kysely {
-  provider     = "prisma-kysely"
-  output       = "../src/db"
-  fileName     = "types.ts"
-  enumFileName = "enums.ts"
+  provider      = "prisma-kysely"
+  output        = "../src/db"
+  fileName      = "types.ts"
+  enumFileName  = "enums.ts"
+  binaryTargets = "native"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
 }
 
 model Admin {
-  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  org_id       String       @db.Uuid
-  Organization Organization @relation(fields: [org_id], references: [OrganizationId])
-  first_name   String
-  last_name    String
-  email        String
-  admin_role   AdminRole[]
+  id                  String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  org_id              String         @db.Uuid
+  username            String
+  email               String
+  hashedPassword      String
+  salt                String
+  resetTokenExpiresAt DateTime?
+  admin_role          AdminRole[]
+  organization        Organization[]
 
   @@unique([id, email])
 }
@@ -131,9 +139,10 @@ model Organization {
   organizationSize          OrganizationSize
   Industry                  Industry
   PayrollData               PayrollData[]
-  Admin                     Admin[]
   EmployeeProfiles          EmployeeProfile[]
   OrganizationAttendanceKpi OrganizationAttendanceKpi[]
+  Admin                     Admin?                      @relation(fields: [adminId], references: [id])
+  adminId                   String?                     @db.Uuid
 
   @@unique([OrganizationId, OrganizationName, Email])
 }

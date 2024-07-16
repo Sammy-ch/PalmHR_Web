@@ -23,17 +23,15 @@ const SignupPage = () => {
     }
   }, [isAuthenticated])
 
-  // focus on email box on page load
-  const emailRef = useRef<HTMLInputElement>(null)
+  // focus on username box on page load
+  const usernameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    emailRef.current?.focus()
+    usernameRef.current?.focus()
   }, [])
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await signUp({
-      first_name: data.firstName,
-      last_name: data.lastName,
-      username: data.email,
+      username: data.username,
       password: data.password,
     })
 
@@ -63,65 +61,25 @@ const SignupPage = () => {
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <Label
-                    name="firstName"
+                    name="username"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    First Name
+                    Username
                   </Label>
                   <TextField
-                    name="firstName"
+                    name="username"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
                     validation={{
                       required: {
                         value: true,
-                        message: 'First Name is required',
+                        message: 'Username is required',
                       },
                     }}
                   />
-                  <FieldError name="firstName" className="rw-field-error" />
-
-                  <Label
-                    name="lastName"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Last Name
-                  </Label>
-                  <TextField
-                    name="lastName"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Last Name is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="lastName" className="rw-field-error" />
-
-                  <Label
-                    name="email"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Email
-                  </Label>
-                  <TextField
-                    name="email"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    ref={emailRef}
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Email is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="email" className="rw-field-error" />
+                  <FieldError name="username" className="rw-field-error" />
 
                   <Label
                     name="password"

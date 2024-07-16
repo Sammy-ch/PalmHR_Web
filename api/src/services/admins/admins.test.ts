@@ -26,26 +26,28 @@ describe('admins', () => {
     const result = await createAdmin({
       input: {
         org_id: scenario.admin.two.org_id,
-        first_name: 'String',
-        last_name: 'String',
+        username: 'String',
         email: 'String',
+        hashedPassword: 'String',
+        salt: 'String',
       },
     })
 
     expect(result.org_id).toEqual(scenario.admin.two.org_id)
-    expect(result.first_name).toEqual('String')
-    expect(result.last_name).toEqual('String')
+    expect(result.username).toEqual('String')
     expect(result.email).toEqual('String')
+    expect(result.hashedPassword).toEqual('String')
+    expect(result.salt).toEqual('String')
   })
 
   scenario('updates a admin', async (scenario: StandardScenario) => {
     const original = (await admin({ id: scenario.admin.one.id })) as Admin
     const result = await updateAdmin({
       id: original.id,
-      input: { first_name: 'String2' },
+      input: { username: 'String2' },
     })
 
-    expect(result.first_name).toEqual('String2')
+    expect(result.username).toEqual('String2')
   })
 
   scenario('deletes a admin', async (scenario: StandardScenario) => {

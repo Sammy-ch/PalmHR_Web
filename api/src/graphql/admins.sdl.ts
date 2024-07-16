@@ -3,9 +3,11 @@ export const schema = gql`
     id: String!
     org_id: String!
     Organization: Organization!
-    first_name: String!
-    last_name: String!
+    username: String!
     email: String!
+    hashedPassword: String!
+    salt: String!
+    resetTokenExpiresAt: DateTime
     admin_role: [AdminRole]!
   }
 
@@ -16,16 +18,20 @@ export const schema = gql`
 
   input CreateAdminInput {
     org_id: String!
-    first_name: String!
-    last_name: String!
+    username: String!
     email: String!
+    hashedPassword: String!
+    salt: String!
+    resetTokenExpiresAt: DateTime
   }
 
   input UpdateAdminInput {
     org_id: String
-    first_name: String
-    last_name: String
+    username: String
     email: String
+    hashedPassword: String
+    salt: String
+    resetTokenExpiresAt: DateTime
   }
 
   type Mutation {

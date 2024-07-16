@@ -20,8 +20,7 @@ export const QUERY: TypedDocumentNode<EditAdminById> = gql`
     admin: admin(id: $id) {
       id
       org_id
-      first_name
-      last_name
+      username
       email
     }
   }
@@ -35,8 +34,7 @@ const UPDATE_ADMIN_MUTATION: TypedDocumentNode<
     updateAdmin(id: $id, input: $input) {
       id
       org_id
-      first_name
-      last_name
+      username
       email
     }
   }

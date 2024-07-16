@@ -5,46 +5,48 @@ export const standard = defineScenario<Prisma.AdminCreateArgs>({
   admin: {
     one: {
       data: {
-        first_name: 'String',
-        last_name: 'String',
+        username: 'String',
         email: 'String',
+        hashedPassword: 'String',
+        salt: 'String',
         Organization: {
           create: {
+            OrganizationId: 'String',
             OrganizationName: 'String',
-            Address: 'String',
+            organizationType: 'NonProfit',
+            addressStreet: 'String',
+            addressCity: 'String',
+            addressState: 'String',
+            addressCountry: 'String',
             Email: 'String',
+            websiteUrl: 'String',
             Phone: 'String',
-            User: {
-              create: {
-                id: 'String',
-                first_name: 'String',
-                last_name: 'String',
-                email: 'String',
-              },
-            },
+            organizationSize: 'Small',
+            Industry: 'Technology',
           },
         },
       },
     },
     two: {
       data: {
-        first_name: 'String',
-        last_name: 'String',
+        username: 'String',
         email: 'String',
+        hashedPassword: 'String',
+        salt: 'String',
         Organization: {
           create: {
+            OrganizationId: 'String',
             OrganizationName: 'String',
-            Address: 'String',
+            organizationType: 'NonProfit',
+            addressStreet: 'String',
+            addressCity: 'String',
+            addressState: 'String',
+            addressCountry: 'String',
             Email: 'String',
+            websiteUrl: 'String',
             Phone: 'String',
-            User: {
-              create: {
-                id: 'String',
-                first_name: 'String',
-                last_name: 'String',
-                email: 'String',
-              },
-            },
+            organizationSize: 'Small',
+            Industry: 'Technology',
           },
         },
       },
