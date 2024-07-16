@@ -1,7 +1,7 @@
 import type { Decoded } from '@redwoodjs/api'
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
 
-import { db } from './db'
+import { kyselyDB } from './kysely'
 
 /**
  * The name of the cookie that dbAuth sets
@@ -34,10 +34,11 @@ export const getCurrentUser = async (session: Decoded) => {
     throw new Error('Invalid session')
   }
 
-  return await db.admin.findUnique({
-    where: { id: session.id },
-    select: { id: true },
-  })
+  return await kyselyDB
+    .selectFrom('Admin')
+    .select(['id'])
+    .where('id', '=', session.id)
+    .executeTakeFirst()
 }
 
 /**

@@ -9,26 +9,18 @@ type DashoardLayoutProps = {
 }
 
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
-  const { client } = useAuth()
-  const [userSession, setUserSession] = useState('')
+  const { currentUser } = useAuth()
+  const [orgId, setOrgId] = useState('')
 
   useEffect(() => {
-    async function getUserSession() {
-      const { data } = await client.auth.getSession()
-
-      if (data) {
-        setUserSession(data.session.user.id)
-      }
-    }
-
-    getUserSession()
-  }, [client])
+    setOrgId(currentUser?.id)
+  }, [currentUser])
 
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <Navigation />
       <div className="flex flex-col">
-        <DashboardHeaderCell id={userSession} />
+        <DashboardHeaderCell id={orgId} />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
         </main>
