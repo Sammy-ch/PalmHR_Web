@@ -67,16 +67,11 @@ export const employeeAttendancesByOrganization: QueryResolvers['employeeAttendan
 
 export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendance'] =
   async ({ input }) => {
-    const attendance = await kyselyDB
+    return await kyselyDB
       .insertInto('EmployeeAttendance')
       .values(input)
       .returningAll()
       .executeTakeFirst()
-    return {
-      ...attendance,
-      checkin_time: formatDatetime(attendance.checkin_time),
-      checkout_time: formatDatetime(attendance.checkout_time),
-    }
   }
 
 export const updateEmployeeAttendance: MutationResolvers['updateEmployeeAttendance'] =

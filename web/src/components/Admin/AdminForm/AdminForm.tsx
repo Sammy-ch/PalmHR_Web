@@ -61,32 +61,22 @@ const AdminForm = (props: AdminFormProps) => {
         </Label>
 
         <TextField
-          name="first_name"
-          defaultValue={props.admin?.first_name}
+          name="username"
+          defaultValue={props.admin?.username}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="first_name" className="rw-field-error" />
+        <FieldError name="username" className="rw-field-error" />
 
         <Label
           name="last_name"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Last name
+          User Name{' '}
         </Label>
-
-        <TextField
-          name="last_name"
-          defaultValue={props.admin?.last_name}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="last_name" className="rw-field-error" />
 
         <Label
           name="email"

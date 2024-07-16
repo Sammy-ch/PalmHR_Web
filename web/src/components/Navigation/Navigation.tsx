@@ -7,20 +7,12 @@ import { Button } from 'src/components/ui/button'
 import logo from './palmHR_logo.png'
 
 const Navigation = () => {
-  const { client } = useAuth()
-  const [userSession, setUserSession] = useState('')
+  const { currentUser } = useAuth()
+  const [orgId, setOrgId] = useState('')
 
   useEffect(() => {
-    async function getUserSession() {
-      const { data } = await client.auth.getSession()
-
-      if (data) {
-        setUserSession(data.session.user.id)
-      }
-    }
-
-    getUserSession()
-  }, [client])
+    setOrgId(currentUser?.id)
+  }, [currentUser])
 
   return (
     <div className="hidden border-r bg-muted/40 md:block">
@@ -39,7 +31,7 @@ const Navigation = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <DashboardNavigationCell id={userSession} />
+          <DashboardNavigationCell id={orgId} />
         </div>
       </div>
     </div>

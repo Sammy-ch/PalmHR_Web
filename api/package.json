@@ -12,6 +12,7 @@
     "@redwoodjs/graphql-server": "7.7.1",
     "@simplewebauthn/server": "^7",
     "@supabase/supabase-js": "2.42.7",
+    "date-fns": "^3.6.0",
     "ioredis": "^5.4.1",
     "kysely": "^0.27.4",
     "pg": "^8.12.0",

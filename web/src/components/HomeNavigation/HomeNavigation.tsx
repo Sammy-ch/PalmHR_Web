@@ -9,20 +9,12 @@ import { Button } from '../ui/button'
 import logo from './palmHR_logo.png'
 
 const HomeNavigation = () => {
-  const { client, logOut } = useAuth()
-  const [userSession, setUserSession] = useState('')
+  const { logOut, isAuthenticated, currentUser } = useAuth()
+  const [orgId, setOrgId] = useState('')
 
   useEffect(() => {
-    async function getUserSession() {
-      const { data } = await client.auth.getSession()
-
-      if (data) {
-        setUserSession(data.session.user.id)
-      }
-    }
-
-    getUserSession()
-  }, [client])
+    setOrgId(currentUser?.id)
+  }, [currentUser])
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">
@@ -58,11 +50,11 @@ const HomeNavigation = () => {
         </NavLink>
       </nav>
       <div className="flex">
-        {userSession ? (
+        {isAuthenticated ? (
           <main className="flex gap-2">
             <Button
               onClick={() => {
-                navigate(routes.dashboard({ id: userSession }))
+                navigate(routes.dashboard({ id: orgId }))
               }}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >

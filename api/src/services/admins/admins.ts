@@ -1,8 +1,4 @@
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  AdminRelationResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
@@ -36,13 +32,4 @@ export const deleteAdmin: MutationResolvers['deleteAdmin'] = ({ id }) => {
   return db.admin.delete({
     where: { id },
   })
-}
-
-export const Admin: AdminRelationResolvers = {
-  Organization: (_obj, { root }) => {
-    return db.admin.findUnique({ where: { id: root?.id } }).Organization()
-  },
-  admin_role: (_obj, { root }) => {
-    return db.admin.findUnique({ where: { id: root?.id } }).admin_role()
-  },
 }

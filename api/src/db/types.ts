@@ -18,9 +18,11 @@ import type {
 export type Admin = {
   id: Generated<string>
   org_id: string
-  first_name: string
-  last_name: string
+  username: string
   email: string
+  hashedPassword: string
+  salt: string
+  resetTokenExpiresAt: Timestamp | null
 }
 export type AdminRole = {
   id: Generated<string>
@@ -89,6 +91,7 @@ export type Organization = {
   isVerified: Generated<boolean>
   organizationSize: OrganizationSize
   Industry: Industry
+  adminId: string | null
 }
 export type OrganizationAttendanceKpi = {
   id: Generated<string>
