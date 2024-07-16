@@ -110,7 +110,7 @@ const Routes = () => {
         <Route path="/dashboard/employee-stats/{id}" page={PerformancePage} name="performance" />
         <Route path="/organization/attendance/{id}" page={AttendancePage} name="attendance" />
         <Route path="/organization/pay-rolls/{id}" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
-        <Route path="/organization/settings/{id}" page={SettingsPage} name="settings" prerender />
+        <Route path="/organization/settings/{id}" page={SettingsPage} name="settings" />
       </PrivateSet>
       <Route notfound page={NotFoundPage} />
     </Router>
