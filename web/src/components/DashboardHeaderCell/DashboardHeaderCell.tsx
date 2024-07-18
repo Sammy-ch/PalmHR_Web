@@ -55,9 +55,9 @@ export const Success = ({
   FindDashboardHeaderQuery,
   FindDashboardHeaderQueryVariables
 >) => {
-  if (dashboard.isVerified === false) {
-    navigate(routes.verifyOrganizationEmail())
-  }
+  // if (dashboard.isVerified === false) {
+  //   navigate(routes.verifyOrganizationEmail())
+  // }
 
   return <DashboardHeader organization={dashboard} />
 }
