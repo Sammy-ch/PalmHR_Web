@@ -14,7 +14,7 @@ export const QUERY: TypedDocumentNode<FindAdmins, FindAdminsVariables> = gql`
     admins {
       id
       org_id
-      username
+      fullName
       email
     }
   }

@@ -3,54 +3,8 @@ import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.AdminCreateArgs>({
   admin: {
-    one: {
-      data: {
-        username: 'String',
-        email: 'String',
-        hashedPassword: 'String',
-        salt: 'String',
-        Organization: {
-          create: {
-            OrganizationId: 'String',
-            OrganizationName: 'String',
-            organizationType: 'NonProfit',
-            addressStreet: 'String',
-            addressCity: 'String',
-            addressState: 'String',
-            addressCountry: 'String',
-            Email: 'String',
-            websiteUrl: 'String',
-            Phone: 'String',
-            organizationSize: 'Small',
-            Industry: 'Technology',
-          },
-        },
-      },
-    },
-    two: {
-      data: {
-        username: 'String',
-        email: 'String',
-        hashedPassword: 'String',
-        salt: 'String',
-        Organization: {
-          create: {
-            OrganizationId: 'String',
-            OrganizationName: 'String',
-            organizationType: 'NonProfit',
-            addressStreet: 'String',
-            addressCity: 'String',
-            addressState: 'String',
-            addressCountry: 'String',
-            Email: 'String',
-            websiteUrl: 'String',
-            Phone: 'String',
-            organizationSize: 'Small',
-            Industry: 'Technology',
-          },
-        },
-      },
-    },
+    one: { data: { id: 'String', org_id: 'String', email: 'String' } },
+    two: { data: { id: 'String', org_id: 'String', email: 'String' } },
   },
 })
 

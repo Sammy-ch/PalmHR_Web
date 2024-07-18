@@ -16,7 +16,7 @@ export const QUERY: TypedDocumentNode<
     admin: admin(id: $id) {
       id
       org_id
-      username
+      fullName
       email
     }
   }

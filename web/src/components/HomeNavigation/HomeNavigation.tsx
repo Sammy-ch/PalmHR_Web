@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { SignInButton } from '@clerk/clerk-react'
 
 import { NavLink, navigate, routes } from '@redwoodjs/router'
+import { useMutation, useQuery } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 
@@ -10,13 +12,56 @@ import { Button } from '../ui/button'
 
 import logo from './palmHR_logo.png'
 
+const CREATE_ADMIN_MUTATION = gql`
+  mutation CreateAdminMutation($input: CreateAdminInput!) {
+    createAdmin(input: $input) {
+      id
+    }
+  }
+`
+
+const FIND_ADMIN_QUERY = gql`
+  query FindAdminQuery($id: String!) {
+    admin(id: $id) {
+      id
+    }
+  }
+`
+
 const HomeNavigation = () => {
-  const { logOut, isAuthenticated, currentUser } = useAuth()
+  const { logOut, isAuthenticated, userMetadata } = useAuth()
   const [orgId, setOrgId] = useState('')
+  const [createAdmin] = useMutation(CREATE_ADMIN_MUTATION, {
+    onCompleted: () => {
+      toast('Welcome')
+    },
+    onError(error) {
+      toast.error(error.message)
+    },
+  })
+
+  const { data, loading, error } = useQuery(FIND_ADMIN_QUERY, {
+    variables: { id: userMetadata?.id },
+    skip: !isAuthenticated,
+  })
 
   useEffect(() => {
-    setOrgId(currentUser?.id)
-  }, [currentUser])
+    if (isAuthenticated && !loading && !error) {
+      if (!data?.admin) {
+        createAdmin({
+          variables: {
+            input: {
+              id: userMetadata?.id,
+              org_id: userMetadata?.id,
+              fullName: userMetadata?.fullName,
+              email: userMetadata?.primaryEmailAddress?.emailAddress,
+            },
+          },
+        })
+      } else console.log('Welcome')
+      setOrgId(userMetadata?.id)
+    }
+  }, [isAuthenticated, loading, error, data])
 
   return (
     <header className="sub-header border-1 z-10  flex items-center justify-between rounded-full  bg-white px-10 py-2 shadow-md ">

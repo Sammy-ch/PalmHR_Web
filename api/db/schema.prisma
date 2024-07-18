@@ -25,14 +25,14 @@ generator client {
 
 model Admin {
   id           String         @id @db.Text
-  org_id       String         @db.Uuid
+  org_id       String         @db.Text
   fullName     String         @default("")
   email        String
   imageUrl     String?
   admin_role   AdminRole[]
   organization Organization[]
 
-  @@unique([id, email])
+  @@unique([id, email,org_id])
 }
 
 model AdminRole {

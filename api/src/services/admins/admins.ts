@@ -1,35 +1,45 @@
 import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
-import { db } from 'src/lib/db'
+import { kyselyDB } from 'src/lib/kysely'
 
-export const admins: QueryResolvers['admins'] = () => {
-  return db.admin.findMany()
+export const admins: QueryResolvers['admins'] = async () => {
+  return await kyselyDB.selectFrom('Admin').selectAll().execute()
 }
 
-export const admin: QueryResolvers['admin'] = ({ id }) => {
-  return db.admin.findUnique({
-    where: { id },
-  })
+export const admin: QueryResolvers['admin'] = async ({ id }) => {
+  return await kyselyDB
+    .selectFrom('Admin')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirst()
 }
 
-export const createAdmin: MutationResolvers['createAdmin'] = ({ input }) => {
-  return db.admin.create({
-    data: input,
-  })
+export const createAdmin: MutationResolvers['createAdmin'] = async ({
+  input,
+}) => {
+  return await kyselyDB
+    .insertInto('Admin')
+    .values(input)
+    .returningAll()
+    .executeTakeFirst()
 }
 
-export const updateAdmin: MutationResolvers['updateAdmin'] = ({
+export const updateAdmin: MutationResolvers['updateAdmin'] = async ({
   id,
   input,
 }) => {
-  return db.admin.update({
-    data: input,
-    where: { id },
-  })
+  return await kyselyDB
+    .updateTable('Admin')
+    .set(input)
+    .where('id', '=', id)
+    .returningAll()
+    .executeTakeFirst()
 }
 
-export const deleteAdmin: MutationResolvers['deleteAdmin'] = ({ id }) => {
-  return db.admin.delete({
-    where: { id },
-  })
+export const deleteAdmin: MutationResolvers['deleteAdmin'] = async ({ id }) => {
+  return await kyselyDB
+    .deleteFrom('Admin')
+    .where('id', '=', id)
+    .returningAll()
+    .executeTakeFirst()
 }
