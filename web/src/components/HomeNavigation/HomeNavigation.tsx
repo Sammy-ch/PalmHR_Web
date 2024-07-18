@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { SignInButton } from '@clerk/clerk-react'
+
 import { NavLink, navigate, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
@@ -69,12 +71,13 @@ const HomeNavigation = () => {
           </main>
         ) : (
           <>
-            <Button
+            {/* <Button
               onClick={() => navigate(routes.login())}
               className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
             >
               Log In
-            </Button>
+            </Button> */}
+            <SignInButton mode="modal" />
           </>
         )}
       </div>

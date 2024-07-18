@@ -13,6 +13,7 @@
   includeEnvironmentVariables = [
       "SUPABASE_URL",
       "SUPABASE_KEY",
+      "CLERK_PUBLISHABLE_KEY",
       ]
 [api]
   host = "0.0.0.0"
