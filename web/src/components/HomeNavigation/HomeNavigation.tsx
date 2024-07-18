@@ -71,13 +71,9 @@ const HomeNavigation = () => {
           </main>
         ) : (
           <>
-            {/* <Button
-              onClick={() => navigate(routes.login())}
-              className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   "
-            >
-              Log In
-            </Button> */}
-            <SignInButton mode="modal" />
+            <div className="navbar hover:border-green flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-[#00A551] text-white   ">
+              <SignInButton mode="modal" />
+            </div>
           </>
         )}
       </div>
