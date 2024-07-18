@@ -16,13 +16,11 @@ import type {
 } from './enums'
 
 export type Admin = {
-  id: Generated<string>
+  id: string
   org_id: string
-  username: string
+  fullName: Generated<string>
   email: string
-  hashedPassword: string
-  salt: string
-  resetTokenExpiresAt: Timestamp | null
+  imageUrl: string | null
 }
 export type AdminRole = {
   id: Generated<string>
@@ -93,17 +91,7 @@ export type Organization = {
   Industry: Industry
   adminId: string | null
 }
-export type OrganizationAttendanceKpi = {
-  id: Generated<string>
-  TotalOvertime: number
-  TotalWorkhours: number
-  TotalSickLeaves: number
-  AbstenteeismRate: number
-  EarlyAttendaceRate: number
-  LateAttedanceRate: number
-  org_id: string
-}
-export type PayrollData = {
+export type PayrollSetting = {
   id: Generated<string>
   org_id: string
   housing: number | null
@@ -124,6 +112,5 @@ export type DB = {
   EmployeePayRoll: EmployeePayRoll
   EmployeeProfile: EmployeeProfile
   Organization: Organization
-  OrganizationAttendanceKpi: OrganizationAttendanceKpi
-  PayrollData: PayrollData
+  PayrollSetting: PayrollSetting
 }

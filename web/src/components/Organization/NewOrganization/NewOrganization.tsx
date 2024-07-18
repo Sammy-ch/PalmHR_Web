@@ -27,28 +27,19 @@ const CREATE_ORGANIZATION_MUTATION: TypedDocumentNode<
 `
 
 const NewOrganization = () => {
-  const [userSession, setUserSession] = useState('')
-
-  const { client } = useAuth()
+  const { currentUser } = useAuth()
+  const [orgId, setOrgId] = useState('')
 
   useEffect(() => {
-    async function getUserSession() {
-      const { data } = await client.auth.getSession()
-
-      if (data) {
-        setUserSession(data.session.user.id)
-      }
-    }
-
-    getUserSession()
-  }, [client])
+    setOrgId(currentUser?.id)
+  }, [currentUser])
 
   const [createOrganization, { loading, error }] = useMutation(
     CREATE_ORGANIZATION_MUTATION,
     {
       onCompleted: () => {
         toast.success('Organization created')
-        navigate(routes.dashboard({ id: userSession }))
+        navigate(routes.dashboard({ id: orgId }))
       },
       onError: (error) => {
         toast.error(error.message)
@@ -59,7 +50,7 @@ const NewOrganization = () => {
   const onSave = (input: CreateOrganizationInput) => {
     const updatedInput: CreateOrganizationInput = {
       ...input,
-      OrganizationId: userSession,
+      OrganizationId: orgId,
       isVerified: false,
     }
     createOrganization({ variables: { input: updatedInput } })

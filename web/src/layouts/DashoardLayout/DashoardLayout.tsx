@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { Redirect, routes } from '@redwoodjs/router'
+
 import { useAuth } from 'src/auth'
 import DashboardHeaderCell from 'src/components/DashboardHeaderCell'
 import Navigation from 'src/components/Navigation/Navigation'
@@ -9,12 +11,19 @@ type DashoardLayoutProps = {
 }
 
 const DashoardLayout = ({ children }: DashoardLayoutProps) => {
-  const { currentUser } = useAuth()
+  const { currentUser, isAuthenticated } = useAuth()
   const [orgId, setOrgId] = useState('')
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return () => {
+        ;<Redirect to={routes.home()} />
+        return
+      }
+    }
+
     setOrgId(currentUser?.id)
-  }, [currentUser])
+  }, [isAuthenticated, currentUser])
 
   return (
     <main className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

@@ -24,32 +24,30 @@ generator client {
 }
 
 model Admin {
-  id                  String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  org_id              String         @db.Uuid
-  username            String
-  email               String
-  hashedPassword      String
-  salt                String
-  resetTokenExpiresAt DateTime?
-  admin_role          AdminRole[]
-  organization        Organization[]
+  id           String         @id @db.Text
+  org_id       String         @db.Uuid
+  fullName     String         @default("")
+  email        String
+  imageUrl     String?
+  admin_role   AdminRole[]
+  organization Organization[]
 
   @@unique([id, email])
 }
 
 model AdminRole {
   id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  adminId String? @db.Uuid
+  adminId String? @db.Text
   role    String
-  admin   Admin?  @relation(fields: [adminId], references: [id])
+  admin   Admin?  @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
   @@unique([id, role, adminId])
 }
 
 model EmployeeProfile {
   profile_id           String                 @id @db.Uuid
-  org_id               String                 @db.Uuid
-  Organization         Organization           @relation(fields: [org_id], references: [OrganizationId])
+  org_id               String                 @db.Text
+  Organization         Organization           @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
   first_name           String
   last_name            String
   profile_image        String?
@@ -98,10 +96,10 @@ model EmployeePayRoll {
   @@unique([id])
 }
 
-model PayrollData {
+model PayrollSetting {
   id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  org_id             String       @db.Uuid
-  organization       Organization @relation(fields: [org_id], references: [OrganizationId])
+  org_id             String       @db.Text
+  organization       Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
   housing            Int?         @db.Integer
   transport          Int?         @db.Integer
   INSS               Int?         @db.Integer
@@ -125,38 +123,25 @@ model EmployeeLeaveForm {
 }
 
 model Organization {
-  OrganizationId            String                      @id @db.Uuid
-  OrganizationName          String                      @db.Text
-  organizationType          OrganizationType
-  addressStreet             String                      @db.Text
-  addressCity               String                      @db.Text
-  addressState              String                      @db.Text
-  addressCountry            String                      @db.Text
-  Email                     String                      @db.Text
-  websiteUrl                String                      @db.Text
-  Phone                     String                      @db.Text
-  isVerified                Boolean                     @default(false) @db.Boolean
-  organizationSize          OrganizationSize
-  Industry                  Industry
-  PayrollData               PayrollData[]
-  EmployeeProfiles          EmployeeProfile[]
-  OrganizationAttendanceKpi OrganizationAttendanceKpi[]
-  Admin                     Admin?                      @relation(fields: [adminId], references: [id])
-  adminId                   String?                     @db.Uuid
+  OrganizationId   String            @id @db.Text
+  OrganizationName String            @db.Text
+  organizationType OrganizationType
+  addressStreet    String            @db.Text
+  addressCity      String            @db.Text
+  addressState     String            @db.Text
+  addressCountry   String            @db.Text
+  Email            String            @db.Text
+  websiteUrl       String            @db.Text
+  Phone            String            @db.Text
+  isVerified       Boolean           @default(false) @db.Boolean
+  organizationSize OrganizationSize
+  Industry         Industry
+  PayrollSettings  PayrollSetting[]
+  EmployeeProfiles EmployeeProfile[]
+  Admin            Admin?            @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  adminId          String?           @db.Text
 
   @@unique([OrganizationId, OrganizationName, Email])
-}
-
-model OrganizationAttendanceKpi {
-  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  TotalOvertime      Int          @db.Integer
-  TotalWorkhours     Int          @db.Integer
-  TotalSickLeaves    Int          @db.Integer
-  AbstenteeismRate   Int          @db.Integer
-  EarlyAttendaceRate Int          @db.Integer
-  LateAttedanceRate  Int          @db.Integer
-  org_id             String       @db.Uuid
-  Organization       Organization @relation(fields: [org_id], references: [OrganizationId])
 }
 
 enum AttendanceTag {
