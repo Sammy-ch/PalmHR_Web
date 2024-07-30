@@ -124,7 +124,7 @@ model EmployeeLeaveForm {
 
 model Organization {
   OrganizationId   String            @id @db.Text
-  OrganizationName String            @db.Textkpi
+  OrganizationName String            @db.Text
   organizationType OrganizationType
   addressStreet    String            @db.Text
   addressCity      String            @db.Text
