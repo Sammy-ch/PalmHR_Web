@@ -32,7 +32,7 @@ model Admin {
   admin_role   AdminRole[]
   organization Organization[]
 
-  @@unique([id, email,org_id])
+  @@unique([id, email, org_id])
 }
 
 model AdminRole {
@@ -124,7 +124,7 @@ model EmployeeLeaveForm {
 
 model Organization {
   OrganizationId   String            @id @db.Text
-  OrganizationName String            @db.Text
+  OrganizationName String            @db.Textkpi
   organizationType OrganizationType
   addressStreet    String            @db.Text
   addressCity      String            @db.Text

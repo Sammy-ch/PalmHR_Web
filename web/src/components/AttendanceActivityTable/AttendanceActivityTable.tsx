@@ -1,3 +1,4 @@
+// web/src/components/AttendanceActivityTable.tsx
 import { Badge } from '../ui/badge'
 import {
   Card,
@@ -14,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table'
-
 
 export default function AttendanceActivityTable({
   employeeAttendances,
@@ -86,7 +86,8 @@ export default function AttendanceActivityTable({
                         employeeAttendance.checkin_time,
                         employeeAttendance.checkout_time
                       )
-                    : '--:--:--'}{' '}
+                    : '--:--:--'}
+                  {}
                 </TableCell>
               </TableRow>
             ))}
@@ -97,13 +98,24 @@ export default function AttendanceActivityTable({
   )
 }
 
+function verifyWorkingHours(workTime: number) {
+  if (workTime > 8) {
+    return 8
+  } else if (workTime < 1) {
+    return 0
+  } else {
+    return workTime
+  }
+}
+
 function calculateWorkingHours(checkinTime: string, checkoutTime: string) {
   const checkinDate = new Date(checkinTime)
   const checkoutDate = new Date(checkoutTime)
 
   const diffInMilliseconds = checkoutDate.getTime() - checkinDate.getTime()
   const diffInMinutes = diffInMilliseconds / (1000 * 60)
-  const diffInHours = diffInMinutes / 60
+  console.log('working time : ', verifyWorkingHours(diffInMinutes / 60))
+  const diffInHours = verifyWorkingHours(diffInMinutes / 60)
 
   return diffInHours.toFixed(1)
 }

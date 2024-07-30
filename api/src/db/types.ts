@@ -38,10 +38,10 @@ export type CheckingRequestQueue = {
 export type EmployeeAttendance = {
   attendance_id: string
   employee_id: string
-  checkin_time: Timestamp | null
+  checkin_time: Timestamp | null | string
   checkout_time: Timestamp | null
   checking_date: Timestamp | null
-  working_time: Timestamp | null
+  working_time: Timestamp | null | string
   attendance_tag: AttendanceTag
 }
 export type EmployeeLeaveForm = {

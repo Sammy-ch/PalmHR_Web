@@ -6,7 +6,7 @@ export const schema = gql`
     checkin_time: DateTime
     checkout_time: DateTime
     checking_date: DateTime
-    working_time: DateTime
+    working_time: String
     attendance_tag: AttendanceTag!
   }
 

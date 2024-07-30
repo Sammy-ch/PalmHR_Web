@@ -67,6 +67,11 @@ export const employeeAttendancesByOrganization: QueryResolvers['employeeAttendan
 
 export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendance'] =
   async ({ input }) => {
+    console.log(
+      'Trying to create EmployeeAttendance with time fr : ',
+      input.checkin_time.toLocaleTimeString('fr-FR')
+    )
+    input.checkin_time = input.checkin_time.toLocaleTimeString('fr-FR')
     return await kyselyDB
       .insertInto('EmployeeAttendance')
       .values(input)

@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react'
+
+import { createClient } from '@supabase/supabase-js'
 import { BadgeCheck, ListFilter, Timer, BookX } from 'lucide-react'
 import type { FindKpiCardQuery, FindKpiCardQueryVariables } from 'types/graphql'
 
@@ -19,6 +22,30 @@ export const QUERY: TypedDocumentNode<
     }
   }
 `
+
+// Initialize the client with your Supabase project URL and API key
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+)
+
+// Define the table you want to query
+const tableName = 'EmployeeAttendance'
+
+// Fetch data from the table
+async function fetchData() {
+  const { data, error } = await supabase.from(tableName).select('*')
+
+  if (error) {
+    console.error('Error fetching data:', error)
+    return
+  }
+
+  console.log('Fetched data:', data)
+  return data[0]
+}
+
+const dat = 0
 
 export const Loading = () => <div>Loading...</div>
 
@@ -76,11 +103,65 @@ export const Failure = () => {
 export const Success = ({
   kpiCard,
 }: CellSuccessProps<FindKpiCardQuery, FindKpiCardQueryVariables>) => {
+  const [allAttendenciesCount, setAllAttendenciesCount] = useState(0)
+  const [onTimeAttendenciesCount, setOnTimeAttendenciesCount] = useState(0)
+  const [lateAttendenciesCount, setLateTimeAttendenciesCount] = useState(0)
+  useEffect(() => {
+    const fetchOnTimeRowNumber = async () => {
+      const { count, error } = await supabase
+        .from(tableName)
+        .select('*', { count: 'exact' })
+        .lt('checkin_time', '8:10:00')
+
+      if (error) {
+        console.error('Error fetching data:', error)
+        return
+      }
+
+      console.log('number of all attendancies : ', count)
+      setOnTimeAttendenciesCount(count)
+    }
+
+    const fetchLateTimeRowNumber = async () => {
+      const { count, error } = await supabase
+        .from(tableName)
+        .select('*', { count: 'exact' })
+        .gt('checkin_time', '8:10:00')
+
+      if (error) {
+        console.error('Error fetching data:', error)
+        return
+      }
+
+      console.log('number of all attendancies : ', count)
+      setLateTimeAttendenciesCount(count)
+    }
+
+    const fetchRowNumber = async () => {
+      const { count, error } = await supabase
+        .from(tableName)
+        .select('*', { count: 'exact' })
+
+      if (error) {
+        console.error('Error fetching data:', error)
+        return
+      }
+
+      console.log('number of all attendancies : ', count)
+      setAllAttendenciesCount(count)
+    }
+
+    fetchLateTimeRowNumber()
+    fetchOnTimeRowNumber()
+    fetchRowNumber()
+  }, [])
   return (
     <section className="mb-10 grid w-[1000px] gap-5 rounded-md md:grid-cols-1 lg:grid-cols-4">
       <KpiCard
         title={'On-Time Attendance'}
-        metric={`${kpiCard.onTimePercentage}%`}
+        metric={`${Math.round(
+          (onTimeAttendenciesCount * 100) / allAttendenciesCount
+        )}%`}
         icon={BadgeCheck}
       />
       <KpiCard
@@ -95,7 +176,9 @@ export const Success = ({
       />
       <KpiCard
         title={'Late Attendance'}
-        metric={`${kpiCard.lateAttendanceRate}%`}
+        metric={`${Math.round(
+          (lateAttendenciesCount * 100) / allAttendenciesCount
+        )}%`}
         icon={BookX}
       />
     </section>

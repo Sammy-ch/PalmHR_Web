@@ -27,8 +27,9 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "yarn@4.3.1",
   "dependencies": {
-    "prisma-kysely": "^1.8.0"
+    "prisma-kysely": "^1.8.0",
+    "react-to-print": "^2.15.1"
   }
 }
