@@ -68,6 +68,7 @@ model EmployeeAttendance {
   checkout_time  DateTime?       @db.Time()
   checking_date  DateTime?       @db.Date
   working_time   DateTime?       @db.Time()
+  overtime       DateTime?       @db.Time()
   attendance_tag AttendanceTag
 }
 
@@ -87,27 +88,25 @@ model EmployeePayRoll {
   pay_period_start DateTime        @db.Date
   pay_period_end   DateTime        @db.Date
   base_salary      Int             @db.Integer
-  overtime         Int?            @db.Integer
   net_salary       Int?            @db.Integer
+  gross_salary     Int?            @db.Integer
   bonuses          Int?            @db.Integer
-  gross_amount     Int?            @db.Integer
   labor_cost       Int?            @db.Integer
+  IPR              Int?            @db.Integer
 
   @@unique([id])
 }
 
 model PayrollSetting {
-  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  org_id             String       @db.Text
-  organization       Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
-  housing            Int?         @db.Integer
-  transport          Int?         @db.Integer
-  INSS               Int?         @db.Integer
-  INSS_contribution  Int?         @db.Integer
-  INSS_payroll_risks Int?         @db.Integer
-  medical_insurance  Int?         @db.Integer
-  IPR                Int?         @db.Integer
-  userId             String?      @db.Uuid
+  id                String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  org_id            String       @db.Text
+  organization      Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
+  housing           Int?         @db.Integer
+  transportation    Int?         @db.Integer
+  INSS              Int?         @db.Integer
+  INSS_patronal     Int?         @db.Integer
+  INSS_risque       Int?         @db.Integer
+  medical_insurance Int?         @db.Integer
 }
 
 model EmployeeLeaveForm {

@@ -42,6 +42,7 @@ export type EmployeeAttendance = {
   checkout_time: Timestamp | null
   checking_date: Timestamp | null
   working_time: Timestamp | null
+  overtime: Timestamp | null
   attendance_tag: AttendanceTag
 }
 export type EmployeeLeaveForm = {
@@ -59,11 +60,11 @@ export type EmployeePayRoll = {
   pay_period_start: Timestamp
   pay_period_end: Timestamp
   base_salary: number
-  overtime: number | null
   net_salary: number | null
+  gross_salary: number | null
   bonuses: number | null
-  gross_amount: number | null
   labor_cost: number | null
+  IPR: number | null
 }
 export type EmployeeProfile = {
   profile_id: string
@@ -95,13 +96,11 @@ export type PayrollSetting = {
   id: Generated<string>
   org_id: string
   housing: number | null
-  transport: number | null
+  transportation: number | null
   INSS: number | null
-  INSS_contribution: number | null
-  INSS_payroll_risks: number | null
+  INSS_patronal: number | null
+  INSS_risque: number | null
   medical_insurance: number | null
-  IPR: number | null
-  userId: string | null
 }
 export type DB = {
   Admin: Admin
