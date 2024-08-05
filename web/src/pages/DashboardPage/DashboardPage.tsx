@@ -7,7 +7,6 @@ import { Metadata } from '@redwoodjs/web'
 
 import EmployeeAttendancesCell from 'src/components/EmployeeAttendance/EmployeeAttendancesCell'
 import KpiCardCell from 'src/components/KpiCardCell'
-import PrintButton from 'src/components/PrintButton/PrintButton'
 
 const DashboardPage = () => {
   const { id } = useParams()

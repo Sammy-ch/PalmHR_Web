@@ -25,7 +25,7 @@ CREATE TYPE "OrganizationType" AS ENUM ('NonProfit', 'ForProfit', 'Government', 
 -- CreateTable
 CREATE TABLE "Admin" (
     "id" TEXT NOT NULL,
-    "org_id" UUID NOT NULL,
+    "org_id" TEXT NOT NULL,
     "fullName" TEXT NOT NULL DEFAULT '',
     "email" TEXT NOT NULL,
     "imageUrl" TEXT,
@@ -64,6 +64,7 @@ CREATE TABLE "EmployeeAttendance" (
     "checkout_time" TIME,
     "checking_date" DATE,
     "working_time" TIME,
+    "overtime" TIME,
     "attendance_tag" "AttendanceTag" NOT NULL,
 
     CONSTRAINT "EmployeeAttendance_pkey" PRIMARY KEY ("attendance_id")
@@ -87,11 +88,11 @@ CREATE TABLE "EmployeePayRoll" (
     "pay_period_start" DATE NOT NULL,
     "pay_period_end" DATE NOT NULL,
     "base_salary" INTEGER NOT NULL,
-    "overtime" INTEGER,
     "net_salary" INTEGER,
+    "gross_salary" INTEGER,
     "bonuses" INTEGER,
-    "gross_amount" INTEGER,
     "labor_cost" INTEGER,
+    "IPR" INTEGER,
 
     CONSTRAINT "EmployeePayRoll_pkey" PRIMARY KEY ("id")
 );
@@ -101,13 +102,11 @@ CREATE TABLE "PayrollSetting" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "org_id" TEXT NOT NULL,
     "housing" INTEGER,
-    "transport" INTEGER,
+    "transportation" INTEGER,
     "INSS" INTEGER,
-    "INSS_contribution" INTEGER,
-    "INSS_payroll_risks" INTEGER,
+    "INSS_patronal" INTEGER,
+    "INSS_risque" INTEGER,
     "medical_insurance" INTEGER,
-    "IPR" INTEGER,
-    "userId" UUID,
 
     CONSTRAINT "PayrollSetting_pkey" PRIMARY KEY ("id")
 );
@@ -141,13 +140,12 @@ CREATE TABLE "Organization" (
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "organizationSize" "OrganizationSize" NOT NULL,
     "Industry" "Industry" NOT NULL,
-    "adminId" TEXT,
 
     CONSTRAINT "Organization_pkey" PRIMARY KEY ("OrganizationId")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Admin_id_email_key" ON "Admin"("id", "email");
+CREATE UNIQUE INDEX "Admin_id_email_org_id_key" ON "Admin"("id", "email", "org_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "AdminRole_id_role_adminId_key" ON "AdminRole"("id", "role", "adminId");
@@ -160,6 +158,9 @@ CREATE UNIQUE INDEX "EmployeeLeaveForm_id_key" ON "EmployeeLeaveForm"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Organization_OrganizationId_OrganizationName_Email_key" ON "Organization"("OrganizationId", "OrganizationName", "Email");
+
+-- AddForeignKey
+ALTER TABLE "Admin" ADD CONSTRAINT "Admin_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "Organization"("OrganizationId") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "AdminRole" ADD CONSTRAINT "AdminRole_adminId_fkey" FOREIGN KEY ("adminId") REFERENCES "Admin"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -181,6 +182,3 @@ ALTER TABLE "PayrollSetting" ADD CONSTRAINT "PayrollSetting_org_id_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "EmployeeLeaveForm" ADD CONSTRAINT "EmployeeLeaveForm_leave_id_fkey" FOREIGN KEY ("leave_id") REFERENCES "EmployeeProfile"("profile_id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Organization" ADD CONSTRAINT "Organization_adminId_fkey" FOREIGN KEY ("adminId") REFERENCES "Admin"("id") ON DELETE CASCADE ON UPDATE CASCADE;

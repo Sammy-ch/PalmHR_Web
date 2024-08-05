@@ -1,9 +1,3 @@
-// Don't forget to tell Prisma about your edits to this file using
-// `yarn rw prisma migrate dev` or `yarn rw prisma db push`.
-// `migrate` is like committing while `push` is for prototyping.
-// Read more about both here:
-// https://www.prisma.io/docs/orm/prisma-migrate
-
 datasource db {
   provider  = "postgresql"
   url       = env("SUPABASE_DATABASE_URL")
@@ -24,13 +18,13 @@ generator client {
 }
 
 model Admin {
-  id           String         @id @db.Text
-  org_id       String         @db.Text
-  fullName     String         @default("")
+  id           String       @id @db.Text
+  org_id       String       @db.Text
+  fullName     String       @default("")
   email        String
   imageUrl     String?
+  organization Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
   admin_role   AdminRole[]
-  organization Organization[]
 
   @@unique([id, email, org_id])
 }
@@ -137,8 +131,7 @@ model Organization {
   Industry         Industry
   PayrollSettings  PayrollSetting[]
   EmployeeProfiles EmployeeProfile[]
-  Admin            Admin?            @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  adminId          String?           @db.Text
+  Admins           Admin[]
 
   @@unique([OrganizationId, OrganizationName, Email])
 }

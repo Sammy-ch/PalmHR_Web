@@ -90,7 +90,6 @@ export type Organization = {
   isVerified: Generated<boolean>
   organizationSize: OrganizationSize
   Industry: Industry
-  adminId: string | null
 }
 export type PayrollSetting = {
   id: Generated<string>

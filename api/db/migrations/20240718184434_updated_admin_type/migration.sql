@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Admin" ALTER COLUMN "org_id" SET DATA TYPE TEXT;
