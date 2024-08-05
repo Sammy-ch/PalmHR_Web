@@ -22,11 +22,11 @@ export const QUERY: TypedDocumentNode<EditEmployeePayRollById> = gql`
       pay_period_start
       pay_period_end
       base_salary
-      overtime
       net_salary
+      gross_salary
       bonuses
-      gross_amount
       labor_cost
+      IPR
     }
   }
 `
@@ -44,11 +44,11 @@ const UPDATE_EMPLOYEE_PAY_ROLL_MUTATION: TypedDocumentNode<
       pay_period_start
       pay_period_end
       base_salary
-      overtime
       net_salary
+      gross_salary
       bonuses
-      gross_amount
       labor_cost
+      IPR
     }
   }
 `

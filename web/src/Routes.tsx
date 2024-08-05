@@ -19,6 +19,9 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set wrap={ScaffoldLayout} title="EmployeePayRolls" titleTo="employeePayRolls" buttonLabel="New EmployeePayRoll" buttonTo="newEmployeePayRoll">
+        <Route path="/employee-pay-rolls" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
+      </Set>
       <Set wrap={ScaffoldLayout} title="OrganizationPayrollSettings" titleTo="organizationPayrollSettings" buttonLabel="New OrganizationPayrollSetting" buttonTo="newOrganizationPayrollSetting">
         <Route path="/organization-payroll-settings/new" page={OrganizationPayrollSettingNewOrganizationPayrollSettingPage} name="newOrganizationPayrollSetting" />
         <Route path="/organization-payroll-settings/{id}/edit" page={OrganizationPayrollSettingEditOrganizationPayrollSettingPage} name="editOrganizationPayrollSetting" />
@@ -117,6 +120,7 @@ const Routes = () => {
         <Route path="/organization/attendance/{id}" page={AttendancePage} name="attendance" />
         <Route path="/organization/pay-rolls/{id}" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
         <Route path="/organization/settings/{id}" page={SettingsPage} name="settings" />
+        <Route path="/organization/pay-rolls/{id}/new" page={EmployeePayRollNewEmployeePayRollPage} name="newEmployeePayRoll" />
       </PrivateSet>
       <Route notfound page={NotFoundPage} />
     </Router>

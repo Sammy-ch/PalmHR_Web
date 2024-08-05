@@ -4,63 +4,42 @@ import type {
   EmployeePayRollRelationResolvers,
 } from 'types/graphql'
 
-import { kyselyDB } from 'src/lib/kysely'
+import { db } from 'src/lib/db'
 
-export const employeePayRolls: QueryResolvers['employeePayRolls'] =
-  async () => {
-    return await kyselyDB.selectFrom('EmployeePayRoll').selectAll().execute()
-  }
+export const employeePayRolls: QueryResolvers['employeePayRolls'] = () => {
+  return db.employeePayRoll.findMany()
+}
 
-export const employeePayRoll: QueryResolvers['employeePayRoll'] = async ({
-  id,
-}) => {
-  return await kyselyDB
-    .selectFrom('EmployeePayRoll')
-    .selectAll()
-    .where('id', '=', id)
-    .executeTakeFirst()
+export const employeePayRoll: QueryResolvers['employeePayRoll'] = ({ id }) => {
+  return db.employeePayRoll.findUnique({
+    where: { id },
+  })
 }
 
 export const createEmployeePayRoll: MutationResolvers['createEmployeePayRoll'] =
-  async ({ input }) => {
-    return await kyselyDB
-      .insertInto('EmployeePayRoll')
-      .values(input)
-      .returningAll()
-      .executeTakeFirst()
+  ({ input }) => {
+    return db.employeePayRoll.create({
+      data: input,
+    })
   }
 
 export const updateEmployeePayRoll: MutationResolvers['updateEmployeePayRoll'] =
-  async ({ id, input }) => {
-    return await kyselyDB
-      .updateTable('EmployeePayRoll')
-      .set(input)
-      .where('id', '=', id)
-      .returningAll()
-      .executeTakeFirst()
+  ({ id, input }) => {
+    return db.employeePayRoll.update({
+      data: input,
+      where: { id },
+    })
   }
 
 export const deleteEmployeePayRoll: MutationResolvers['deleteEmployeePayRoll'] =
-  async ({ id }) => {
-    return await kyselyDB
-      .deleteFrom('EmployeePayRoll')
-      .where('id', '=', id)
-      .returningAll()
-      .executeTakeFirst()
+  ({ id }) => {
+    return db.employeePayRoll.delete({
+      where: { id },
+    })
   }
 
 export const EmployeePayRoll: EmployeePayRollRelationResolvers = {
-  employee: async (_obj, { root }) => {
-    if (!root?.id) return null
-    return await kyselyDB
-      .selectFrom('EmployeeProfile')
-      .selectAll()
-      .innerJoin(
-        'EmployeePayRoll',
-        'EmployeeProfile.profile_id',
-        'EmployeePayRoll.id'
-      )
-      .where('EmployeePayRoll.id', '=', root.id)
-      .executeTakeFirst()
+  employee: (_obj, { root }) => {
+    return db.employeePayRoll.findUnique({ where: { id: root?.id } }).employee()
   },
 }

@@ -21,11 +21,11 @@ export const QUERY: TypedDocumentNode<
       pay_period_start
       pay_period_end
       base_salary
-      overtime
       net_salary
+      gross_salary
       bonuses
-      gross_amount
       labor_cost
+      IPR
     }
   }
 `

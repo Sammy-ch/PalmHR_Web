@@ -42,22 +42,18 @@ describe('employeePayRolls', () => {
     const result = await createEmployeePayRoll({
       input: {
         id: scenario.employeePayRoll.two.id,
-        pay_period_start: '2024-05-17T14:42:30.236Z',
-        pay_period_end: '2024-05-17T14:42:30.236Z',
-        attendance_report: scenario.employeePayRoll.two.attendance_report,
-        base_salary: 171192,
+        pay_period_start: '2024-08-05T13:43:58.125Z',
+        pay_period_end: '2024-08-05T13:43:58.125Z',
+        base_salary: 7705432,
       },
     })
 
     expect(result.id).toEqual(scenario.employeePayRoll.two.id)
     expect(result.pay_period_start).toEqual(
-      new Date('2024-05-17T14:42:30.236Z')
+      new Date('2024-08-05T13:43:58.125Z')
     )
-    expect(result.pay_period_end).toEqual(new Date('2024-05-17T14:42:30.236Z'))
-    expect(result.attendance_report).toEqual(
-      scenario.employeePayRoll.two.attendance_report
-    )
-    expect(result.base_salary).toEqual(171192)
+    expect(result.pay_period_end).toEqual(new Date('2024-08-05T13:43:58.125Z'))
+    expect(result.base_salary).toEqual(7705432)
   })
 
   scenario('updates a employeePayRoll', async (scenario: StandardScenario) => {
@@ -66,11 +62,11 @@ describe('employeePayRolls', () => {
     })) as EmployeePayRoll
     const result = await updateEmployeePayRoll({
       id: original.id,
-      input: { pay_period_start: '2024-05-18T14:42:30.236Z' },
+      input: { pay_period_start: '2024-08-06T13:43:58.125Z' },
     })
 
     expect(result.pay_period_start).toEqual(
-      new Date('2024-05-18T14:42:30.236Z')
+      new Date('2024-08-06T13:43:58.125Z')
     )
   })
 

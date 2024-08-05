@@ -57,13 +57,12 @@ const EmployeePayRollsList = ({ employeePayRolls }: FindEmployeePayRolls) => {
             <th>Id</th>
             <th>Pay period start</th>
             <th>Pay period end</th>
-            <th>Attendance report</th>
             <th>Base salary</th>
-            <th>Overtime</th>
             <th>Net salary</th>
+            <th>Gross salary</th>
             <th>Bonuses</th>
-            <th>Gross amount</th>
             <th>Labor cost</th>
+            <th>Ipr</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -73,13 +72,12 @@ const EmployeePayRollsList = ({ employeePayRolls }: FindEmployeePayRolls) => {
               <td>{truncate(employeePayRoll.id)}</td>
               <td>{timeTag(employeePayRoll.pay_period_start)}</td>
               <td>{timeTag(employeePayRoll.pay_period_end)}</td>
-              <td>{truncate(employeePayRoll.attendance_report)}</td>
               <td>{truncate(employeePayRoll.base_salary)}</td>
-              <td>{truncate(employeePayRoll.overtime)}</td>
               <td>{truncate(employeePayRoll.net_salary)}</td>
+              <td>{truncate(employeePayRoll.gross_salary)}</td>
               <td>{truncate(employeePayRoll.bonuses)}</td>
-              <td>{truncate(employeePayRoll.gross_amount)}</td>
               <td>{truncate(employeePayRoll.labor_cost)}</td>
+              <td>{truncate(employeePayRoll.IPR)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
