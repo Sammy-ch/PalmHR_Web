@@ -7,9 +7,13 @@ import type {
 import { kyselyDB } from 'src/lib/kysely'
 
 const formatDatetime = (dateTime: string | Date): Date => {
-  if (typeof dateTime === 'string' && /^\d{2}:\d{2}:\d{2}$/.test(dateTime)) {
-    // If the input is a time string (e.g., "08:22:00"), prepend a default date
-    dateTime = `1970-01-01T${dateTime}Z`
+  if (typeof dateTime === 'string') {
+    // If the input is a time string with milliseconds (e.g., "09:57:39.056699"), remove the milliseconds
+    dateTime = dateTime.split('.')[0]
+    if (/^\d{2}:\d{2}:\d{2}$/.test(dateTime)) {
+      // If the input is a time string (e.g., "08:22:00"), prepend a default date
+      dateTime = `1970-01-01T${dateTime}Z`
+    }
   }
   const date = new Date(dateTime)
   if (isNaN(date.getTime())) {
@@ -69,9 +73,9 @@ export const createEmployeeAttendance: MutationResolvers['createEmployeeAttendan
   async ({ input }) => {
     console.log(
       'Trying to create EmployeeAttendance with time fr : ',
-      input.checkin_time.toLocaleTimeString('fr-FR')
+      input.checkin_time.toLocaleString('fr-FR')
     )
-    input.checkin_time = input.checkin_time.toLocaleTimeString('fr-FR')
+    input.checkin_time = input.checkin_time.toLocaleString('fr-FR')
     return await kyselyDB
       .insertInto('EmployeeAttendance')
       .values(input)
