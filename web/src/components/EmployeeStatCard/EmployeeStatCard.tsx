@@ -2,6 +2,7 @@ import { CreditCard, Settings, User, Trash } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import type { FindEmployeeProfileByProfileId } from 'types/graphql'
 
+import EmployeePayrollCard from '../EmployeePayrollCard/EmployeePayrollCard'
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 import {
