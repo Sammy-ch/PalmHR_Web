@@ -8,12 +8,12 @@
   },
   "devDependencies": {
     "@edgio/cli": "^7.11.4",
-    "@redwoodjs/auth-clerk-setup": "7.7.1",
-    "@redwoodjs/auth-dbauth-setup": "7.7.1",
-    "@redwoodjs/auth-supabase-setup": "7.7.1",
-    "@redwoodjs/cli-data-migrate": "7.7.1",
-    "@redwoodjs/core": "7.7.1",
-    "@redwoodjs/project-config": "7.7.1",
+    "@redwoodjs/auth-clerk-setup": "7.7.3",
+    "@redwoodjs/auth-dbauth-setup": "7.7.3",
+    "@redwoodjs/auth-supabase-setup": "7.7.3",
+    "@redwoodjs/cli-data-migrate": "7.7.3",
+    "@redwoodjs/core": "7.7.3",
+    "@redwoodjs/project-config": "7.7.3",
     "@redwoodjs/studio": "11",
     "prettier-plugin-tailwindcss": "0.4.1"
   },
