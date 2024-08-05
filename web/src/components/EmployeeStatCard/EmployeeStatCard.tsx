@@ -1,4 +1,4 @@
-import { GaugeIcon } from 'lucide-react'
+import { CreditCard, Settings, User, Trash } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import type { FindEmployeeProfileByProfileId } from 'types/graphql'
 
@@ -14,6 +14,16 @@ import {
 import { ChartTooltip, ChartTooltipContent } from '../ui/chart'
 import { ChartConfig, ChartContainer } from '../ui/chart'
 import { ChartLegend, ChartLegendContent } from '../ui/chart'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
 
 interface Props {
   employeeProfile: NonNullable<
@@ -40,10 +50,7 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="default" className="bg-white" size="icon">
-            <GaugeIcon color="green" className="h-5 w-5" />
-            <span className="sr-only">Settings</span>
-          </Button>
+          <EmployeeProfileDropdownMenu />
         </div>
       </header>
       <main className="grid flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-2 md:p-10">
@@ -207,5 +214,45 @@ function ClockIcon(props) {
       <circle cx="12" cy="12" r="10" />
       <polyline points="12 6 12 12 16 14" />
     </svg>
+  )
+}
+
+export function EmployeeProfileDropdownMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="text-black">
+          Profile
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Employee Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <User className="mr-2 h-4 w-4" />
+            <span>Generate Report</span>
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <CreditCard className="mr-2 h-4 w-4" />
+            <span>Generate Payroll</span>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Payroll Settings</span>
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <Trash color="red" className="mr-2 h-4 w-4" />
+          <span className="text-red-500">Delete Employee</span>
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
