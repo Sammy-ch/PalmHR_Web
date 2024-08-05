@@ -48,10 +48,10 @@ model EmployeeProfile {
   position             String
   email                String?
   allowed_leaves       Int?
-  AttendanceData       EmployeeAttendance[]
-  LeaveData            EmployeeLeaveForm[]
-  CheckingRequestsData CheckingRequestQueue[]
-  PayrollData          EmployeePayRoll[]
+  EmployeeAttendances      EmployeeAttendance[]
+  EmployeeLeaves            EmployeeLeaveForm[]
+  CheckingRequests CheckingRequestQueue[]
+  EmployeePayRolls EmployeePayRoll[]
 }
 
 model EmployeeAttendance {
@@ -91,7 +91,7 @@ model EmployeePayRoll {
   @@unique([id])
 }
 
-model PayrollSetting {
+model OrganizationPayrollSetting {
   id                String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   org_id            String       @db.Text
   organization      Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
@@ -129,7 +129,7 @@ model Organization {
   isVerified       Boolean           @default(false) @db.Boolean
   organizationSize OrganizationSize
   Industry         Industry
-  PayrollSettings  PayrollSetting[]
+  OrganizationPayrollSettings OrganizationPayrollSetting[]
   EmployeeProfiles EmployeeProfile[]
   Admins           Admin[]
 

@@ -91,7 +91,7 @@ export type Organization = {
   organizationSize: OrganizationSize
   Industry: Industry
 }
-export type PayrollSetting = {
+export type OrganizationPayrollSetting = {
   id: Generated<string>
   org_id: string
   housing: number | null
@@ -110,5 +110,5 @@ export type DB = {
   EmployeePayRoll: EmployeePayRoll
   EmployeeProfile: EmployeeProfile
   Organization: Organization
-  PayrollSetting: PayrollSetting
+  OrganizationPayrollSetting: OrganizationPayrollSetting
 }
