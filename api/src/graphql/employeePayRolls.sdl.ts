@@ -16,6 +16,7 @@ export const schema = gql`
   }
 
   input CreateEmployeePayRollInput {
+    id: String!
     base_salary: Int!
     net_salary: Int
     gross_salary: Int
