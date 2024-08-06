@@ -42,6 +42,7 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
     setIsDialogOpen(true)
   }
 
+  const hasPayrollSetting = !!employeeProfile.EmployeePayRolls[0]?.id
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -63,6 +64,7 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
         <div className="flex items-center space-x-4">
           <EmployeeProfileDropdownMenu
             onPayrollSettingsClick={handlePayrollSettingsClick}
+            hasPayrollSetting={hasPayrollSetting}
           />
         </div>
       </header>
@@ -238,7 +240,10 @@ function ClockIcon(props) {
   )
 }
 
-export function EmployeeProfileDropdownMenu({ onPayrollSettingsClick }) {
+export function EmployeeProfileDropdownMenu({
+  onPayrollSettingsClick,
+  hasPayrollSetting,
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -262,7 +267,9 @@ export function EmployeeProfileDropdownMenu({ onPayrollSettingsClick }) {
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={onPayrollSettingsClick}>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Payroll Settings</span>
+            <span>
+              {hasPayrollSetting ? 'Update Payroll info' : 'Set Payroll info'}
+            </span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
