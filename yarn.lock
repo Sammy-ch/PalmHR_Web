@@ -5958,7 +5958,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:1.1.1, @radix-ui/react-dialog@npm:^1.0.4, @radix-ui/react-dialog@npm:^1.0.5":
+"@radix-ui/react-dialog@npm:1.1.1, @radix-ui/react-dialog@npm:^1.0.4, @radix-ui/react-dialog@npm:^1.0.5, @radix-ui/react-dialog@npm:^1.1.1":
   version: 1.1.1
   resolution: "@radix-ui/react-dialog@npm:1.1.1"
   dependencies:
@@ -24175,6 +24175,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@edgio/cli": "npm:^7.11.4"
+    "@radix-ui/react-dialog": "npm:^1.1.1"
     "@redwoodjs/auth-clerk-setup": "npm:7.7.3"
     "@redwoodjs/auth-dbauth-setup": "npm:7.7.3"
     "@redwoodjs/auth-supabase-setup": "npm:7.7.3"

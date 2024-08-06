@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { CreditCard, Settings, User, Trash } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import type { FindEmployeeProfileByProfileId } from 'types/graphql'
@@ -15,6 +17,7 @@ import {
 import { ChartTooltip, ChartTooltipContent } from '../ui/chart'
 import { ChartConfig, ChartContainer } from '../ui/chart'
 import { ChartLegend, ChartLegendContent } from '../ui/chart'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +36,11 @@ interface Props {
 }
 
 const EmployeeStatCard = ({ employeeProfile }: Props) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handlePayrollSettingsClick = () => {
+    setIsDialogOpen(true)
+  }
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between rounded-md bg-black px-6 py-4 text-white">
@@ -51,7 +59,9 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <EmployeeProfileDropdownMenu />
+          <EmployeeProfileDropdownMenu
+            onPayrollSettingsClick={handlePayrollSettingsClick}
+          />
         </div>
       </header>
       <main className="grid flex-1 grid-cols-1 gap-6 p-6 md:grid-cols-2 md:p-10">
@@ -149,6 +159,14 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           </CardContent>
         </Card>
       </main>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Payroll Settings</DialogTitle>
+          </DialogHeader>
+          <EmployeePayrollCard id={employeeProfile.profile_id} />
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
@@ -218,7 +236,7 @@ function ClockIcon(props) {
   )
 }
 
-export function EmployeeProfileDropdownMenu() {
+export function EmployeeProfileDropdownMenu({ onPayrollSettingsClick }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -240,7 +258,7 @@ export function EmployeeProfileDropdownMenu() {
             <span>Generate Payroll</span>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onSelect={onPayrollSettingsClick}>
             <Settings className="mr-2 h-4 w-4" />
             <span>Payroll Settings</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

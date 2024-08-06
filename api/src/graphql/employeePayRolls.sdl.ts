@@ -18,6 +18,7 @@ export const schema = gql`
   }
 
   input CreateEmployeePayRollInput {
+    id: String!
     pay_period_start: DateTime!
     pay_period_end: DateTime!
     base_salary: Int!
