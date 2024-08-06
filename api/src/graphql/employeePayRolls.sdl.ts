@@ -2,8 +2,6 @@ export const schema = gql`
   type EmployeePayRoll {
     id: String!
     employee: EmployeeProfile!
-    pay_period_start: DateTime!
-    pay_period_end: DateTime!
     base_salary: Int!
     net_salary: Int
     gross_salary: Int
@@ -18,9 +16,6 @@ export const schema = gql`
   }
 
   input CreateEmployeePayRollInput {
-    id: String!
-    pay_period_start: DateTime!
-    pay_period_end: DateTime!
     base_salary: Int!
     net_salary: Int
     gross_salary: Int
@@ -30,8 +25,6 @@ export const schema = gql`
   }
 
   input UpdateEmployeePayRollInput {
-    pay_period_start: DateTime
-    pay_period_end: DateTime
     base_salary: Int
     net_salary: Int
     gross_salary: Int

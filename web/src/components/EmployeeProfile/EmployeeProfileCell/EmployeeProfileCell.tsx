@@ -27,7 +27,6 @@ export const QUERY: TypedDocumentNode<
       allowed_leaves
       EmployeePayRolls {
         id
-        pay_period_start
       }
     }
   }

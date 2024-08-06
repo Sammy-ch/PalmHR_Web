@@ -19,8 +19,6 @@ export const QUERY: TypedDocumentNode<EditEmployeePayRollById> = gql`
   query EditEmployeePayRollById($id: String!) {
     employeePayRoll: employeePayRoll(id: $id) {
       id
-      pay_period_start
-      pay_period_end
       base_salary
       net_salary
       gross_salary

@@ -18,8 +18,6 @@ export const QUERY: TypedDocumentNode<
   query FindEmployeePayRolls {
     employeePayRolls {
       id
-      pay_period_start
-      pay_period_end
       base_salary
       net_salary
       gross_salary

@@ -5,9 +5,7 @@ export const standard = defineScenario<Prisma.EmployeePayRollCreateArgs>({
   employeePayRoll: {
     one: {
       data: {
-        pay_period_start: '2024-08-05T13:43:58.138Z',
-        pay_period_end: '2024-08-05T13:43:58.138Z',
-        base_salary: 7484043,
+        base_salary: 5168792,
         employee: {
           create: {
             profile_id: 'String',
@@ -36,9 +34,7 @@ export const standard = defineScenario<Prisma.EmployeePayRollCreateArgs>({
     },
     two: {
       data: {
-        pay_period_start: '2024-08-05T13:43:58.138Z',
-        pay_period_end: '2024-08-05T13:43:58.138Z',
-        base_salary: 6515845,
+        base_salary: 2015363,
         employee: {
           create: {
             profile_id: 'String',

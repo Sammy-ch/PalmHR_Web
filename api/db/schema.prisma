@@ -79,8 +79,6 @@ model CheckingRequestQueue {
 model EmployeePayRoll {
   id               String          @id @db.Uuid
   employee         EmployeeProfile @relation(fields: [id], references: [profile_id])
-  pay_period_start DateTime        @db.Date
-  pay_period_end   DateTime        @db.Date
   base_salary      Int             @db.Integer
   net_salary       Int?            @db.Integer
   gross_salary     Int?            @db.Integer

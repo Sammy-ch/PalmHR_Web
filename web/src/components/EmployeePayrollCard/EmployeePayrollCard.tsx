@@ -70,20 +70,6 @@ const EmployeePayrollCard = ({ id }) => {
         <CardContent className="grid gap-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="pay-period-start">Pay Period Start</Label>
-              <Input
-                name="pay_period_start"
-                id="pay-period-start"
-                type="date"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="pay-period-end">Pay Period End</Label>
-              <Input name="pay_period_end" id="pay-period-end" type="date" />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
               <Label htmlFor="base-salary">Base Salary</Label>
               <Input
                 name="base_salary"

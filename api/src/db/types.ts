@@ -57,8 +57,6 @@ export type EmployeeLeaveForm = {
 }
 export type EmployeePayRoll = {
   id: string
-  pay_period_start: Timestamp
-  pay_period_end: Timestamp
   base_salary: number
   net_salary: number | null
   gross_salary: number | null
