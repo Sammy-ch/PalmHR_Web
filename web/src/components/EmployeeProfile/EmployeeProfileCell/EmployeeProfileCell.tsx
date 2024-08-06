@@ -27,6 +27,12 @@ export const QUERY: TypedDocumentNode<
       allowed_leaves
       EmployeePayRolls {
         id
+        IPR
+        base_salary
+        bonuses
+        gross_salary
+        labor_cost
+        net_salary
       }
     }
   }

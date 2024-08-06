@@ -5,6 +5,7 @@ import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import type { FindEmployeeProfileByProfileId } from 'types/graphql'
 
 import EmployeePayrollCard from '../EmployeePayrollCard/EmployeePayrollCard'
+import UpdateEmployeePayrollCard from '../EmployeePayrollCard/UpdateEmployeePayrollCard'
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 import {
@@ -168,7 +169,13 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
           <DialogHeader>
             <DialogTitle>Payroll Settings</DialogTitle>
           </DialogHeader>
-          <EmployeePayrollCard id={employeeProfile.profile_id} />
+          {hasPayrollSetting ? (
+            <UpdateEmployeePayrollCard
+              employeePayRoll={employeeProfile.EmployeePayRolls[0]}
+            />
+          ) : (
+            <EmployeePayrollCard id={employeeProfile.profile_id} />
+          )}
         </DialogContent>
       </Dialog>
     </div>
