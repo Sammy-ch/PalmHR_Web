@@ -1,50 +1,66 @@
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  OrganizationPayrollSettingRelationResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
-import { db } from 'src/lib/db'
+import { kyselyDB } from 'src/lib/kysely'
 
 export const organizationPayrollSettings: QueryResolvers['organizationPayrollSettings'] =
-  () => {
-    return db.organizationPayrollSetting.findMany()
+  async () => {
+    return await kyselyDB
+      .selectFrom('OrganizationPayrollSetting')
+      .selectAll()
+      .execute()
   }
 
 export const organizationPayrollSetting: QueryResolvers['organizationPayrollSetting'] =
-  ({ id }) => {
-    return db.organizationPayrollSetting.findUnique({
-      where: { id },
-    })
+  async ({ id }) => {
+    return await kyselyDB
+      .selectFrom('OrganizationPayrollSetting')
+      .selectAll()
+      .where('id', '=', id)
+      .executeTakeFirst()
   }
 
+export const organizationPayrollSettingsByOrgId = async ({ org_id }) => {
+  return await kyselyDB
+    .selectFrom('OrganizationPayrollSetting')
+    .selectAll()
+    .where('org_id', '=', org_id)
+    .execute()
+}
+
 export const createOrganizationPayrollSetting: MutationResolvers['createOrganizationPayrollSetting'] =
-  ({ input }) => {
-    return db.organizationPayrollSetting.create({
-      data: input,
-    })
+  async ({ input }) => {
+    return await kyselyDB
+      .insertInto('OrganizationPayrollSetting')
+      .values(input)
+      .returningAll()
+      .executeTakeFirst()
   }
 
 export const updateOrganizationPayrollSetting: MutationResolvers['updateOrganizationPayrollSetting'] =
-  ({ id, input }) => {
-    return db.organizationPayrollSetting.update({
-      data: input,
-      where: { id },
-    })
+  async ({ id, input }) => {
+    return await kyselyDB
+      .updateTable('OrganizationPayrollSetting')
+      .set(input)
+      .where('id', '=', id)
+      .returningAll()
+      .executeTakeFirst()
   }
 
 export const deleteOrganizationPayrollSetting: MutationResolvers['deleteOrganizationPayrollSetting'] =
-  ({ id }) => {
-    return db.organizationPayrollSetting.delete({
-      where: { id },
-    })
+  async ({ id }) => {
+    return await kyselyDB
+      .deleteFrom('OrganizationPayrollSetting')
+      .where('id', '=', id)
+      .returningAll()
+      .executeTakeFirst()
   }
 
-export const OrganizationPayrollSetting: OrganizationPayrollSettingRelationResolvers =
-  {
-    organization: (_obj, { root }) => {
-      return db.organizationPayrollSetting
-        .findUnique({ where: { id: root?.id } })
-        .organization()
-    },
-  }
+export const OrganizationPayrollSetting = {
+  organization: async (_obj, { root }) => {
+    return await kyselyDB
+      .selectFrom('Organization')
+      .selectAll()
+      .where('Organization.OrganizationId', '=', root?.org_id)
+      .executeTakeFirst()
+  },
+}
