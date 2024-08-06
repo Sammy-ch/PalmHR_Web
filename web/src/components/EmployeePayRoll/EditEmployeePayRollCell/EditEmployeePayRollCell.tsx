@@ -31,27 +31,27 @@ export const QUERY: TypedDocumentNode<EditEmployeePayRollById> = gql`
   }
 `
 
-const UPDATE_EMPLOYEE_PAY_ROLL_MUTATION: TypedDocumentNode<
-  EditEmployeePayRollById,
-  UpdateEmployeePayRollMutationVariables
-> = gql`
-  mutation UpdateEmployeePayRollMutation(
-    $id: String!
-    $input: UpdateEmployeePayRollInput!
-  ) {
-    updateEmployeePayRoll(id: $id, input: $input) {
-      id
-      pay_period_start
-      pay_period_end
-      base_salary
-      net_salary
-      gross_salary
-      bonuses
-      labor_cost
-      IPR
-    }
-  }
-`
+// const UPDATE_EMPLOYEE_PAY_ROLL_MUTATION: TypedDocumentNode<
+//   EditEmployeePayRollById,
+//   UpdateEmployeePayRollMutationVariables
+// > = gql`
+//   mutation UpdateEmployeePayRollMutation(
+//     $id: String!
+//     $input: UpdateEmployeePayRollInput!
+//   ) {
+//     updateEmployeePayRoll(id: $id, input: $input) {
+//       id
+//       pay_period_start
+//       pay_period_end
+//       base_salary
+//       net_salary
+//       gross_salary
+//       bonuses
+//       labor_cost
+//       IPR
+//     }
+//   }
+// `
 
 export const Loading = () => <div>Loading...</div>
 

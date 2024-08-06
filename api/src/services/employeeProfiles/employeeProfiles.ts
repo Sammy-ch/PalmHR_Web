@@ -1,8 +1,4 @@
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  EmployeeProfileRelationResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
 import { kyselyDB } from 'src/lib/kysely'
 
@@ -36,7 +32,7 @@ export const createEmployeeProfile: MutationResolvers['createEmployeeProfile'] =
       .insertInto('EmployeeProfile')
       .values(input)
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirst()
   }
 
 export const updateEmployeeProfile: MutationResolvers['updateEmployeeProfile'] =
@@ -46,7 +42,7 @@ export const updateEmployeeProfile: MutationResolvers['updateEmployeeProfile'] =
       .set(input)
       .where('profile_id', '=', profile_id)
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirst()
   }
 
 export const deleteEmployeeProfile: MutationResolvers['deleteEmployeeProfile'] =
@@ -55,44 +51,39 @@ export const deleteEmployeeProfile: MutationResolvers['deleteEmployeeProfile'] =
       .deleteFrom('EmployeeProfile')
       .where('profile_id', '=', profile_id)
       .returningAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirst()
   }
 
-export const EmployeeProfile: EmployeeProfileRelationResolvers = {
+export const EmployeeProfile = {
   Organization: async (_obj, { root }) => {
     return await kyselyDB
       .selectFrom('Organization')
       .selectAll()
-      .innerJoin(
-        'EmployeeProfile',
-        'Organization.OrganizationId',
-        'EmployeeProfile.org_id'
-      )
-      .where('EmployeeProfile.profile_id', '=', root?.profile_id)
+      .where('OrganizationId', '=', root?.org_id)
       .executeTakeFirst()
   },
-  AttendanceData: async (_obj, { root }) => {
+  EmployeeAttendances: async (_obj, { root }) => {
     return await kyselyDB
       .selectFrom('EmployeeAttendance')
       .selectAll()
       .where('EmployeeAttendance.employee_id', '=', root?.profile_id)
       .execute()
   },
-  LeaveData: async (_obj, { root }) => {
+  EmployeeLeaves: async (_obj, { root }) => {
     return await kyselyDB
       .selectFrom('EmployeeLeaveForm')
       .selectAll()
       .where('EmployeeLeaveForm.leave_id', '=', root?.profile_id)
       .execute()
   },
-  CheckingRequestsData: async (_obj, { root }) => {
+  CheckingRequests: async (_obj, { root }) => {
     return await kyselyDB
       .selectFrom('CheckingRequestQueue')
       .selectAll()
       .where('CheckingRequestQueue.employee_id', '=', root?.profile_id)
       .execute()
   },
-  PayrollData: async (_obj, { root }) => {
+  EmployeePayRolls: async (_obj, { root }) => {
     return await kyselyDB
       .selectFrom('EmployeePayRoll')
       .selectAll()

@@ -25,6 +25,10 @@ export const QUERY: TypedDocumentNode<
       position
       email
       allowed_leaves
+      EmployeePayRolls {
+        id
+        pay_period_start
+      }
     }
   }
 `

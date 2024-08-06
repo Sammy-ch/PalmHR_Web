@@ -41,6 +41,8 @@ const EmployeeStatCard = ({ employeeProfile }: Props) => {
   const handlePayrollSettingsClick = () => {
     setIsDialogOpen(true)
   }
+
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between rounded-md bg-black px-6 py-4 text-white">
