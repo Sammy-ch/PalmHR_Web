@@ -24,6 +24,10 @@ export const QUERY: TypedDocumentNode<
       bonuses
       labor_cost
       IPR
+      employee {
+        first_name
+        last_name
+      }
     }
   }
 `

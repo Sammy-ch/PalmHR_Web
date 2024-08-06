@@ -120,7 +120,6 @@ const Routes = () => {
         <Route path="/organization/attendance/{id}" page={AttendancePage} name="attendance" />
         <Route path="/organization/pay-rolls/{id}" page={EmployeePayRollEmployeePayRollsPage} name="employeePayRolls" />
         <Route path="/organization/settings/{id}" page={SettingsPage} name="settings" />
-        <Route path="/organization/pay-rolls/{id}/new" page={EmployeePayRollNewEmployeePayRollPage} name="newEmployeePayRoll" />
       </PrivateSet>
       <Route notfound page={NotFoundPage} />
     </Router>

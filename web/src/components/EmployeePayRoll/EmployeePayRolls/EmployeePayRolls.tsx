@@ -10,7 +10,7 @@ import type { TypedDocumentNode } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/EmployeePayRoll/EmployeePayRollsCell'
-import { timeTag, truncate } from 'src/lib/formatters'
+import { truncate } from 'src/lib/formatters'
 
 const DELETE_EMPLOYEE_PAY_ROLL_MUTATION: TypedDocumentNode<
   DeleteEmployeePayRollMutation,
@@ -54,9 +54,8 @@ const EmployeePayRollsList = ({ employeePayRolls }: FindEmployeePayRolls) => {
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Pay period start</th>
-            <th>Pay period end</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Base salary</th>
             <th>Net salary</th>
             <th>Gross salary</th>
@@ -69,16 +68,15 @@ const EmployeePayRollsList = ({ employeePayRolls }: FindEmployeePayRolls) => {
         <tbody>
           {employeePayRolls.map((employeePayRoll) => (
             <tr key={employeePayRoll.id}>
-              <td>{truncate(employeePayRoll.id)}</td>
-              <td>{timeTag(employeePayRoll.pay_period_start)}</td>
-              <td>{timeTag(employeePayRoll.pay_period_end)}</td>
-              <td>{truncate(employeePayRoll.base_salary)}</td>
+              <td>{truncate(employeePayRoll.employee.first_name)}</td>
+              <td>{truncate(employeePayRoll.employee.last_name)}</td>
+              <td>{truncate(employeePayRoll.base_salary)} fbu</td>
               <td>{truncate(employeePayRoll.net_salary)}</td>
               <td>{truncate(employeePayRoll.gross_salary)}</td>
               <td>{truncate(employeePayRoll.bonuses)}</td>
               <td>{truncate(employeePayRoll.labor_cost)}</td>
               <td>{truncate(employeePayRoll.IPR)}</td>
-              <td>
+              {/* <td>
                 <nav className="rw-table-actions">
                   <Link
                     to={routes.employeePayRoll({ id: employeePayRoll.id })}
@@ -105,7 +103,7 @@ const EmployeePayRollsList = ({ employeePayRolls }: FindEmployeePayRolls) => {
                     Delete
                   </button>
                 </nav>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
