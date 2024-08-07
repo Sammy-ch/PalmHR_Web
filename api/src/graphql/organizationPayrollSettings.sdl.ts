@@ -15,7 +15,7 @@ export const schema = gql`
     organizationPayrollSettings: [OrganizationPayrollSetting!]! @requireAuth
     organizationPayrollSetting(id: String!): OrganizationPayrollSetting
       @requireAuth
-    organizationPayrollSettingByOrg(
+    organizationPayrollSettingsByOrgId(
       org_id: String!
     ): OrganizationPayrollSetting! @requireAuth
   }
