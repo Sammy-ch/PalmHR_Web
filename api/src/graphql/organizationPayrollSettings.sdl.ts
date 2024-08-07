@@ -13,11 +13,8 @@ export const schema = gql`
 
   type Query {
     organizationPayrollSettings: [OrganizationPayrollSetting!]! @requireAuth
-    organizationPayrollSetting(id: String!): OrganizationPayrollSetting
+    organizationPayrollSetting(org_id: String!): OrganizationPayrollSetting
       @requireAuth
-    organizationPayrollSettingsByOrgId(
-      org_id: String!
-    ): OrganizationPayrollSetting! @requireAuth
   }
 
   input CreateOrganizationPayrollSettingInput {

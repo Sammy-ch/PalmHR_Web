@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useParams } from '@redwoodjs/router'
 import { useQuery } from '@redwoodjs/web'
@@ -24,7 +24,7 @@ import {
 
 const QUERY = gql`
   query FindOrganizationPayrollSetting($id: String!) {
-    organizationPayrollSettingsByOrgId(org_id: $id) {
+    organizationPayrollSetting(org_id: $id) {
       org_id
     }
   }
@@ -32,12 +32,18 @@ const QUERY = gql`
 
 const EmployeePayRollsPage = () => {
   const { id } = useParams()
+  const [payrollSettings, setPayrollSettings] = useState()
+  const [isSecondDialogOpen, setIsSecondDialogOpen] = useState(false)
+
   const { data, loading, error } = useQuery(QUERY, {
     variables: { id },
   })
-  const [isSecondDialogOpen, setIsSecondDialogOpen] = useState(false)
 
-  console.log(data)
+  useEffect(() => {
+    if (data) {
+      setPayrollSettings(data.organizationPayrollSetting)
+    }
+  }, [data])
 
   const closeDialog = () => {
     setIsSecondDialogOpen(false)
@@ -48,7 +54,7 @@ const EmployeePayRollsPage = () => {
 
   return (
     <>
-      {!data.organizationPayrollSettingByOrg && (
+      {!payrollSettings && (
         <AlertDialog defaultOpen>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -68,7 +74,7 @@ const EmployeePayRollsPage = () => {
           </AlertDialogContent>
         </AlertDialog>
       )}
-      {data.organizationPayrollSettingByOrg && <EmployeePayRollsCell />}
+      {<EmployeePayRollsCell />}
       {isSecondDialogOpen && (
         <Dialog defaultOpen>
           <DialogContent>

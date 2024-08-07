@@ -11,21 +11,13 @@ export const organizationPayrollSettings: QueryResolvers['organizationPayrollSet
   }
 
 export const organizationPayrollSetting: QueryResolvers['organizationPayrollSetting'] =
-  async ({ id }) => {
+  async ({ org_id }) => {
     return await kyselyDB
       .selectFrom('OrganizationPayrollSetting')
       .selectAll()
-      .where('id', '=', id)
+      .where('org_id', '=', org_id)
       .executeTakeFirst()
   }
-
-export const organizationPayrollSettingsByOrgId = async ({ org_id }) => {
-  return await kyselyDB
-    .selectFrom('OrganizationPayrollSetting')
-    .selectAll()
-    .where('org_id', '=', org_id)
-    .execute()
-}
 
 export const createOrganizationPayrollSetting: MutationResolvers['createOrganizationPayrollSetting'] =
   async ({ input }) => {

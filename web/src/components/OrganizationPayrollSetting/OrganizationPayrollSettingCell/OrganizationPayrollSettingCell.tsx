@@ -16,7 +16,7 @@ export const QUERY: TypedDocumentNode<
   FindOrganizationPayrollSettingByIdVariables
 > = gql`
   query FindOrganizationPayrollSettingById($id: String!) {
-    organizationPayrollSetting: organizationPayrollSetting(id: $id) {
+    organizationPayrollSetting: organizationPayrollSetting(org_id: $id) {
       id
       org_id
       housing

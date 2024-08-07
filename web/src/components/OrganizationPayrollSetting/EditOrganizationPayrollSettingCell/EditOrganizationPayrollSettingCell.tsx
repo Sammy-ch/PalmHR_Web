@@ -17,7 +17,7 @@ import OrganizationPayrollSettingForm from 'src/components/OrganizationPayrollSe
 
 export const QUERY: TypedDocumentNode<EditOrganizationPayrollSettingById> = gql`
   query EditOrganizationPayrollSettingById($id: String!) {
-    organizationPayrollSetting: organizationPayrollSetting(id: $id) {
+    organizationPayrollSetting: organizationPayrollSetting(org_id: $id) {
       id
       org_id
       housing
