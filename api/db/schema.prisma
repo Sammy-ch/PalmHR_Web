@@ -91,7 +91,7 @@ model EmployeePayRoll {
 
 model OrganizationPayrollSetting {
   id                String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  org_id            String       @db.Text
+  org_id            String       @db.Text @unique
   organization      Organization @relation(fields: [org_id], references: [OrganizationId], onDelete: Cascade)
   housing           Int?         @db.Integer
   transportation    Int?         @db.Integer

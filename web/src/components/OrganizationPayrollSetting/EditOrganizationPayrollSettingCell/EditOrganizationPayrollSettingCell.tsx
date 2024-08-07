@@ -15,41 +15,41 @@ import { toast } from '@redwoodjs/web/toast'
 
 import OrganizationPayrollSettingForm from 'src/components/OrganizationPayrollSetting/OrganizationPayrollSettingForm'
 
-export const QUERY: TypedDocumentNode<EditOrganizationPayrollSettingById> = gql`
-  query EditOrganizationPayrollSettingById($id: String!) {
-    organizationPayrollSetting: organizationPayrollSetting(org_id: $id) {
-      id
-      org_id
-      housing
-      transportation
-      INSS
-      INSS_patronal
-      INSS_risque
-      medical_insurance
-    }
-  }
-`
+// export const QUERY: TypedDocumentNode<EditOrganizationPayrollSettingById> = gql`
+//   query EditOrganizationPayrollSettingById($id: String!) {
+//     organizationPayrollSetting: organizationPayrollSetting(org_id: $id) {
+//       id
+//       org_id
+//       housing
+//       transportation
+//       INSS
+//       INSS_patronal
+//       INSS_risque
+//       medical_insurance
+//     }
+//   }
+// `
 
-const UPDATE_ORGANIZATION_PAYROLL_SETTING_MUTATION: TypedDocumentNode<
-  EditOrganizationPayrollSettingById,
-  UpdateOrganizationPayrollSettingMutationVariables
-> = gql`
-  mutation UpdateOrganizationPayrollSettingMutation(
-    $id: String!
-    $input: UpdateOrganizationPayrollSettingInput!
-  ) {
-    updateOrganizationPayrollSetting(id: $id, input: $input) {
-      id
-      org_id
-      housing
-      transportation
-      INSS
-      INSS_patronal
-      INSS_risque
-      medical_insurance
-    }
-  }
-`
+// const UPDATE_ORGANIZATION_PAYROLL_SETTING_MUTATION: TypedDocumentNode<
+//   EditOrganizationPayrollSettingById,
+//   UpdateOrganizationPayrollSettingMutationVariables
+// > = gql`
+//   mutation UpdateOrganizationPayrollSettingMutation(
+//     $id: String!
+//     $input: UpdateOrganizationPayrollSettingInput!
+//   ) {
+//     updateOrganizationPayrollSetting(id: $id, input: $input) {
+//       id
+//       org_id
+//       housing
+//       transportation
+//       INSS
+//       INSS_patronal
+//       INSS_risque
+//       medical_insurance
+//     }
+//   }
+// `
 
 export const Loading = () => <div>Loading...</div>
 

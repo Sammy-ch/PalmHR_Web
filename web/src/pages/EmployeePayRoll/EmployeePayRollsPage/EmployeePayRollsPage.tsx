@@ -14,6 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from 'src/components/ui/alert-dialog'
+import { Button } from 'src/components/ui/button' // Import the Button component
 import {
   Dialog,
   DialogContent,
@@ -21,6 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from 'src/components/ui/dialog'
+import UpdateOrganizationpayrollsettingcard from 'src/components/UpdateOrganizationpayrollsettingcard/UpdateOrganizationpayrollsettingcard'
 
 const QUERY = gql`
   query FindOrganizationPayrollSetting($id: String!) {
@@ -45,6 +47,10 @@ const EmployeePayRollsPage = () => {
     }
   }, [data])
 
+  const openDialog = () => {
+    setIsSecondDialogOpen(true)
+  }
+
   const closeDialog = () => {
     setIsSecondDialogOpen(false)
   }
@@ -67,25 +73,39 @@ const EmployeePayRollsPage = () => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogAction onClick={() => setIsSecondDialogOpen(true)}>
+              <AlertDialogAction onClick={openDialog}>
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       )}
+      <div className="mb-4 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Employee Payrolls</h1>
+        <Button onClick={openDialog}>
+          {payrollSettings ? 'Payroll Settings' : 'Set Payroll Settings'}
+        </Button>
+      </div>
       {<EmployeePayRollsCell />}
       {isSecondDialogOpen && (
-        <Dialog defaultOpen>
+        <Dialog open={isSecondDialogOpen} onOpenChange={setIsSecondDialogOpen}>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Organization Payroll Settings</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              <Organizationpayrollsettingcard
-                org_id={id}
-                onClose={closeDialog}
-              />
+              {payrollSettings ? (
+                <UpdateOrganizationpayrollsettingcard
+                  org_id={id}
+                  onClose={closeDialog}
+                  organizationPayrollSettings={payrollSettings}
+                />
+              ) : (
+                <Organizationpayrollsettingcard
+                  org_id={id}
+                  onClose={closeDialog}
+                />
+              )}
             </DialogDescription>
           </DialogContent>
         </Dialog>
