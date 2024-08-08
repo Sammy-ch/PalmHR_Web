@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import type { EditOrganizationPayrollSettingById } from 'types/graphql'
+
 import { useParams } from '@redwoodjs/router'
 import { useQuery } from '@redwoodjs/web'
 
@@ -27,14 +29,22 @@ import UpdateOrganizationpayrollsettingcard from 'src/components/UpdateOrganizat
 const QUERY = gql`
   query FindOrganizationPayrollSetting($id: String!) {
     organizationPayrollSetting(org_id: $id) {
+      id
       org_id
+      INSS
+      INSS_patronal
+      INSS_risque
+      housing
+      medical_insurance
+      transportation
     }
   }
 `
 
 const EmployeePayRollsPage = () => {
   const { id } = useParams()
-  const [payrollSettings, setPayrollSettings] = useState()
+  const [payrollSettings, setPayrollSettings] =
+    useState<EditOrganizationPayrollSettingById['organizationPayrollSetting']>()
   const [isSecondDialogOpen, setIsSecondDialogOpen] = useState(false)
 
   const { data, loading, error } = useQuery(QUERY, {
@@ -96,7 +106,7 @@ const EmployeePayRollsPage = () => {
             <DialogDescription>
               {payrollSettings ? (
                 <UpdateOrganizationpayrollsettingcard
-                  org_id={id}
+                  id={payrollSettings.id}
                   onClose={closeDialog}
                   organizationPayrollSettings={payrollSettings}
                 />

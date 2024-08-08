@@ -40,12 +40,6 @@ const Routes = () => {
         <Route path="/user-accounts/{id}" page={UserAccountUserAccountPage} name="userAccount" />
         <Route path="/user-accounts" page={UserAccountUserAccountsPage} name="userAccounts" />
       </Set>
-      <Set wrap={ScaffoldLayout} title="PayRollSettings" titleTo="payRollSettings" buttonLabel="New PayRollSetting" buttonTo="newPayRollSetting">
-        <Route path="/pay-roll-settings/new" page={PayRollSettingNewPayRollSettingPage} name="newPayRollSetting" />
-        <Route path="/pay-roll-settings/{id}/edit" page={PayRollSettingEditPayRollSettingPage} name="editPayRollSetting" />
-        <Route path="/pay-roll-settings/{id}" page={PayRollSettingPayRollSettingPage} name="payRollSetting" />
-        <Route path="/pay-roll-settings" page={PayRollSettingPayRollSettingsPage} name="payRollSettings" />
-      </Set>
       <Set title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
         <Route path="/users/new" page={UserNewUserPage} name="newUser" />
         <Route path="/users/{id}/edit" page={UserEditUserPage} name="editUser" />

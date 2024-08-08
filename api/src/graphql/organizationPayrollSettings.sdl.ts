@@ -28,7 +28,7 @@ export const schema = gql`
   }
 
   input UpdateOrganizationPayrollSettingInput {
-    org_id: String
+    id: String
     housing: Int
     transportation: Int
     INSS: Int

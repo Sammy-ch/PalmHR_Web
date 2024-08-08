@@ -1,4 +1,11 @@
+import type {
+  EditOrganizationPayrollSettingById,
+  UpdateOrganizationPayrollSettingInput,
+  UpdateOrganizationPayrollSettingMutationVariables,
+} from 'types/graphql'
+
 import { Form } from '@redwoodjs/forms'
+import { TypedDocumentNode } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 
 import { Input } from 'src/components/ui/input'
@@ -14,16 +21,16 @@ import {
   CardFooter,
 } from '../ui/card'
 
-import type { EditOrganizationPayrollSettingById } from '@/types/graphql'
-import { UpdateOrganizationPayrollSettingInput } from '@/types/graphql'
-
 interface UpdateOrganizationpayrollsettingcardProps {
-  org_id: string
+  id: string
   onClose: () => void
   organizationPayrollSettings?: EditOrganizationPayrollSettingById['organizationPayrollSetting']
 }
 
-const UPDATE_ORGANIZATION_PAYROLL_SETTING = gql`
+const UPDATE_ORGANIZATION_PAYROLL_SETTING_MUTATION: TypedDocumentNode<
+  EditOrganizationPayrollSettingById,
+  UpdateOrganizationPayrollSettingMutationVariables
+> = gql`
   mutation UpdateOrganizationPayrollSettingMutation(
     $id: String!
     $input: UpdateOrganizationPayrollSettingInput!
@@ -31,21 +38,27 @@ const UPDATE_ORGANIZATION_PAYROLL_SETTING = gql`
     updateOrganizationPayrollSetting(id: $id, input: $input) {
       id
       org_id
+      housing
+      transportation
+      INSS
+      INSS_patronal
+      INSS_risque
+      medical_insurance
     }
   }
 `
 
 const UpdateOrganizationpayrollsettingcard = ({
-  org_id,
+  id,
   onClose,
   organizationPayrollSettings,
 }: UpdateOrganizationpayrollsettingcardProps) => {
   const [updateOrganizationPayrollSetting, { loading, error }] = useMutation(
-    UPDATE_ORGANIZATION_PAYROLL_SETTING
+    UPDATE_ORGANIZATION_PAYROLL_SETTING_MUTATION
   )
 
   const onSubmit = (data: UpdateOrganizationPayrollSettingInput) => {
-    const inputData = { ...data, org_id }
+    const inputData = { ...data, id }
 
     updateOrganizationPayrollSetting({
       variables: { id: organizationPayrollSettings.id, input: inputData },
@@ -94,7 +107,13 @@ const UpdateOrganizationpayrollsettingcard = ({
           </div>
           <div className="grid gap-2">
             <Label htmlFor="inss">INSS</Label>
-            <Input name="INSS" id="inss" type="number" placeholder="0.00" />
+            <Input
+              name="INSS"
+              id="inss"
+              type="number"
+              placeholder="0.00"
+              defaultValue={organizationPayrollSettings.INSS}
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="inss-patronal">INSS Patronal</Label>
